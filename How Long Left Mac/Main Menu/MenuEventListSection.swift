@@ -17,6 +17,18 @@ struct MenuEventListSection: View {
     @EnvironmentObject var env: MainMenuEnvironment
     @EnvironmentObject var reader: CalendarSource
     
+    func getColor(for event: Event) -> Color? {
+        
+        guard event.isAllDay && event.status() == .upcoming else { return nil }
+        
+        if let cg = reader.lookupCalendar(withID: event.calId)?.cgColor {
+            return Color(cg)
+        }
+        
+        return nil
+        
+    }
+    
     var body: some View {
         
 
@@ -25,7 +37,7 @@ struct MenuEventListSection: View {
             Section(content: {
                 ForEach(events) { event in
                     
-                    MenuButton(model: mainMenuModel, idForHover: event.id, submenuContent: {
+                    MenuButton(model: mainMenuModel, idForHover: event.id, customHighlight: getColor(for: event), fill: getColor(for: event) != nil, submenuContent: {
                         AnyView(MenuEventView(event: event)
                             .environmentObject(reader)
                         

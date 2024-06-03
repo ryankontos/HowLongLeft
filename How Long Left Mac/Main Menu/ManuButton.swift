@@ -31,6 +31,8 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
     let reselectDelay: Double
     let submenuContent: (() -> AnyView)?
     let idForHover: String
+    let customHighlight: Color?
+    let fill: Bool
 
     init(
         model: MainMenuViewModel,
@@ -40,6 +42,8 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
         padding: CGFloat = 6,
         deselectDelay: Double = 0.1,
         reselectDelay: Double = 0.1,
+        customHighlight: Color? = nil,
+        fill: Bool = false,
         submenuContent: (() -> AnyView)? = nil,
         @ViewBuilder content: () -> Content,
         action: @escaping () -> Void
@@ -54,6 +58,8 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
         self.idForHover = idForHover
         self.content = content()
         self.action = action
+        self.customHighlight = customHighlight
+        self.fill = fill
     }
 
     var body: some View {
@@ -71,7 +77,8 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
         .padding(.horizontal, 10)
         .background(
             RoundedRectangle(cornerRadius: cornerRadius)
-                .opacity((idForHover == model.selectedItemID) && !isFlashing ? opacity : 0)
+                .foregroundStyle(getBackgroundColor())
+                .opacity(getBackgroundOpactiy())
         )
         .onTapGesture {
             flashButton()
@@ -116,15 +123,29 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
                         
                         globalPosition = newOrigin
                         
-                        if let submenuContent {
-                            if model.selectedItemID == idForHover {
-                                //windowManager.openSubWindow(id: idForHover, at: globalPosition, view: AnyView(submenuContent()))
-                            }
-                        }
                         
                     }
             }
         }
+    }
+    
+    private func getBackgroundColor() -> Color {
+        
+        return isHighlighted() ? .primary : customHighlight ?? .primary
+        
+    }
+    
+    private func getBackgroundOpactiy() -> Double {
+        
+        
+        return isHighlighted() ? opacity : (fill ? 0.05 : 0.0)
+        
+    }
+    
+    func isHighlighted() -> Bool {
+        
+       return (idForHover == model.selectedItemID) && !isFlashing
+        
     }
     
     private func handleSelectionChange(oldValue: String?, newValue: String?) {

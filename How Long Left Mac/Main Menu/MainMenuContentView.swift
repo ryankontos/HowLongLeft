@@ -44,7 +44,7 @@ struct MainMenuContentView: View {
                                 MenuEventListSection(title: group.title, events: group.events, mainMenuModel: mainMenuModel)
                             }
                             
-                            if index < groups.endIndex-1 && index != 0 {
+                            if index < groups.endIndex-1 && groups.count > 1 {
                                 Divider()
                             }
                         }

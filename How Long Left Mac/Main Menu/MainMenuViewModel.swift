@@ -172,10 +172,18 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
     
     func eventGroups(at date: Date) -> [TitledEventGroup] {
         guard let currentPoint = timePointStore.getPointAt(date: date) else { return [] }
-        return [
-            TitledEventGroup(nil, currentPoint.inProgressEvents),
-            TitledEventGroup("Upcoming", currentPoint.upcomingEvents)
+        var groups = [
+            TitledEventGroup("On Now", currentPoint.inProgressEvents),
         ]
+        
+        let dates = currentPoint.upcomingGroupedByStartDay
+        
+        let upcomingGroups = dates.map({  TitledEventGroup("\($0.date.formatted(date: .abbreviated, time: .omitted))", $0.events) })
+        
+        groups.append(contentsOf: upcomingGroups)
+        
+        return groups
+        
     }
 }
 

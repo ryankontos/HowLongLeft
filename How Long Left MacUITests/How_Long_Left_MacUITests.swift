@@ -1,13 +1,13 @@
 //
-//  How_Long_LeftUITests.swift
-//  How Long LeftUITests
+//  How_Long_Left_MacUITests.swift
+//  How Long Left MacUITests
 //
-//  Created by Ryan on 2/5/2024.
+//  Created by Ryan on 5/5/2024.
 //
 
 import XCTest
 
-final class How_Long_LeftUITests: XCTestCase {
+final class How_Long_Left_MacUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -26,6 +26,7 @@ final class How_Long_LeftUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
@@ -36,9 +37,6 @@ final class How_Long_LeftUITests: XCTestCase {
             measure(metrics: [XCTApplicationLaunchMetric()]) {
                 XCUIApplication().launch()
             }
-            
-            
-            
         }
     }
 }

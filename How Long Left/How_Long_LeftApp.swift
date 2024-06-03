@@ -6,27 +6,24 @@
 //
 
 import SwiftUI
-import SwiftData
+import HowLongLeftKit
+
 
 @main
 struct How_Long_LeftApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    
+    let container = DefaultContainer()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(container.calendarReader)
+                .environmentObject(container.calendarPrefsManager)
+                .environmentObject(container.eventCache)
+                .environmentObject(container.pointStore)
         }
-        .modelContainer(sharedModelContainer)
+        
     }
 }
+
+

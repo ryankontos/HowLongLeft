@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		BF30A9922BE369D8007850EE /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF30A9912BE369D8007850EE /* HowLongLeftKit */; };
 		BF30A9A22BE3BA71007850EE /* EventListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A9A12BE3BA71007850EE /* EventListItem.swift */; };
 		BF30A9A42BE3BB26007850EE /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A9A32BE3BB26007850EE /* EventList.swift */; };
+		BF37BD612C0DBD4E003F657D /* FluidMenuBarExtra in Frameworks */ = {isa = PBXBuildFile; productRef = BF37BD602C0DBD4E003F657D /* FluidMenuBarExtra */; };
+		BF37BD642C0DBD78003F657D /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF37BD632C0DBD78003F657D /* HowLongLeftKit */; };
 		BF3CAF042BF4A78D003035C7 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = BF3CAF032BF4A78D003035C7 /* Settings */; };
 		BF3CAF092BF4A7C2003035C7 /* Panes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF082BF4A7C2003035C7 /* Panes.swift */; };
 		BF3CAF0B2BF4A821003035C7 /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF0A2BF4A821003035C7 /* SettingsWindow.swift */; };
@@ -22,7 +24,6 @@
 		BF3CAF162BF4C518003035C7 /* MacCalendarContexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF152BF4C518003035C7 /* MacCalendarContexts.swift */; };
 		BF3CAF4F2BF4D0DC003035C7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF4E2BF4D0DC003035C7 /* main.swift */; };
 		BF40D8B22BEC8AE200E26563 /* ToggleCalendarStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D8B12BEC8AE200E26563 /* ToggleCalendarStateView.swift */; };
-		BF4A054E2BF1F89600678073 /* MenuBarExtraAccess in Frameworks */ = {isa = PBXBuildFile; productRef = BF4A054D2BF1F89600678073 /* MenuBarExtraAccess */; settings = {ATTRIBUTES = (Required, ); }; };
 		BF4A055C2BF20A5B00678073 /* StatusItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */; };
 		BF7465EA2BF237B3009C373D /* MenuInProgressListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7465E92BF237B3009C373D /* MenuInProgressListItemView.swift */; };
 		BF75F9D92BFD1A2D00326B72 /* FluidMenuBarExtra in Frameworks */ = {isa = PBXBuildFile; productRef = BF75F9D82BFD1A2D00326B72 /* FluidMenuBarExtra */; };
@@ -188,11 +189,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF4A054E2BF1F89600678073 /* MenuBarExtraAccess in Frameworks */,
 				BF3CAF042BF4A78D003035C7 /* Settings in Frameworks */,
+				BF37BD642C0DBD78003F657D /* HowLongLeftKit in Frameworks */,
 				BF91A6172BEF1E480047D534 /* HowLongLeftKit in Frameworks */,
 				BF75F9D92BFD1A2D00326B72 /* FluidMenuBarExtra in Frameworks */,
 				BFA1BCC42BFF69840069F5CF /* FluidMenuBarExtra in Frameworks */,
+				BF37BD612C0DBD4E003F657D /* FluidMenuBarExtra in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,10 +455,11 @@
 			name = "How Long Left Mac";
 			packageProductDependencies = (
 				BF91A6162BEF1E480047D534 /* HowLongLeftKit */,
-				BF4A054D2BF1F89600678073 /* MenuBarExtraAccess */,
 				BF3CAF032BF4A78D003035C7 /* Settings */,
 				BF75F9D82BFD1A2D00326B72 /* FluidMenuBarExtra */,
 				BFA1BCC32BFF69840069F5CF /* FluidMenuBarExtra */,
+				BF37BD602C0DBD4E003F657D /* FluidMenuBarExtra */,
+				BF37BD632C0DBD78003F657D /* HowLongLeftKit */,
 			);
 			productName = "How Long Left Mac";
 			productReference = BFF0E6772BE6881F0023AB22 /* How Long Left Mac.app */;
@@ -543,18 +546,18 @@
 			mainGroup = BFE8F0B82BE3602000083FD6;
 			packageReferences = (
 				BFF0E6A42BE91A210023AB22 /* XCRemoteSwiftPackageReference "Defaults" */,
-				BF4A054C2BF1F89600678073 /* XCRemoteSwiftPackageReference "MenuBarExtraAccess" */,
 				BF3CAF022BF4A78D003035C7 /* XCRemoteSwiftPackageReference "Settings" */,
-				BFA1BCC22BFF69840069F5CF /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */,
+				BF37BD5F2C0DBD4E003F657D /* XCRemoteSwiftPackageReference "fluid-menu-bar-extra" */,
+				BF37BD622C0DBD78003F657D /* XCRemoteSwiftPackageReference "HowLongLeftKit" */,
 			);
 			productRefGroup = BFE8F0C22BE3602000083FD6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				BFE8F0C02BE3602000083FD6 /* How Long Left */,
+				BFF0E6762BE6881F0023AB22 /* How Long Left Mac */,
 				BFE8F0D22BE3602200083FD6 /* How Long LeftTests */,
 				BFE8F0DC2BE3602200083FD6 /* How Long LeftUITests */,
-				BFF0E6762BE6881F0023AB22 /* How Long Left Mac */,
 				BFF0E6862BE688220023AB22 /* How Long Left MacTests */,
 				BFF0E6902BE688220023AB22 /* How Long Left MacUITests */,
 			);
@@ -1209,28 +1212,29 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		BFA1BCC22BFF69840069F5CF /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../fluid-menu-bar-extra";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
+		BF37BD5F2C0DBD4E003F657D /* XCRemoteSwiftPackageReference "fluid-menu-bar-extra" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ryankontos/fluid-menu-bar-extra.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		BF37BD622C0DBD78003F657D /* XCRemoteSwiftPackageReference "HowLongLeftKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ryankontos/HowLongLeftKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		BF3CAF022BF4A78D003035C7 /* XCRemoteSwiftPackageReference "Settings" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Settings.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 3.1.1;
-			};
-		};
-		BF4A054C2BF1F89600678073 /* XCRemoteSwiftPackageReference "MenuBarExtraAccess" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/orchetect/MenuBarExtraAccess.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.5;
 			};
 		};
 		BFF0E6A42BE91A210023AB22 /* XCRemoteSwiftPackageReference "Defaults" */ = {
@@ -1248,15 +1252,20 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = HowLongLeftKit;
 		};
+		BF37BD602C0DBD4E003F657D /* FluidMenuBarExtra */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF37BD5F2C0DBD4E003F657D /* XCRemoteSwiftPackageReference "fluid-menu-bar-extra" */;
+			productName = FluidMenuBarExtra;
+		};
+		BF37BD632C0DBD78003F657D /* HowLongLeftKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF37BD622C0DBD78003F657D /* XCRemoteSwiftPackageReference "HowLongLeftKit" */;
+			productName = HowLongLeftKit;
+		};
 		BF3CAF032BF4A78D003035C7 /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BF3CAF022BF4A78D003035C7 /* XCRemoteSwiftPackageReference "Settings" */;
 			productName = Settings;
-		};
-		BF4A054D2BF1F89600678073 /* MenuBarExtraAccess */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF4A054C2BF1F89600678073 /* XCRemoteSwiftPackageReference "MenuBarExtraAccess" */;
-			productName = MenuBarExtraAccess;
 		};
 		BF75F9D82BFD1A2D00326B72 /* FluidMenuBarExtra */ = {
 			isa = XCSwiftPackageProductDependency;

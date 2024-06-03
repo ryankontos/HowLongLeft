@@ -14,12 +14,15 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
     
     let mainMenuViewModelQueue = DispatchQueue(label: "HowLongLeftMac.MainMenuViewModelQueue")
     
-    @Published var selectedItemID: String?
+    @Published var selectedItemID: String? {
+        didSet {
+            handleSelectionChange(oldValue: oldValue, newValue: selectedItemID)
+        }
+    }
     
     @Published var scrollPosition: CGPoint = .zero
     
     private let timePointStore: TimePointStore
-    
     public var scrollProxy: ScrollViewProxy?
     
     private var latestHoverDate: Date?
@@ -27,6 +30,8 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
     
     private var selectFromHoverWorkItem: DispatchWorkItem?
     private var setHoverWorkItem: DispatchWorkItem?
+    
+    public weak var submenuManager: FluidMenuBarExtraWindowManager?
     
     @Published var clickID: String?
     
@@ -40,68 +45,35 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
     }
     
     func setWindowHovering(_ hovering: Bool, id: String?) {
-        
-       
-        
         selectFromHoverWorkItem?.cancel()
-        
         setHoverWorkItem?.cancel()
         
         let item = DispatchWorkItem { [self] in
-            
             if hovering {
-                
                 selectIDFromHover(id)
-                
-                
-            } else {
-                if selectedItemID == id {
-                    //print("SSII 1")
-                    selectedItemID = nil
-                    selectIDFromHover(nil)
-                }
-                
+            } else if selectedItemID == id {
+                selectedItemID = nil
+                selectIDFromHover(nil)
             }
-            
         }
         
-        self.setHoverWorkItem = item
-        
+        setHoverWorkItem = item
         DispatchQueue.main.async(execute: item)
-        
-        
     }
     
-    
-    
     func selectIDFromHover(_ idToSelect: String?) {
-        
-        
-        
-        guard idToSelect != selectedItemID else {
-            return
-            
-        }
+        guard idToSelect != selectedItemID else { return }
         
         selectFromHoverWorkItem?.cancel()
         
-      
         let item = DispatchWorkItem { [self] in
             latestHoverDate = Date()
+            if let latestKeyDate = latestKeyDate, Date().timeIntervalSince(latestKeyDate) < 0.5 { return }
             
-            
-            
-            // If the latest key date was in the last 0.5s, ignore and return instead of selecting
-            if let latestKeyDate = latestKeyDate, Date().timeIntervalSince(latestKeyDate) < 0.5 {
-                return
+            lastSelectWasByKey = false
+            if selectedItemID != idToSelect {
+                selectedItemID = idToSelect
             }
-            
-            self.lastSelectWasByKey = false
-            if self.selectedItemID != idToSelect {
-                self.selectedItemID = idToSelect
-               // //print("SSII 2")
-            }
-           
         }
         
         let delay: TimeInterval = {
@@ -112,56 +84,48 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
             }
         }()
         
-        self.selectFromHoverWorkItem = item
-        
+        selectFromHoverWorkItem = item
         DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: item)
     }
     
     func resetHover() {
-        
         latestKeyDate = nil
         if let latestActualHoverId {
             selectedItemID = latestActualHoverId
-            //print("SSII 3")
         }
     }
     
     func clickItem() {
-        clickID = self.selectedItemID
+        clickID = selectedItemID
     }
     
     func selectNextItem() {
         guard let currentID = selectedItemID else {
             selectedItemID = getIdsList().first
-            //print("SSII 4")
             return
         }
         
         let ids = getIdsList()
         if let currentIndex = ids.firstIndex(of: currentID), currentIndex + 1 < ids.count {
             selectedItemID = ids[currentIndex + 1]
-            //print("SSII 5")
         }
         
-        
-        self.lastSelectWasByKey = true
+        lastSelectWasByKey = true
         latestKeyDate = Date()
     }
     
     func selectPreviousItem() {
         guard let currentID = selectedItemID else {
             selectedItemID = getIdsList().last
-            //print("SSII 6")
             return
         }
         
         let ids = getIdsList()
         if let currentIndex = ids.firstIndex(of: currentID), currentIndex > 0 {
             selectedItemID = ids[currentIndex - 1]
-            //print("SSII 7")
         }
         
-        self.lastSelectWasByKey = true
+        lastSelectWasByKey = true
         latestKeyDate = Date()
     }
     
@@ -172,23 +136,33 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
     
     func eventGroups(at date: Date) -> [TitledEventGroup] {
         guard let currentPoint = timePointStore.getPointAt(date: date) else { return [] }
+        
         var groups = [
             TitledEventGroup("On Now", currentPoint.inProgressEvents),
         ]
         
-        let dates = currentPoint.upcomingGroupedByStartDay
-        
-        let upcomingGroups = dates.map({  TitledEventGroup("\($0.date.formatted(date: .abbreviated, time: .omitted))", $0.events) })
+        let upcomingGroups = currentPoint.upcomingGroupedByStartDay.map {
+            TitledEventGroup("\($0.date.formatted(date: .abbreviated, time: .omitted))", $0.events)
+        }
         
         groups.append(contentsOf: upcomingGroups)
         
         return groups
+    }
+    
+    private func handleSelectionChange(oldValue: String?, newValue: String?) {
+        submenuManager?.closeSubwindow(force: false, notify: false)
         
+        if let newValue = newValue {
+            submenuManager?.openSubWindow(id: newValue)
+        }
+   
+        if lastSelectWasByKey {
+            scrollProxy?.scrollTo(newValue, anchor: .bottom)
+        }
     }
 }
 
 public enum OptionsSectionButton: String, CaseIterable {
     case settings, quit
 }
-
-

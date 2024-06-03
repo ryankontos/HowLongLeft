@@ -53,6 +53,8 @@ struct MainMenuContentView: View {
                 .coordinateSpace(name: "scroll")
                 
                 .onAppear() {
+                
+                    mainMenuModel.submenuManager = windowManager
                     windowManager.hoverManager = mainMenuModel
                     mainMenuModel.scrollProxy = proxy
                 }

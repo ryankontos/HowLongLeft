@@ -193,7 +193,6 @@
 			files = (
 				BF3CAF042BF4A78D003035C7 /* Settings in Frameworks */,
 				BF37BD642C0DBD78003F657D /* HowLongLeftKit in Frameworks */,
-				BF91A6172BEF1E480047D534 /* HowLongLeftKit in Frameworks */,
 				BF75F9D92BFD1A2D00326B72 /* FluidMenuBarExtra in Frameworks */,
 				BFA1BCC42BFF69840069F5CF /* FluidMenuBarExtra in Frameworks */,
 				BF37BD612C0DBD4E003F657D /* FluidMenuBarExtra in Frameworks */,

@@ -15,6 +15,7 @@
 		BF30A9A22BE3BA71007850EE /* EventListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A9A12BE3BA71007850EE /* EventListItem.swift */; };
 		BF30A9A42BE3BB26007850EE /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A9A32BE3BB26007850EE /* EventList.swift */; };
 		BF37BD612C0DBD4E003F657D /* FluidMenuBarExtra in Frameworks */ = {isa = PBXBuildFile; productRef = BF37BD602C0DBD4E003F657D /* FluidMenuBarExtra */; };
+		BF37BD642C0DBD78003F657D /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF37BD632C0DBD78003F657D /* HowLongLeftKit */; };
 		BF3CAF042BF4A78D003035C7 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = BF3CAF032BF4A78D003035C7 /* Settings */; };
 		BF3CAF092BF4A7C2003035C7 /* Panes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF082BF4A7C2003035C7 /* Panes.swift */; };
 		BF3CAF0B2BF4A821003035C7 /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF0A2BF4A821003035C7 /* SettingsWindow.swift */; };
@@ -191,6 +192,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF3CAF042BF4A78D003035C7 /* Settings in Frameworks */,
+				BF37BD642C0DBD78003F657D /* HowLongLeftKit in Frameworks */,
+				BF91A6172BEF1E480047D534 /* HowLongLeftKit in Frameworks */,
 				BF75F9D92BFD1A2D00326B72 /* FluidMenuBarExtra in Frameworks */,
 				BFA1BCC42BFF69840069F5CF /* FluidMenuBarExtra in Frameworks */,
 				BF37BD612C0DBD4E003F657D /* FluidMenuBarExtra in Frameworks */,
@@ -1260,6 +1263,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BF37BD5F2C0DBD4E003F657D /* XCRemoteSwiftPackageReference "fluid-menu-bar-extra" */;
 			productName = FluidMenuBarExtra;
+		};
+		BF37BD632C0DBD78003F657D /* HowLongLeftKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF37BD622C0DBD78003F657D /* XCRemoteSwiftPackageReference "HowLongLeftKit" */;
+			productName = HowLongLeftKit;
 		};
 		BF3CAF032BF4A78D003035C7 /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;

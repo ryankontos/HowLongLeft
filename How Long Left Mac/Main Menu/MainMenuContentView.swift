@@ -27,9 +27,12 @@ struct MainMenuContentView: View {
     
     var body: some View {
         Group {
-            main
-                .transition(.opacity)
-                .environmentObject(menuEnv)
+            ZStack {
+                detectorView
+                main
+                    .transition(.opacity)
+                    .environmentObject(menuEnv)
+            }
         }
     }
     
@@ -41,7 +44,7 @@ struct MainMenuContentView: View {
                         let groups = mainMenuModel.eventGroups(at: Date())
                         ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
                             if !group.events.isEmpty {
-                                MenuEventListSection(title: group.title, events: group.events, mainMenuModel: mainMenuModel)
+                                MenuEventListSection(title: group.title, allDayEvents: [], events: group.events, mainMenuModel: mainMenuModel)
                             }
                             
                             if index < groups.endIndex-1 && groups.count > 1 {
@@ -65,12 +68,13 @@ struct MainMenuContentView: View {
                     .padding(.horizontal, 10)
                     .padding(.bottom, 4)
                 
-                MenuButton(model: mainMenuModel, idForHover: OptionsSectionButton.settings.rawValue, content: {
+                MenuButton(model: mainMenuModel, idForHover: OptionsSectionButton.settings.rawValue, padding: 4, content: {
                     HStack {
                         Text("Settings...")
                         Spacer()
                         Text("⌘ ,")
-                            .foregroundStyle(.secondary)
+                            .foregroundColor(.secondary)
+                            //.foregroundStyle(.secondary)
                             .font(.system(size: 12, weight: .regular))
                     }
                 }, action: {
@@ -79,12 +83,12 @@ struct MainMenuContentView: View {
                     }
                 })
                 
-                MenuButton(model: mainMenuModel, idForHover: OptionsSectionButton.quit.rawValue, content: {
+                MenuButton(model: mainMenuModel, idForHover: OptionsSectionButton.quit.rawValue, padding: 4, content: {
                     HStack {
                         Text("Quit How Long Left")
                         Spacer()
                         Text("⌘ Q")
-                            .foregroundStyle(.secondary)
+                            .foregroundColor(.secondary)
                             .font(.system(size: 12, weight: .regular))
                     }
                 }, action: {
@@ -96,29 +100,33 @@ struct MainMenuContentView: View {
         }
         .padding(.horizontal, 6)
         .padding(.vertical, 9)
-        .background() {
-            ArrowKeyDetector(
-                onLeftArrow: { },
-                onRightArrow: { },
-                onUpArrow: {
-                    mainMenuModel.selectPreviousItem()
-                },
-                onDownArrow: {
-                    mainMenuModel.selectNextItem()
-                }, onEnter: {
-                    mainMenuModel.clickItem()
-                }, onEsc: {
-                    
-                }
-            )
-        }
+        
         .frame(minWidth: 300, maxWidth: 350, maxHeight: 400)
-        .onChange(of: phase) { (old, new) in
+       /* .onChange(of: phase) { (old, new) in
             if new != .active {
                // mainMenuModel.selectedItemID = nil
             }
             
-        }
+        } */
+    }
+    
+    var detectorView: some View {
+        
+        ArrowKeyDetector(
+            onLeftArrow: { },
+            onRightArrow: { },
+            onUpArrow: {
+                mainMenuModel.selectPreviousItem()
+            },
+            onDownArrow: {
+                mainMenuModel.selectNextItem()
+            }, onEnter: {
+                mainMenuModel.clickItem()
+            }, onEsc: {
+                
+            }
+        )
+        
     }
 }
 

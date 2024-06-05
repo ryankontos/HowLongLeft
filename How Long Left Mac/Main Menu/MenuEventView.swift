@@ -35,7 +35,7 @@ struct MenuEventView: View {
                 
                 Circle()
                     .frame(width: 9)
-                    .foregroundStyle(getColor())
+                    .foregroundColor(getColor())
                 
                 Text("\(event.title)")
                     .font(.system(size: 16, weight: .semibold, design: .default))

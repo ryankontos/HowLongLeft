@@ -18,11 +18,11 @@ struct CalendarsPane: View {
         
 
         ZStack {
-            List(selection: $selection) {
+            List() {
                 
                 ForEach($calPrefs.calendarItems) { $displayInfo in
                     
-                    CalendarSettingPickerView(manager: _calPrefs, calendarInfo: displayInfo, toggleContext: "")
+                    CalendarSettingPickerView(calendarInfo: displayInfo, toggleContext: "")
 
                     
                     //.tint(Color(displayInfo.calendar.color))

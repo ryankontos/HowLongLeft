@@ -1,5 +1,5 @@
 //
-//  MenuInProgressListItemView.swift
+//  EventMenuListItem.swift
 //  How Long Left Mac
 //
 //  Created by Ryan on 13/5/2024.
@@ -8,7 +8,7 @@
 import SwiftUI
 import HowLongLeftKit
 
-struct MenuInProgressListItemView: View {
+struct EventMenuListItem: View {
     
     @State var expand = false
     
@@ -43,7 +43,7 @@ struct MenuInProgressListItemView: View {
                         Text("\(event.title)")
                             .truncationMode(.middle)
                             .lineLimit(1)
-                            .fontWeight(.regular)
+                          
                         
                         if event.status() == .inProgress {
                             
@@ -61,7 +61,7 @@ struct MenuInProgressListItemView: View {
                     
                     ProgressRingView(progress: 0.6, ringWidth: 4, ringSize: 19, color: getColor())
                 } else {
-                    Text(formatTime(date: event.startDate))
+                    Text(formatTime(event: event))
                         .foregroundStyle(.secondary)
                         .font(.system(size: 10.5, weight: .regular))
                 }
@@ -85,7 +85,14 @@ struct MenuInProgressListItemView: View {
        
     }
     
-    func formatTime(date: Date) -> String {
+    func formatTime(event: Event) -> String {
+        
+        if event.isAllDay {
+            return "all-day"
+        }
+        
+        let date = event.startDate
+        
         let calendar = Calendar.current
         let minute = calendar.component(.minute, from: date)
 
@@ -103,7 +110,7 @@ struct MenuInProgressListItemView: View {
 }
 
 #Preview {
-    MenuInProgressListItemView(mainMenuModel: nil, event: .init(title: "Event", start: Date(), end: Date().addingTimeInterval(1000)))
+    EventMenuListItem(mainMenuModel: nil, event: .init(title: "Event", start: Date(), end: Date().addingTimeInterval(1000)))
 }
 
 struct ProgressRingView: View {

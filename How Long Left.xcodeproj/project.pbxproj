@@ -22,7 +22,7 @@
 		BF3CAF4F2BF4D0DC003035C7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF4E2BF4D0DC003035C7 /* main.swift */; };
 		BF40D8B22BEC8AE200E26563 /* ToggleCalendarStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D8B12BEC8AE200E26563 /* ToggleCalendarStateView.swift */; };
 		BF4A055C2BF20A5B00678073 /* StatusItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */; };
-		BF7465EA2BF237B3009C373D /* MenuInProgressListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7465E92BF237B3009C373D /* MenuInProgressListItemView.swift */; };
+		BF7465EA2BF237B3009C373D /* EventMenuListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7465E92BF237B3009C373D /* EventMenuListItem.swift */; };
 		BF7E03A52BEC7F7800FD3B31 /* How_Long_LeftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */; };
 		BF89C1F92BEA13AC001B73C1 /* EnabledCalendarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89C1F82BEA13AC001B73C1 /* EnabledCalendarsView.swift */; };
 		BF91A6152BEF1E120047D534 /* StatusItemContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */; };
@@ -121,7 +121,7 @@
 		BF3CAF4E2BF4D0DC003035C7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BF40D8B12BEC8AE200E26563 /* ToggleCalendarStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCalendarStateView.swift; sourceTree = "<group>"; };
 		BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemStore.swift; sourceTree = "<group>"; };
-		BF7465E92BF237B3009C373D /* MenuInProgressListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInProgressListItemView.swift; sourceTree = "<group>"; };
+		BF7465E92BF237B3009C373D /* EventMenuListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenuListItem.swift; sourceTree = "<group>"; };
 		BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = How_Long_LeftApp.swift; sourceTree = "<group>"; };
 		BF89C1F82BEA13AC001B73C1 /* EnabledCalendarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnabledCalendarsView.swift; sourceTree = "<group>"; };
 		BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemContentView.swift; sourceTree = "<group>"; };
@@ -216,7 +216,7 @@
 			children = (
 				BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */,
 				BF2759FA2C0195A200595A87 /* MainMenuViewModel.swift */,
-				BF7465E92BF237B3009C373D /* MenuInProgressListItemView.swift */,
+				BF7465E92BF237B3009C373D /* EventMenuListItem.swift */,
 				BFC313C22C0094FC00778D52 /* MenuEventView.swift */,
 				BFE7114E2BF2816A000A167E /* ManuButton.swift */,
 				BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */,
@@ -663,7 +663,7 @@
 				BF3CAF112BF4AC4C003035C7 /* MacDefaultContainer.swift in Sources */,
 				BF3CAF0D2BF4A8F3003035C7 /* CalendarsPane.swift in Sources */,
 				BF3CAF0B2BF4A821003035C7 /* SettingsWindow.swift in Sources */,
-				BF7465EA2BF237B3009C373D /* MenuInProgressListItemView.swift in Sources */,
+				BF7465EA2BF237B3009C373D /* EventMenuListItem.swift in Sources */,
 				BFF0E67A2BE6881F0023AB22 /* AppDelegate.swift in Sources */,
 				BF3CAF0F2BF4AB6F003035C7 /* GeneralPane.swift in Sources */,
 				BF3CAF142BF4C3F0003035C7 /* CalendarSettingPickerView.swift in Sources */,
@@ -1010,7 +1010,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ryankontos.How-Long-Left-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1045,7 +1045,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ryankontos.How-Long-Left-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";

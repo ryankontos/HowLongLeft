@@ -98,7 +98,7 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
            
             model.selectIDFromHover(hovering ? idForHover : nil)
         }
-        .onChange(of: model.clickID) { (old, newValue) in
+        .onChange(of: model.clickID) { newValue in
             if newValue == idForHover {
                 flashButton()
                 action()
@@ -116,7 +116,7 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
                         globalPosition = geo.frame(in: .global).origin
                         windowManager.registerSubwindowButtonPosition(point: globalPosition, for: idForHover)
                     }
-                    .onChange(of: geo.frame(in: .global).origin) { (old, newOrigin) in
+                    .onChange(of: geo.frame(in: .global).origin) { newOrigin in
                         //print("Frame changed")
                         
                         globalPosition = newOrigin
@@ -138,7 +138,7 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
     private func getBackgroundOpactiy() -> Double {
         
         
-        return isHighlighted() ? opacity : (fill ? 0.05 : 0.0)
+        return isHighlighted() ? opacity : (fill ? 0.1 : 0.0)
         
     }
     

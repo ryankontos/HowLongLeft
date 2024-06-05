@@ -11,6 +11,7 @@ import HowLongLeftKit
 struct MenuEventListSection: View {
     
     var title: String?
+    var allDayEvents: [Event]
     var events: [Event]
     var mainMenuModel: MainMenuViewModel
     
@@ -34,29 +35,33 @@ struct MenuEventListSection: View {
 
         
         VStack(alignment: .leading, spacing: 0) {
+            
+            
             Section(content: {
-                ForEach(events) { event in
+                
+                VStack {
                     
-                    MenuButton(model: mainMenuModel, idForHover: event.id, customHighlight: getColor(for: event), fill: getColor(for: event) != nil, submenuContent: {
-                        AnyView(MenuEventView(event: event)
-                            .environmentObject(reader)
+                    
+                    ForEach(events) { event in
+                        getMenuButton(for: event)
+                    }
+                    
+                    MenuButton(model: mainMenuModel, idForHover: UUID().uuidString, padding: 5, submenuContent: {
                         
-                        )
+                        AnyView(ScrollView() {Text("Window")
+                        }
+                            .frame(width: 300, height: 200))
+                        
                     }, content: {
-                        MenuInProgressListItemView(event: event)
-                        
-                        
+                        Text("All Day Events...")
+                            .foregroundStyle(.secondary)
                     }, action: {
                         
                     })
-                    .id(event.id)
                     
-                
-                   
-                    
-                    
-                   
                 }
+                
+                
             }, header: {
                 if let title {
                     
@@ -76,6 +81,25 @@ struct MenuEventListSection: View {
             
             
         }
+        
+    }
+    
+    @ViewBuilder
+    func getMenuButton(for event: Event) -> some View {
+        
+        MenuButton(model: mainMenuModel, idForHover: event.id, customHighlight: getColor(for: event), fill: getColor(for: event) != nil, submenuContent: {
+            AnyView(MenuEventView(event: event)
+                .environmentObject(reader)
+            
+            )
+        }, content: {
+            EventMenuListItem(event: event)
+            
+            
+        }, action: {
+            
+        })
+        .id(event.id)
         
     }
 }

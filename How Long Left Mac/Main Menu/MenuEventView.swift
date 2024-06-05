@@ -7,12 +7,15 @@
 
 import SwiftUI
 import HowLongLeftKit
+import FluidMenuBarExtra
 
 struct MenuEventView: View {
     
     @EnvironmentObject var menuEnv: MainMenuEnvironment
     
     @EnvironmentObject var calSource: CalendarSource
+    
+    @EnvironmentObject var windowManager: ModernMenuBarExtraWindow
     
     var menuModel: WindowSelectionManager!
     
@@ -51,10 +54,39 @@ struct MenuEventView: View {
                 
                 Spacer()
                 
+                
+                
             }
+            
+            
             
             Spacer()
             
+            MenuButton(model: menuModel, idForHover: "id", submenuContent: {
+                
+                AnyView (
+                
+                    VStack{
+                        
+                        Text("Nested Subwindow!!")
+                        
+                    }
+                        .frame(width: 200, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                
+                )
+                
+            },content: {
+                
+                Text("Button")
+                
+            }, action: {
+                
+            })
+            
+        }
+        .onAppear() {
+            windowManager.hoverManager = menuModel
+            menuModel.submenuManager = windowManager
         }
         .padding(.all, 20)
         .frame(width: 250, height: 200)
@@ -70,7 +102,7 @@ extension MenuEventView: MenuSelectableItemsProvider {
     
     
     func getItems() -> [String] {
-        return []
+        return ["id"]
     }
     
     

@@ -13,6 +13,7 @@ struct MainMenuContentView: View {
     
     @EnvironmentObject var pointStore: TimePointStore
     @EnvironmentObject var settingsWindow: SettingsWindow
+    @EnvironmentObject var windowManager: ModernMenuBarExtraWindow
     
     var selectionManager: WindowSelectionManager
     
@@ -22,7 +23,7 @@ struct MainMenuContentView: View {
     
     @Environment(\.scenePhase) var phase
     
-    @EnvironmentObject var windowManager: ModernMenuBarExtraWindow
+   
     
     @StateObject var menuEnv = MainMenuEnvironment()
     @State private var scrollPosition: CGPoint = .zero

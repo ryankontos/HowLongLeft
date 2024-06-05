@@ -14,6 +14,15 @@ struct MenuEventView: View {
     
     @EnvironmentObject var calSource: CalendarSource
     
+    var menuModel: WindowSelectionManager!
+    
+    init(event: Event) {
+       
+        self.event = event
+        
+        self.menuModel = WindowSelectionManager(itemsProvider: self)
+    }
+    
     var event: Event
     
     func getColor() -> Color {
@@ -56,3 +65,13 @@ struct MenuEventView: View {
 }
 
 
+
+extension MenuEventView: MenuSelectableItemsProvider {
+    
+    
+    func getItems() -> [String] {
+        return []
+    }
+    
+    
+}

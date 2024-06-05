@@ -25,15 +25,14 @@ class StatusItemStore: EventCacheObserver {
         super.init(eventCache: container.eventCache)
         
         
-        
-        
-        
     }
     
     func createMainMenu() {
         
+        let model = MainMenuViewModel(timePointStore: self.container.pointStore)
+        
         let mainExtra = FluidMenuBarExtra(title: "How Long Left") {
-            AnyView(MainMenuContentView(mainMenuModel: MainMenuViewModel(timePointStore: self.container.pointStore))
+            AnyView(MainMenuContentView(selectionManager: WindowSelectionManager(itemsProvider: model), model: model)
                 .environmentObject(self.container.settingsWindow)
                 .environmentObject(self.container.pointStore)
                 .environmentObject(self.container.calendarReader))

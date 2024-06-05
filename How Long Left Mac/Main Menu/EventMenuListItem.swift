@@ -12,7 +12,7 @@ struct EventMenuListItem: View {
     
     @State var expand = false
     
-    var mainMenuModel: MainMenuViewModel?
+    var mainMenuModel: WindowSelectionManager?
     
     @EnvironmentObject var source: CalendarSource
     

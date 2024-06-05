@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BF2759FB2C0195A200595A87 /* MainMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2759FA2C0195A200595A87 /* MainMenuViewModel.swift */; };
+		BF2759FB2C0195A200595A87 /* WindowSelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2759FA2C0195A200595A87 /* WindowSelectionManager.swift */; };
 		BF2759FE2C01A1A500595A87 /* ArrowKeyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2759FD2C01A1A500595A87 /* ArrowKeyDetector.swift */; };
 		BF30A9922BE369D8007850EE /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF30A9912BE369D8007850EE /* HowLongLeftKit */; };
 		BF30A9A22BE3BA71007850EE /* EventListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A9A12BE3BA71007850EE /* EventListItem.swift */; };
@@ -104,7 +104,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BF2759FA2C0195A200595A87 /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
+		BF2759FA2C0195A200595A87 /* WindowSelectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSelectionManager.swift; sourceTree = "<group>"; };
 		BF2759FD2C01A1A500595A87 /* ArrowKeyDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowKeyDetector.swift; sourceTree = "<group>"; };
 		BF30A99F2BE3BA1F007850EE /* How-Long-LeftUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-LeftUITests-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BF30A9A02BE3BA4E007850EE /* How-Long-Left-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-Left-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -215,7 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */,
-				BF2759FA2C0195A200595A87 /* MainMenuViewModel.swift */,
+				BF2759FA2C0195A200595A87 /* WindowSelectionManager.swift */,
 				BF7465E92BF237B3009C373D /* EventMenuListItem.swift */,
 				BFC313C22C0094FC00778D52 /* MenuEventView.swift */,
 				BFE7114E2BF2816A000A167E /* ManuButton.swift */,
@@ -652,7 +652,7 @@
 				BFE2328A2BF4F1E9004F55D8 /* StatusItemCountdown.swift in Sources */,
 				BF3CAF4F2BF4D0DC003035C7 /* main.swift in Sources */,
 				BFAC93EB2C09FE5B00AB66BF /* OffsetObservingScrollView.swift in Sources */,
-				BF2759FB2C0195A200595A87 /* MainMenuViewModel.swift in Sources */,
+				BF2759FB2C0195A200595A87 /* WindowSelectionManager.swift in Sources */,
 				BF91A61D2BF1D6BA0047D534 /* MainMenuContentView.swift in Sources */,
 				BF2759FE2C01A1A500595A87 /* ArrowKeyDetector.swift in Sources */,
 				BF3CAF092BF4A7C2003035C7 /* Panes.swift in Sources */,

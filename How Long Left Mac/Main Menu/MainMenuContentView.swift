@@ -14,7 +14,9 @@ struct MainMenuContentView: View {
     @EnvironmentObject var pointStore: TimePointStore
     @EnvironmentObject var settingsWindow: SettingsWindow
     
-    var mainMenuModel: MainMenuViewModel
+    var selectionManager: WindowSelectionManager
+    
+    var model: MainMenuViewModel
     
     @State var displayEvent: Event?
     
@@ -24,6 +26,7 @@ struct MainMenuContentView: View {
     
     @StateObject var menuEnv = MainMenuEnvironment()
     @State private var scrollPosition: CGPoint = .zero
+    
     
     var body: some View {
         Group {
@@ -41,10 +44,10 @@ struct MainMenuContentView: View {
             ScrollViewReader { proxy in
                 ScrollView(showsIndicators: false) {
                     VStack {
-                        let groups = mainMenuModel.eventGroups(at: Date())
+                        let groups = model.getEventGroups(at: Date())
                         ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
                             if !group.events.isEmpty {
-                                MenuEventListSection(title: group.title, allDayEvents: [], events: group.events, mainMenuModel: mainMenuModel)
+                                MenuEventListSection(title: group.title, allDayEvents: [], events: group.events, mainMenuModel: selectionManager)
                             }
                             
                             if index < groups.endIndex-1 && groups.count > 1 {
@@ -57,9 +60,9 @@ struct MainMenuContentView: View {
                 
                 .onAppear() {
                 
-                    mainMenuModel.submenuManager = windowManager
-                    windowManager.hoverManager = mainMenuModel
-                    mainMenuModel.scrollProxy = proxy
+                    selectionManager.submenuManager = windowManager
+                    windowManager.hoverManager = selectionManager
+                    selectionManager.scrollProxy = proxy
                 }
             }
             
@@ -68,7 +71,7 @@ struct MainMenuContentView: View {
                     .padding(.horizontal, 10)
                     .padding(.bottom, 4)
                 
-                MenuButton(model: mainMenuModel, idForHover: OptionsSectionButton.settings.rawValue, padding: 4, content: {
+                MenuButton(model: selectionManager, idForHover: OptionsSectionButton.settings.rawValue, padding: 4, content: {
                     HStack {
                         Text("Settings...")
                         Spacer()
@@ -83,7 +86,7 @@ struct MainMenuContentView: View {
                     }
                 })
                 
-                MenuButton(model: mainMenuModel, idForHover: OptionsSectionButton.quit.rawValue, padding: 4, content: {
+                MenuButton(model: selectionManager, idForHover: OptionsSectionButton.quit.rawValue, padding: 4, content: {
                     HStack {
                         Text("Quit How Long Left")
                         Spacer()
@@ -116,21 +119,57 @@ struct MainMenuContentView: View {
             onLeftArrow: { },
             onRightArrow: { },
             onUpArrow: {
-                mainMenuModel.selectPreviousItem()
+                selectionManager.selectPreviousItem()
             },
             onDownArrow: {
-                mainMenuModel.selectNextItem()
+                selectionManager.selectNextItem()
             }, onEnter: {
-                mainMenuModel.clickItem()
+                selectionManager.clickItem()
             }, onEsc: {
                 
             }
         )
         
     }
+    
+  
+    
 }
 
 class MainMenuEnvironment: ObservableObject {
     @Published var displayEvent: Event?
 }
 
+
+class MainMenuViewModel: MenuSelectableItemsProvider {
+    
+    var pointStore: TimePointStore
+    
+    func getItems() -> [String] {
+        let groups = getEventGroups(at: Date())
+        return groups.flatMap { $0.events.map { $0.id } } + OptionsSectionButton.allCases.map { $0.rawValue }
+    }
+    
+    public func getEventGroups(at date: Date) -> [TitledEventGroup] {
+        guard let currentPoint = pointStore.getPointAt(date: date) else { return [] }
+        
+        var groups = [
+            TitledEventGroup("On Now", currentPoint.inProgressEvents),
+        ]
+        
+        let upcomingGroups = currentPoint.upcomingGroupedByStartDay.map {
+            TitledEventGroup("\($0.date.formatted(date: .abbreviated, time: .omitted))", $0.events)
+        }
+        
+        groups.append(contentsOf: upcomingGroups)
+        
+        return groups
+    }
+    
+    init(timePointStore: TimePointStore) {
+        
+        self.pointStore = timePointStore
+        
+    }
+    
+}

@@ -10,7 +10,7 @@ import HowLongLeftKit
 import SwiftUI
 import FluidMenuBarExtra
 
-class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
+class WindowSelectionManager: ObservableObject, SubWindowSelectionManager {
     
     let mainMenuViewModelQueue = DispatchQueue(label: "HowLongLeftMac.MainMenuViewModelQueue")
     
@@ -22,7 +22,12 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
     
     @Published var scrollPosition: CGPoint = .zero
     
-    private let timePointStore: TimePointStore
+    var latestItems = [String]()
+    
+    //private let timePointStore: TimePointStore
+    
+    private var itemsProvider: MenuSelectableItemsProvider
+    
     public var scrollProxy: ScrollViewProxy?
     
     private var latestHoverDate: Date?
@@ -40,8 +45,9 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
     
     var latestActualHoverId: String?
     
-    init(timePointStore: TimePointStore) {
-        self.timePointStore = timePointStore
+    init(itemsProvider: MenuSelectableItemsProvider) {
+        self.itemsProvider = itemsProvider
+        self.latestItems = itemsProvider.getItems()
     }
     
     func setWindowHovering(_ hovering: Bool, id: String?) {
@@ -101,11 +107,11 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
     
     func selectNextItem() {
         guard let currentID = selectedItemID else {
-            selectedItemID = getIdsList().first
+            selectedItemID = latestItems.first
             return
         }
         
-        let ids = getIdsList()
+        let ids = latestItems
         if let currentIndex = ids.firstIndex(of: currentID), currentIndex + 1 < ids.count {
             selectedItemID = ids[currentIndex + 1]
         }
@@ -116,11 +122,11 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
     
     func selectPreviousItem() {
         guard let currentID = selectedItemID else {
-            selectedItemID = getIdsList().last
+            selectedItemID = latestItems.last
             return
         }
         
-        let ids = getIdsList()
+        let ids = latestItems
         if let currentIndex = ids.firstIndex(of: currentID), currentIndex > 0 {
             selectedItemID = ids[currentIndex - 1]
         }
@@ -129,26 +135,7 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
         latestKeyDate = Date()
     }
     
-    func getIdsList() -> [String] {
-        let groups = eventGroups(at: Date())
-        return groups.flatMap { $0.events.map { $0.id } } + OptionsSectionButton.allCases.map { $0.rawValue }
-    }
     
-    func eventGroups(at date: Date) -> [TitledEventGroup] {
-        guard let currentPoint = timePointStore.getPointAt(date: date) else { return [] }
-        
-        var groups = [
-            TitledEventGroup("On Now", currentPoint.inProgressEvents),
-        ]
-        
-        let upcomingGroups = currentPoint.upcomingGroupedByStartDay.map {
-            TitledEventGroup("\($0.date.formatted(date: .abbreviated, time: .omitted))", $0.events)
-        }
-        
-        groups.append(contentsOf: upcomingGroups)
-        
-        return groups
-    }
     
     private func handleSelectionChange(oldValue: String?, newValue: String?) {
         submenuManager?.closeSubwindow(notify: false) // Do not notify self (Because we already know!)
@@ -166,3 +153,10 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
 public enum OptionsSectionButton: String, CaseIterable {
     case settings, quit
 }
+
+protocol MenuSelectableItemsProvider {
+    
+    func getItems() -> [String]
+    
+}
+

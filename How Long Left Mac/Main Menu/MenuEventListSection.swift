@@ -13,7 +13,7 @@ struct MenuEventListSection: View {
     var title: String?
     var allDayEvents: [Event]
     var events: [Event]
-    var mainMenuModel: MainMenuViewModel
+    var mainMenuModel: WindowSelectionManager
     
     @EnvironmentObject var env: MainMenuEnvironment
     @EnvironmentObject var reader: CalendarSource

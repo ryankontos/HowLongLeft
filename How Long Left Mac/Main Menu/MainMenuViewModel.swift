@@ -151,7 +151,7 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
     }
     
     private func handleSelectionChange(oldValue: String?, newValue: String?) {
-        submenuManager?.closeSubwindow()
+        submenuManager?.closeSubwindow(notify: false)
         
         if let newValue = newValue {
             submenuManager?.openSubWindow(id: newValue)

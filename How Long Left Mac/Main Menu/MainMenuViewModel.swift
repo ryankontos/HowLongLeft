@@ -31,7 +31,7 @@ class MainMenuViewModel: ObservableObject, SubWindowSelectionManager {
     private var selectFromHoverWorkItem: DispatchWorkItem?
     private var setHoverWorkItem: DispatchWorkItem?
     
-    public weak var submenuManager: FluidMenuBarExtraWindowManager?
+    public weak var submenuManager: ModernMenuBarExtraWindow?
     
     @Published var clickID: String?
     

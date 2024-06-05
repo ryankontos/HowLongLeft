@@ -20,7 +20,7 @@ struct MainMenuContentView: View {
     
     @Environment(\.scenePhase) var phase
     
-    @EnvironmentObject var windowManager: FluidMenuBarExtraWindowManager
+    @EnvironmentObject var windowManager: ModernMenuBarExtraWindow
     
     @StateObject var menuEnv = MainMenuEnvironment()
     @State private var scrollPosition: CGPoint = .zero

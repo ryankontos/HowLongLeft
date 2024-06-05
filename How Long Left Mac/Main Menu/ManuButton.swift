@@ -12,7 +12,7 @@ import FluidMenuBarExtra
 struct MenuButton<Content: View>: View, SubwindowDelegate {
 
     @ObservedObject var model: MainMenuViewModel
-    @EnvironmentObject var windowManager: FluidMenuBarExtraWindowManager
+    @EnvironmentObject var windowManager: ModernMenuBarExtraWindow
     
     @State private var isHovering = false
     @State private var isFlashing = false

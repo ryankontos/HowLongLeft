@@ -7,8 +7,11 @@
 
 import SwiftUI
 import HowLongLeftKit
+import FluidMenuBarExtra
 
 struct MenuEventListSection: View {
+    
+    var id: String
     
     var title: String?
     var allDayEvents: [Event]
@@ -46,18 +49,7 @@ struct MenuEventListSection: View {
                         getMenuButton(for: event)
                     }
                     
-                    MenuButton(model: mainMenuModel, idForHover: UUID().uuidString, padding: 5, submenuContent: {
-                        
-                        AnyView(ScrollView() {Text("Window")
-                        }
-                            .frame(width: 300, height: 200))
-                        
-                    }, content: {
-                        Text("All Day Events...")
-                            .foregroundStyle(.secondary)
-                    }, action: {
-                        
-                    })
+                    
                     
                 }
                 
@@ -87,7 +79,7 @@ struct MenuEventListSection: View {
     @ViewBuilder
     func getMenuButton(for event: Event) -> some View {
         
-        MenuButton(model: mainMenuModel, idForHover: event.id, customHighlight: getColor(for: event), fill: getColor(for: event) != nil, submenuContent: {
+        MenuButton(model: mainMenuModel, idForHover: event.id, cornerRadius: event.isAllDay ? 12 : 5, customHighlight: getColor(for: event), fill: getColor(for: event) != nil, submenuContent: {
             AnyView(MenuEventView(event: event)
                 .environmentObject(reader)
             

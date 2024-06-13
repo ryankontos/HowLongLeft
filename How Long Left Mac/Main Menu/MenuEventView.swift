@@ -41,57 +41,82 @@ struct MenuEventView: View {
     
     var body: some View {
         
-        VStack {
+        ZStack {
             
-            HStack {
+            //ArrowKeySelectionManagingView(id: "Second \(event.title)", selectionManager: menuModel)
+            
+            VStack {
                 
-                Circle()
-                    .frame(width: 9)
-                    .foregroundColor(getColor())
+                HStack {
+                    
+                    Circle()
+                        .frame(width: 9)
+                        .foregroundColor(getColor())
+                    
+                    Text("\(event.title)")
+                        .font(.system(size: 16, weight: .semibold, design: .default))
+                    
+                    Spacer()
+                    
+                    
+                    
+                }
                 
-                Text("\(event.title)")
-                    .font(.system(size: 16, weight: .semibold, design: .default))
+                
                 
                 Spacer()
                 
+                MenuButton(model: menuModel, idForHover: "1", submenuContent: {
+                    
+                    AnyView (
+                        
+                        VStack{
+                            
+                            Text("1")
+                            
+                        }
+                            .frame(width: 200, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        
+                    )
+                    
+                },content: {
+                    
+                    Text("Button 1")
+                    
+                }, action: {
+                    
+                })
                 
+                MenuButton(model: menuModel, idForHover: "2", submenuContent: {
+                    
+                    AnyView (
+                        
+                        VStack{
+                            
+                            Text("2")
+                            
+                        }
+                            .frame(width: 200, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        
+                    )
+                    
+                },content: {
+                    
+                    Text("Button 2")
+                    
+                }, action: {
+                    
+                })
                 
             }
-            
-            
-            
-            Spacer()
-            
-            MenuButton(model: menuModel, idForHover: "id", submenuContent: {
-                
-                AnyView (
-                
-                    VStack{
-                        
-                        Text("Nested Subwindow!!")
-                        
-                    }
-                        .frame(width: 200, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                
-                )
-                
-            },content: {
-                
-                Text("Button")
-                
-            }, action: {
-                
-            })
+            .onAppear() {
+                windowManager.hoverManager = menuModel
+                menuModel.submenuManager = windowManager
+            }
+            .padding(.all, 20)
+            .frame(width: 250, height: 200)
             
         }
-        .onAppear() {
-            windowManager.hoverManager = menuModel
-            menuModel.submenuManager = windowManager
-        }
-        .padding(.all, 20)
-        .frame(width: 250, height: 200)
-        
-       
            
     }
 }
@@ -102,7 +127,7 @@ extension MenuEventView: MenuSelectableItemsProvider {
     
     
     func getItems() -> [String] {
-        return ["id"]
+        return ["1","2"]
     }
     
     

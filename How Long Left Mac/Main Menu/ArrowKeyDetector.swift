@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 struct ArrowKeyDetector: NSViewRepresentable {
+    
+    var id: String
+    
     var onLeftArrow: (() -> Void)?
     var onRightArrow: (() -> Void)?
     var onUpArrow: (() -> Void)?
@@ -77,7 +80,9 @@ struct ArrowKeyDetector: NSViewRepresentable {
         }
 
         override func viewDidMoveToWindow() {
-            window?.makeFirstResponder(self)
+            print("Make FR \(coordinator!.parent.id)")
+           // window!.makeFirstResponder(self)
+            
         }
     }
 }

@@ -23,7 +23,7 @@ struct MainMenuContentView: View {
     
     @Environment(\.scenePhase) var phase
     
-   
+    
     
     @StateObject var menuEnv = MainMenuEnvironment()
     @State private var scrollPosition: CGPoint = .zero
@@ -32,7 +32,7 @@ struct MainMenuContentView: View {
     var body: some View {
         Group {
             ZStack {
-                detectorView
+                ArrowKeySelectionManagingView(id: "Main", selectionManager: selectionManager)
                 main
                     .transition(.opacity)
                     .environmentObject(menuEnv)
@@ -48,7 +48,7 @@ struct MainMenuContentView: View {
                         let groups = model.getEventGroups(at: Date())
                         ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
                             if !group.events.isEmpty {
-                                MenuEventListSection(title: group.title, allDayEvents: [], events: group.events, mainMenuModel: selectionManager)
+                                MenuEventListSection(id: group.title!, title: group.title, allDayEvents: [], events: group.events, mainMenuModel: selectionManager)
                             }
                             
                             if index < groups.endIndex-1 && groups.count > 1 {
@@ -106,32 +106,10 @@ struct MainMenuContentView: View {
         .padding(.vertical, 9)
         
         .frame(minWidth: 300, maxWidth: 350, maxHeight: 400)
-       /* .onChange(of: phase) { (old, new) in
-            if new != .active {
-               // mainMenuModel.selectedItemID = nil
-            }
-            
-        } */
+      
     }
     
-    var detectorView: some View {
-        
-        ArrowKeyDetector(
-            onLeftArrow: { },
-            onRightArrow: { },
-            onUpArrow: {
-                selectionManager.selectPreviousItem()
-            },
-            onDownArrow: {
-                selectionManager.selectNextItem()
-            }, onEnter: {
-                selectionManager.clickItem()
-            }, onEsc: {
-                
-            }
-        )
-        
-    }
+    
     
   
     

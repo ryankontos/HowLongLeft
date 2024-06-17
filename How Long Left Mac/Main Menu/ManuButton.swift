@@ -11,8 +11,8 @@ import FluidMenuBarExtra
 
 struct MenuButton<Content: View>: View, SubwindowDelegate {
 
-    @ObservedObject var model: MainMenuViewModel
-    @EnvironmentObject var windowManager: FluidMenuBarExtraWindowManager
+    @ObservedObject var model: WindowSelectionManager
+    @EnvironmentObject var windowManager: ModernMenuBarExtraWindow
     
     @State private var isHovering = false
     @State private var isFlashing = false
@@ -35,7 +35,7 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
     let fill: Bool
 
     init(
-        model: MainMenuViewModel,
+        model: WindowSelectionManager,
         idForHover: String,
         opacity: Double = 0.2,
         cornerRadius: CGFloat = 5,
@@ -96,7 +96,8 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
         
         .onHover { hovering in
            
-            model.selectIDFromHover(hovering ? idForHover : nil)
+            model.setMenuItemHovering(id: hovering ? idForHover : nil, hovering: hovering)
+            
         }
         .onChange(of: model.clickID) { newValue in
             if newValue == idForHover {
@@ -144,7 +145,7 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
     
     func isHighlighted() -> Bool {
         
-       return (idForHover == model.selectedItemID) && !isFlashing
+       return (idForHover == model.menuSelection) && !isFlashing
         
     }
     

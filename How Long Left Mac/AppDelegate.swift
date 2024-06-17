@@ -17,8 +17,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
        // //print("Launched")
         // Initialize the status item store
+        
+        guard ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" else {
+            return
+        }
+        
         statusItemStore = StatusItemStore(container: container)
         
+    
        
     }
     

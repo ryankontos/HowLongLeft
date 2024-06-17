@@ -7,12 +7,13 @@
 
 import SwiftUI
 import HowLongLeftKit
+import FluidMenuBarExtra
 
 struct EventMenuListItem: View {
     
     @State var expand = false
     
-    var mainMenuModel: MainMenuViewModel?
+    var mainMenuModel: WindowSelectionManager?
     
     @EnvironmentObject var source: CalendarSource
     
@@ -35,9 +36,17 @@ struct EventMenuListItem: View {
             
             HStack(spacing: 8) {
             
-                Circle()
-                    .frame(width: 8)
-                    .foregroundStyle(getColor().opacity(0.7))
+                if !event.isAllDay {
+                    
+                    Circle()
+                        .frame(width: 8)
+                        .foregroundStyle(getColor().opacity(0.7))
+                    
+                } else {
+                    
+                    
+                    
+                }
               
                     VStack(alignment: .leading, spacing: 1) {
                         Text("\(event.title)")
@@ -110,7 +119,7 @@ struct EventMenuListItem: View {
 }
 
 #Preview {
-    EventMenuListItem(mainMenuModel: nil, event: .init(title: "Event", start: Date(), end: Date().addingTimeInterval(1000)))
+    EventMenuListItem(mainMenuModel: nil, event: Event.init(title: "Event", start: Date(), end: Date().addingTimeInterval(1000)))
 }
 
 struct ProgressRingView: View {

@@ -13,22 +13,26 @@ struct MainMenuContentView: View {
     
     @EnvironmentObject var pointStore: TimePointStore
     @EnvironmentObject var settingsWindow: SettingsWindow
+    @EnvironmentObject var windowManager: ModernMenuBarExtraWindow
     
-    var mainMenuModel: MainMenuViewModel
+    var selectionManager: WindowSelectionManager
+    
+    var model: MainMenuViewModel
     
     @State var displayEvent: Event?
     
     @Environment(\.scenePhase) var phase
     
-    @EnvironmentObject var windowManager: FluidMenuBarExtraWindowManager
+    
     
     @StateObject var menuEnv = MainMenuEnvironment()
     @State private var scrollPosition: CGPoint = .zero
     
+    
     var body: some View {
         Group {
             ZStack {
-                detectorView
+                ArrowKeySelectionManagingView(id: "Main", selectionManager: selectionManager)
                 main
                     .transition(.opacity)
                     .environmentObject(menuEnv)
@@ -41,10 +45,10 @@ struct MainMenuContentView: View {
             ScrollViewReader { proxy in
                 ScrollView(showsIndicators: false) {
                     VStack {
-                        let groups = mainMenuModel.eventGroups(at: Date())
+                        let groups = model.getEventGroups(at: Date())
                         ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
                             if !group.events.isEmpty {
-                                MenuEventListSection(title: group.title, allDayEvents: [], events: group.events, mainMenuModel: mainMenuModel)
+                                MenuEventListSection(id: group.title!, title: group.title, allDayEvents: [], events: group.events, mainMenuModel: selectionManager)
                             }
                             
                             if index < groups.endIndex-1 && groups.count > 1 {
@@ -57,9 +61,9 @@ struct MainMenuContentView: View {
                 
                 .onAppear() {
                 
-                    mainMenuModel.submenuManager = windowManager
-                    windowManager.hoverManager = mainMenuModel
-                    mainMenuModel.scrollProxy = proxy
+                    selectionManager.submenuManager = windowManager
+                    windowManager.hoverManager = selectionManager
+                    selectionManager.scrollProxy = proxy
                 }
             }
             
@@ -68,7 +72,7 @@ struct MainMenuContentView: View {
                     .padding(.horizontal, 10)
                     .padding(.bottom, 4)
                 
-                MenuButton(model: mainMenuModel, idForHover: OptionsSectionButton.settings.rawValue, padding: 4, content: {
+                MenuButton(model: selectionManager, idForHover: OptionsSectionButton.settings.rawValue, padding: 4, content: {
                     HStack {
                         Text("Settings...")
                         Spacer()
@@ -83,7 +87,7 @@ struct MainMenuContentView: View {
                     }
                 })
                 
-                MenuButton(model: mainMenuModel, idForHover: OptionsSectionButton.quit.rawValue, padding: 4, content: {
+                MenuButton(model: selectionManager, idForHover: OptionsSectionButton.quit.rawValue, padding: 4, content: {
                     HStack {
                         Text("Quit How Long Left")
                         Spacer()
@@ -101,36 +105,50 @@ struct MainMenuContentView: View {
         .padding(.horizontal, 6)
         .padding(.vertical, 9)
         
-        .frame(minWidth: 300, maxWidth: 350, maxHeight: 400)
-       /* .onChange(of: phase) { (old, new) in
-            if new != .active {
-               // mainMenuModel.selectedItemID = nil
-            }
-            
-        } */
+        .frame(minWidth: 300, maxWidth: 310, maxHeight: 400)
+      
     }
     
-    var detectorView: some View {
-        
-        ArrowKeyDetector(
-            onLeftArrow: { },
-            onRightArrow: { },
-            onUpArrow: {
-                mainMenuModel.selectPreviousItem()
-            },
-            onDownArrow: {
-                mainMenuModel.selectNextItem()
-            }, onEnter: {
-                mainMenuModel.clickItem()
-            }, onEsc: {
-                
-            }
-        )
-        
-    }
+    
+    
+  
+    
 }
 
 class MainMenuEnvironment: ObservableObject {
     @Published var displayEvent: Event?
 }
 
+
+class MainMenuViewModel: MenuSelectableItemsProvider {
+    
+    var pointStore: TimePointStore
+    
+    func getItems() -> [String] {
+        let groups = getEventGroups(at: Date())
+        return groups.flatMap { $0.events.map { $0.id } } + OptionsSectionButton.allCases.map { $0.rawValue }
+    }
+    
+    public func getEventGroups(at date: Date) -> [TitledEventGroup] {
+        guard let currentPoint = pointStore.getPointAt(date: date) else { return [] }
+        
+        var groups = [
+            TitledEventGroup("On Now", currentPoint.inProgressEvents),
+        ]
+        
+        let upcomingGroups = currentPoint.upcomingGroupedByStartDay.map {
+            TitledEventGroup("\($0.date.formatted(date: .abbreviated, time: .omitted))", $0.events)
+        }
+        
+        groups.append(contentsOf: upcomingGroups)
+        
+        return groups
+    }
+    
+    init(timePointStore: TimePointStore) {
+        
+        self.pointStore = timePointStore
+        
+    }
+    
+}

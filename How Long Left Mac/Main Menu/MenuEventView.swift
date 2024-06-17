@@ -8,6 +8,7 @@
 import SwiftUI
 import HowLongLeftKit
 import FluidMenuBarExtra
+import MapKit
 
 struct MenuEventView: View {
     
@@ -15,20 +16,29 @@ struct MenuEventView: View {
     var menuModel: WindowSelectionManager!
     var event: Event
     
+    
+    
     init(event: Event) {
         self.event = event
         self.menuModel = WindowSelectionManager(itemsProvider: self)
+        
+  
+        
     }
+    
+    @State var annotationItems: [MapAnnotationItem] = []
+    
+    @State var mapLocation: MKCoordinateRegion?
     
     var body: some View {
         
         ZStack {
             
-            VStack() {
+            VStack {
                 
                 VStack(alignment: .leading, spacing: 20) {
                     
-                    HStack {
+                    HStack(alignment: .center) {
                         
                           RoundedRectangle(cornerRadius: 10)
                             .frame(width: 4.5)
@@ -37,23 +47,31 @@ struct MenuEventView: View {
                         Text("\(event.title)")
                             .font(.system(size: 15.25, weight: .medium, design: .default))
                         
+                       
+                        
                         Spacer()
                         
                     }
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                     
-                    
-                    RoundedRectangle(cornerRadius: 12)
-                        .frame(height: 50)
-                        .foregroundStyle(.secondary.opacity(0.1))
-                    
+                    if let locationName = event.locationName {
+                        Text(locationName)
+                    }
                     
                 }
                 
                 Spacer()
                 
               
-                
+                if let region = mapLocation {
+                    
+                    Map(coordinateRegion: .constant(region), interactionModes: [], showsUserLocation: false, userTrackingMode: .constant(.none), annotationItems: annotationItems, annotationContent: { item in
+                        MapMarker(coordinate: item.coordinate, tint: getColor())
+                    })
+                    .frame(height: 80)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    
+                }
                 
             }
            
@@ -61,6 +79,9 @@ struct MenuEventView: View {
             .padding(.horizontal, 20)
             .frame(width: 270, height: 350)
             
+        }
+        .onAppear() {
+            setLocation()
         }
            
     }
@@ -72,6 +93,36 @@ struct MenuEventView: View {
         }
         
         return .blue
+        
+    }
+    
+    func setLocation() {
+        
+        Task {
+            
+            
+            if let locationName = event.locationName {
+                
+                do {
+                    let location = try await LocationConverter.shared.convertToCLLocation(locationName: locationName)
+        
+                    let region = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                    
+                    self.mapLocation = region
+                    
+                    let item = MapAnnotationItem(coordinate: location.coordinate)
+                    
+                    annotationItems = [item]
+                    
+                        
+                    } catch {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                
+               
+            }
+            
+        }
         
     }
     
@@ -100,4 +151,9 @@ extension MenuEventView: MenuSelectableItemsProvider {
         }))
     
     
+}
+
+struct MapAnnotationItem: Identifiable {
+    var coordinate: CLLocationCoordinate2D
+    let id = UUID()
 }

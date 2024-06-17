@@ -96,7 +96,8 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
         
         .onHover { hovering in
            
-            model.selectIDFromHover(hovering ? idForHover : nil)
+            model.setMenuItemHovering(id: hovering ? idForHover : nil, hovering: hovering)
+            
         }
         .onChange(of: model.clickID) { newValue in
             if newValue == idForHover {
@@ -144,7 +145,7 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
     
     func isHighlighted() -> Bool {
         
-       return (idForHover == model.selectedItemID) && !isFlashing
+       return (idForHover == model.menuSelection) && !isFlashing
         
     }
     

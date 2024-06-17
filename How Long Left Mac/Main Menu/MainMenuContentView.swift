@@ -105,7 +105,7 @@ struct MainMenuContentView: View {
         .padding(.horizontal, 6)
         .padding(.vertical, 9)
         
-        .frame(minWidth: 300, maxWidth: 350, maxHeight: 400)
+        .frame(minWidth: 300, maxWidth: 310, maxHeight: 400)
       
     }
     

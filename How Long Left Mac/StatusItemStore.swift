@@ -100,7 +100,7 @@ class StatusItemManager {
             self.menubarExtra.statusItem.statusItem.button?.image = nil
         } else {
             self.menubarExtra.statusItem.statusItem.button?.title = ""
-            self.menubarExtra.statusItem.statusItem.button?.image = NSImage(systemSymbolName: "clock", accessibilityDescription: nil)
+            self.menubarExtra.statusItem.statusItem.button?.image = NSImage(systemSymbolName: "calendar", accessibilityDescription: nil)
         }
     }
     

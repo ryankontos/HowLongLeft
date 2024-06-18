@@ -17,9 +17,20 @@ struct EventMenuListItem: View {
     
     @EnvironmentObject var source: CalendarSource
     
+    @ObservedObject var progressManager: EventProgressManager
+    
     var event: Event
     
- 
+    init(event: Event) {
+        
+        self.event = event
+       
+        self.progressManager = EventProgressManager(event: event)
+        self.infoStringGen = InfoStringManager(event: event, stringGenerator: EventCountdownTextGenerator())
+        
+    }
+    
+    @ObservedObject var infoStringGen: InfoStringManager
     func getColor() -> Color {
         
         if let cg = source.lookupCalendar(withID: event.calId)?.cgColor {
@@ -48,7 +59,7 @@ struct EventMenuListItem: View {
                     
                 }
               
-                    VStack(alignment: .leading, spacing: 1) {
+                    VStack(alignment: .leading, spacing: 3) {
                         Text("\(event.title)")
                             .truncationMode(.middle)
                             .lineLimit(1)
@@ -56,7 +67,9 @@ struct EventMenuListItem: View {
                         
                         if event.status() == .inProgress {
                             
-                            Text("Ends in 10 minutes")
+                            Text(infoStringGen.infoString)
+                                .monospacedDigit()
+                                .fontWeight(.medium)
                                 .foregroundStyle(.secondary)
                             
                         }
@@ -68,7 +81,7 @@ struct EventMenuListItem: View {
                 
                 if event.status() == .inProgress {
                     
-                    ProgressRingView(progress: 0.6, ringWidth: 4, ringSize: 19, color: getColor())
+                    ProgressRingView(progress: progressManager.progress, ringWidth: 4, ringSize: 28, color: getColor())
                 } else {
                     Text(formatTime(event: event))
                         .foregroundStyle(.secondary)
@@ -117,30 +130,10 @@ struct EventMenuListItem: View {
         return dateFormatter.string(from: date)
     }
 }
-
+/*
 #Preview {
-    EventMenuListItem(mainMenuModel: nil, event: Event.init(title: "Event", start: Date(), end: Date().addingTimeInterval(1000)))
+    EventMenuListItem(mainMenuModel: nil, event: Event.init(title: "Event", start: Date(), end: Date().addingTimeInterval(1000)), infoStringGen: (event: , stringGenerator: )
+    )
 }
+*/
 
-struct ProgressRingView: View {
-    var progress: Double // Progress should be a value between 0 and 1
-    var ringWidth: CGFloat
-    var ringSize: CGFloat
-    var color: Color
-    var body: some View {
-        ZStack {
-            Circle() // Background circle
-                .stroke(lineWidth: ringWidth)
-                .opacity(0.3)
-                .foregroundColor(Color.gray)
-
-            Circle() // Foreground circle showing progress
-                .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
-                .stroke(style: StrokeStyle(lineWidth: ringWidth, lineCap: .round, lineJoin: .round))
-                .foregroundColor(color.opacity(0.7))
-                .rotationEffect(Angle(degrees: 270.0))
-                .animation(.linear, value: progress)
-        }
-        .frame(width: ringSize, height: ringSize)
-    }
-}

@@ -35,7 +35,8 @@ class StatusItemStore: EventCacheObserver {
             AnyView(MainMenuContentView(selectionManager: WindowSelectionManager(itemsProvider: model), model: model)
                 .environmentObject(self.container.settingsWindow)
                 .environmentObject(self.container.pointStore)
-                .environmentObject(self.container.calendarReader))
+                .environmentObject(self.container.calendarReader)
+                .environmentObject(self.container.timerContainer))
                
         }
         

@@ -55,5 +55,9 @@ struct CalendarsPane: View {
 }
 
 #Preview {
-    CalendarsPane()
+    let container = MacDefaultContainer()
+    
+    return CalendarsPane()
+        .environmentObject(container.calendarPrefsManager)
+        
 }

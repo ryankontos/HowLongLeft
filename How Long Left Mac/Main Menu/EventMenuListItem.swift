@@ -11,7 +11,10 @@ import FluidMenuBarExtra
 
 struct EventMenuListItem: View {
     
+    
     @State var expand = false
+    
+    @EnvironmentObject var timerContainer: GlobalTimerContainer
     
     var mainMenuModel: WindowSelectionManager?
     
@@ -21,16 +24,18 @@ struct EventMenuListItem: View {
     
     var event: Event
     
+    let dateFormatter = DateFormatterUtility()
+    
     init(event: Event) {
         
         self.event = event
        
         self.progressManager = EventProgressManager(event: event)
-        self.infoStringGen = InfoStringManager(event: event, stringGenerator: EventCountdownTextGenerator())
+       
         
     }
     
-    @ObservedObject var infoStringGen: InfoStringManager
+    
     func getColor() -> Color {
         
         if let cg = source.lookupCalendar(withID: event.calId)?.cgColor {
@@ -47,7 +52,7 @@ struct EventMenuListItem: View {
             
             HStack(spacing: 8) {
             
-                if !event.isAllDay {
+                if !event.isAllDay || event.status() == .inProgress {
                     
                     Circle()
                         .frame(width: 8)
@@ -67,8 +72,7 @@ struct EventMenuListItem: View {
                         
                         if event.status() == .inProgress {
                             
-                            Text(infoStringGen.infoString)
-                                .monospacedDigit()
+                            EventCountdownText(event)
                                 .fontWeight(.medium)
                                 .foregroundStyle(.secondary)
                             
@@ -80,8 +84,7 @@ struct EventMenuListItem: View {
                 Spacer()
                 
                 if event.status() == .inProgress {
-                    
-                    ProgressRingView(progress: progressManager.progress, ringWidth: 4, ringSize: 28, color: getColor())
+                    ProgressRingView(progress: progressManager.progress, ringWidth: 4, ringSize: 22, percentageRingWidth: 4, percentageRingSize: 26, color: getColor())
                 } else {
                     Text(formatTime(event: event))
                         .foregroundStyle(.secondary)
@@ -103,6 +106,7 @@ struct EventMenuListItem: View {
             
             
         }
+      
        
        
     }
@@ -113,21 +117,7 @@ struct EventMenuListItem: View {
             return "all-day"
         }
         
-        let date = event.startDate
-        
-        let calendar = Calendar.current
-        let minute = calendar.component(.minute, from: date)
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        dateFormatter.dateFormat = minute == 0 ? "h a" : "h:mm a"
-        
-        // Check if the AM/PM setting is needed by the current locale
-        if !dateFormatter.dateFormat.contains("a") {
-            dateFormatter.dateFormat = minute == 0 ? "H" : "H:mm"
-        }
-
-        return dateFormatter.string(from: date)
+        return dateFormatter.formattedTimeString(event.startDate)
     }
 }
 /*

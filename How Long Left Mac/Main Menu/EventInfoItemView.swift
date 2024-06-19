@@ -9,26 +9,55 @@ import SwiftUI
 
 struct EventInfoItemView<Content: View>: View {
     
+    var title: String
     var symbol: String
     var color: Color
     var infoView: () -> Content
     
     var body: some View {
-        HStack(alignment: .top, spacing: 10) {
+        /*  HStack(alignment: .top, spacing: 10) {
+         
+         Image(systemName: symbol)
+         .foregroundStyle(.secondary)
+         .frame(width: 12)
+         
+         VStack {
+         
+         infoView()
+         
+         //.padding(.top, 1)
+         
+         }
+         }
+         // .background(Color.red)
+         } */
+        
+        VStack(alignment: .leading, spacing: 5) {
             
-            Image(systemName: symbol)
-                .foregroundStyle(color)
-                .frame(width: 12)
+            Text(title)
+                .textCase(.uppercase)
+                .foregroundStyle(.secondary)
+                .fontWeight(.medium)
             
-            VStack {
-                
-                infoView()
-                //.padding(.top, 1)
-                
-            }
+            infoView()
+            
         }
+        
     }
+        
 }
 
 
+#Preview {
+    
+    VStack {
+        
+        EventInfoItemView(title: "Location", symbol: "location.fill", color: .blue, infoView: {
+            Text("3 Maxim Street, West Ryde, NSW, 2114")
+        })
+        .frame(width: 200)
+        
+    }
 
+    .frame(width: 300, height: 300)
+}

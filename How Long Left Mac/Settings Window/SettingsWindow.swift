@@ -41,6 +41,7 @@ class SettingsWindow: ObservableObject {
                 
             ) {
                 GeneralPane()
+                    .environmentObject(calendarManager)
             },
             
             Settings.Pane(

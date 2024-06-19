@@ -122,6 +122,8 @@ class MainMenuEnvironment: ObservableObject {
 
 class MainMenuViewModel: MenuSelectableItemsProvider {
     
+    let dateFormatter = DateFormatterUtility()
+    
     var pointStore: TimePointStore
     
     func getItems() -> [String] {
@@ -137,7 +139,7 @@ class MainMenuViewModel: MenuSelectableItemsProvider {
         ]
         
         let upcomingGroups = currentPoint.upcomingGroupedByStartDay.map {
-            TitledEventGroup("\($0.date.formatted(date: .abbreviated, time: .omitted))", $0.events)
+            TitledEventGroup("\(dateFormatter.formattedDateString($0.date, allowRelative: true))", $0.events)
         }
         
         groups.append(contentsOf: upcomingGroups)

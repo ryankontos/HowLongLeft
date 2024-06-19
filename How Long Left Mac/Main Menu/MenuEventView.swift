@@ -51,14 +51,20 @@ struct MenuEventView: View {
                         
                         VStack(alignment: .leading, spacing: 16) {
                             
-                            
-                            
-                            EventInfoItemView(symbol: "location.fill", color: .blue) {
-                                Text("Room: 10")
+                            if let locationName = event.locationName {
+                                EventInfoItemView(title: "Location", symbol: "location.fill", color: .blue) {
+                                    Text(locationName)
+                                        
+                                }
                             }
                             
-                            EventInfoItemView(symbol: "clock.fill", color: .purple) {
+                            
+                            EventInfoItemView(title: "Date", symbol: "clock.fill", color: .purple) {
                                 VStack(alignment: .leading) {
+                                    
+                                    if event.isAllDay {
+                                        Text("All-Day")
+                                    }
                                     
                                     Text("Today, 12:00am -")
                                     Text("Today, 1pm")
@@ -66,7 +72,7 @@ struct MenuEventView: View {
                                 }
                             }
                             
-                            EventInfoItemView(symbol: "hourglass", color: .green) {
+                            EventInfoItemView(title: "Duration", symbol: "hourglass", color: .green) {
                                 VStack(alignment: .leading) {
                                     
                                     Text("1 hour")
@@ -75,7 +81,7 @@ struct MenuEventView: View {
                                 }
                             }
                             
-                            EventInfoItemView(symbol: "calendar", color: .red) {
+                            EventInfoItemView(title: "Calendar", symbol: "calendar", color: .red) {
                                 VStack(alignment: .leading) {
                                     
                                     Text("Home")
@@ -155,50 +161,35 @@ struct MenuEventView: View {
     
     
     var headerView: some View {
-        
-        
-        
+       
         HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 9) {
-                
                 HStack(alignment: .center, spacing: 7) {
-                    
                     Circle()
                         .frame(width: 8)
                         .foregroundColor(getColor())
-                    
+        
                     VStack(alignment: .leading, spacing: 5) {
-                        
                        
                         Text("\(event.title)")
                             .font(.system(size: 14.5, weight: .medium, design: .default))
                             .opacity(0.9)
-                        
-                   
-                        
+                 
                     }
-                  
-                    
-                    
+          
                     Spacer()
                     
                     ProgressRingView(progress: 0.6, ringWidth: 4, ringSize: 22, color: getColor())
                     
                 }
-               // .background(Color.red)
                 
                 HStack(spacing: 5) {
+                Image(systemName: "timer")
                     
-                    Image(systemName: "timer")
-                       
-                    
-                    Text("5 minutes remaining")
-                        
-                    // .padding(.leading, 10)
-                    
-                }
+                EventCountdownText(event)
+                 
+            }
                 .font(.system(size: 13.5, weight: .medium, design: .default))
-                .foregroundStyle(.secondary)
                 .opacity(0.75)
                 
             }

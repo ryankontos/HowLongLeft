@@ -458,6 +458,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				BFCC7D902C2171A40034ADD8 /* PBXTargetDependency */,
+				BFCC7D8E2C2171A10034ADD8 /* PBXTargetDependency */,
 			);
 			name = "How Long Left Mac";
 			packageProductDependencies = (
@@ -707,6 +709,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BFCC7D8E2C2171A10034ADD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = BFCC7D8D2C2171A10034ADD8 /* Defaults */;
+		};
+		BFCC7D902C2171A40034ADD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = BFCC7D8F2C2171A40034ADD8 /* Settings */;
+		};
 		BFE8F0D52BE3602200083FD6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BFE8F0C02BE3602000083FD6 /* How Long Left */;
@@ -1026,7 +1036,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ryankontos.How-Long-Left-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1061,7 +1071,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ryankontos.How-Long-Left-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1273,6 +1283,16 @@
 		BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HowLongLeftKit;
+		};
+		BFCC7D8D2C2171A10034ADD8 /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFB1FBBA2C0DF3C800D04B84 /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
+		};
+		BFCC7D8F2C2171A40034ADD8 /* Settings */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFB1FBB72C0DF3B500D04B84 /* XCRemoteSwiftPackageReference "Settings" */;
+			productName = Settings;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

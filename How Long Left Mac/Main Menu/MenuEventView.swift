@@ -26,6 +26,8 @@ struct MenuEventView: View {
         
     }
     
+    let formatter = DateFormatterUtility()
+    
     @State var annotationItems: [MapAnnotationItem] = []
     
     @State var mapLocation: MKCoordinateRegion?
@@ -66,8 +68,8 @@ struct MenuEventView: View {
                                         Text("All-Day")
                                     }
                                     
-                                    Text("Today, 12:00am -")
-                                    Text("Today, 1pm")
+                                    Text("\(formatter.getEventIntervalString(event: event, newLineForEnd: true))")
+                                   
                                     
                                 }
                             }

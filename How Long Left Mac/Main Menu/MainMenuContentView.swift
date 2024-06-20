@@ -15,6 +15,8 @@ struct MainMenuContentView: View {
     @EnvironmentObject var settingsWindow: SettingsWindow
     @EnvironmentObject var windowManager: ModernMenuBarExtraWindow
     
+    @EnvironmentObject var eventListSettingsManager: EventListSettingsManager
+    
     var selectionManager: WindowSelectionManager
     
     var model: MainMenuViewModel
@@ -33,23 +35,29 @@ struct MainMenuContentView: View {
         Group {
             ZStack {
                 ArrowKeySelectionManagingView(id: "Main", selectionManager: selectionManager)
-                main
-                    .transition(.opacity)
-                    .environmentObject(menuEnv)
+                
+                let groups = model.getEventGroups(at: Date())
+                
+                    getEventGroupsView(groups: groups)
+                        .transition(.opacity)
+                        .environmentObject(menuEnv)
+                
+                
+               
             }
         }
     }
     
-    var main: some View {
+    func getEventGroupsView(groups: [TitledEventGroup]) -> some View {
         VStack {
             ScrollViewReader { proxy in
                 ScrollView(showsIndicators: false) {
                     VStack {
-                        let groups = model.getEventGroups(at: Date())
+                        
                         ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
-                            if !group.events.isEmpty {
+                            
                                 MenuEventListSection(id: group.title!, title: group.title, allDayEvents: [], events: group.events, mainMenuModel: selectionManager)
-                            }
+                            
                             
                             if index < groups.endIndex-1 && groups.count > 1 {
                                 Divider()
@@ -122,9 +130,13 @@ class MainMenuEnvironment: ObservableObject {
 
 class MainMenuViewModel: MenuSelectableItemsProvider {
     
-    let dateFormatter = DateFormatterUtility()
+    
     
     var pointStore: TimePointStore
+    
+    var listSettings: EventListSettingsManager
+    
+    lazy var eventListProvider = EventListGroupProvider(settingsManager: listSettings)
     
     func getItems() -> [String] {
         let groups = getEventGroups(at: Date())
@@ -133,23 +145,13 @@ class MainMenuViewModel: MenuSelectableItemsProvider {
     
     public func getEventGroups(at date: Date) -> [TitledEventGroup] {
         guard let currentPoint = pointStore.getPointAt(date: date) else { return [] }
-        
-        var groups = [
-            TitledEventGroup("On Now", currentPoint.inProgressEvents),
-        ]
-        
-        let upcomingGroups = currentPoint.upcomingGroupedByStartDay.map {
-            TitledEventGroup("\(dateFormatter.formattedDateString($0.date, allowRelative: true))", $0.events)
-        }
-        
-        groups.append(contentsOf: upcomingGroups)
-        
-        return groups
+        return eventListProvider.getGroups(from: currentPoint)
     }
     
-    init(timePointStore: TimePointStore) {
+    init(timePointStore: TimePointStore, listSettings: EventListSettingsManager) {
         
         self.pointStore = timePointStore
+        self.listSettings = listSettings
         
     }
     

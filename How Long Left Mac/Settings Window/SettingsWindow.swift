@@ -13,21 +13,38 @@ import HowLongLeftKit
 class SettingsWindow: ObservableObject {
     
     let calendarManager: EventFilterDefaultsManager
+    let eventListSettingsManager: EventListSettingsManager
     
-    init(calendarManager: EventFilterDefaultsManager) {
-        self.calendarManager = calendarManager
+    init(container: MacDefaultContainer) {
+        self.calendarManager = container.calendarPrefsManager
+        self.eventListSettingsManager = container.eventListSettingsManager
     }
     
     func open() {
-        settingsWindowController.window?.level = .floating
-        settingsWindowController.hidesToolbarForSingleItem = false
-       
-        settingsWindowController.show()
         
-        if #available(macOS 14.0, *) {
-            NSApp.activate()
-        } else {
-            // Fallback on earlier versions
+        
+        NSApp.deactivate()
+        
+        
+        DispatchQueue.main.async { [self] in
+            
+            if #available(macOS 14.0, *) {
+                NSApp.activate()
+            } else {
+                NSApp.activate(ignoringOtherApps: true)
+            }
+            
+            settingsWindowController.close()
+            
+            settingsWindowController.window?.level = .normal
+            settingsWindowController.hidesToolbarForSingleItem = false
+            
+            settingsWindowController.show()
+            settingsWindowController.window!.makeKeyAndOrderFront(nil)
+            settingsWindowController.window!.makeMain()
+            
+           
+            
         }
         
     }
@@ -41,6 +58,7 @@ class SettingsWindow: ObservableObject {
                 
             ) {
                 GeneralPane()
+                    .environmentObject(eventListSettingsManager)
                     .environmentObject(calendarManager)
             },
             

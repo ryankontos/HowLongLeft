@@ -14,6 +14,8 @@ struct GeneralPane: View {
     
     @EnvironmentObject var filteringManager: EventFilterDefaultsManager
     
+    @EnvironmentObject var listSettingsModel: EventListSettingsManager
+    
     var body: some View {
         
         Form {
@@ -26,15 +28,78 @@ struct GeneralPane: View {
             
             Section("Main Menu") {
                 
-                Toggle(isOn: .constant(true), label: {
-                    Text("Show \"On Now\" Section")
+                Toggle(isOn: $listSettingsModel.showInProgress, label: {
+                    Text("Show In-Progress Events Section")
                 })
                 
-                Toggle(isOn: .constant(true), label: {
+                if listSettingsModel.showInProgress {
+                    
+                    Toggle(isOn: $listSettingsModel.showInProgressWhenEmpty, label: {
+                        Text("Show When Empty")
+                    })
+                    
+                }
+            }
+            
+            Section {
+                
+                
+                Toggle(isOn: $listSettingsModel.showUpcoming, label: {
                     Text("Show Upcoming Events")
                 })
                 
+                if listSettingsModel.showUpcoming {
+                    
+                    
+                    Toggle(isOn: $listSettingsModel.showEmptyUpcomingDays, label: {
+                        Text("Show Days Without Events")
+                    })
+                    
+                    Stepper(value: $listSettingsModel.upcomingDaysLimit, label: {
+                        HStack {
+                            Text("Limit")
+                            
+                            
+                            Spacer()
+                            
+                            
+                            Text("\(listSettingsModel.upcomingDaysLimit) Day\(listSettingsModel.upcomingDaysLimit == 1 ? "" : "s")")
+                                .foregroundStyle(.secondary)
+
+                        }
+                    })
+                    
+                    
+                    
+                }
+                
+                
             }
+            
+            if listSettingsModel.showUpcoming && listSettingsModel.showInProgress {
+                
+                Section {
+                    
+                    Picker("Sort Events", selection: $listSettingsModel.sortMode.animation(), content: {
+                        Text("On Now First")
+                            .tag(EventListSortMode.onNowFirst)
+                        Text("Chronologically")
+                            .tag(EventListSortMode.chronological)
+                        Text("Upcoming First")
+                            .tag(EventListSortMode.upcomingFirst)
+                        
+                    })
+                    
+                }
+                
+            }
+            
+            Section {
+                
+              
+                
+            }
+           
             
             Section("All-Day Events") {
                 
@@ -48,11 +113,15 @@ struct GeneralPane: View {
             
         }
         .formStyle(.grouped)
-        .frame(width: 400, height: 400)
+        .frame(width: 450, height: 500)
         
     }
 }
 
 #Preview {
-    GeneralPane()
+    let container = DefaultContainer()
+    
+    return GeneralPane()
+        .environmentObject(container.calendarPrefsManager)
 }
+

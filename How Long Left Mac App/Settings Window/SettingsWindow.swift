@@ -10,7 +10,7 @@ import Settings
 import AppKit
 import HowLongLeftKit
 
-class SettingsWindow: ObservableObject {
+class SettingsWindow: NSObject, ObservableObject, NSWindowDelegate {
     
     let calendarManager: EventFilterDefaultsManager
     let eventListSettingsManager: EventListSettingsManager
@@ -22,11 +22,24 @@ class SettingsWindow: ObservableObject {
     
     func open() {
         
+       
+     
         
-        NSApp.deactivate()
+        DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
+            
+            settingsWindowController.window!.delegate = self
+            settingsWindowController.window!.collectionBehavior = [.primary, .fullScreenNone]
+            
+            settingsWindowController.window?.level = .normal
+            settingsWindowController.hidesToolbarForSingleItem = false
         
-        
-        DispatchQueue.main.async { [self] in
+            settingsWindowController.isAnimated = false
+            settingsWindowController.show()
+            
+       
+                self.settingsWindowController.window!.makeKeyAndOrderFront(nil)
+                self.settingsWindowController.window!.makeMain()
+              
             
             if #available(macOS 14.0, *) {
                 NSApp.activate()
@@ -34,19 +47,15 @@ class SettingsWindow: ObservableObject {
                 NSApp.activate(ignoringOtherApps: true)
             }
             
-            settingsWindowController.close()
-            
-            settingsWindowController.window?.level = .normal
-            settingsWindowController.hidesToolbarForSingleItem = false
-            
-            settingsWindowController.show()
-            settingsWindowController.window!.makeKeyAndOrderFront(nil)
-            settingsWindowController.window!.makeMain()
-            
-           
             
         }
         
+        
+    }
+    
+    func windowDidResignKey(_ notification: Notification) {
+        
+        print("Settings window resigned key")
     }
     
     private lazy var settingsWindowController = SettingsWindowController(

@@ -4,10 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>How Long Left Mac.xcscheme_^#shared#^_</key>
+		<key>How Long Left Mac App.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
+		</dict>
+		<key>How Long Left Mac Menu.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>How Long Left.xcscheme_^#shared#^_</key>
 		<dict>
@@ -17,6 +22,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>BF7205B42C244C9A0045F34D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BFE8F0C02BE3602000083FD6</key>
 		<dict>
 			<key>primary</key>
@@ -28,6 +38,21 @@
 			<true/>
 		</dict>
 		<key>BFE8F0DC2BE3602200083FD6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BFF0E6762BE6881F0023AB22</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BFF0E6862BE688220023AB22</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BFF0E6902BE688220023AB22</key>
 		<dict>
 			<key>primary</key>
 			<true/>

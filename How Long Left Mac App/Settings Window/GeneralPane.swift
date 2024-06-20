@@ -22,7 +22,7 @@ struct GeneralPane: View {
             
             Section {
                 Toggle(isOn: .constant(true), label: {
-                    Text("Launch at Login")
+                    Text("Launch at Login!")
                 })
             }
             

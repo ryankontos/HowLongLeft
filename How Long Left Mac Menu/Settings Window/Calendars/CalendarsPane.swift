@@ -17,7 +17,6 @@ struct CalendarsPane: View {
     var body: some View {
         
 
-        ZStack {
             Form {
                 
                 Section("Enabled Calendars") {
@@ -36,17 +35,18 @@ struct CalendarsPane: View {
                
                 
             }
-           
+            .frame(minHeight: 400, maxHeight: 2000)
             
-           
+            
             .formStyle(.grouped)
            
-            
-            .frame(width: 450, height: 500)
+            .padding(.horizontal, 0)
+            //.padding(.vertical, 40)
+           .frame(width: 450)
            
             
             
-        }
+        
            
            
         

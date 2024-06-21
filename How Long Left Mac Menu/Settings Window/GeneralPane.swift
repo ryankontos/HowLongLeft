@@ -22,7 +22,7 @@ struct GeneralPane: View {
             
             Section {
                 Toggle(isOn: .constant(true), label: {
-                    Text("Launch at Login")
+                    Text("Launch at Login!")
                 })
             }
             
@@ -93,15 +93,16 @@ struct GeneralPane: View {
                 }
                 
             }
-        
+            
+       
             
             Section("All-Day Events") {
                 
                 Defaults.Toggle("Show All-Day Events", key: filteringManager.configuration.allowAllDayKey)
                 
-                Toggle(isOn: .constant(true), label: {
+                /*Toggle(isOn: .constant(true), label: {
                     Text("Show In On Now ")
-                })
+                }) */
                 
             }
             
@@ -113,10 +114,9 @@ struct GeneralPane: View {
 }
 
 #Preview {
-    let container = MacDefaultContainer()
+    let container = DefaultContainer()
     
     return GeneralPane()
         .environmentObject(container.calendarPrefsManager)
-        .environmentObject(container.eventListSettingsManager)
 }
 

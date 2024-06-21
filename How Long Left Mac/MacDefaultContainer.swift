@@ -10,7 +10,7 @@ import HowLongLeftKit
 
 class MacDefaultContainer: DefaultContainer {
     
-   // public lazy var settingsWindow = SettingsWindow(container: self)
+    public lazy var settingsWindow = SettingsWindow(container: self)
     
     public lazy var statusItemEventFilter = EventCache(calendarReader: self.calendarReader, calendarProvider: self.calendarPrefsManager, calendarContexts: [MacCalendarContexts.statusItem.rawValue])
     

@@ -17,7 +17,8 @@ struct CalendarsPane: View {
     var body: some View {
         
 
-            Form {
+        ZStack {
+            List() {
                 
                 ForEach($calPrefs.calendarItems) { $displayInfo in
                     
@@ -35,16 +36,16 @@ struct CalendarsPane: View {
             }
             .frame(minHeight: 400, maxHeight: 2000)
             
-            
-            .formStyle(.grouped)
            
-            .padding(.horizontal, 0)
-            //.padding(.vertical, 40)
-           .frame(width: 450)
+            .listStyle(.inset(alternatesRowBackgrounds: true))
+           
+            .padding(.horizontal, 20)
+            .padding(.vertical, 40)
+            .frame(width: 500)
            
             
             
-        
+        }
            
            
         

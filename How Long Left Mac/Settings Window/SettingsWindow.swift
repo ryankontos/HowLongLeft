@@ -10,7 +10,7 @@ import Settings
 import AppKit
 import HowLongLeftKit
 
-class SettingsWindow: NSObject, ObservableObject, NSWindowDelegate {
+class SettingsWindow: ObservableObject {
     
     let calendarManager: EventFilterDefaultsManager
     let eventListSettingsManager: EventListSettingsManager
@@ -22,24 +22,11 @@ class SettingsWindow: NSObject, ObservableObject, NSWindowDelegate {
     
     func open() {
         
-       
-     
         
-        DispatchQueue.main.asyncAfter(deadline: .now()) { [self] in
-            
-            settingsWindowController.window!.delegate = self
-            settingsWindowController.window!.collectionBehavior = [.primary, .fullScreenNone]
-            
-            settingsWindowController.window?.level = .normal
-            settingsWindowController.hidesToolbarForSingleItem = false
+        NSApp.deactivate()
         
-            settingsWindowController.isAnimated = false
-            settingsWindowController.show()
-            
-       
-                self.settingsWindowController.window!.makeKeyAndOrderFront(nil)
-                self.settingsWindowController.window!.makeMain()
-              
+        
+        DispatchQueue.main.async { [self] in
             
             if #available(macOS 14.0, *) {
                 NSApp.activate()
@@ -47,15 +34,19 @@ class SettingsWindow: NSObject, ObservableObject, NSWindowDelegate {
                 NSApp.activate(ignoringOtherApps: true)
             }
             
+            settingsWindowController.close()
+            
+            settingsWindowController.window?.level = .normal
+            settingsWindowController.hidesToolbarForSingleItem = false
+            
+            settingsWindowController.show()
+            settingsWindowController.window!.makeKeyAndOrderFront(nil)
+            settingsWindowController.window!.makeMain()
+            
+           
             
         }
         
-        
-    }
-    
-    func windowDidResignKey(_ notification: Notification) {
-        
-        print("Settings window resigned key")
     }
     
     private lazy var settingsWindowController = SettingsWindowController(

@@ -20,7 +20,7 @@ struct MenuEventListSection: View {
     
     @EnvironmentObject var env: MainMenuEnvironment
     @EnvironmentObject var reader: CalendarSource
-    
+    @EnvironmentObject var eventInfoSource: StoredEventManager
     @EnvironmentObject var timerContainer: GlobalTimerContainer
     
     func getColor(for event: Event) -> Color? {
@@ -83,6 +83,7 @@ struct MenuEventListSection: View {
         
         MenuButton(model: mainMenuModel, idForHover: event.id, cornerRadius: event.isAllDay ? 12 : 5, customHighlight: getColor(for: event), fill: getColor(for: event) != nil, submenuContent: {
             AnyView(MenuEventView(event: event)
+                .environmentObject(eventInfoSource)
                 .environmentObject(reader)
                 .environmentObject(timerContainer)
             

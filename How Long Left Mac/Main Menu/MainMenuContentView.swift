@@ -13,7 +13,9 @@ struct MainMenuContentView: View {
     
     @EnvironmentObject var pointStore: TimePointStore
     @EnvironmentObject var settingsWindow: SettingsWindow
-    @EnvironmentObject var windowManager: ModernMenuBarExtraWindow
+    @EnvironmentObject var windowManager: FMBEWindowProxy
+    @EnvironmentObject var calendarSource: CalendarSource
+    @EnvironmentObject var storedManager: StoredEventManager
     
     @EnvironmentObject var eventListSettingsManager: EventListSettingsManager
     
@@ -36,16 +38,38 @@ struct MainMenuContentView: View {
             ZStack {
                 ArrowKeySelectionManagingView(id: "Main", selectionManager: selectionManager)
                 
-                let groups = model.getEventGroups(at: Date())
-                
-                    getEventGroupsView(groups: groups)
-                        .transition(.opacity)
-                        .environmentObject(menuEnv)
-                
-                
+                VStack {
+                    
+                    let groups = model.getEventGroups(at: Date())
+                    
+                    if !groups.isEmpty {
+                        
+                        getEventGroupsView(groups: groups)
+                            .transition(.opacity)
+                            .environmentObject(menuEnv)
+                    } else {
+                        
+                        if calendarSource.authorization == .denied {
+                            MenuNoCalendarAccessView()
+                            
+                        } else {
+                            
+                            MenuNoEventsView()
+                            
+                        }
+                        
+                    }
+                    
+                    bottomView
+                    
+                }
                
             }
         }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 9)
+        
+        .frame(minWidth: 300, maxWidth: 310, maxHeight: 400)
     }
     
     func getEventGroupsView(groups: [TitledEventGroup]) -> some View {
@@ -70,54 +94,57 @@ struct MainMenuContentView: View {
                 .onAppear() {
                 
                     selectionManager.submenuManager = windowManager
-                    windowManager.hoverManager = selectionManager
+                    windowManager.window?.hoverManager = selectionManager
                     selectionManager.scrollProxy = proxy
                 }
             }
             
-            VStack(alignment: .leading, spacing: 0) {
-                Divider()
-                    .padding(.horizontal, 10)
-                    .padding(.bottom, 4)
-                
-                MenuButton(model: selectionManager, idForHover: OptionsSectionButton.settings.rawValue, padding: 4, content: {
-                    HStack {
-                        Text("Settings...")
-                        Spacer()
-                        Text("⌘ ,")
-                            .foregroundColor(.secondary)
-                            //.foregroundStyle(.secondary)
-                            .font(.system(size: 12, weight: .regular))
-                    }
-                }, action: {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                        settingsWindow.open()
-                    }
-                })
-                
-                MenuButton(model: selectionManager, idForHover: OptionsSectionButton.quit.rawValue, padding: 4, content: {
-                    HStack {
-                        Text("Quit How Long Left")
-                        Spacer()
-                        Text("⌘ Q")
-                            .foregroundColor(.secondary)
-                            .font(.system(size: 12, weight: .regular))
-                    }
-                }, action: {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                        NSApp.terminate(nil)
-                    }
-                })
-            }
+           
         }
-        .padding(.horizontal, 6)
-        .padding(.vertical, 9)
         
-        .frame(minWidth: 300, maxWidth: 310, maxHeight: 400)
       
     }
     
-    
+    var bottomView: some View {
+        
+        VStack(alignment: .leading, spacing: 0) {
+            Divider()
+                .padding(.horizontal, 10)
+                .padding(.bottom, 4)
+            
+            MenuButton(model: selectionManager, idForHover: OptionsSectionButton.settings.rawValue, padding: 4, content: {
+                HStack {
+                    Text("Settings...")
+                    Spacer()
+                    Text("⌘ ,")
+                        .foregroundColor(.secondary)
+                        //.foregroundStyle(.secondary)
+                        .font(.system(size: 12, weight: .regular))
+                }
+            }, action: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    //settingsWindow.open()
+                    windowManager.window?.resignKey()
+                    settingsWindow.open()
+                }
+            })
+            
+            MenuButton(model: selectionManager, idForHover: OptionsSectionButton.quit.rawValue, padding: 4, content: {
+                HStack {
+                    Text("Quit How Long Left")
+                    Spacer()
+                    Text("⌘ Q")
+                        .foregroundColor(.secondary)
+                        .font(.system(size: 12, weight: .regular))
+                }
+            }, action: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    NSApp.terminate(nil)
+                }
+            })
+        }
+        
+    }
     
   
     

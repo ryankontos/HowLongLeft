@@ -25,6 +25,7 @@
 		BF4A055C2BF20A5B00678073 /* StatusItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */; };
 		BF4A0A602C1783E70094A170 /* MenuTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A0A5F2C1783E70094A170 /* MenuTimelineView.swift */; };
 		BF4D145D2C2149A000ED054C /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4D145C2C2149A000ED054C /* ProgressRingView.swift */; };
+		BF6688E12C25E4770075D69A /* StatusBarPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6688E02C25E4770075D69A /* StatusBarPane.swift */; };
 		BF7465EA2BF237B3009C373D /* EventMenuListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7465E92BF237B3009C373D /* EventMenuListItem.swift */; };
 		BF7E03A52BEC7F7800FD3B31 /* How_Long_LeftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */; };
 		BF89C1F92BEA13AC001B73C1 /* EnabledCalendarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89C1F82BEA13AC001B73C1 /* EnabledCalendarsView.swift */; };
@@ -41,6 +42,8 @@
 		BFC313C32C0094FC00778D52 /* MenuEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC313C22C0094FC00778D52 /* MenuEventView.swift */; };
 		BFCC9D772C036E57003475C8 /* MenuEventListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */; };
 		BFDC7ACB2C2132C200EF8AF5 /* EventInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */; };
+		BFDDA3DB2C25B406001160A1 /* MenuNoCalendarAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */; };
+		BFDDA3DD2C25B77C001160A1 /* MenuNoEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */; };
 		BFE2328A2BF4F1E9004F55D8 /* StatusItemCountdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE232892BF4F1E9004F55D8 /* StatusItemCountdown.swift */; };
 		BFE2A09B2BE3C7290063B227 /* CalendarReadConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE2A09A2BE3C7290063B227 /* CalendarReadConfiguration.swift */; };
 		BFE7114D2BF27211000A167E /* PushLeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7114C2BF27211000A167E /* PushLeading.swift */; };
@@ -129,6 +132,7 @@
 		BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemStore.swift; sourceTree = "<group>"; };
 		BF4A0A5F2C1783E70094A170 /* MenuTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTimelineView.swift; sourceTree = "<group>"; };
 		BF4D145C2C2149A000ED054C /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
+		BF6688E02C25E4770075D69A /* StatusBarPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPane.swift; sourceTree = "<group>"; };
 		BF7465E92BF237B3009C373D /* EventMenuListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenuListItem.swift; sourceTree = "<group>"; };
 		BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = How_Long_LeftApp.swift; sourceTree = "<group>"; };
 		BF89C1F82BEA13AC001B73C1 /* EnabledCalendarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnabledCalendarsView.swift; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 		BFC313C22C0094FC00778D52 /* MenuEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEventView.swift; sourceTree = "<group>"; };
 		BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuEventListSection.swift; sourceTree = "<group>"; };
 		BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoItemView.swift; sourceTree = "<group>"; };
+		BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNoCalendarAccessView.swift; sourceTree = "<group>"; };
+		BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNoEventsView.swift; sourceTree = "<group>"; };
 		BFE232892BF4F1E9004F55D8 /* StatusItemCountdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemCountdown.swift; sourceTree = "<group>"; };
 		BFE2A09A2BE3C7290063B227 /* CalendarReadConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarReadConfiguration.swift; sourceTree = "<group>"; };
 		BFE7114C2BF27211000A167E /* PushLeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushLeading.swift; sourceTree = "<group>"; };
@@ -230,6 +236,8 @@
 				BF4D145C2C2149A000ED054C /* ProgressRingView.swift */,
 				BFC313C22C0094FC00778D52 /* MenuEventView.swift */,
 				BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */,
+				BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */,
+				BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */,
 				BF46AA822C2055DE005A6E7A /* MenuEventViewParent.swift */,
 				BFE7114E2BF2816A000A167E /* ManuButton.swift */,
 				BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */,
@@ -254,6 +262,7 @@
 				BF3CAF0A2BF4A821003035C7 /* SettingsWindow.swift */,
 				BF3CAF082BF4A7C2003035C7 /* Panes.swift */,
 				BF3CAF0E2BF4AB6F003035C7 /* GeneralPane.swift */,
+				BF6688E02C25E4770075D69A /* StatusBarPane.swift */,
 				BF3CAF122BF4C3CE003035C7 /* Calendars */,
 			);
 			path = "Settings Window";
@@ -667,6 +676,7 @@
 				BFDC7ACB2C2132C200EF8AF5 /* EventInfoItemView.swift in Sources */,
 				BFCC9D772C036E57003475C8 /* MenuEventListSection.swift in Sources */,
 				BF4A055C2BF20A5B00678073 /* StatusItemStore.swift in Sources */,
+				BFDDA3DD2C25B77C001160A1 /* MenuNoEventsView.swift in Sources */,
 				BFE2328A2BF4F1E9004F55D8 /* StatusItemCountdown.swift in Sources */,
 				BF2435222C11232C007B11D8 /* ArrowKeySelectionManagingView.swift in Sources */,
 				BF3CAF4F2BF4D0DC003035C7 /* main.swift in Sources */,
@@ -688,7 +698,9 @@
 				BFF0E67A2BE6881F0023AB22 /* AppDelegate.swift in Sources */,
 				BF3CAF0F2BF4AB6F003035C7 /* GeneralPane.swift in Sources */,
 				BF3CAF142BF4C3F0003035C7 /* CalendarSettingPickerView.swift in Sources */,
+				BF6688E12C25E4770075D69A /* StatusBarPane.swift in Sources */,
 				BFAC93E92C09FE0C00AB66BF /* PositionObservingView.swift in Sources */,
+				BFDDA3DB2C25B406001160A1 /* MenuNoCalendarAccessView.swift in Sources */,
 				BF4D145D2C2149A000ED054C /* ProgressRingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

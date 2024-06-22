@@ -33,6 +33,7 @@ class StatusItemStore: EventCacheObserver {
         
         let mainExtra = FluidMenuBarExtra(title: "How Long Left") {
             AnyView(MainMenuContentView(selectionManager: WindowSelectionManager(itemsProvider: model), model: model)
+                .environmentObject(self.container.storedEventManager)
                 .environmentObject(self.container.eventListSettingsManager)
                 .environmentObject(self.container.settingsWindow)
                 .environmentObject(self.container.pointStore)

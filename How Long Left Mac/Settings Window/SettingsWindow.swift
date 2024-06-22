@@ -12,7 +12,7 @@ import HowLongLeftKit
 
 class SettingsWindow: ObservableObject {
     
-    let calendarManager: EventFilterDefaultsManager
+    let calendarManager: EventFetchSettingsManager
     let eventListSettingsManager: EventListSettingsManager
     
     init(container: MacDefaultContainer) {
@@ -24,7 +24,7 @@ class SettingsWindow: ObservableObject {
         
         
         NSApp.deactivate()
-        
+        NSApp.activate(ignoringOtherApps: true)
         
         DispatchQueue.main.async { [self] in
             
@@ -35,6 +35,8 @@ class SettingsWindow: ObservableObject {
             }
             
             settingsWindowController.close()
+            
+            settingsWindowController.window?.collectionBehavior = [.auxiliary, .primary]
             
             settingsWindowController.window?.level = .normal
             settingsWindowController.hidesToolbarForSingleItem = false
@@ -69,6 +71,16 @@ class SettingsWindow: ObservableObject {
                 
             ) {
                 CalendarsPane()
+                    .environmentObject(calendarManager)
+            },
+            
+            Settings.Pane(
+                identifier: Settings.PaneIdentifier.statusbar,
+                title: "Status Bar",
+                toolbarIcon: NSImage(systemSymbolName: "clock", accessibilityDescription: nil)!
+                
+            ) {
+                StatusBarPane()
                     .environmentObject(calendarManager)
             },
             

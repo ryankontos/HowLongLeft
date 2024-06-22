@@ -13,7 +13,7 @@ struct MenuEventViewParent: View {
     
     @EnvironmentObject var menuEnv: MainMenuEnvironment
     @EnvironmentObject var calSource: CalendarSource
-    @EnvironmentObject var windowManager: ModernMenuBarExtraWindow
+    @EnvironmentObject var windowManager: FMBEWindowProxy
     
     var menuModel: WindowSelectionManager!
     
@@ -33,7 +33,7 @@ struct MenuEventViewParent: View {
             
         }
         .onAppear() {
-            windowManager.hoverManager = menuModel
+            windowManager.window?.hoverManager = menuModel
             menuModel.submenuManager = windowManager
         }
     }

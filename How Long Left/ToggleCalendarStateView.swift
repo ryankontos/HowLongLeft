@@ -9,7 +9,7 @@ import SwiftUI
 import HowLongLeftKit
 
 struct ToggleCalendarStateView: View {
-    @EnvironmentObject var manager: EventFilterDefaultsManager
+    @EnvironmentObject var manager: EventFetchSettingsManager
     @ObservedObject var calendarInfo: CalendarInfo
     let toggleContext: String
     

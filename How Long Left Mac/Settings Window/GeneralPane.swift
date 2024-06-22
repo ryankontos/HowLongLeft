@@ -12,7 +12,7 @@ import HowLongLeftKit
 
 struct GeneralPane: View {
     
-    @EnvironmentObject var filteringManager: EventFilterDefaultsManager
+    @EnvironmentObject var filteringManager: EventFetchSettingsManager
     
     @EnvironmentObject var listSettingsModel: EventListSettingsManager
     

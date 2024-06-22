@@ -11,7 +11,7 @@ import EventKit
 
 struct EnabledCalendarsView: View {
     
-    @EnvironmentObject var manager: EventFilterDefaultsManager
+    @EnvironmentObject var manager: EventFetchSettingsManager
     
     var body: some View {
         

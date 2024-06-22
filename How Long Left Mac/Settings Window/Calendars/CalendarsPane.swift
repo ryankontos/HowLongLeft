@@ -10,7 +10,7 @@ import HowLongLeftKit
 
 struct CalendarsPane: View {
     
-    @EnvironmentObject var calPrefs: EventFilterDefaultsManager
+    @EnvironmentObject var calPrefs: EventFetchSettingsManager
     
     @State var selection = [String]()
     

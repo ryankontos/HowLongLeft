@@ -13,6 +13,8 @@ import MapKit
 struct MenuEventView: View {
     
     @EnvironmentObject var calSource: CalendarSource
+    @EnvironmentObject var eventInfoSource: StoredEventManager
+    
     var menuModel: WindowSelectionManager!
     var event: Event
     
@@ -134,14 +136,14 @@ struct MenuEventView: View {
                     MenuButton(model: menuModel, idForHover: "2", padding: 4, content: {
                         HStack {
                            
-                            Text("Options...")
+                            Text("Hide...")
                             Spacer()
                            
                                 .foregroundColor(.secondary)
                                 .font(.system(size: 12, weight: .regular))
                         }
                     }, action: {
-                        
+                        eventInfoSource.setEventHidden(event: event, hidden: true)
                     })
                     
                     
@@ -262,11 +264,13 @@ extension MenuEventView: MenuSelectableItemsProvider {
     
     let container = MacDefaultContainer()
     
+    let window = ModernMenuBarExtraWindow(title: "Title", content: {
+        AnyView(Text("Content"))
+    })
+    
     return MenuEventView(event: .init(title: "Reception", start: Date(), end: Date().addingTimeInterval(10)))
         .environmentObject(container.calendarReader)
-        .environmentObject(ModernMenuBarExtraWindow(title: "Title", content: {
-            AnyView(Text("Content"))
-        }))
+        .environmentObject(window.proxy)
     
     
 }

@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 import FluidMenuBarExtra
 
-struct MenuButton<Content: View>: View, SubwindowDelegate {
+struct MenuButton<Content: View>: View {
 
     @ObservedObject var model: WindowSelectionManager
-    @EnvironmentObject var windowManager: ModernMenuBarExtraWindow
+    @EnvironmentObject var windowManager: FMBEWindowProxy
     
     @State private var isHovering = false
     @State private var isFlashing = false
@@ -88,7 +88,7 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
         .onAppear {
             
             if let content = submenuContent?() {
-                windowManager.registerSubwindowView(view: content, for: idForHover)
+                windowManager.window?.registerSubwindowView(view: content, for: idForHover)
             }
             
            
@@ -115,13 +115,13 @@ struct MenuButton<Content: View>: View, SubwindowDelegate {
                     .onAppear {
                        
                         globalPosition = geo.frame(in: .global).origin
-                        windowManager.registerSubwindowButtonPosition(point: globalPosition, for: idForHover)
+                        windowManager.window?.registerSubwindowButtonPosition(point: globalPosition, for: idForHover)
                     }
                     .onChange(of: geo.frame(in: .global).origin) { newOrigin in
                         //print("Frame changed")
                         
                         globalPosition = newOrigin
-                        windowManager.registerSubwindowButtonPosition(point: globalPosition, for: idForHover)
+                        windowManager.window?.registerSubwindowButtonPosition(point: globalPosition, for: idForHover)
                         
                         
                         

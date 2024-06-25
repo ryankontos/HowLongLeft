@@ -107,7 +107,7 @@ struct GeneralPane: View {
             
         }
         .formStyle(.grouped)
-        .frame(width: 450, height: 500)
+        //.frame(width: 450, height: 500)
         
     }
 }

@@ -14,23 +14,13 @@ struct CalendarSettingPickerView: View {
     @ObservedObject var calendarInfo: CalendarInfo
     let toggleContext: String
     
-    @State private var selection: Option = .full
-    private var selectionPublisher: PassthroughSubject<Option, Never>
-    
-    private enum Option: String, CaseIterable, Identifiable {
-        case full = "Menu & Status Bar"
-        case menuOnly = "Menu Only"
-        case off = "Off"
-        
-        var id: String {
-            return self.rawValue
-        }
-    }
+    @State private var selection: CalendarsPane.Option = .full
+    private var selectionPublisher: PassthroughSubject<CalendarsPane.Option, Never>
     
     init(calendarInfo: CalendarInfo, toggleContext: String) {
         self.calendarInfo = calendarInfo
         self.toggleContext = toggleContext
-        self.selectionPublisher = PassthroughSubject<Option, Never>()
+        self.selectionPublisher = PassthroughSubject<CalendarsPane.Option, Never>()
     }
     
     var body: some View {
@@ -46,7 +36,7 @@ struct CalendarSettingPickerView: View {
             }
             
             Picker(selection: $selection, content: {
-                ForEach(Option.allCases) {
+                ForEach(CalendarsPane.Option.allCases) {
                     Text($0.rawValue)
                         .tag($0)
                 }
@@ -60,25 +50,24 @@ struct CalendarSettingPickerView: View {
             }
         }
         .onAppear() {
-            let containsApp = manager.containsContext(calendarInfo: calendarInfo, contextID: HLLStandardCalendarContexts.app.rawValue)
-            let containsStatusItem = manager.containsContext(calendarInfo: calendarInfo, contextID: MacCalendarContexts.statusItem.rawValue)
-            
-            if containsApp && containsStatusItem {
-                selection = .full
-            } else if containsApp {
-                selection = .menuOnly
-            } else {
-                selection = .off
-            }
+            updateSelectionFromItem()
         }
+        .onReceive(calendarInfo.objectWillChange, perform: { _ in
+            updateSelectionFromItem()
+        })
+        .onChange(of: calendarInfo, perform: { new in
+            
+            updateSelectionFromItem()
+            
+        })
         .onReceive(selectionPublisher) { newSelection in
             switch newSelection {
             case .full:
-                manager.updateContexts(for: calendarInfo, addContextIDs: [HLLStandardCalendarContexts.app.rawValue, MacCalendarContexts.statusItem.rawValue])
+                manager.updateContexts(for: calendarInfo, addContextIDs: [HLLStandardCalendarContexts.app.rawValue, MacCalendarContexts.statusItem.rawValue], notify: true)
             case .menuOnly:
-                manager.updateContexts(for: calendarInfo, addContextIDs: [HLLStandardCalendarContexts.app.rawValue], removeContextIDs: [MacCalendarContexts.statusItem.rawValue])
+                manager.updateContexts(for: calendarInfo, addContextIDs: [HLLStandardCalendarContexts.app.rawValue], removeContextIDs: [MacCalendarContexts.statusItem.rawValue], notify: true)
             case .off:
-                manager.updateContexts(for: calendarInfo, removeContextIDs: [MacCalendarContexts.statusItem.rawValue, HLLStandardCalendarContexts.app.rawValue])
+                manager.updateContexts(for: calendarInfo, removeContextIDs: [MacCalendarContexts.statusItem.rawValue, HLLStandardCalendarContexts.app.rawValue], notify: true)
             }
         }
     }
@@ -88,5 +77,20 @@ struct CalendarSettingPickerView: View {
             return Color(cal.cgColor)
         }
         return .gray
+    }
+    
+    func updateSelectionFromItem() {
+        
+        let containsApp = manager.containsContext(calendarInfo: calendarInfo, contextID: HLLStandardCalendarContexts.app.rawValue)
+        let containsStatusItem = manager.containsContext(calendarInfo: calendarInfo, contextID: MacCalendarContexts.statusItem.rawValue)
+        
+        if containsApp && containsStatusItem {
+            selection = .full
+        } else if containsApp {
+            selection = .menuOnly
+        } else {
+            selection = .off
+        }
+        
     }
 }

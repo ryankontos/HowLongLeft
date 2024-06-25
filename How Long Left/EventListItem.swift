@@ -19,7 +19,7 @@ struct EventListItem: View {
         VStack(alignment: .leading) {
             
             Circle()
-                .foregroundStyle(getColor())
+                .foregroundStyle(calendarSource.getColor(calendarID: event.calendarId))
                 .frame(width: 10)
                 
             
@@ -30,17 +30,7 @@ struct EventListItem: View {
         }
     }
     
-    func getColor() -> Color {
-        
-        if let col = calendarSource.lookupCalendar(withID: event.calId)?.cgColor {
-            return Color(cgColor: col)
-        }
-        
-        return .primary
-            
-        
-        
-    }
+    
 }
 
 #Preview {

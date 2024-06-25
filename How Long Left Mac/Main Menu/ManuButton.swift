@@ -112,6 +112,10 @@ struct MenuButton<Content: View>: View {
         .background {
             GeometryReader { geo in
                 Color.clear
+                    .onDisappear() {
+                        model.setMenuItemHovering(id: nil, hovering: false)
+                        
+                    }
                     .onAppear {
                        
                         globalPosition = geo.frame(in: .global).origin

@@ -19,6 +19,8 @@ struct MainMenuContentView: View {
     
     @EnvironmentObject var eventListSettingsManager: EventListSettingsManager
     
+    @EnvironmentObject var configInfo: MenuConfigurationInfo
+    
     var selectionManager: WindowSelectionManager
     
     var model: MainMenuViewModel
@@ -40,9 +42,33 @@ struct MainMenuContentView: View {
                 
                 VStack {
                     
+                   
+                    
                     let groups = model.getEventGroups(at: Date())
                     
                     if !groups.isEmpty {
+                        
+                        if let title = configInfo.getTitle() {
+                            
+                            HStack {
+                                
+                                VStack(alignment: .leading) {
+                                    
+                                    Text(title)
+                                        .font(.system(size: 15, weight: .semibold))
+                                        .padding(.vertical, 4)
+                                    
+                                    Divider()
+                                    
+                                }
+                                
+                                Spacer()
+                                
+                            }
+                            
+                            .padding(.horizontal, 10)
+                            
+                        }
                         
                         getEventGroupsView(groups: groups)
                             .transition(.opacity)

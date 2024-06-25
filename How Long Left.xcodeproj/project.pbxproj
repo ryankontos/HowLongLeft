@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BF2435222C11232C007B11D8 /* ArrowKeySelectionManagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2435212C11232C007B11D8 /* ArrowKeySelectionManagingView.swift */; };
 		BF2759FE2C01A1A500595A87 /* ArrowKeyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2759FD2C01A1A500595A87 /* ArrowKeyDetector.swift */; };
+		BF28597A2C281F2B00CCF31C /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = BF2859792C281F2B00CCF31C /* SwiftUIIntrospect */; };
 		BF30A9922BE369D8007850EE /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF30A9912BE369D8007850EE /* HowLongLeftKit */; };
 		BF30A9A22BE3BA71007850EE /* EventListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A9A12BE3BA71007850EE /* EventListItem.swift */; };
 		BF30A9A42BE3BB26007850EE /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A9A32BE3BB26007850EE /* EventList.swift */; };
@@ -25,7 +26,9 @@
 		BF4A055C2BF20A5B00678073 /* StatusItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */; };
 		BF4A0A602C1783E70094A170 /* MenuTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A0A5F2C1783E70094A170 /* MenuTimelineView.swift */; };
 		BF4D145D2C2149A000ED054C /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4D145C2C2149A000ED054C /* ProgressRingView.swift */; };
+		BF64830A2C27002F00C58A13 /* HiddenEventsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6483092C27002F00C58A13 /* HiddenEventsPane.swift */; };
 		BF6688E12C25E4770075D69A /* StatusBarPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6688E02C25E4770075D69A /* StatusBarPane.swift */; };
+		BF70D48E2C2AE618004833F0 /* MenuConfigurationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF70D48D2C2AE618004833F0 /* MenuConfigurationInfo.swift */; };
 		BF7465EA2BF237B3009C373D /* EventMenuListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7465E92BF237B3009C373D /* EventMenuListItem.swift */; };
 		BF7E03A52BEC7F7800FD3B31 /* How_Long_LeftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */; };
 		BF89C1F92BEA13AC001B73C1 /* EnabledCalendarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89C1F82BEA13AC001B73C1 /* EnabledCalendarsView.swift */; };
@@ -39,7 +42,17 @@
 		BFB1FBC12C0DF42400D04B84 /* FluidMenuBarExtra in Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBC02C0DF42400D04B84 /* FluidMenuBarExtra */; };
 		BFB1FBC32C0DF4CC00D04B84 /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */; };
 		BFB1FBC42C0DF4CC00D04B84 /* HowLongLeftKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		BFBF9F092C27DB3F00B32D26 /* MacDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F072C27DB3F00B32D26 /* MacDataModel.xcdatamodeld */; };
+		BFBF9F0B2C27DE8A00B32D26 /* MacPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */; };
+		BFBF9F0D2C27E26D00B32D26 /* CustomStatusItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0C2C27E26D00B32D26 /* CustomStatusItemStore.swift */; };
+		BFBF9F0F2C27EC0000B32D26 /* SettingsWindowContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0E2C27EC0000B32D26 /* SettingsWindowContentView.swift */; };
 		BFC313C32C0094FC00778D52 /* MenuEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC313C22C0094FC00778D52 /* MenuEventView.swift */; };
+		BFC6AD1C2C285C0600DEB881 /* MacSettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD1B2C285C0600DEB881 /* MacSettingsTab.swift */; };
+		BFC6AD1E2C285C6C00DEB881 /* ManageCustomMenusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD1D2C285C6C00DEB881 /* ManageCustomMenusView.swift */; };
+		BFC6AD212C285DD400DEB881 /* EditCustomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD202C285DD400DEB881 /* EditCustomMenuView.swift */; };
+		BFC6AD242C29388100DEB881 /* CustomStatusItemContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD232C29388100DEB881 /* CustomStatusItemContainer.swift */; };
+		BFC6AD262C2938DF00DEB881 /* StatusItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD252C2938DF00DEB881 /* StatusItemManager.swift */; };
+		BFC6AD282C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD272C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift */; };
 		BFCC9D772C036E57003475C8 /* MenuEventListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */; };
 		BFDC7ACB2C2132C200EF8AF5 /* EventInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */; };
 		BFDDA3DB2C25B406001160A1 /* MenuNoCalendarAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */; };
@@ -132,7 +145,9 @@
 		BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemStore.swift; sourceTree = "<group>"; };
 		BF4A0A5F2C1783E70094A170 /* MenuTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTimelineView.swift; sourceTree = "<group>"; };
 		BF4D145C2C2149A000ED054C /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
+		BF6483092C27002F00C58A13 /* HiddenEventsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenEventsPane.swift; sourceTree = "<group>"; };
 		BF6688E02C25E4770075D69A /* StatusBarPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPane.swift; sourceTree = "<group>"; };
+		BF70D48D2C2AE618004833F0 /* MenuConfigurationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuConfigurationInfo.swift; sourceTree = "<group>"; };
 		BF7465E92BF237B3009C373D /* EventMenuListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenuListItem.swift; sourceTree = "<group>"; };
 		BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = How_Long_LeftApp.swift; sourceTree = "<group>"; };
 		BF89C1F82BEA13AC001B73C1 /* EnabledCalendarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnabledCalendarsView.swift; sourceTree = "<group>"; };
@@ -142,7 +157,17 @@
 		BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuContentView.swift; sourceTree = "<group>"; };
 		BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionObservingView.swift; sourceTree = "<group>"; };
 		BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetObservingScrollView.swift; sourceTree = "<group>"; };
+		BFBF9F082C27DB3F00B32D26 /* MacDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MacDataModel.xcdatamodel; sourceTree = "<group>"; };
+		BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPersistence.swift; sourceTree = "<group>"; };
+		BFBF9F0C2C27E26D00B32D26 /* CustomStatusItemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStatusItemStore.swift; sourceTree = "<group>"; };
+		BFBF9F0E2C27EC0000B32D26 /* SettingsWindowContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowContentView.swift; sourceTree = "<group>"; };
 		BFC313C22C0094FC00778D52 /* MenuEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEventView.swift; sourceTree = "<group>"; };
+		BFC6AD1B2C285C0600DEB881 /* MacSettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacSettingsTab.swift; sourceTree = "<group>"; };
+		BFC6AD1D2C285C6C00DEB881 /* ManageCustomMenusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCustomMenusView.swift; sourceTree = "<group>"; };
+		BFC6AD202C285DD400DEB881 /* EditCustomMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCustomMenuView.swift; sourceTree = "<group>"; };
+		BFC6AD232C29388100DEB881 /* CustomStatusItemContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStatusItemContainer.swift; sourceTree = "<group>"; };
+		BFC6AD252C2938DF00DEB881 /* StatusItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemManager.swift; sourceTree = "<group>"; };
+		BFC6AD272C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuCalendarPrefsContainerView.swift; sourceTree = "<group>"; };
 		BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuEventListSection.swift; sourceTree = "<group>"; };
 		BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoItemView.swift; sourceTree = "<group>"; };
 		BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNoCalendarAccessView.swift; sourceTree = "<group>"; };
@@ -206,6 +231,7 @@
 				BFB1FBBC2C0DF3C800D04B84 /* Defaults in Frameworks */,
 				BFB1FBC12C0DF42400D04B84 /* FluidMenuBarExtra in Frameworks */,
 				BFB1FBB92C0DF3B500D04B84 /* Settings in Frameworks */,
+				BF28597A2C281F2B00CCF31C /* SwiftUIIntrospect in Frameworks */,
 				BFB1FBC32C0DF4CC00D04B84 /* HowLongLeftKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,6 +271,7 @@
 				BF2435212C11232C007B11D8 /* ArrowKeySelectionManagingView.swift */,
 				BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */,
 				BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */,
+				BF70D48D2C2AE618004833F0 /* MenuConfigurationInfo.swift */,
 			);
 			path = "Main Menu";
 			sourceTree = "<group>";
@@ -260,9 +287,12 @@
 			isa = PBXGroup;
 			children = (
 				BF3CAF0A2BF4A821003035C7 /* SettingsWindow.swift */,
+				BFBF9F0E2C27EC0000B32D26 /* SettingsWindowContentView.swift */,
+				BFC6AD1B2C285C0600DEB881 /* MacSettingsTab.swift */,
 				BF3CAF082BF4A7C2003035C7 /* Panes.swift */,
 				BF3CAF0E2BF4AB6F003035C7 /* GeneralPane.swift */,
-				BF6688E02C25E4770075D69A /* StatusBarPane.swift */,
+				BFC6AD1F2C285DC400DEB881 /* Status Bar */,
+				BF6483092C27002F00C58A13 /* HiddenEventsPane.swift */,
 				BF3CAF122BF4C3CE003035C7 /* Calendars */,
 			);
 			path = "Settings Window";
@@ -275,6 +305,37 @@
 				BF3CAF132BF4C3F0003035C7 /* CalendarSettingPickerView.swift */,
 			);
 			path = Calendars;
+			sourceTree = "<group>";
+		};
+		BF70D48F2C2B326F004833F0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BFC6AD1F2C285DC400DEB881 /* Status Bar */ = {
+			isa = PBXGroup;
+			children = (
+				BF6688E02C25E4770075D69A /* StatusBarPane.swift */,
+				BFC6AD1D2C285C6C00DEB881 /* ManageCustomMenusView.swift */,
+				BFC6AD202C285DD400DEB881 /* EditCustomMenuView.swift */,
+				BFC6AD272C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift */,
+			);
+			path = "Status Bar";
+			sourceTree = "<group>";
+		};
+		BFC6AD222C29387400DEB881 /* StatusItem */ = {
+			isa = PBXGroup;
+			children = (
+				BF70D48F2C2B326F004833F0 /* View */,
+				BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */,
+				BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */,
+				BFC6AD232C29388100DEB881 /* CustomStatusItemContainer.swift */,
+				BFC6AD252C2938DF00DEB881 /* StatusItemManager.swift */,
+			);
+			path = StatusItem;
 			sourceTree = "<group>";
 		};
 		BFE8F0B82BE3602000083FD6 = {
@@ -356,13 +417,14 @@
 			children = (
 				BF91A6182BEF1EBE0047D534 /* How-Long-Left-Mac-Info.plist */,
 				BF3CAF4E2BF4D0DC003035C7 /* main.swift */,
+				BFBF9F072C27DB3F00B32D26 /* MacDataModel.xcdatamodeld */,
+				BFBF9F0C2C27E26D00B32D26 /* CustomStatusItemStore.swift */,
 				BF2759FC2C01973C00595A87 /* Main Menu */,
 				BF3CAF102BF4AC4C003035C7 /* MacDefaultContainer.swift */,
-				BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */,
 				BF8A5A5F2C23272C001A4701 /* MacDefaults.swift */,
 				BFF0E6792BE6881F0023AB22 /* AppDelegate.swift */,
 				BFF0E67B2BE6881F0023AB22 /* ContentView.swift */,
-				BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */,
+				BFC6AD222C29387400DEB881 /* StatusItem */,
 				BF3CAF152BF4C518003035C7 /* MacCalendarContexts.swift */,
 				BFE232892BF4F1E9004F55D8 /* StatusItemCountdown.swift */,
 				BF3CAF052BF4A7A2003035C7 /* Settings Window */,
@@ -479,6 +541,7 @@
 				BFB1FBBB2C0DF3C800D04B84 /* Defaults */,
 				BFB1FBC02C0DF42400D04B84 /* FluidMenuBarExtra */,
 				BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */,
+				BF2859792C281F2B00CCF31C /* SwiftUIIntrospect */,
 			);
 			productName = "How Long Left Mac";
 			productReference = BFF0E6772BE6881F0023AB22 /* How Long Left Mac.app */;
@@ -568,6 +631,7 @@
 				BFB1FBBA2C0DF3C800D04B84 /* XCRemoteSwiftPackageReference "Defaults" */,
 				BFB1FBBE2C0DF3EE00D04B84 /* XCLocalSwiftPackageReference "../How Long Left Kit" */,
 				BFB1FBBF2C0DF42400D04B84 /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */,
+				BF2859782C281F2A00CCF31C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = BFE8F0C22BE3602000083FD6 /* Products */;
 			projectDirPath = "";
@@ -675,31 +739,43 @@
 				BFE7114D2BF27211000A167E /* PushLeading.swift in Sources */,
 				BFDC7ACB2C2132C200EF8AF5 /* EventInfoItemView.swift in Sources */,
 				BFCC9D772C036E57003475C8 /* MenuEventListSection.swift in Sources */,
+				BFBF9F0D2C27E26D00B32D26 /* CustomStatusItemStore.swift in Sources */,
 				BF4A055C2BF20A5B00678073 /* StatusItemStore.swift in Sources */,
+				BF70D48E2C2AE618004833F0 /* MenuConfigurationInfo.swift in Sources */,
 				BFDDA3DD2C25B77C001160A1 /* MenuNoEventsView.swift in Sources */,
 				BFE2328A2BF4F1E9004F55D8 /* StatusItemCountdown.swift in Sources */,
 				BF2435222C11232C007B11D8 /* ArrowKeySelectionManagingView.swift in Sources */,
 				BF3CAF4F2BF4D0DC003035C7 /* main.swift in Sources */,
 				BFAC93EB2C09FE5B00AB66BF /* OffsetObservingScrollView.swift in Sources */,
+				BFC6AD212C285DD400DEB881 /* EditCustomMenuView.swift in Sources */,
+				BFBF9F092C27DB3F00B32D26 /* MacDataModel.xcdatamodeld in Sources */,
+				BFC6AD262C2938DF00DEB881 /* StatusItemManager.swift in Sources */,
 				BF8A5A602C23272C001A4701 /* MacDefaults.swift in Sources */,
+				BFC6AD1E2C285C6C00DEB881 /* ManageCustomMenusView.swift in Sources */,
 				BF91A61D2BF1D6BA0047D534 /* MainMenuContentView.swift in Sources */,
 				BF2759FE2C01A1A500595A87 /* ArrowKeyDetector.swift in Sources */,
 				BF3CAF092BF4A7C2003035C7 /* Panes.swift in Sources */,
 				BF4A0A602C1783E70094A170 /* MenuTimelineView.swift in Sources */,
+				BFBF9F0F2C27EC0000B32D26 /* SettingsWindowContentView.swift in Sources */,
 				BF91A6152BEF1E120047D534 /* StatusItemContentView.swift in Sources */,
 				BFF0E67C2BE6881F0023AB22 /* ContentView.swift in Sources */,
+				BFC6AD282C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift in Sources */,
 				BFE7114F2BF2816A000A167E /* ManuButton.swift in Sources */,
 				BF3CAF162BF4C518003035C7 /* MacCalendarContexts.swift in Sources */,
 				BF3CAF112BF4AC4C003035C7 /* MacDefaultContainer.swift in Sources */,
 				BF3CAF0D2BF4A8F3003035C7 /* CalendarsPane.swift in Sources */,
 				BF3CAF0B2BF4A821003035C7 /* SettingsWindow.swift in Sources */,
+				BF64830A2C27002F00C58A13 /* HiddenEventsPane.swift in Sources */,
 				BF46AA832C2055DE005A6E7A /* MenuEventViewParent.swift in Sources */,
+				BFC6AD1C2C285C0600DEB881 /* MacSettingsTab.swift in Sources */,
 				BF7465EA2BF237B3009C373D /* EventMenuListItem.swift in Sources */,
 				BFF0E67A2BE6881F0023AB22 /* AppDelegate.swift in Sources */,
 				BF3CAF0F2BF4AB6F003035C7 /* GeneralPane.swift in Sources */,
 				BF3CAF142BF4C3F0003035C7 /* CalendarSettingPickerView.swift in Sources */,
 				BF6688E12C25E4770075D69A /* StatusBarPane.swift in Sources */,
+				BFC6AD242C29388100DEB881 /* CustomStatusItemContainer.swift in Sources */,
 				BFAC93E92C09FE0C00AB66BF /* PositionObservingView.swift in Sources */,
+				BFBF9F0B2C27DE8A00B32D26 /* MacPersistence.swift in Sources */,
 				BFDDA3DB2C25B406001160A1 /* MenuNoCalendarAccessView.swift in Sources */,
 				BF4D145D2C2149A000ED054C /* ProgressRingView.swift in Sources */,
 			);
@@ -1259,6 +1335,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BF2859782C281F2A00CCF31C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 		BFB1FBB72C0DF3B500D04B84 /* XCRemoteSwiftPackageReference "Settings" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Settings.git";
@@ -1278,6 +1362,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BF2859792C281F2B00CCF31C /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF2859782C281F2A00CCF31C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = SwiftUIIntrospect;
+		};
 		BF30A9912BE369D8007850EE /* HowLongLeftKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HowLongLeftKit;
@@ -1311,6 +1400,20 @@
 			productName = Settings;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		BFBF9F072C27DB3F00B32D26 /* MacDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BFBF9F082C27DB3F00B32D26 /* MacDataModel.xcdatamodel */,
+			);
+			currentVersion = BFBF9F082C27DB3F00B32D26 /* MacDataModel.xcdatamodel */;
+			name = MacDataModel.xcdatamodeld;
+			path = "/Users/ryankontos/Developer/How Long Left/How Long Left Mac/MacDataModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BFE8F0B92BE3602000083FD6 /* Project object */;
 }

@@ -12,4 +12,5 @@ extension Settings.PaneIdentifier {
     static let general = Self("general")
     static let calendars = Self("calendars")
     static let statusbar = Self("statusbar")
+    static let hidden = Self("hidden")
 }

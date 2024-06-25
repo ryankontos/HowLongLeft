@@ -22,7 +22,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         
-        statusItemStore = StatusItemStore(container: container)
         
     
        

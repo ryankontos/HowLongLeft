@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct StatusBarPane: View {
+    
+    @EnvironmentObject var store: StatusItemStore
+    
     var body: some View {
         
         NavigationStack {
@@ -17,8 +20,12 @@ struct StatusBarPane: View {
                 
                 
             }
+            .formStyle(.grouped)
+           // .frame(width: 450, height: 500)
             
         }
+        
+        .navigationTitle("Status Bar")
         
     }
 }

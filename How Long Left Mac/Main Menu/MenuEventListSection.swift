@@ -27,7 +27,7 @@ struct MenuEventListSection: View {
         
         guard event.isAllDay && event.status() == .upcoming else { return nil }
         
-        if let cg = reader.lookupCalendar(withID: event.calId)?.cgColor {
+        if let cg = reader.lookupCalendar(withID: event.calendarID)?.cgColor {
             return Color(cg)
         }
         

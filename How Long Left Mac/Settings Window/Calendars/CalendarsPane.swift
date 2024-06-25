@@ -12,12 +12,9 @@ struct CalendarsPane: View {
     
     @EnvironmentObject var calPrefs: EventFetchSettingsManager
     
-    @State var selection = [String]()
-    
     var body: some View {
         
 
-        ZStack {
             Form {
                 
                 Section("Enabled Calendars") {
@@ -26,9 +23,7 @@ struct CalendarsPane: View {
                         
                         CalendarSettingPickerView(calendarInfo: displayInfo, toggleContext: "")
                         
-                        
-                        //.tint(Color(displayInfo.calendar.color))
-                        
+                      
                     }
                     
                     
@@ -38,20 +33,57 @@ struct CalendarsPane: View {
             }
            
             
-           
             .formStyle(.grouped)
-           
-            
-            .frame(width: 450, height: 500)
-           
-            
-            
-        }
-           
-           
+            .toolbarRole(.editor)
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    
+                    Menu("Set All", systemImage: "slider.horizontal.3") {
+                        
+                        Button("Set All Menu & Status Bar", action: {
+                            updateAllContexts(option: .full)
+                        })
+                        
+                        Button("Set All Menu Only", action: {
+                            updateAllContexts(option: .menuOnly)
+                        })
+                        
+                        Button("Set All Off", action: {
+                            updateAllContexts(option: .off)
+                        })
+                        
+                    }
+                    
+                    
+                }
+            }
+    
         
     }
     
+    func updateAllContexts(option: Option) {
+        
+        switch option {
+        case .full:
+            
+            calPrefs.batchUpdateContexts(addContextIDs: [HLLStandardCalendarContexts.app.rawValue, MacCalendarContexts.statusItem.rawValue])
+        case .menuOnly:
+            calPrefs.batchUpdateContexts(addContextIDs: [HLLStandardCalendarContexts.app.rawValue], removeContextIDs: [MacCalendarContexts.statusItem.rawValue])
+        case .off:
+            calPrefs.batchUpdateContexts(removeContextIDs: [MacCalendarContexts.statusItem.rawValue, HLLStandardCalendarContexts.app.rawValue])
+        }
+        
+    }
+    
+    public enum Option: String, CaseIterable, Identifiable {
+        case full = "Menu & Status Bar"
+        case menuOnly = "Menu Only"
+        case off = "Off"
+        
+        var id: String {
+            return self.rawValue
+        }
+    }
    
 }
 

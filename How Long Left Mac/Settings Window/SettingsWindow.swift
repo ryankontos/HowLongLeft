@@ -9,83 +9,39 @@ import Foundation
 import Settings
 import AppKit
 import HowLongLeftKit
+import SwiftUI
 
 class SettingsWindow: ObservableObject {
     
     let calendarManager: EventFetchSettingsManager
     let eventListSettingsManager: EventListSettingsManager
+    unowned var container: MacDefaultContainer
+    
+    var window: NSWindow?
     
     init(container: MacDefaultContainer) {
+        self.container = container
         self.calendarManager = container.calendarPrefsManager
         self.eventListSettingsManager = container.eventListSettingsManager
     }
     
     func open() {
-        
-        
         NSApp.deactivate()
         NSApp.activate(ignoringOtherApps: true)
         
-        DispatchQueue.main.async { [self] in
-            
-            if #available(macOS 14.0, *) {
-                NSApp.activate()
-            } else {
-                NSApp.activate(ignoringOtherApps: true)
-            }
-            
-            settingsWindowController.close()
-            
-            settingsWindowController.window?.collectionBehavior = [.auxiliary, .primary]
-            
-            settingsWindowController.window?.level = .normal
-            settingsWindowController.hidesToolbarForSingleItem = false
-            
-            settingsWindowController.show()
-            settingsWindowController.window!.makeKeyAndOrderFront(nil)
-            settingsWindowController.window!.makeMain()
-            
-           
-            
-        }
+        window?.close()
+        window = nil
         
+        window = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 715, height: 540),
+            styleMask: [.titled, .closable, .resizable, .miniaturizable, .fullSizeContentView],
+            backing: .buffered, defer: false)
+        
+        window?.center()
+        window?.isReleasedWhenClosed = false
+        window?.title = "How Long Left Settings"
+        //window?.setFrameAutosaveName("How Long Left Settings")
+        window?.contentView = NSHostingView(rootView: SettingsWindowContentView(container: container))
+        window?.makeKeyAndOrderFront(nil)
     }
-    
-    private lazy var settingsWindowController = SettingsWindowController(
-        panes: [
-            Settings.Pane(
-                identifier: Settings.PaneIdentifier.general,
-                title: "General",
-                toolbarIcon: NSImage(systemSymbolName: "gear", accessibilityDescription: nil)!
-                
-            ) {
-                GeneralPane()
-                    .environmentObject(eventListSettingsManager)
-                    .environmentObject(calendarManager)
-            },
-            
-            Settings.Pane(
-                identifier: Settings.PaneIdentifier.calendars,
-                title: "Calendars",
-                toolbarIcon: NSImage(systemSymbolName: "calendar", accessibilityDescription: nil)!
-                
-            ) {
-                CalendarsPane()
-                    .environmentObject(calendarManager)
-            },
-            
-            Settings.Pane(
-                identifier: Settings.PaneIdentifier.statusbar,
-                title: "Status Bar",
-                toolbarIcon: NSImage(systemSymbolName: "clock", accessibilityDescription: nil)!
-                
-            ) {
-                StatusBarPane()
-                    .environmentObject(calendarManager)
-            },
-            
-        ]
-    )
-
-    
 }

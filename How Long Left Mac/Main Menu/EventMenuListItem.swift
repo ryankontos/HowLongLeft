@@ -38,7 +38,7 @@ struct EventMenuListItem: View {
     
     func getColor() -> Color {
         
-        if let cg = source.lookupCalendar(withID: event.calId)?.cgColor {
+        if let cg = source.lookupCalendar(withID: event.calendarID)?.cgColor {
             return Color(cg)
         }
         

@@ -143,7 +143,11 @@ struct MenuEventView: View {
                                 .font(.system(size: 12, weight: .regular))
                         }
                     }, action: {
-                        eventInfoSource.setEventHidden(event: event, hidden: true)
+                        
+                        withAnimation {
+                            
+                            eventInfoSource.addEventToStore(event: event)
+                        }
                     })
                     
                     
@@ -206,7 +210,7 @@ struct MenuEventView: View {
     
     func getColor() -> Color {
         
-        if let cg = calSource.lookupCalendar(withID: event.calId)?.cgColor {
+        if let cg = calSource.lookupCalendar(withID: event.calendarID)?.cgColor {
             return Color(cg)
         }
         

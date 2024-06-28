@@ -12,7 +12,7 @@ struct ManageCustomMenusView: View {
     
     @EnvironmentObject var store: StatusItemStore
     
-    @State var editingItem: CustomStatusItemContainer?
+    @State var editingItem: StatusItemContainer?
     
     @State var editingNewItem = false
     
@@ -41,7 +41,7 @@ struct ManageCustomMenusView: View {
 
                     Button("Delete", role: .destructive) {
                         
-                        store.customStatusItemStore.removeCustomStatusItem(item: item.info)
+                        store.statusItemDataStore.removeCustomStatusItem(item: item.info)
                         
                     }
                     

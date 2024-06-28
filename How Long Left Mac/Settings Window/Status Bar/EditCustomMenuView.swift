@@ -19,7 +19,7 @@ struct EditCustomMenuView: View {
     
     var isItemNew: Bool
     
-    @State var item: CustomStatusItemContainer
+    @State var item: StatusItemContainer
     @State var field1: String = ""
     
     @State var useCustomColor = false
@@ -107,9 +107,8 @@ struct EditCustomMenuView: View {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         if self.isItemNew {
-                            let context = store.customStatusItemStore.context
-                            context.delete(item.info)
-                            try? context.save()
+                            store.statusItemDataStore.removeCustomStatusItem(item: item.info)
+                           
                         }
                         
                         dismiss()
@@ -119,9 +118,7 @@ struct EditCustomMenuView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
                         save()
-                        let context = store.customStatusItemStore.context
-                        context.insert(item.info)
-                        try? context.save()
+                        store.statusItemDataStore.saveItem(item: item.info)
                         dismiss()
                     }
                     .disabled(!titleValid)

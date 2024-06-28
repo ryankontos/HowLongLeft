@@ -12,25 +12,30 @@ import HowLongLeftKit
 
 class MenuConfigurationInfo: ObservableObject {
     
-    init(info: CustomStatusItemInfo? = nil) {
+    init(info: StatusItemConfiguration? = nil) {
         self.info = info
     }
     
-    private var info: CustomStatusItemInfo?
+    private var info: StatusItemConfiguration?
     
     func getColor() -> Color? {
         
         
-        guard let info else { print("Color returning nil"); return nil }
-        guard info.useCustomColor else { print("Color returning nil"); return nil }
-        guard let code = info.customColorCode else { print("Color returning nil"); return nil }
+        guard let info else { return nil }
+        guard info.useCustomColor else { return nil }
+        guard let code = info.customColorCode else { return nil }
         
         return Color(CGColor.fromHex(code)!)
     }
     
+    func showTitles() -> Bool {
+        guard let info else { return false }
+        return info.showTitle
+    }
+    
     func getTitle() -> String? {
         
-        if let info {
+        if let info, info.isCustom {
             return info.title
         }
         

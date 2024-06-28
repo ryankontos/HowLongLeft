@@ -14,17 +14,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let container = MacDefaultContainer()
     var window: NSWindow!
 
+    static var initTime = Date()
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
        // //print("Launched")
         // Initialize the status item store
-        
-        guard ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" else {
-            return
-        }
-        
+      
         
     
        
+    }
+    
+    func applicationWillBecomeActive(_ notification: Notification) {
+        
+        DispatchQueue.main.async {
+            
+            let windowsCount = NSApplication.shared.windows.filter { $0.isVisible }.count
+            
+            print("Activating with \(windowsCount) visible windows")
+            
+        }
+        
+        
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

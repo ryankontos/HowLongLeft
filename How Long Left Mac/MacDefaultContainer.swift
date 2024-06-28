@@ -11,6 +11,12 @@ import HowLongLeftKit
 class MacDefaultContainer: DefaultContainer {
 
     public lazy var statusItemStore: StatusItemStore? = {
+        
+        
+        guard ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" else {
+            return nil
+        }
+        
         // The closure provides a reference to self
         return StatusItemStore(container: self)
     }()
@@ -21,12 +27,12 @@ class MacDefaultContainer: DefaultContainer {
         calendarReader: self.calendarReader,
         calendarProvider: self.calendarPrefsManager,
         calendarContexts: [MacCalendarContexts.statusItem.rawValue],
-        hiddenEventManager: self.hiddenEventManager
+        hiddenEventManager: self.hiddenEventManager, id: "MacDefaultContainer"
     )
     
     public lazy var eventListSettingsManager = EventListSettingsManager(domain: "MacMainMenu")
     
-    public lazy var customStatusItemManager = CustomStatusItemStore()
+    public lazy var customStatusItemManager = StatusItemConfigurationStore()
     
     override init() {
         super.init()

@@ -60,6 +60,7 @@ struct SettingsWindowContentView: View {
                         .environmentObject(container.hiddenEventManager)
                 case .menuBar:
                     StatusBarPane()
+                        .environmentObject(container.statusItemStore!.mainStatusItemContainer!.info)
                         .environmentObject(container.statusItemStore!)
                 case .customMenuBarItems:
                     ManageCustomMenusView()

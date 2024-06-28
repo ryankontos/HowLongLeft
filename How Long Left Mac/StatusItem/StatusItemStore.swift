@@ -12,17 +12,18 @@ import SwiftUI
 
 class StatusItemStore: EventCacheObserver, ObservableObject {
     
-    var mainManager: StatusItemManager!
     unowned var defaultContainer: MacDefaultContainer
 
-    @Published var customStatusItemContainers = Set<CustomStatusItemContainer>()
+    @Published var mainStatusItemContainer: StatusItemContainer?
+    @Published var customStatusItemContainers = Set<StatusItemContainer>()
     private var cancellables: Set<AnyCancellable> = []
     
     private var customItemStoreSubscription: AnyCancellable?
     
-    let customStatusItemStore = CustomStatusItemStore()
+    let statusItemDataStore = StatusItemConfigurationStore()
+   
     
-    let mainConfigInfo = MenuConfigurationInfo()
+   
     
     init(container: MacDefaultContainer) {
         self.defaultContainer = container
@@ -30,19 +31,26 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         
     }
     
-    func createNewCustomStatusItem() -> CustomStatusItemContainer {
-        let newInfo = customStatusItemStore.makeNewCustomStatusItem()
+    func createNewCustomStatusItem() -> StatusItemContainer {
+        let newInfo = statusItemDataStore.makeNewCustomStatusItem()
         let container = initalizeCustomStatusItemContainer(from: newInfo)
         customStatusItemContainers.insert(container)
         updateSubscriptions()
         return container
     }
     
+    func loadMainStatusItem() {
+        guard mainStatusItemContainer == nil else { return }
+        let info = statusItemDataStore.getMainStatusItem()
+        mainStatusItemContainer = initalizeCustomStatusItemContainer(from: info)
+    }
+    
     func loadCustomStatusItemContainers() {
+        
         print("Loading containers, there are currently \(self.customStatusItemContainers.count)")
-        var newContainers = Set<CustomStatusItemContainer>()
+        var newContainers = Set<StatusItemContainer>()
         let existing = customStatusItemContainers
-        let newInfos = customStatusItemStore.getCustomCalendarStatusItems()
+        let newInfos = statusItemDataStore.getCustomStatusItems()
         
         // Add existing items that are still relevant
         for existingItem in existing where newInfos.contains(where: { $0.identifier == existingItem.info.identifier }) {
@@ -56,7 +64,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         
         // Destroy items that are in the original set but not in the new set
         for existingItem in existing where !newContainers.contains(existingItem) {
-            existingItem.statusItem?.destoryMenuItem()
+            existingItem.destroy()
         }
         
         print("Finished loading containers, there are now \(newContainers.count)")
@@ -64,8 +72,22 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         updateSubscriptions()
     }
     
-    private func initalizeCustomStatusItemContainer(from info: CustomStatusItemInfo) -> CustomStatusItemContainer {
-        return CustomStatusItemContainer(source: defaultContainer.calendarReader, hiddenEventManager: defaultContainer.hiddenEventManager, info: info, settings: defaultContainer.settingsWindow, timer: defaultContainer.timerContainer, listManager: defaultContainer.eventListSettingsManager)
+    private func initalizeCustomStatusItemContainer(from info: StatusItemConfiguration) -> StatusItemContainer {
+        
+        
+        var filtering = defaultContainer.calendarPrefsManager
+        
+        if info.isCustom {
+            let appSet: Set<String> = []
+            let config = EventFetchSettingsManager.Configuration(
+                domain: "HLLMac_CustomStatusItem_\(info.identifier!)",
+                defaultContextsForNonMatches: appSet)
+            
+                filtering = EventFetchSettingsManager(calendarSource: defaultContainer.calendarReader, config: config)
+            
+        }
+         
+        return StatusItemContainer(source: defaultContainer.calendarReader, hiddenEventManager: defaultContainer.hiddenEventManager, info: info, settings: defaultContainer.settingsWindow, timer: defaultContainer.timerContainer, listManager: defaultContainer.eventListSettingsManager, filtering: filtering)
     }
     
     private func updateSubscriptions() {
@@ -87,7 +109,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         self.customItemStoreSubscription?.cancel()
         self.customItemStoreSubscription = nil
         
-        self.customItemStoreSubscription = customStatusItemStore.objectWillChange
+        self.customItemStoreSubscription = statusItemDataStore.objectWillChange
             .sink { [weak self] _ in
                 DispatchQueue.main.async {
                     self?.loadCustomStatusItemContainers()
@@ -98,47 +120,18 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         
     }
     
-    private func customStatusItemContainerDidChange(_ container: CustomStatusItemContainer) {
+    private func customStatusItemContainerDidChange(_ container: StatusItemContainer) {
         // Handle the change and update the array if necessary
         loadCustomStatusItemContainers()
         objectWillChange.send()
     }
     
-    func createMainMenu() {
-        let model = MainMenuViewModel(timePointStore: self.defaultContainer.pointStore, listSettings: self.defaultContainer.eventListSettingsManager)
-        
-        let mainExtra = FluidMenuBarExtraWindowManager(title: "How Long Left", windowContent: {
-            AnyView(MainMenuContentView(selectionManager: WindowSelectionManager(itemsProvider: model), model: model)
-                .environmentObject(self.defaultContainer.hiddenEventManager)
-                .environmentObject(self.defaultContainer.eventListSettingsManager)
-                .environmentObject(self.defaultContainer.settingsWindow)
-                .environmentObject(self.defaultContainer.pointStore)
-                .environmentObject(self.defaultContainer.calendarReader)
-                .environmentObject(self.defaultContainer.timerContainer)
-                .environmentObject(self.mainConfigInfo)
-            )
-        }, statusItemContent: {
-            AnyView(
-                
-                StatusItemContentView()
-                    .environmentObject(self.defaultContainer.pointStore)
-                    .environmentObject(self.mainConfigInfo)
-            
-            
-            )
-        })
-        
-       
-      
-        let statusItemPointStore = TimePointStore(eventCache: self.defaultContainer.statusItemEventFilter)
-        
-        self.mainManager = StatusItemManager(menubarExtra: mainExtra, timePointStore: statusItemPointStore, statusItemPointStore: statusItemPointStore, customTitle: nil)
-    }
+ 
     
     override func eventsChanged() {
-        if mainManager == nil && defaultContainer.calendarReader.authorization != .notDetermined {
-            createMainMenu()
+        if defaultContainer.calendarReader.authorization != .notDetermined {
             setUpCustomItemStoreSubscription()
+            loadMainStatusItem()
             loadCustomStatusItemContainers()
         }
     }

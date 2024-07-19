@@ -57,11 +57,11 @@ struct StatusItemContentView: View {
     func getEvent(at date: Date) -> Event? {
         
         guard let point = pointStore.getPointAt(date: date) else {
-            print("Status item countdown got no current timepoint for \(date)")
+            //print("Status item countdown got no current timepoint for \(date)")
             return nil
         }
         
-        print("Status item countdown got current timepoint!")
+       // print("Status item countdown got current timepoint!")
         return point.fetchSingleEvent(accordingTo: .preferInProgress)
         
     }

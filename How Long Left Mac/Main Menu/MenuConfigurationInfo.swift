@@ -30,7 +30,7 @@ class MenuConfigurationInfo: ObservableObject {
     
     func showTitles() -> Bool {
         guard let info else { return false }
-        return info.showTitle
+        return true
     }
     
     func getTitle() -> String? {

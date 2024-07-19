@@ -21,7 +21,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
     private var customItemStoreSubscription: AnyCancellable?
     
     let statusItemDataStore = StatusItemConfigurationStore()
-   
+    let settingsStore = StatusItemSettingsStore()
     
    
     
@@ -67,6 +67,10 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
             existingItem.destroy()
         }
         
+        newContainers.forEach { container in
+            container.setSettings(to: getSettings(info: container.info))
+        }
+        
         print("Finished loading containers, there are now \(newContainers.count)")
         self.customStatusItemContainers = newContainers
         updateSubscriptions()
@@ -86,6 +90,8 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
                 filtering = EventFetchSettingsManager(calendarSource: defaultContainer.calendarReader, config: config)
             
         }
+        
+      
          
         return StatusItemContainer(source: defaultContainer.calendarReader, hiddenEventManager: defaultContainer.hiddenEventManager, info: info, settings: defaultContainer.settingsWindow, timer: defaultContainer.timerContainer, listManager: defaultContainer.eventListSettingsManager, filtering: filtering)
     }
@@ -127,6 +133,13 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
     }
     
  
+    private func getSettings(info: StatusItemConfiguration) -> StatusItemSettings {
+        if info.isCustom &&  info.useDefaultSettings {
+            return settingsStore.getSettings(withId: info.identifier!)
+        } else {
+            return settingsStore.getDefaultSettings()
+        }
+    }
     
     override func eventsChanged() {
         if defaultContainer.calendarReader.authorization != .notDetermined {

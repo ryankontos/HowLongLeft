@@ -37,6 +37,7 @@
 		BF91A61D2BF1D6BA0047D534 /* MainMenuContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */; };
 		BFAC93E92C09FE0C00AB66BF /* PositionObservingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */; };
 		BFAC93EB2C09FE5B00AB66BF /* OffsetObservingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */; };
+		BFB075072C3134E800018A28 /* StatusItemSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB075062C3134E800018A28 /* StatusItemSettingsStore.swift */; };
 		BFB1FBB92C0DF3B500D04B84 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBB82C0DF3B500D04B84 /* Settings */; };
 		BFB1FBBC2C0DF3C800D04B84 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBBB2C0DF3C800D04B84 /* Defaults */; };
 		BFB1FBC12C0DF42400D04B84 /* FluidMenuBarExtra in Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBC02C0DF42400D04B84 /* FluidMenuBarExtra */; };
@@ -156,6 +157,7 @@
 		BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuContentView.swift; sourceTree = "<group>"; };
 		BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionObservingView.swift; sourceTree = "<group>"; };
 		BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetObservingScrollView.swift; sourceTree = "<group>"; };
+		BFB075062C3134E800018A28 /* StatusItemSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemSettingsStore.swift; sourceTree = "<group>"; };
 		BFBF9F082C27DB3F00B32D26 /* MacDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MacDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPersistence.swift; sourceTree = "<group>"; };
 		BFBF9F0C2C27E26D00B32D26 /* StatusItemConfigurationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemConfigurationStore.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */,
+				BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */,
 				BF4A0A5F2C1783E70094A170 /* MenuTimelineView.swift */,
 				BF7465E92BF237B3009C373D /* EventMenuListItem.swift */,
 				BF4D145C2C2149A000ED054C /* ProgressRingView.swift */,
@@ -264,7 +267,6 @@
 				BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */,
 				BF46AA822C2055DE005A6E7A /* MenuEventViewParent.swift */,
 				BFE7114E2BF2816A000A167E /* ManuButton.swift */,
-				BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */,
 				BF2759FD2C01A1A500595A87 /* ArrowKeyDetector.swift */,
 				BF2435212C11232C007B11D8 /* ArrowKeySelectionManagingView.swift */,
 				BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */,
@@ -308,6 +310,7 @@
 		BF70D48F2C2B326F004833F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -326,11 +329,12 @@
 		BFC6AD222C29387400DEB881 /* StatusItem */ = {
 			isa = PBXGroup;
 			children = (
-				BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */,
-				BF70D48F2C2B326F004833F0 /* View */,
-				BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */,
 				BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */,
 				BFC6AD232C29388100DEB881 /* StatusItemContainer.swift */,
+				BFBF9F0C2C27E26D00B32D26 /* StatusItemConfigurationStore.swift */,
+				BFB075062C3134E800018A28 /* StatusItemSettingsStore.swift */,
+				BF70D48F2C2B326F004833F0 /* View */,
+				BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */,
 			);
 			path = StatusItem;
 			sourceTree = "<group>";
@@ -416,12 +420,11 @@
 				BF3CAF4E2BF4D0DC003035C7 /* main.swift */,
 				BFF0E6792BE6881F0023AB22 /* AppDelegate.swift */,
 				BFBF9F072C27DB3F00B32D26 /* MacDataModel.xcdatamodeld */,
-				BFBF9F0C2C27E26D00B32D26 /* StatusItemConfigurationStore.swift */,
+				BFC6AD222C29387400DEB881 /* StatusItem */,
 				BF2759FC2C01973C00595A87 /* Main Menu */,
 				BF3CAF102BF4AC4C003035C7 /* MacDefaultContainer.swift */,
 				BF8A5A5F2C23272C001A4701 /* MacDefaults.swift */,
 				BFF0E67B2BE6881F0023AB22 /* ContentView.swift */,
-				BFC6AD222C29387400DEB881 /* StatusItem */,
 				BF3CAF152BF4C518003035C7 /* MacCalendarContexts.swift */,
 				BFE232892BF4F1E9004F55D8 /* StatusItemCountdown.swift */,
 				BF3CAF052BF4A7A2003035C7 /* Settings Window */,
@@ -587,7 +590,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					BFE8F0C02BE3602000083FD6 = {
@@ -742,6 +745,7 @@
 				BFDDA3DD2C25B77C001160A1 /* MenuNoEventsView.swift in Sources */,
 				BFE2328A2BF4F1E9004F55D8 /* StatusItemCountdown.swift in Sources */,
 				BF2435222C11232C007B11D8 /* ArrowKeySelectionManagingView.swift in Sources */,
+				BFB075072C3134E800018A28 /* StatusItemSettingsStore.swift in Sources */,
 				BF3CAF4F2BF4D0DC003035C7 /* main.swift in Sources */,
 				BFAC93EB2C09FE5B00AB66BF /* OffsetObservingScrollView.swift in Sources */,
 				BFC6AD212C285DD400DEB881 /* EditCustomMenuView.swift in Sources */,
@@ -961,6 +965,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "How-Long-Left-Info.plist";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This allows How Long Left to display your events.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -997,6 +1002,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "How-Long-Left-Info.plist";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This allows How Long Left to display your events.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1118,6 +1124,7 @@
 				INFOPLIST_FILE = "How-Long-Left-Mac-Info.plist";
 				INFOPLIST_KEY_LSBackgroundOnly = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This allows How Long Left to display your events.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1153,6 +1160,7 @@
 				INFOPLIST_FILE = "How-Long-Left-Mac-Info.plist";
 				INFOPLIST_KEY_LSBackgroundOnly = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "This allows How Long Left to display your events.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (

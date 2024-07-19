@@ -6,8 +6,13 @@
         <attribute name="customColorCode" optional="YES" attributeType="String"/>
         <attribute name="identifier" optional="YES" attributeType="String"/>
         <attribute name="isCustom" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="showTitle" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="useCustomColor" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="useDefaultSettings" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="StatusItemSettings" representedClassName="StatusItemSettings" syncable="YES" codeGenerationType="class">
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="identifier" optional="YES" attributeType="String"/>
+        <attribute name="showTitles" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
 </model>

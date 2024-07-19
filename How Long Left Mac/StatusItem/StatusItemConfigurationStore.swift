@@ -55,6 +55,7 @@ class StatusItemConfigurationStore: ObservableObject {
     }
     
     func createDefaultStatusItemIfNeeded() {
+        
         let fetchRequest: NSFetchRequest<StatusItemConfiguration> = StatusItemConfiguration.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "identifier == %@", "MainStatusItem")
             
@@ -65,6 +66,7 @@ class StatusItemConfigurationStore: ObservableObject {
             item.isCustom = false
             item.activated = true
             item.title = "How Long Left"
+            
             saveItem(item: item)
         }
     }

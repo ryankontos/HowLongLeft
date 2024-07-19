@@ -14,14 +14,6 @@ import SwiftUI
 
 class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     
-    static func == (lhs: StatusItemContainer, rhs: StatusItemContainer) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
     let id: String
     let hiddenEventManager: StoredEventManager
     let settings: SettingsWindow
@@ -35,8 +27,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     let filtering: EventFetchSettingsManager?
     let listManager: EventListSettingsManager
     var infoObject: MenuConfigurationInfo
-   
-    
+    var statusItemSettings: StatusItemSettings?
     
     var menubarExtra: FluidMenuBarExtraWindowManager?
     private var cancellables: Set<AnyCancellable> = []
@@ -58,9 +49,6 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         self.hiddenEventManager = hiddenEventManager
         self.listManager = listManager
       
-        
-       
-       
         self.filtering = filtering
         
         self.menuCache = EventCache(
@@ -85,6 +73,12 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         checkActivation()
     }
     
+    func setSettings(to: StatusItemSettings) {
+        
+        self.statusItemSettings = to
+        
+    }
+    
     private func setupFilteringObservation() {
         filtering?.objectWillChange
             .sink { [weak self] _ in
@@ -94,6 +88,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     }
     
     func checkActivation() {
+        
         guard info.activated else { return }
         
         guard self.menubarExtra == nil else { return }
@@ -136,9 +131,15 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     }
     
     func destroy() {
-        
         self.menubarExtra?.destroy()
-        
+    }
+    
+    static func == (lhs: StatusItemContainer, rhs: StatusItemContainer) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
     deinit {

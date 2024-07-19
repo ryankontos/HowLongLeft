@@ -93,7 +93,7 @@ struct MainMenuContentView: View {
             }
         }
         .padding(.horizontal, 6)
-        .padding(.vertical, 9)
+        .padding(.vertical, 10)
         
         .frame(minWidth: 300, maxWidth: 310, maxHeight: 400)
     }
@@ -106,7 +106,7 @@ struct MainMenuContentView: View {
                         
                         ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
                             
-                                MenuEventListSection(id: group.title!, title: group.title, allDayEvents: [], events: group.events, mainMenuModel: selectionManager)
+                                MenuEventListSection(id: group.title ?? "nil", title: group.title, allDayEvents: [], events: group.events, mainMenuModel: selectionManager)
                             
                             
                             if index < groups.endIndex-1 && groups.count > 1 {
@@ -193,7 +193,15 @@ class MainMenuViewModel: MenuSelectableItemsProvider {
     
     func getItems() -> [String] {
         let groups = getEventGroups(at: Date())
-        return groups.flatMap { $0.events.map { $0.id } } + OptionsSectionButton.allCases.map { $0.rawValue }
+        return groups.flatMap { group in
+            group.events.map { getEventId(eventId: $0.id, groupId: group.title ?? "nil") }
+        } + OptionsSectionButton.allCases.map { $0.rawValue }
+    }
+    
+    func getEventId(eventId: String, groupId: String) -> String {
+        
+        return "\(groupId)-(\(eventId)"
+        
     }
     
     public func getEventGroups(at date: Date) -> [TitledEventGroup] {

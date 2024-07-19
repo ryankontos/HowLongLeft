@@ -32,12 +32,12 @@ struct StatusBarPane: View {
     
                 Section("Display Options") {
                    
-                    Toggle("Show Event Titles", isOn: $config.showTitle)
+                 /*   Toggle("Show Event Titles", isOn: $config.showTitle)
                         .onChange(of: config.showTitle, perform: { new in
                             
                             store.statusItemDataStore.saveItem(item: config)
                             
-                        })
+                        }) */
                     
                     Slider(value: .constant(10), in: 5...10, label: {
                         VStack(alignment: .leading) {

@@ -63,7 +63,7 @@ struct MenuEventListSection: View {
                         Text(title)
                             .fontWeight(.semibold)
                             .opacity(0.9)
-                            .padding(.vertical, 7)
+                            .padding(.bottom, 9)
                             .padding(.horizontal, 10)
                         
                     }
@@ -75,13 +75,15 @@ struct MenuEventListSection: View {
             
             
         }
+        .padding(.vertical, 7)
+     
         
     }
     
     @ViewBuilder
     func getMenuButton(for event: Event) -> some View {
         
-        MenuButton(model: mainMenuModel, idForHover: event.id, cornerRadius: event.isAllDay ? 12 : 5, customHighlight: getColor(for: event), fill: getColor(for: event) != nil, submenuContent: {
+        MenuButton(model: mainMenuModel, idForHover: "\(self.id)-\(event.id)", cornerRadius: event.isAllDay ? 12 : 5, customHighlight: getColor(for: event), fill: getColor(for: event) != nil, submenuContent: {
             AnyView(MenuEventView(event: event)
                 .environmentObject(eventInfoSource)
                 .environmentObject(reader)

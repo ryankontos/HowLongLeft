@@ -16,7 +16,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     
     let id: String
     let hiddenEventManager: StoredEventManager
-    let settings: SettingsWindow
+    let settingsWindow: SettingsWindow
     let timer: GlobalTimerContainer
     let info: StatusItemConfiguration
     let pointStore: TimePointStore
@@ -36,7 +36,8 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         source: CalendarSource,
         hiddenEventManager: StoredEventManager,
         info: StatusItemConfiguration,
-        settings: SettingsWindow,
+        settings: StatusItemSettings,
+        settingsWindow: SettingsWindow,
         timer: GlobalTimerContainer,
         listManager: EventListSettingsManager,
         filtering: EventFetchSettingsManager
@@ -44,7 +45,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         self.source = source
         self.id = info.identifier!
         self.info = info
-        self.settings = settings
+        self.settingsWindow = settingsWindow
         self.timer = timer
         self.hiddenEventManager = hiddenEventManager
         self.listManager = listManager
@@ -67,7 +68,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         
         self.pointStore = TimePointStore(eventCache: menuCache)
         self.statusItemPointStore = TimePointStore(eventCache: statusItemCache)
-        self.infoObject = MenuConfigurationInfo(info: info)
+        self.infoObject = MenuConfigurationInfo(info: info, settings: nil)
         
         setupFilteringObservation()
         checkActivation()
@@ -102,7 +103,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
                 AnyView(MainMenuContentView(selectionManager: WindowSelectionManager(itemsProvider: model), model: model)
                     .environmentObject(hiddenEventManager)
                     .environmentObject(listManager)
-                    .environmentObject(settings)
+                    .environmentObject(settingsWindow)
                     .environmentObject(pointStore)
                     .environmentObject(source)
                     .environmentObject(timer)
@@ -111,7 +112,8 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
             statusItemContent: { [self] in
                 AnyView(StatusItemContentView()
                     .environmentObject(statusItemPointStore)
-                    .environmentObject(infoObject))
+                    .environmentObject(infoObject)
+                    .environmentObject(statusItemSettings!))
             }
         )
         

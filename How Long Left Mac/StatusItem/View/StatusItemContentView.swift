@@ -17,6 +17,7 @@ struct StatusItemContentView: View {
     @EnvironmentObject var pointStore: TimePointStore
     @EnvironmentObject var menuConfiguration: MenuConfigurationInfo
     
+    @EnvironmentObject var settings: StatusItemSettings
     
     var body: some View {
         
@@ -27,13 +28,22 @@ struct StatusItemContentView: View {
                 if let event = getEvent(at: context.date) {
                     
                     
+                    HStack {
+                        
+                        if settings.showTitles {
+                            Text("\(truncatedTitle(title: event.title)):") 
+                                .lineLimit(1)
+                                .truncationMode(.middle)
+                            
+                            
+                        }
                         
                         Text("\(getStatusItemText(event: event, at: context.date))")
                             .lineLimit(1)
                             .monospacedDigit()
                         
-                       
                         
+                    }
                     
                         
                 } else {
@@ -54,6 +64,22 @@ struct StatusItemContentView: View {
        
     }
     
+    func truncatedTitle(title fullText: String) -> String {
+        
+ 
+        
+        let maxCharacters = Int(settings.titleLengthLimit)
+            let textLength = fullText.count
+            
+            guard textLength > maxCharacters else {
+                return fullText
+            }
+
+            let start = fullText.prefix(maxCharacters / 2)
+            let end = fullText.suffix(maxCharacters / 2)
+            return "\(start)...\(end)"
+        }
+    
     func getEvent(at date: Date) -> Event? {
         
         guard let point = pointStore.getPointAt(date: date) else {
@@ -70,11 +96,6 @@ struct StatusItemContentView: View {
         
         
         var countdown =  "\(countdown(to: event.countdownDate(at: at), from: at, showSeconds: true))"
-        
-        if menuConfiguration.showTitles() {
-            countdown = "\(event.title): \(countdown)"
-        }
-        
         return countdown
     }
     
@@ -92,7 +113,6 @@ struct StatusItemContentView: View {
         
         // Show leading zeroes
         formatter.zeroFormattingBehavior = [.pad]
-        
         
         // Ensure the target date is in the future
         guard date > from else {

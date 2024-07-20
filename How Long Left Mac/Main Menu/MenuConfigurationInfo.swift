@@ -12,11 +12,12 @@ import HowLongLeftKit
 
 class MenuConfigurationInfo: ObservableObject {
     
-    init(info: StatusItemConfiguration? = nil) {
+    init(info: StatusItemConfiguration? = nil, settings: StatusItemSettings?) {
         self.info = info
     }
     
     private var info: StatusItemConfiguration?
+    private var settings: StatusItemSettings?
     
     func getColor() -> Color? {
         
@@ -29,8 +30,8 @@ class MenuConfigurationInfo: ObservableObject {
     }
     
     func showTitles() -> Bool {
-        guard let info else { return false }
-        return true
+        guard let settings else { return false }
+        return settings.showTitles
     }
     
     func getTitle() -> String? {

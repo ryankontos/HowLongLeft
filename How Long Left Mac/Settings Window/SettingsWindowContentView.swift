@@ -59,9 +59,14 @@ struct SettingsWindowContentView: View {
                         .environmentObject(container.calendarPrefsManager)
                         .environmentObject(container.hiddenEventManager)
                 case .menuBar:
-                    StatusBarPane()
+                    
+                    let settings = container.statusItemStore!.mainStatusItemContainer!.statusItemSettings!
+                    let store = container.statusItemStore!
+                    
+                    StatusBarPane(model: StatusBarPaneModel(settings: settings, store: store))
                         .environmentObject(container.statusItemStore!.mainStatusItemContainer!.info)
-                        .environmentObject(container.statusItemStore!)
+                        .environmentObject(settings)
+                        .environmentObject(store)
                 case .customMenuBarItems:
                     ManageCustomMenusView()
                         .environmentObject(container.statusItemStore!)

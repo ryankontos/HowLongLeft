@@ -43,6 +43,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         guard mainStatusItemContainer == nil else { return }
         let info = statusItemDataStore.getMainStatusItem()
         mainStatusItemContainer = initalizeCustomStatusItemContainer(from: info)
+        mainStatusItemContainer?.setSettings(to: getSettings(info: info))
     }
     
     func loadCustomStatusItemContainers() {
@@ -93,7 +94,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         
       
          
-        return StatusItemContainer(source: defaultContainer.calendarReader, hiddenEventManager: defaultContainer.hiddenEventManager, info: info, settings: defaultContainer.settingsWindow, timer: defaultContainer.timerContainer, listManager: defaultContainer.eventListSettingsManager, filtering: filtering)
+        return StatusItemContainer(source: defaultContainer.calendarReader, hiddenEventManager: defaultContainer.hiddenEventManager, info: info, settings: getSettings(info: info), settingsWindow: defaultContainer.settingsWindow, timer: defaultContainer.timerContainer, listManager: defaultContainer.eventListSettingsManager, filtering: filtering)
     }
     
     private func updateSubscriptions() {

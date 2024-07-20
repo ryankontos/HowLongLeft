@@ -14,6 +14,7 @@ struct MenuEventListSection: View {
     var id: String
     
     var title: String?
+    var info: String?
     var allDayEvents: [Event]
     var events: [Event]
     var mainMenuModel: WindowSelectionManager
@@ -59,14 +60,31 @@ struct MenuEventListSection: View {
             }, header: {
                 if let title {
                     
-                    PushLeading {
+                    HStack {
+                        
                         Text(title)
                             .fontWeight(.semibold)
                             .opacity(0.9)
-                            .padding(.bottom, 9)
-                            .padding(.horizontal, 10)
+                            
+                        
+                        
+                        Spacer()
+                        
+                        
+                        if let info {
+                            
+                            Text(info)
+                            
+                                .opacity(0.9)
+                                .foregroundStyle(.secondary)
+                            
+                        }
                         
                     }
+                    .padding(.bottom, 15)
+                    .padding(.horizontal, 10)
+                    
+                   
                     
                     .frame(maxWidth: .infinity)
                     

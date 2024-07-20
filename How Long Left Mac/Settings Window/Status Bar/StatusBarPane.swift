@@ -11,6 +11,11 @@ struct StatusBarPane: View {
     
     @EnvironmentObject var store: StatusItemStore
     @EnvironmentObject var config: StatusItemConfiguration
+    @EnvironmentObject var settings: StatusItemSettings
+    
+    @ObservedObject var model: StatusBarPaneModel
+    
+    @State var titleLimit: Int = 0
     
     var body: some View {
         
@@ -32,22 +37,27 @@ struct StatusBarPane: View {
     
                 Section("Display Options") {
                    
-                 /*   Toggle("Show Event Titles", isOn: $config.showTitle)
-                        .onChange(of: config.showTitle, perform: { new in
-                            
-                            store.statusItemDataStore.saveItem(item: config)
-                            
-                        }) */
+                    Toggle("Show Event Titles", isOn: $model.showTitles)
+                        
                     
-                    Slider(value: .constant(10), in: 5...10, label: {
-                        VStack(alignment: .leading) {
-                            Text("Title Length Limit")
-                            Text("10 Characters")
-                                .foregroundStyle(.secondary)
-                        }
+                    if settings.showTitles {
+                        Slider(value: $model.titleLimit, in: 5...50, step: 1, label: {
+                            VStack(alignment: .leading) {
+                                Text("Title Length Limit")
+                                Text("\(Int(settings.titleLengthLimit)) Characters")
+                                    .foregroundStyle(.secondary)
+                            }
+                            
+                            
+                        }, onEditingChanged: {_ in 
+                            
+                        })
+                        .onChange(of: settings.titleLengthLimit, perform: { old in
+                            let hapticManager = NSHapticFeedbackManager.defaultPerformer
+                            hapticManager.perform(.alignment, performanceTime: .default)
+                        })
                         
-                        
-                    })
+                    }
                     
                     
                    
@@ -108,12 +118,47 @@ struct StatusBarPane: View {
            // .frame(width: 450, height: 500)
             
         }
+        .onAppear() {
+            self.titleLimit = Int(settings.titleLengthLimit)
+        }
         
         .navigationTitle("Status Bar")
         
     }
 }
 
-#Preview {
-    StatusBarPane()
+
+
+class StatusBarPaneModel: ObservableObject {
+    
+    init(settings: StatusItemSettings, store: StatusItemStore) {
+        self.settings = settings
+        self.showTitles = settings.showTitles
+        self.store = store
+        self.titleLimit = Double(Int(settings.titleLengthLimit))
+    }
+    
+    var settings: StatusItemSettings
+    
+    var store: StatusItemStore
+    
+    @Published var showTitles: Bool {
+        didSet {
+            settings.showTitles = showTitles
+            
+            store.settingsStore.saveSettings(settings: settings)
+            
+        }
+    }
+    
+    @Published var titleLimit: Double {
+        
+        didSet {
+            settings.titleLengthLimit = Double(Int(titleLimit))
+            store.settingsStore.saveSettings(settings: settings)
+            
+        }
+        
+    }
+    
 }

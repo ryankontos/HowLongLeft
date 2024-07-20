@@ -14,5 +14,6 @@
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="identifier" optional="YES" attributeType="String"/>
         <attribute name="showTitles" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="titleLengthLimit" optional="YES" attributeType="Double" defaultValueString="15" usesScalarValueType="YES"/>
     </entity>
 </model>

@@ -12,10 +12,7 @@ class MacDefaultContainer: DefaultContainer {
 
     public lazy var statusItemStore: StatusItemStore? = {
         
-        
-        guard ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" else {
-            return nil
-        }
+      
         
         // The closure provides a reference to self
         return StatusItemStore(container: self)

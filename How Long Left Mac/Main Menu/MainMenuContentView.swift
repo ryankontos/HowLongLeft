@@ -106,7 +106,7 @@ struct MainMenuContentView: View {
                         
                         ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
                             
-                                MenuEventListSection(id: group.title ?? "nil", title: group.title, allDayEvents: [], events: group.events, mainMenuModel: selectionManager)
+                            MenuEventListSection(id: group.title ?? "nil", title: group.title, info: group.info, allDayEvents: [], events: group.events, mainMenuModel: selectionManager)
                             
                             
                             if index < groups.endIndex-1 && groups.count > 1 {

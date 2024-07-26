@@ -94,7 +94,7 @@ struct SettingsWindowContentView: View {
         case .hidden:
             Label("Hidden", systemImage: "eye.slash")
         case .menuBar:
-            Label("Menu Bar", systemImage: "rectangle.tophalf.filled")
+            Label("Status Bar", systemImage: "rectangle.tophalf.filled")
         case .customMenuBarItems:
             Label("Custom Menu Bar Items", systemImage: "star.fill")
         }

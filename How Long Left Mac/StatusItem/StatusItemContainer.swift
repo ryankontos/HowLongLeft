@@ -16,6 +16,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     
     let id: String
     let hiddenEventManager: StoredEventManager
+    let selectedEventManager: StoredEventManager
     let settingsWindow: SettingsWindow
     let timer: GlobalTimerContainer
     let info: StatusItemConfiguration
@@ -35,6 +36,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     init(
         source: CalendarSource,
         hiddenEventManager: StoredEventManager,
+        selectedManager: StoredEventManager,
         info: StatusItemConfiguration,
         settings: StatusItemSettings,
         settingsWindow: SettingsWindow,
@@ -48,6 +50,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         self.settingsWindow = settingsWindow
         self.timer = timer
         self.hiddenEventManager = hiddenEventManager
+        self.selectedEventManager = selectedManager
         self.listManager = listManager
       
         self.filtering = filtering
@@ -71,7 +74,9 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         self.infoObject = MenuConfigurationInfo(info: info, settings: nil)
         
         setupFilteringObservation()
+        setupStatusItemPointStoreObservation()
         checkActivation()
+        evaluateVisibility()
     }
     
     func setSettings(to: StatusItemSettings) {
@@ -79,6 +84,15 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         self.statusItemSettings = to
         
     }
+    
+    private func setupStatusItemPointStoreObservation() {
+        statusItemPointStore.objectWillChange
+            .sink { [weak self] _ in
+                self?.evaluateVisibility()
+            }
+            .store(in: &cancellables)
+    }
+    
     
     private func setupFilteringObservation() {
         filtering?.objectWillChange
@@ -88,7 +102,23 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
             .store(in: &cancellables)
     }
     
+    func evaluateVisibility() {
+        
+
+        
+        guard let currentPoint = statusItemPointStore.currentPoint else { return }
+        
+        let event = currentPoint.fetchSingleEvent(accordingTo: .preferInProgress)
+     
+        //menubarExtra?.setStatusItemVisible(event != nil)
+        
+    }
+    
     func checkActivation() {
+        
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            return
+        }
         
         guard info.activated else { return }
         
@@ -100,7 +130,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
             title: "\(info.title!)",
             windowContent: { [self] in
                 
-                AnyView(MainMenuContentView(selectionManager: WindowSelectionManager(itemsProvider: model), model: model)
+                AnyView(MainMenuContentView(selectedManager: selectedEventManager, selectionManager: WindowSelectionManager(itemsProvider: model), model: model)
                     .environmentObject(hiddenEventManager)
                     .environmentObject(listManager)
                     .environmentObject(settingsWindow)
@@ -110,10 +140,12 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
                     .environmentObject(infoObject))
             },
             statusItemContent: { [self] in
-                AnyView(StatusItemContentView()
+                AnyView(StatusItemContentView(selectedManager: selectedEventManager)
                     .environmentObject(statusItemPointStore)
                     .environmentObject(infoObject)
-                    .environmentObject(statusItemSettings!))
+                    .environmentObject(statusItemSettings!)
+                    .environmentObject(source)
+                )
             }
         )
         

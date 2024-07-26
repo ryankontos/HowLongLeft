@@ -10,147 +10,122 @@ import HowLongLeftKit
 
 struct StatusItemContentView: View {
     
-   
-    
     @Environment(\.self) var environment
-    
     @EnvironmentObject var pointStore: TimePointStore
     @EnvironmentObject var menuConfiguration: MenuConfigurationInfo
-    
     @EnvironmentObject var settings: StatusItemSettings
+    @EnvironmentObject var calendarSource: CalendarSource
+    @ObservedObject var selectedManager: StoredEventManager
     
     var body: some View {
-        
-        TimelineView(.periodic(from:StatusItemContentView.previousSecondWithMillisecondZero, by: 1)) { context in
-            
-            Group {
-                
-                if let event = getEvent(at: context.date) {
+        TimelineView(.periodic(from: Self.previousSecondWithMillisecondZero, by: 1)) { context in
+            content(for: context.date)
+        }
+       
+        .padding(.horizontal, 4)
+        .fixedSize(horizontal: true, vertical: true)
+    }
+    
+    @ViewBuilder
+    private func content(for date: Date) -> some View {
+        Group {
+            if settings.showCountdowns, let event = getEvent(at: date) {
+                HStack(alignment: .center, spacing: 7) {
                     
-                    
-                    HStack {
+                    if settings.showIndicatorDot {
                         
-                        if settings.showTitles {
-                            Text("\(truncatedTitle(title: event.title)):") 
-                                .lineLimit(1)
-                                .truncationMode(.middle)
-                            
-                            
-                        }
-                        
-                        Text("\(getStatusItemText(event: event, at: context.date))")
-                            .lineLimit(1)
-                            .monospacedDigit()
-                        
+                        Circle()
+                            .foregroundStyle(calendarSource.getColor(calendarID: event.calendarID))
+                            .frame(width: 7.5)
+                            .opacity(0.9)
                         
                     }
                     
-                        
-                } else {
-                    Image(systemName: "clock")
-                        .renderingMode(.template)
-                       
-                        
+                    Text(getStatusItemText(event: event, at: date))
+                        .lineLimit(1)
+                        .monospacedDigit()
+                        .id(event.id)
+                      
                 }
-                
+            } else {
+                Image(systemName: "clock")
+                    .renderingMode(.template)
             }
-            .foregroundColor(menuConfiguration.getColor())
-            
         }
-        .fixedSize(horizontal: true, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+        .foregroundColor(menuConfiguration.getColor())
+        .transaction { transaction in
+            transaction.animation = nil
+        }
         
-        
-    
+       
        
     }
     
-    func truncatedTitle(title fullText: String) -> String {
-        
- 
-        
+    private func truncatedTitle(_ fullText: String) -> String {
         let maxCharacters = Int(settings.titleLengthLimit)
-            let textLength = fullText.count
-            
-            guard textLength > maxCharacters else {
-                return fullText
+        guard fullText.count > maxCharacters else { return fullText }
+        
+        let start = fullText.prefix(maxCharacters / 2)
+        let end = fullText.suffix(maxCharacters / 2)
+        return "\(start)...\(end)"
+    }
+    
+    private func getEvent(at date: Date) -> Event? {
+        
+        guard let point = pointStore.getPointAt(date: date) else { return nil }
+        
+        if let selected = selectedManager.getAllStoredEvents().first, let id = selected.eventID {
+            if let event = point.allEvents.first(where: { $0.eventID == id }) {
+                return event
             }
-
-            let start = fullText.prefix(maxCharacters / 2)
-            let end = fullText.suffix(maxCharacters / 2)
-            return "\(start)...\(end)"
-        }
-    
-    func getEvent(at date: Date) -> Event? {
-        
-        guard let point = pointStore.getPointAt(date: date) else {
-            //print("Status item countdown got no current timepoint for \(date)")
-            return nil
         }
         
-       // print("Status item countdown got current timepoint!")
-        return point.fetchSingleEvent(accordingTo: .preferInProgress)
-        
+       
+        let rule = SingleEventFetchRule(rawValue: Int(settings.eventFetchRule))!
+        return point.fetchSingleEvent(accordingTo: rule)
     }
     
-    func getStatusItemText(event: Event, at: Date) -> String {
+    private func getStatusItemText(event: Event, at date: Date) -> String {
+        let countdownText = countdown(to: event.countdownDate(at: date), from: date, showSeconds: true)
+        var statusText = event.status(at: date) == .upcoming ? "in \(countdownText)" : countdownText
         
+        if settings.showTitles {
+            statusText = "\(truncatedTitle(event.title)): \(statusText)"
+        }
         
-        var countdown =  "\(countdown(to: event.countdownDate(at: at), from: at, showSeconds: true))"
-        return countdown
+        return statusText
     }
     
-     
-    func countdown(to date: Date, from: Date, showSeconds: Bool) -> String {
+    private func countdown(to date: Date, from currentDate: Date, showSeconds: Bool) -> String {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
-        
-        // Set the allowed units
-        if showSeconds {
-            formatter.allowedUnits = [.hour, .minute, .second]
-        } else {
-            formatter.allowedUnits = [.hour, .minute]
-        }
-        
-        // Show leading zeroes
+        formatter.allowedUnits = showSeconds ? [.hour, .minute, .second] : [.hour, .minute]
         formatter.zeroFormattingBehavior = [.pad]
         
-        // Ensure the target date is in the future
-        guard date > from else {
-            return "00:00:00"
+        guard date > currentDate else { return "00:00:00" }
+        
+        return formatter.string(from: currentDate, to: date) ?? "00:00:00"
+    }
+    
+    static var previousSecondWithMillisecondZero: Date = {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        
+        guard let previousSecondDate = calendar.date(byAdding: .second, value: -1, to: currentDate) else {
+            fatalError("Failed to create the date with millisecond set to zero.")
         }
         
-        let result = formatter.string(from: from, to: date)!
-        //print(result)
-        return result
-    }
-
-    static var previousSecondWithMillisecondZero: Date = {
-            // Get the current date
-            let currentDate = Date()
-
-            // Get the current calendar
-            let calendar = Calendar.current
-
-            // Subtract one second from the current date
-            guard let previousSecondDate = calendar.date(byAdding: .second, value: -1, to: currentDate) else {
-                fatalError("Failed to subtract one second from the current date.")
-            }
-
-            // Get the components of the previous second date
-            var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: previousSecondDate)
-            // Set the millisecond to zero
-            components.nanosecond = 0
-
-            // Create the new date with the millisecond set to zero
-            guard let dateWithMillisecondZero = calendar.date(from: components) else {
-                fatalError("Failed to create the date with millisecond set to zero.")
-            }
-
-            return dateWithMillisecondZero
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: previousSecondDate)
+        
+        components.nanosecond = 0
+        
+        return calendar.date(from: components) ?? {
+            fatalError("Failed to create the date with millisecond set to zero.")
         }()
+    }()
 }
 
 #Preview {
-    StatusItemContentView()
+    StatusItemContentView(selectedManager: StoredEventManager(domain: "Preview_SelectedManager", limit: 1))
 }
 

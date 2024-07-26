@@ -12,7 +12,7 @@ import SwiftUI
 
 class StatusItemStore: EventCacheObserver, ObservableObject {
     
-    unowned var defaultContainer: MacDefaultContainer
+    var defaultContainer: MacDefaultContainer
 
     @Published var mainStatusItemContainer: StatusItemContainer?
     @Published var customStatusItemContainers = Set<StatusItemContainer>()
@@ -94,7 +94,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         
       
          
-        return StatusItemContainer(source: defaultContainer.calendarReader, hiddenEventManager: defaultContainer.hiddenEventManager, info: info, settings: getSettings(info: info), settingsWindow: defaultContainer.settingsWindow, timer: defaultContainer.timerContainer, listManager: defaultContainer.eventListSettingsManager, filtering: filtering)
+        return StatusItemContainer(source: defaultContainer.calendarReader, hiddenEventManager: defaultContainer.hiddenEventManager, selectedManager: defaultContainer.selectedEventManager, info: info, settings: getSettings(info: info), settingsWindow: defaultContainer.settingsWindow, timer: defaultContainer.timerContainer, listManager: defaultContainer.eventListSettingsManager, filtering: filtering)
     }
     
     private func updateSubscriptions() {

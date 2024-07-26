@@ -29,9 +29,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         DispatchQueue.main.async {
             
-            let windowsCount = NSApplication.shared.windows.filter { $0.isVisible }.count
+            NSApplication.shared.windows.forEach({ print("Window: \($0.description), \($0.isVisible)") })
             
-            print("Activating with \(windowsCount) visible windows")
+            
+            
+            //print("Activating with \(windowsCount) visible windows")
             
         }
         

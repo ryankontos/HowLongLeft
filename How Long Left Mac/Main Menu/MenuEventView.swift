@@ -105,19 +105,7 @@ struct MenuEventView: View {
                         
                         Spacer()
                         
-                        if let region = mapLocation {
-                            
-                            Divider()
-                                .padding(.vertical, 10)
-                            
-                            Map(coordinateRegion: .constant(region), interactionModes: [], showsUserLocation: false, userTrackingMode: .constant(.none), annotationItems: annotationItems, annotationContent: { item in
-                                MapMarker(coordinate: item.coordinate, tint: getColor())
-                            })
-                            .allowsHitTesting(false)
-                            .frame(height: 80)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            
-                        }
+                     
                         
                     }
                     .padding(.horizontal, 10)

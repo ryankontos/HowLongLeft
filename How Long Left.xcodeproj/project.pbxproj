@@ -28,6 +28,7 @@
 		BF4D145D2C2149A000ED054C /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4D145C2C2149A000ED054C /* ProgressRingView.swift */; };
 		BF64830A2C27002F00C58A13 /* HiddenEventsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6483092C27002F00C58A13 /* HiddenEventsPane.swift */; };
 		BF6688E12C25E4770075D69A /* StatusBarPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6688E02C25E4770075D69A /* StatusBarPane.swift */; };
+		BF6A0D792C5264C90082E6BB /* PieProgess.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A0D782C5264C90082E6BB /* PieProgess.swift */; };
 		BF70D48E2C2AE618004833F0 /* MenuConfigurationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF70D48D2C2AE618004833F0 /* MenuConfigurationInfo.swift */; };
 		BF7465EA2BF237B3009C373D /* EventMenuListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7465E92BF237B3009C373D /* EventMenuListItem.swift */; };
 		BF7E03A52BEC7F7800FD3B31 /* How_Long_LeftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */; };
@@ -35,6 +36,7 @@
 		BF8A5A602C23272C001A4701 /* MacDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A5F2C23272C001A4701 /* MacDefaults.swift */; };
 		BF91A6152BEF1E120047D534 /* StatusItemContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */; };
 		BF91A61D2BF1D6BA0047D534 /* MainMenuContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */; };
+		BF94648D2C4D680F00CC8A9E /* ActivationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF94648C2C4D680F00CC8A9E /* ActivationObserver.swift */; };
 		BFAC93E92C09FE0C00AB66BF /* PositionObservingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */; };
 		BFAC93EB2C09FE5B00AB66BF /* OffsetObservingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */; };
 		BFB075072C3134E800018A28 /* StatusItemSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB075062C3134E800018A28 /* StatusItemSettingsStore.swift */; };
@@ -147,6 +149,7 @@
 		BF4D145C2C2149A000ED054C /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
 		BF6483092C27002F00C58A13 /* HiddenEventsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenEventsPane.swift; sourceTree = "<group>"; };
 		BF6688E02C25E4770075D69A /* StatusBarPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPane.swift; sourceTree = "<group>"; };
+		BF6A0D782C5264C90082E6BB /* PieProgess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieProgess.swift; sourceTree = "<group>"; };
 		BF70D48D2C2AE618004833F0 /* MenuConfigurationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuConfigurationInfo.swift; sourceTree = "<group>"; };
 		BF7465E92BF237B3009C373D /* EventMenuListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenuListItem.swift; sourceTree = "<group>"; };
 		BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = How_Long_LeftApp.swift; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 		BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemContentView.swift; sourceTree = "<group>"; };
 		BF91A6182BEF1EBE0047D534 /* How-Long-Left-Mac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-Left-Mac-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuContentView.swift; sourceTree = "<group>"; };
+		BF94648C2C4D680F00CC8A9E /* ActivationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationObserver.swift; sourceTree = "<group>"; };
 		BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionObservingView.swift; sourceTree = "<group>"; };
 		BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetObservingScrollView.swift; sourceTree = "<group>"; };
 		BFB075062C3134E800018A28 /* StatusItemSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemSettingsStore.swift; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */,
+				BF6A0D782C5264C90082E6BB /* PieProgess.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -329,11 +334,11 @@
 		BFC6AD222C29387400DEB881 /* StatusItem */ = {
 			isa = PBXGroup;
 			children = (
+				BF70D48F2C2B326F004833F0 /* View */,
 				BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */,
 				BFC6AD232C29388100DEB881 /* StatusItemContainer.swift */,
 				BFBF9F0C2C27E26D00B32D26 /* StatusItemConfigurationStore.swift */,
 				BFB075062C3134E800018A28 /* StatusItemSettingsStore.swift */,
-				BF70D48F2C2B326F004833F0 /* View */,
 				BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */,
 			);
 			path = StatusItem;
@@ -419,6 +424,7 @@
 				BF91A6182BEF1EBE0047D534 /* How-Long-Left-Mac-Info.plist */,
 				BF3CAF4E2BF4D0DC003035C7 /* main.swift */,
 				BFF0E6792BE6881F0023AB22 /* AppDelegate.swift */,
+				BF94648C2C4D680F00CC8A9E /* ActivationObserver.swift */,
 				BFBF9F072C27DB3F00B32D26 /* MacDataModel.xcdatamodeld */,
 				BFC6AD222C29387400DEB881 /* StatusItem */,
 				BF2759FC2C01973C00595A87 /* Main Menu */,
@@ -740,10 +746,12 @@
 				BFDC7ACB2C2132C200EF8AF5 /* EventInfoItemView.swift in Sources */,
 				BFCC9D772C036E57003475C8 /* MenuEventListSection.swift in Sources */,
 				BFBF9F0D2C27E26D00B32D26 /* StatusItemConfigurationStore.swift in Sources */,
+				BF94648D2C4D680F00CC8A9E /* ActivationObserver.swift in Sources */,
 				BF4A055C2BF20A5B00678073 /* StatusItemStore.swift in Sources */,
 				BF70D48E2C2AE618004833F0 /* MenuConfigurationInfo.swift in Sources */,
 				BFDDA3DD2C25B77C001160A1 /* MenuNoEventsView.swift in Sources */,
 				BFE2328A2BF4F1E9004F55D8 /* StatusItemCountdown.swift in Sources */,
+				BF6A0D792C5264C90082E6BB /* PieProgess.swift in Sources */,
 				BF2435222C11232C007B11D8 /* ArrowKeySelectionManagingView.swift in Sources */,
 				BFB075072C3134E800018A28 /* StatusItemSettingsStore.swift in Sources */,
 				BF3CAF4F2BF4D0DC003035C7 /* main.swift in Sources */,

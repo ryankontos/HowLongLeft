@@ -15,7 +15,8 @@ struct MainMenuContentView: View {
     @EnvironmentObject var settingsWindow: SettingsWindow
     @EnvironmentObject var windowManager: FMBEWindowProxy
     @EnvironmentObject var calendarSource: CalendarSource
-    @EnvironmentObject var storedManager: StoredEventManager
+    
+    @ObservedObject var selectedManager: StoredEventManager
     
     @EnvironmentObject var eventListSettingsManager: EventListSettingsManager
     
@@ -106,7 +107,7 @@ struct MainMenuContentView: View {
                         
                         ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
                             
-                            MenuEventListSection(id: group.title ?? "nil", title: group.title, info: group.info, allDayEvents: [], events: group.events, mainMenuModel: selectionManager)
+                            MenuEventListSection(id: group.title ?? "nil", title: group.title, info: group.info, allDayEvents: [], events: group.events, mainMenuModel: selectionManager, eventSelectionManager: selectedManager)
                             
                             
                             if index < groups.endIndex-1 && groups.count > 1 {

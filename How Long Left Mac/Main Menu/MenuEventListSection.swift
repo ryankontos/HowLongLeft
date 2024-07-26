@@ -19,6 +19,8 @@ struct MenuEventListSection: View {
     var events: [Event]
     var mainMenuModel: WindowSelectionManager
     
+    @ObservedObject var eventSelectionManager: StoredEventManager
+    
     @EnvironmentObject var env: MainMenuEnvironment
     @EnvironmentObject var reader: CalendarSource
     @EnvironmentObject var eventInfoSource: StoredEventManager
@@ -113,7 +115,7 @@ struct MenuEventListSection: View {
             
             
         }, action: {
-            
+            eventSelectionManager.addEventToStore(event: event, removeIfExists: true)
         })
         .id(event.id)
         

@@ -127,7 +127,7 @@ struct StatusBarPane: View {
                             Text("Show Completion Ring")
                         })
                         
-                        Toggle(isOn: .constant(true), label: {
+                        Toggle(isOn: $model.showPercentageText, label: {
                             Text("Show Completion Percentage")
                         })
                     }
@@ -189,7 +189,7 @@ class StatusBarPaneModel: ObservableObject {
         self.showCurrentEvents = SingleEventFetchRule(rawValue: Int(settings.eventFetchRule)) != .upcomingOnly
         self.showUpcomingEvents = SingleEventFetchRule(rawValue: Int(settings.eventFetchRule)) != .inProgressOnly
         
-        
+        self.showPercentageText = settings.showPercentageText
         
     }
     
@@ -249,6 +249,16 @@ class StatusBarPaneModel: ObservableObject {
     @Published var showIndicatorDot: Bool {
         didSet {
             settings.showIndicatorDot = showIndicatorDot
+            
+            store.settingsStore.saveSettings(settings: settings)
+            
+        }
+    }
+    
+    
+    @Published var showPercentageText: Bool {
+        didSet {
+            settings.showPercentageText = showPercentageText
             
             store.settingsStore.saveSettings(settings: settings)
             

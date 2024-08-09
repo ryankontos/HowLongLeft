@@ -56,6 +56,7 @@
 		BFC6AD242C29388100DEB881 /* StatusItemContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD232C29388100DEB881 /* StatusItemContainer.swift */; };
 		BFC6AD282C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD272C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift */; };
 		BFCC9D772C036E57003475C8 /* MenuEventListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */; };
+		BFD31F6B2C6600D100792CD5 /* StatusTextGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD31F6A2C6600D100792CD5 /* StatusTextGenerator.swift */; };
 		BFDC7ACB2C2132C200EF8AF5 /* EventInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */; };
 		BFDDA3DB2C25B406001160A1 /* MenuNoCalendarAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */; };
 		BFDDA3DD2C25B77C001160A1 /* MenuNoEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */; };
@@ -173,6 +174,7 @@
 		BFC6AD232C29388100DEB881 /* StatusItemContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemContainer.swift; sourceTree = "<group>"; };
 		BFC6AD272C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuCalendarPrefsContainerView.swift; sourceTree = "<group>"; };
 		BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuEventListSection.swift; sourceTree = "<group>"; };
+		BFD31F6A2C6600D100792CD5 /* StatusTextGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTextGenerator.swift; sourceTree = "<group>"; };
 		BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoItemView.swift; sourceTree = "<group>"; };
 		BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNoCalendarAccessView.swift; sourceTree = "<group>"; };
 		BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNoEventsView.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */,
+				BFD31F6A2C6600D100792CD5 /* StatusTextGenerator.swift */,
 				BF6A0D782C5264C90082E6BB /* PieProgess.swift */,
 			);
 			path = View;
@@ -749,6 +752,7 @@
 				BF94648D2C4D680F00CC8A9E /* ActivationObserver.swift in Sources */,
 				BF4A055C2BF20A5B00678073 /* StatusItemStore.swift in Sources */,
 				BF70D48E2C2AE618004833F0 /* MenuConfigurationInfo.swift in Sources */,
+				BFD31F6B2C6600D100792CD5 /* StatusTextGenerator.swift in Sources */,
 				BFDDA3DD2C25B77C001160A1 /* MenuNoEventsView.swift in Sources */,
 				BFE2328A2BF4F1E9004F55D8 /* StatusItemCountdown.swift in Sources */,
 				BF6A0D792C5264C90082E6BB /* PieProgess.swift in Sources */,

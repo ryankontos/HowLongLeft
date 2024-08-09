@@ -14,7 +14,7 @@ struct EventMenuListItem: View {
     
     @State var expand = false
     
-    @EnvironmentObject var timerContainer: GlobalTimerContainer
+    var timerContainer: GlobalTimerContainer
     
     var mainMenuModel: WindowSelectionManager?
     
@@ -26,12 +26,14 @@ struct EventMenuListItem: View {
     
     let dateFormatter = DateFormatterUtility()
     
-    init(event: Event) {
+    @ObservedObject var selectedManager: StoredEventManager
+    
+    init(event: Event, selectedManager: StoredEventManager, timerContainer: GlobalTimerContainer) {
         
         self.event = event
-       
+        self.selectedManager = selectedManager
         self.progressManager = EventProgressManager(event: event)
-       
+        self.timerContainer = timerContainer
         
     }
     
@@ -52,15 +54,24 @@ struct EventMenuListItem: View {
             
             HStack(spacing: 8) {
             
+                if selectedManager.isEventStored(event: event) {
+                    Image(systemName: "checkmark")
+                }
+                
+                if event.status() == .upcoming {
+                    
+                    Text(formatTime(event: event))
+                        .foregroundStyle(.secondary)
+                        .font(.system(size: 11.5, weight: .regular))
+                        .frame(width: 50)
+                    
+                }
+                
                 if !event.isAllDay || event.status() == .inProgress {
                     
                     Circle()
                         .frame(width: 8)
                         .foregroundStyle(getColor().opacity(0.7))
-                    
-                } else {
-                    
-                    
                     
                 }
               
@@ -86,9 +97,7 @@ struct EventMenuListItem: View {
                 if event.status() == .inProgress {
                     ProgressRingView(progress: progressManager.progress, ringWidth: 4, ringSize: 22, percentageRingWidth: 4, percentageRingSize: 26, color: getColor())
                 } else {
-                    Text(formatTime(event: event))
-                        .foregroundStyle(.secondary)
-                        .font(.system(size: 10.5, weight: .regular))
+                   
                 }
                 
             }
@@ -106,7 +115,7 @@ struct EventMenuListItem: View {
             
             
         }
-      
+       // .animation(.default)
        
        
     }

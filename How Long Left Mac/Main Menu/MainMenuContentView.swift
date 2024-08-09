@@ -16,7 +16,7 @@ struct MainMenuContentView: View {
     @EnvironmentObject var windowManager: FMBEWindowProxy
     @EnvironmentObject var calendarSource: CalendarSource
     
-    @ObservedObject var selectedManager: StoredEventManager
+    var selectedManager: StoredEventManager
     
     @EnvironmentObject var eventListSettingsManager: EventListSettingsManager
     
@@ -107,7 +107,7 @@ struct MainMenuContentView: View {
                         
                         ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
                             
-                            MenuEventListSection(id: group.title ?? "nil", title: group.title, info: group.info, allDayEvents: [], events: group.events, mainMenuModel: selectionManager, eventSelectionManager: selectedManager)
+                            MenuEventListSection(id: group.title ?? "nil", title: group.title, info: group.info, allDayEvents: [], events: group.events, mainMenuModel: selectionManager, eventSelectionManager: selectedManager, timerContainer: GlobalTimerContainer())
                             
                             
                             if index < groups.endIndex-1 && groups.count > 1 {
@@ -188,6 +188,8 @@ class MainMenuViewModel: MenuSelectableItemsProvider {
     
     var pointStore: TimePointStore
     
+    var selectedManager: StoredEventManager
+    
     var listSettings: EventListSettingsManager
     
     lazy var eventListProvider = EventListGroupProvider(settingsManager: listSettings)
@@ -207,13 +209,14 @@ class MainMenuViewModel: MenuSelectableItemsProvider {
     
     public func getEventGroups(at date: Date) -> [TitledEventGroup] {
         guard let currentPoint = pointStore.getPointAt(date: date) else { return [] }
-        return eventListProvider.getGroups(from: currentPoint)
+        return eventListProvider.getGroups(from: currentPoint, selected: nil)
     }
     
-    init(timePointStore: TimePointStore, listSettings: EventListSettingsManager) {
+    init(timePointStore: TimePointStore, listSettings: EventListSettingsManager, selectedManager: StoredEventManager) {
         
         self.pointStore = timePointStore
         self.listSettings = listSettings
+        self.selectedManager = selectedManager
         
     }
     

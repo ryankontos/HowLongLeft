@@ -28,8 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillBecomeActive(_ notification: Notification) {
         
         DispatchQueue.main.async {
-            
-            NSApplication.shared.windows.forEach({ print("Window: \($0.description), \($0.isVisible)") })
+           
+           // NSApplication.shared.windows.forEach({ print("Window: \($0.description), \($0.isVisible)") })
             
             
             

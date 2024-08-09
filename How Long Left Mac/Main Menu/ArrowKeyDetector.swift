@@ -80,7 +80,7 @@ struct ArrowKeyDetector: NSViewRepresentable {
         }
 
         override func viewDidMoveToWindow() {
-            print("Make FR \(coordinator!.parent.id)")
+           // print("Make FR \(coordinator!.parent.id)")
            // window!.makeFirstResponder(self)
             
         }

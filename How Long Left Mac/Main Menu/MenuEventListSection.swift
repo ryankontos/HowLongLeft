@@ -24,7 +24,7 @@ struct MenuEventListSection: View {
     @EnvironmentObject var env: MainMenuEnvironment
     @EnvironmentObject var reader: CalendarSource
     @EnvironmentObject var eventInfoSource: StoredEventManager
-    @EnvironmentObject var timerContainer: GlobalTimerContainer
+    var timerContainer: GlobalTimerContainer
     
     func getColor(for event: Event) -> Color? {
         
@@ -111,11 +111,15 @@ struct MenuEventListSection: View {
             
             )
         }, content: {
-            EventMenuListItem(event: event)
+            EventMenuListItem(event: event, selectedManager: eventSelectionManager, timerContainer: timerContainer)
             
             
         }, action: {
-            eventSelectionManager.addEventToStore(event: event, removeIfExists: true)
+            
+            withAnimation {
+                
+                eventSelectionManager.addEventToStore(event: event, removeIfExists: true)
+            }
         })
         .id(event.id)
         

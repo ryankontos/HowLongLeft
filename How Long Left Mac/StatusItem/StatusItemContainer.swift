@@ -124,7 +124,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         
         guard self.menubarExtra == nil else { return }
         
-        let model = MainMenuViewModel(timePointStore: pointStore, listSettings: listManager)
+        let model = MainMenuViewModel(timePointStore: pointStore, listSettings: listManager, selectedManager: selectedEventManager)
         
         let extra = FluidMenuBarExtraWindowManager(
             title: "\(info.title!)",

@@ -17,6 +17,7 @@ struct MenuEventListSection: View {
     var info: String?
     var allDayEvents: [Event]
     var events: [Event]
+    var forceProminence: Bool
     var mainMenuModel: WindowSelectionManager
     
     @ObservedObject var eventSelectionManager: StoredEventManager
@@ -28,7 +29,9 @@ struct MenuEventListSection: View {
     
     func getColor(for event: Event) -> Color? {
         
-        guard event.isAllDay && event.status() == .upcoming else { return nil }
+        
+        
+        guard event.isAllDay && event.status() == .upcoming && !forceProminence else { return nil }
         
         if let cg = reader.lookupCalendar(withID: event.calendarID)?.cgColor {
             return Color(cg)
@@ -111,7 +114,7 @@ struct MenuEventListSection: View {
             
             )
         }, content: {
-            EventMenuListItem(event: event, selectedManager: eventSelectionManager, timerContainer: timerContainer)
+            EventMenuListItem(event: event, selectedManager: eventSelectionManager, timerContainer: timerContainer, forceProminent: forceProminence)
             
             
         }, action: {

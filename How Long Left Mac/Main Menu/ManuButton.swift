@@ -65,7 +65,7 @@ struct MenuButton<Content: View>: View {
     var body: some View {
         HStack {
             content
-            Spacer()
+            
             if submenuContent != nil {
                 Image(systemName: "chevron.right")
                     .font(.system(size: 11, weight: .bold))

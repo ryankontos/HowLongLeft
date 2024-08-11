@@ -149,7 +149,7 @@ struct MenuEventView: View {
             
         }
         .onAppear() {
-            setLocation()
+          //  setLocation()
         }
            
     }

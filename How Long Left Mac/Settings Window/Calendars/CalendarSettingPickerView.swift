@@ -12,14 +12,14 @@ import Combine
 struct CalendarSettingPickerView: View {
     @EnvironmentObject var manager: EventFetchSettingsManager
     @ObservedObject var calendarInfo: CalendarInfo
-    let toggleContext: String
+    
     
     @State private var selection: CalendarsPane.Option = .full
     private var selectionPublisher: PassthroughSubject<CalendarsPane.Option, Never>
     
-    init(calendarInfo: CalendarInfo, toggleContext: String) {
+    init(calendarInfo: CalendarInfo) {
         self.calendarInfo = calendarInfo
-        self.toggleContext = toggleContext
+        
         self.selectionPublisher = PassthroughSubject<CalendarsPane.Option, Never>()
     }
     

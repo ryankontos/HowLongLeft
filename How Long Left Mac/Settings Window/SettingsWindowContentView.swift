@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftUIIntrospect
+import HowLongLeftKit
 
 struct SettingsWindowContentView: View {
     
@@ -34,8 +35,23 @@ struct SettingsWindowContentView: View {
             }
             .frame(minWidth: 215, maxWidth: 215)
             .fixedSize(horizontal: true, vertical: false)
+            .conditionalModifier {
+                            if #available(macOS 14.0, *) {
+                                $0 .toolbar(removing: .sidebarToggle)
+                            } else {
+                                $0
+                            }
+                        } 
+            
+            .toolbar {
+                                // Force the toolbar to have a full height
+                                ToolbarItem(placement: .navigation) {
+                                    Spacer()
+                                        .frame(height: 20) // Adjust the height if needed
+                                }
+                            }
+            
            
-           // .toolbar(removing: .sidebarToggle)
         }, detail: {
             
             NavigationStack {
@@ -43,13 +59,14 @@ struct SettingsWindowContentView: View {
                 switch selection {
                 case .general:
                     GeneralPane()
-                        
+                       
+                        .toolbarRole(.editor)
                         .navigationTitle("General")
                         .environmentObject(container.eventListSettingsManager)
                         .environmentObject(container.calendarPrefsManager)
                        
                 case .calendars:
-                    CalendarsPane()
+                    CalendarsPane(contexts: [HLLStandardCalendarContexts.app.rawValue])
                         .navigationTitle("Calendars")
                         .environmentObject(container.calendarPrefsManager)
                 case .hidden:
@@ -60,13 +77,15 @@ struct SettingsWindowContentView: View {
                         .environmentObject(container.hiddenEventManager)
                 case .menuBar:
                     
-                    let settings = container.statusItemStore!.mainStatusItemContainer!.statusItemSettings!
+                    let settings = container.statusItemStore!.mainStatusItemContainer!.statusItemSettings
                     let store = container.statusItemStore!
                     
                     StatusBarPane(model: StatusBarPaneModel(settings: settings, store: store))
                         .environmentObject(container.statusItemStore!.mainStatusItemContainer!.info)
                         .environmentObject(settings)
                         .environmentObject(store)
+                        .environmentObject(container.statusItemStore!.mainStatusItemContainer!)
+                        .environmentObject(container.calendarPrefsManager)
                 case .customMenuBarItems:
                     ManageCustomMenusView()
                         .environmentObject(container.statusItemStore!)
@@ -76,6 +95,7 @@ struct SettingsWindowContentView: View {
             }
             
         })
+        
         
         
         .navigationSplitViewStyle(.automatic)
@@ -96,7 +116,7 @@ struct SettingsWindowContentView: View {
         case .menuBar:
             Label("Status Bar", systemImage: "rectangle.tophalf.filled")
         case .customMenuBarItems:
-            Label("Custom Menu Bar Items", systemImage: "star.fill")
+            Label("Custom Menus", systemImage: "star.fill")
         }
     }
     
@@ -108,4 +128,11 @@ struct SettingsWindowContentView: View {
 
 #Preview {
     SettingsWindowContentView(container: MacDefaultContainer())
+}
+
+
+extension View {
+    func conditionalModifier<T: View>(@ViewBuilder transform: (Self) -> T) -> some View {
+        transform(self)
+    }
 }

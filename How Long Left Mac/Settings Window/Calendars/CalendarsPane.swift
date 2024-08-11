@@ -12,6 +12,10 @@ struct CalendarsPane: View {
     
     @EnvironmentObject var calPrefs: EventFetchSettingsManager
     
+    var contexts: Set<String>
+    
+    var showCalendarsWithContexts: Set<String>?
+    
     var body: some View {
         
 
@@ -19,13 +23,7 @@ struct CalendarsPane: View {
                 
                 Section("Enabled Calendars") {
                     
-                    ForEach($calPrefs.calendarItems) { $displayInfo in
-                        
-                        CalendarSettingPickerView(calendarInfo: displayInfo, toggleContext: "")
-                        
-                      
-                    }
-                    
+                    CalendarsListView()
                     
                 }
                
@@ -73,6 +71,8 @@ struct CalendarsPane: View {
             calPrefs.batchUpdateContexts(removeContextIDs: [MacCalendarContexts.statusItem.rawValue, HLLStandardCalendarContexts.app.rawValue])
         }
         
+       
+        
     }
     
     public enum Option: String, CaseIterable, Identifiable {
@@ -85,12 +85,13 @@ struct CalendarsPane: View {
         }
     }
    
+   
 }
 
 #Preview {
     let container = MacDefaultContainer()
     
-    return CalendarsPane()
+    return CalendarsPane(contexts: [HLLStandardCalendarContexts.app.rawValue])
         .environmentObject(container.calendarPrefsManager)
         
 }

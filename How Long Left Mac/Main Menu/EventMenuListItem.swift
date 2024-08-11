@@ -8,9 +8,11 @@
 import SwiftUI
 import HowLongLeftKit
 import FluidMenuBarExtra
+import Defaults
 
 struct EventMenuListItem: View {
     
+    @Default(.showLocationsInMainMenu) var showLocations
     
     @State var expand = false
     
@@ -28,15 +30,25 @@ struct EventMenuListItem: View {
     
     @ObservedObject var selectedManager: StoredEventManager
     
-    init(event: Event, selectedManager: StoredEventManager, timerContainer: GlobalTimerContainer) {
+    var forceProminent: Bool
+    
+    init(event: Event, selectedManager: StoredEventManager, timerContainer: GlobalTimerContainer, forceProminent: Bool) {
         
         self.event = event
         self.selectedManager = selectedManager
         self.progressManager = EventProgressManager(event: event)
         self.timerContainer = timerContainer
+        self.forceProminent = forceProminent
         
     }
     
+    func getProminence() -> Bool {
+        if forceProminent {
+            return true
+        }
+        
+        return event.status() != .upcoming
+    }
     
     func getColor() -> Color {
         
@@ -58,16 +70,17 @@ struct EventMenuListItem: View {
                     Image(systemName: "checkmark")
                 }
                 
-                if event.status() == .upcoming {
+                if !getProminence() {
                     
                     Text(formatTime(event: event))
                         .foregroundStyle(.secondary)
-                        .font(.system(size: 11.5, weight: .regular))
-                        .frame(width: 50)
+                        .font(.system(size: 11.5, weight: .medium))
+                        .frame(width: 55)
+                        .lineLimit(1)
                     
                 }
                 
-                if !event.isAllDay || event.status() == .inProgress {
+                if !event.isAllDay || getProminence() {
                     
                     Circle()
                         .frame(width: 8)
@@ -75,19 +88,35 @@ struct EventMenuListItem: View {
                     
                 }
               
-                    VStack(alignment: .leading, spacing: 3) {
+                    VStack(alignment: .leading, spacing: 4) {
                         Text("\(event.title)")
                             .truncationMode(.middle)
                             .lineLimit(1)
                           
                         
-                        if event.status() == .inProgress {
+                        if getProminence() {
                             
                             EventCountdownText(event)
                                 .fontWeight(.medium)
                                 .foregroundStyle(.secondary)
                             
                         }
+                        
+                        if let location = event.locationName, showLocations {
+                            
+                            HStack(spacing: 3) {
+                                
+                                Image(systemName: "location.fill")
+                                
+                                Text(location)
+                                    
+                                    .lineLimit(1)
+                                   
+                                
+                            }
+                            .foregroundStyle(.secondary)
+                        }
+                        
                     }
                     .lineLimit(1)
                     
@@ -96,22 +125,11 @@ struct EventMenuListItem: View {
                 
                 if event.status() == .inProgress {
                     ProgressRingView(progress: progressManager.progress, ringWidth: 4, ringSize: 22, percentageRingWidth: 4, percentageRingSize: 26, color: getColor())
-                } else {
-                   
                 }
                 
             }
             
-            if expand {
-                
-                VStack {
-                    
-                    Text("Start and end")
-                    
-                }
-                .padding(.vertical, 10)
-                
-            }
+          
             
             
         }

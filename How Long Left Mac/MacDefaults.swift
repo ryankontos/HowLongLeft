@@ -11,6 +11,6 @@ import HowLongLeftKit
 
 extension Defaults.Keys {
     
-    static let mainMenuSortMode = Key<EventListSortMode>("HowLongLeft_Mac_MainMenuSortMode", default: .onNowFirst)
+    static let showLocationsInMainMenu = Key<Bool>("HowLongLeft_Mac_MainMenu_ShowLocations", default: true)
 
 }

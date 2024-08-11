@@ -27,6 +27,10 @@ struct GeneralPane: View {
             }
             
             Section("Main Menu") {
+                Defaults.Toggle("Show Location Names", key: .showLocationsInMainMenu)
+            }
+            
+            Section {
                 
                 Toggle(isOn: $listSettingsModel.showInProgress, label: {
                     Text("Show In-Progress Events Section")
@@ -106,6 +110,7 @@ struct GeneralPane: View {
             }
             
         }
+       
         .formStyle(.grouped)
         //.frame(width: 450, height: 500)
         

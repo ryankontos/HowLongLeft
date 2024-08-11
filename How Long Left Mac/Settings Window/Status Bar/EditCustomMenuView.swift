@@ -14,6 +14,8 @@ struct EditCustomMenuView: View {
     @Environment(\.dismiss) var dismiss
     
     @EnvironmentObject var store: StatusItemStore
+    @EnvironmentObject var settings: StatusItemSettings
+    @EnvironmentObject var config: StatusItemConfiguration
     
     @State var showCalendarSheet = false
     
@@ -57,7 +59,7 @@ struct EditCustomMenuView: View {
                 
             }
             
-            Section("Event Display") {
+            Section {
                 
                 
                 HStack {
@@ -73,22 +75,30 @@ struct EditCustomMenuView: View {
                     
                 }
                 
+            }
+            
+            Section("Status Item") {
                 
-               
-                
-                NavigationLink(destination: {
-                    
-                }, label: {
-                    Label("Pinned Events", systemImage: "pin.fill")
+            
+                Toggle(isOn: .constant(true), label: {
+                    Text("Mirror Main Status Item")
                 })
+                
+                    
                 
             }
             
-            Section("Options") {
+            if !config.useDefaultSettings {
                 
-                Toggle("", isOn: .constant(true))
+                Section {
+                    
+                    StatusBarPaneContent(model: StatusBarPaneModel(settings: settings, store: store))
+                    
+                }
                 
             }
+            
+           
         }
         .onAppear() {
             

@@ -96,7 +96,7 @@ struct MainMenuContentView: View {
         .padding(.horizontal, 6)
         .padding(.vertical, 10)
         
-        .frame(minWidth: 300, maxWidth: 310, maxHeight: 400)
+        .frame(minWidth: 300, maxWidth: 350, maxHeight: 450)
     }
     
     func getEventGroupsView(groups: [TitledEventGroup]) -> some View {
@@ -107,7 +107,7 @@ struct MainMenuContentView: View {
                         
                         ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
                             
-                            MenuEventListSection(id: group.title ?? "nil", title: group.title, info: group.info, allDayEvents: [], events: group.events, mainMenuModel: selectionManager, eventSelectionManager: selectedManager, timerContainer: GlobalTimerContainer())
+                            MenuEventListSection(id: group.title ?? "nil", title: group.title, info: group.info, allDayEvents: [], events: group.events, forceProminence: group.flags.contains(.prominentSection), mainMenuModel: selectionManager, eventSelectionManager: selectedManager, timerContainer: GlobalTimerContainer())
                             
                             
                             if index < groups.endIndex-1 && groups.count > 1 {

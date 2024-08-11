@@ -28,8 +28,8 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     let filtering: EventFetchSettingsManager?
     let listManager: EventListSettingsManager
     var infoObject: MenuConfigurationInfo
-    var statusItemSettings: StatusItemSettings?
-    
+    var statusItemSettings: StatusItemSettings
+    let config: StatusItemConfiguration?
     var menubarExtra: FluidMenuBarExtraWindowManager?
     private var cancellables: Set<AnyCancellable> = []
     
@@ -42,8 +42,10 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         settingsWindow: SettingsWindow,
         timer: GlobalTimerContainer,
         listManager: EventListSettingsManager,
-        filtering: EventFetchSettingsManager
+        filtering: EventFetchSettingsManager,
+        config: StatusItemConfiguration?
     ) {
+        self.config = config
         self.source = source
         self.id = info.identifier!
         self.info = info
@@ -52,7 +54,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         self.hiddenEventManager = hiddenEventManager
         self.selectedEventManager = selectedManager
         self.listManager = listManager
-      
+        self.statusItemSettings = settings
         self.filtering = filtering
         
         self.menuCache = EventCache(
@@ -65,7 +67,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         self.statusItemCache = EventCache(
             calendarReader: source,
             calendarProvider: filtering,
-            calendarContexts: [MacCalendarContexts.statusItem.rawValue],
+            calendarContexts: [MacCalendarContexts.statusItem.rawValue, HLLStandardCalendarContexts.app.rawValue],
             hiddenEventManager: hiddenEventManager, id: "StatusItemContainer_StatusItemCache_\(info.identifier!)")
         
         
@@ -143,7 +145,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
                 AnyView(StatusItemContentView(selectedManager: selectedEventManager)
                     .environmentObject(statusItemPointStore)
                     .environmentObject(infoObject)
-                    .environmentObject(statusItemSettings!)
+                    .environmentObject(statusItemSettings)
                     .environmentObject(source)
                 )
             }

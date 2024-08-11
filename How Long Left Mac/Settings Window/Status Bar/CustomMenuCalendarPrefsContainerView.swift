@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HowLongLeftKit
 
 struct CustomMenuCalendarPrefsContainerView: View {
     
@@ -14,7 +15,7 @@ struct CustomMenuCalendarPrefsContainerView: View {
     
     
     var body: some View {
-        CalendarsPane()
+        CalendarsPane(contexts: [HLLStandardCalendarContexts.app.rawValue])
             .toolbar(content: {
                 ToolbarItem(placement: .confirmationAction, content: {
                     Button("Done", action: {

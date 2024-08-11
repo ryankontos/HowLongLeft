@@ -94,7 +94,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         
       
          
-        return StatusItemContainer(source: defaultContainer.calendarReader, hiddenEventManager: defaultContainer.hiddenEventManager, selectedManager: defaultContainer.selectedEventManager, info: info, settings: getSettings(info: info), settingsWindow: defaultContainer.settingsWindow, timer: defaultContainer.timerContainer, listManager: defaultContainer.eventListSettingsManager, filtering: filtering)
+        return StatusItemContainer(source: defaultContainer.calendarReader, hiddenEventManager: defaultContainer.hiddenEventManager, selectedManager: defaultContainer.selectedEventManager, info: info, settings: getSettings(info: info), settingsWindow: defaultContainer.settingsWindow, timer: defaultContainer.timerContainer, listManager: defaultContainer.eventListSettingsManager, filtering: filtering, config: info)
     }
     
     private func updateSubscriptions() {

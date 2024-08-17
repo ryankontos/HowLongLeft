@@ -11,6 +11,7 @@ import AppKit
 import HowLongLeftKit
 import SwiftUI
 
+@MainActor
 class SettingsWindow: ObservableObject {
     
     let calendarManager: EventFetchSettingsManager

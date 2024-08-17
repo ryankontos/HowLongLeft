@@ -94,13 +94,7 @@ struct EventMenuListItem: View {
                             .lineLimit(1)
                           
                         
-                        if getProminence() {
-                            
-                            EventCountdownText(event)
-                                .fontWeight(.medium)
-                                .foregroundStyle(.secondary)
-                            
-                        }
+                     
                         
                         if let location = event.locationName, showLocations {
                             
@@ -116,6 +110,16 @@ struct EventMenuListItem: View {
                             }
                             .foregroundStyle(.secondary)
                         }
+                        
+                        if getProminence() {
+                            
+                            EventCountdownText(event)
+                                .font(.system(size: 14))
+                                .fontWeight(.medium)
+                                .foregroundStyle(.secondary)
+                            
+                        }
+                        
                         
                     }
                     .lineLimit(1)

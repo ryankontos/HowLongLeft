@@ -8,7 +8,8 @@
 import Foundation
 import HowLongLeftKit
 
-class MacDefaultContainer: DefaultContainer {
+@MainActor
+class MacDefaultContainer: DefaultContainer, Sendable {
 
     public lazy var statusItemStore: StatusItemStore? = {
         
@@ -33,7 +34,11 @@ class MacDefaultContainer: DefaultContainer {
     
     override init() {
         super.init()
-        // Explicitly access the lazy property to trigger initialization
-        _ = statusItemStore
+        
+        Task {
+            
+            _ = statusItemStore
+            
+        }
     }
 }

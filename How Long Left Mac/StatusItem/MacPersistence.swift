@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 class MacPersistentContainer {
-    static let shared = MacPersistentContainer()
+    nonisolated(unsafe) static let shared = MacPersistentContainer()
 
     let container: NSPersistentCloudKitContainer
 
@@ -30,7 +30,7 @@ class MacPersistentContainer {
         }
 
         container.viewContext.automaticallyMergesChangesFromParent = true
-        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+       // container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 }
 

@@ -10,17 +10,22 @@ import SwiftUI
 import HowLongLeftKit
 
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
     var statusItemStore: StatusItemStore?
-    let container = MacDefaultContainer()
+    var container: MacDefaultContainer?
     var window: NSWindow!
 
-    static var initTime = Date()
+    static let initTime = Date()
+    
+   
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
        // //print("Launched")
         // Initialize the status item store
       
-        
+        Task {
+            container = MacDefaultContainer()
+        }
     
        
     }

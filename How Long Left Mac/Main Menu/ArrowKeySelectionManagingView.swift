@@ -8,33 +8,3 @@
 import SwiftUI
 import FluidMenuBarExtra
 
-struct ArrowKeySelectionManagingView: View {
-    
-    var selectionManager: WindowSelectionManager
-    
-    var iden: String
-    
-    @Environment(\.scenePhase) var phase
-    
-    init(id: String, selectionManager: WindowSelectionManager) {
-        self.iden = id
-        self.selectionManager = selectionManager
-    }
-    
-    var body: some View {
-        ArrowKeyDetector(id: iden, onLeftArrow: {
-            
-        }, onRightArrow: {
-            
-        }, onUpArrow: {
-            selectionManager.selectPreviousItem()
-        }, onDownArrow: {
-            selectionManager.selectNextItem()
-        }, onEnter: {
-            selectionManager.clickItem()
-        }, onEsc: {
-            
-        })
-    }
-}
-

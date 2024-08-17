@@ -21,6 +21,8 @@ struct EditCustomMenuView: View {
     
     var isItemNew: Bool
     
+    @ObservedObject var model: Model
+    
     @State var item: StatusItemContainer
     @State var field1: String = ""
     
@@ -80,7 +82,7 @@ struct EditCustomMenuView: View {
             Section("Status Item") {
                 
             
-                Toggle(isOn: .constant(true), label: {
+                Toggle(isOn: $model.mirrorMainStatusItemSettings.animation(), label: {
                     Text("Mirror Main Status Item")
                 })
                 
@@ -116,11 +118,18 @@ struct EditCustomMenuView: View {
             Group {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
-                        if self.isItemNew {
-                            store.statusItemDataStore.removeCustomStatusItem(item: item.info)
-                           
-                        }
                         
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                            
+                            if self.isItemNew {
+                                store.statusItemDataStore.removeCustomStatusItem(item: item.info)
+                               
+                            }
+                            
+                            
+                        })
+                        
+                       
                         dismiss()
                     }
                 }
@@ -168,14 +177,44 @@ struct EditCustomMenuView: View {
        
         
     }
+    
+    @MainActor
+    class Model: ObservableObject {
+        
+        var store: StatusItemStore
+        var config: StatusItemConfiguration
+        
+        init(store: StatusItemStore, config: StatusItemConfiguration) {
+            self.store = store
+            self.config = config
+            self.mirrorMainStatusItemSettings = config.useDefaultSettings
+        }
+        
+        @Published var mirrorMainStatusItemSettings: Bool {
+            didSet {
+                
+                config.useDefaultSettings = mirrorMainStatusItemSettings
+                
+                DispatchQueue.main.async {
+                    
+                    self.store.resetCustomStatusItems()
+                    
+                }
+            }
+        }
+        
+    }
 }
 
 #Preview {
     
     let container = MacDefaultContainer()
     let manager = container.statusItemStore
+    
+    let item = manager!.createNewCustomStatusItem()
+    
     return NavigationStack {
-        EditCustomMenuView(isItemNew: true, item: manager!.createNewCustomStatusItem())
+        EditCustomMenuView(isItemNew: true, model: .init(store: container.statusItemStore!, config: item.config!), item: item)
     }
     .frame(width: 600, height: 500)
 }

@@ -9,6 +9,7 @@ import SwiftUI
 import HowLongLeftKit
 import FluidMenuBarExtra
 
+@MainActor
 struct MainMenuContentView: View {
     
     @EnvironmentObject var pointStore: TimePointStore
@@ -30,8 +31,6 @@ struct MainMenuContentView: View {
     
     @Environment(\.scenePhase) var phase
     
-    
-    
     @StateObject var menuEnv = MainMenuEnvironment()
     @State private var scrollPosition: CGPoint = .zero
     
@@ -39,7 +38,7 @@ struct MainMenuContentView: View {
     var body: some View {
         Group {
             ZStack {
-                ArrowKeySelectionManagingView(id: "Main", selectionManager: selectionManager)
+               
                 
                 VStack {
                     
@@ -182,6 +181,7 @@ class MainMenuEnvironment: ObservableObject {
 }
 
 
+@MainActor
 class MainMenuViewModel: MenuSelectableItemsProvider {
     
     

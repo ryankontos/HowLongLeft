@@ -25,6 +25,9 @@ struct StatusBarPaneContent: View {
             }
         
         .onAppear {
+            
+            print("Appear: StatusBarPaneContent for \(statusItemContainer.info.title ?? "No title")")
+            
             self.titleLimit = Int(model.titleLimit)
         }
         .sheet(isPresented: $showManageCals) {

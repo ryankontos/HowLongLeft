@@ -3,13 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		BF2435222C11232C007B11D8 /* ArrowKeySelectionManagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2435212C11232C007B11D8 /* ArrowKeySelectionManagingView.swift */; };
 		BF2759FE2C01A1A500595A87 /* ArrowKeyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2759FD2C01A1A500595A87 /* ArrowKeyDetector.swift */; };
 		BF28597A2C281F2B00CCF31C /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = BF2859792C281F2B00CCF31C /* SwiftUIIntrospect */; };
+		BF2DAF392C705676000AAD6F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2DAF382C705676000AAD6F /* WidgetKit.framework */; };
+		BF2DAF3B2C705676000AAD6F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2DAF3A2C705676000AAD6F /* SwiftUI.framework */; };
+		BF2DAF492C705678000AAD6F /* How Long Left Mac WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BF2DAF372C705676000AAD6F /* How Long Left Mac WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BF30A9922BE369D8007850EE /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF30A9912BE369D8007850EE /* HowLongLeftKit */; };
 		BF30A9A22BE3BA71007850EE /* EventListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A9A12BE3BA71007850EE /* EventListItem.swift */; };
 		BF30A9A42BE3BB26007850EE /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A9A32BE3BB26007850EE /* EventList.swift */; };
@@ -87,6 +90,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BF2DAF472C705678000AAD6F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFE8F0B92BE3602000083FD6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF2DAF362C705676000AAD6F;
+			remoteInfo = "How Long Left Mac WidgetExtension";
+		};
 		BFE8F0D42BE3602200083FD6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFE8F0B92BE3602000083FD6 /* Project object */;
@@ -118,6 +128,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		BF2DAF4A2C705678000AAD6F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BF2DAF492C705678000AAD6F /* How Long Left Mac WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BF75F9D32BFD15DB00326B72 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -134,6 +155,9 @@
 /* Begin PBXFileReference section */
 		BF2435212C11232C007B11D8 /* ArrowKeySelectionManagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowKeySelectionManagingView.swift; sourceTree = "<group>"; };
 		BF2759FD2C01A1A500595A87 /* ArrowKeyDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowKeyDetector.swift; sourceTree = "<group>"; };
+		BF2DAF372C705676000AAD6F /* How Long Left Mac WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "How Long Left Mac WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF2DAF382C705676000AAD6F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		BF2DAF3A2C705676000AAD6F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		BF30A99F2BE3BA1F007850EE /* How-Long-LeftUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-LeftUITests-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BF30A9A02BE3BA4E007850EE /* How-Long-Left-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-Left-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BF30A9A12BE3BA71007850EE /* EventListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListItem.swift; sourceTree = "<group>"; };
@@ -215,7 +239,30 @@
 		BFF586632BEA520200EF4C9E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BF2DAF4D2C705678000AAD6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BF2DAF362C705676000AAD6F /* How Long Left Mac WidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BF2DAF3C2C705676000AAD6F /* How Long Left Mac Widget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (BF2DAF4D2C705678000AAD6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "How Long Left Mac Widget"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		BF2DAF342C705676000AAD6F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF2DAF3B2C705676000AAD6F /* SwiftUI.framework in Frameworks */,
+				BF2DAF392C705676000AAD6F /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFE8F0BE2BE3602000083FD6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -293,6 +340,8 @@
 		BF30A98C2BE36925007850EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF2DAF382C705676000AAD6F /* WidgetKit.framework */,
+				BF2DAF3A2C705676000AAD6F /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -368,6 +417,7 @@
 				BFF0E6782BE6881F0023AB22 /* How Long Left Mac */,
 				BFF0E68A2BE688220023AB22 /* How Long Left MacTests */,
 				BFF0E6942BE688220023AB22 /* How Long Left MacUITests */,
+				BF2DAF3C2C705676000AAD6F /* How Long Left Mac Widget */,
 				BFE8F0C22BE3602000083FD6 /* Products */,
 				BF30A98C2BE36925007850EE /* Frameworks */,
 			);
@@ -382,6 +432,7 @@
 				BFF0E6772BE6881F0023AB22 /* How Long Left Mac.app */,
 				BFF0E6872BE688220023AB22 /* How Long Left MacTests.xctest */,
 				BFF0E6912BE688220023AB22 /* How Long Left MacUITests.xctest */,
+				BF2DAF372C705676000AAD6F /* How Long Left Mac WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -485,6 +536,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BF2DAF362C705676000AAD6F /* How Long Left Mac WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF2DAF4E2C705678000AAD6F /* Build configuration list for PBXNativeTarget "How Long Left Mac WidgetExtension" */;
+			buildPhases = (
+				BF2DAF332C705676000AAD6F /* Sources */,
+				BF2DAF342C705676000AAD6F /* Frameworks */,
+				BF2DAF352C705676000AAD6F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BF2DAF3C2C705676000AAD6F /* How Long Left Mac Widget */,
+			);
+			name = "How Long Left Mac WidgetExtension";
+			packageProductDependencies = (
+			);
+			productName = "How Long Left Mac WidgetExtension";
+			productReference = BF2DAF372C705676000AAD6F /* How Long Left Mac WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		BFE8F0C02BE3602000083FD6 /* How Long Left */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFE8F0E72BE3602200083FD6 /* Build configuration list for PBXNativeTarget "How Long Left" */;
@@ -549,12 +622,14 @@
 				BFF0E6742BE6881F0023AB22 /* Frameworks */,
 				BFF0E6752BE6881F0023AB22 /* Resources */,
 				BF75F9D32BFD15DB00326B72 /* Embed Frameworks */,
+				BF2DAF4A2C705678000AAD6F /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				BFCC7D902C2171A40034ADD8 /* PBXTargetDependency */,
 				BFCC7D8E2C2171A10034ADD8 /* PBXTargetDependency */,
+				BF2DAF482C705678000AAD6F /* PBXTargetDependency */,
 			);
 			name = "How Long Left Mac";
 			packageProductDependencies = (
@@ -611,9 +686,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					BF2DAF362C705676000AAD6F = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					BFE8F0C02BE3602000083FD6 = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -664,11 +742,19 @@
 				BFE8F0DC2BE3602200083FD6 /* How Long LeftUITests */,
 				BFF0E6862BE688220023AB22 /* How Long Left MacTests */,
 				BFF0E6902BE688220023AB22 /* How Long Left MacUITests */,
+				BF2DAF362C705676000AAD6F /* How Long Left Mac WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BF2DAF352C705676000AAD6F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFE8F0BF2BE3602000083FD6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -718,6 +804,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BF2DAF332C705676000AAD6F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFE8F0BD2BE3602000083FD6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -829,6 +922,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BF2DAF482C705678000AAD6F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF2DAF362C705676000AAD6F /* How Long Left Mac WidgetExtension */;
+			targetProxy = BF2DAF472C705678000AAD6F /* PBXContainerItemProxy */;
+		};
 		BFCC7D8E2C2171A10034ADD8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = BFCC7D8D2C2171A10034ADD8 /* Defaults */;
@@ -860,6 +958,66 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		BF2DAF4B2C705678000AAD6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "How Long Left Mac Widget/How_Long_Left_Mac_Widget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "How Long Left Mac Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "How Long Left Mac Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ryankontos.How-Long-Left-Mac.How-Long-Left-Mac-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		BF2DAF4C2C705678000AAD6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "How Long Left Mac Widget/How_Long_Left_Mac_Widget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "How Long Left Mac Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "How Long Left Mac Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ryankontos.How-Long-Left-Mac.How-Long-Left-Mac-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		BFE8F0E52BE3602200083FD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1165,7 +1323,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -1201,7 +1359,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -1290,6 +1448,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BF2DAF4E2C705678000AAD6F /* Build configuration list for PBXNativeTarget "How Long Left Mac WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF2DAF4B2C705678000AAD6F /* Debug */,
+				BF2DAF4C2C705678000AAD6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BFE8F0BC2BE3602000083FD6 /* Build configuration list for PBXProject "How Long Left" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

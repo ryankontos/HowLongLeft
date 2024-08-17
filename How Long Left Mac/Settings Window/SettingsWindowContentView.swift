@@ -15,11 +15,11 @@ struct SettingsWindowContentView: View {
     
     @State var selection: MacSettingsTab = .general
     
+    @State private var columnVisibility = NavigationSplitViewVisibility.automatic
+    
     var body: some View {
         
-        NavigationSplitView( sidebar: {
-            
-            
+        NavigationSplitView(columnVisibility: $columnVisibility ,sidebar: {
             
             List(selection: $selection) {
                
@@ -32,24 +32,33 @@ struct SettingsWindowContentView: View {
                     
                 }
                 
+                
             }
+          /*  .onChange(of: columnVisibility, initial: true) { oldVal, newVal in
+                    if newVal == .detailOnly {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            columnVisibility = .all
+                        }
+                    }
+                } */
+            
             .frame(minWidth: 215, maxWidth: 215)
             .fixedSize(horizontal: true, vertical: false)
-            .conditionalModifier {
+         /*   .conditionalModifier {
                             if #available(macOS 14.0, *) {
                                 $0 .toolbar(removing: .sidebarToggle)
                             } else {
                                 $0
                             }
-                        } 
+                        } */
             
             .toolbar {
-                                // Force the toolbar to have a full height
-                                ToolbarItem(placement: .navigation) {
-                                    Spacer()
-                                        .frame(height: 20) // Adjust the height if needed
-                                }
-                            }
+                              
+                ToolbarItem(placement: .navigation) {
+                    Spacer()
+                        .frame(height: 20)
+                    }
+                }
             
            
         }, detail: {
@@ -98,7 +107,7 @@ struct SettingsWindowContentView: View {
         
         
         
-        .navigationSplitViewStyle(.automatic)
+        .navigationSplitViewStyle(.balanced)
     }
     
     @ViewBuilder

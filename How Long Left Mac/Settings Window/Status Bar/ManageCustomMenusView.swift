@@ -88,9 +88,7 @@ struct ManageCustomMenusView: View {
                 
             }) { item in
                 NavigationStack {
-                    EditCustomMenuView(isItemNew: self.editingNewItem,
-                                       model: .init(store: store, config: item.config!)
-                                       ,item: item)
+                    EditCustomMenuView(isItemNew: self.editingNewItem, item: item)
                         .environmentObject(store)
                         .environmentObject(item)
                         .environmentObject(item.config!)

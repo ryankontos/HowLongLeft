@@ -10,7 +10,6 @@ import HowLongLeftKit
 import Combine
 import SwiftUI
 
-@MainActor
 class StatusItemStore: EventCacheObserver, ObservableObject {
     
     var defaultContainer: MacDefaultContainer
@@ -29,7 +28,6 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
     init(container: MacDefaultContainer) {
         self.defaultContainer = container
         super.init(eventCache: container.eventCache)
-        loadMainStatusItem()
         
     }
     
@@ -46,13 +44,6 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         let info = statusItemDataStore.getMainStatusItem()
         mainStatusItemContainer = initalizeCustomStatusItemContainer(from: info)
         mainStatusItemContainer?.setSettings(to: getSettings(info: info))
-    }
-    
-    func resetCustomStatusItems() {
-        
-      
-        loadCustomStatusItemContainers()
-        
     }
     
     func loadCustomStatusItemContainers() {
@@ -103,7 +94,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         
       
          
-        return StatusItemContainer(source: defaultContainer.calendarReader, hiddenEventManager: defaultContainer.hiddenEventManager, selectedManager: defaultContainer.selectedEventManager, info: info, settings: getSettings(info: info), defaultSettings: settingsStore.getDefaultSettings(), settingsWindow: defaultContainer.settingsWindow, timer: defaultContainer.timerContainer, listManager: defaultContainer.eventListSettingsManager, filtering: filtering, config: info)
+        return StatusItemContainer(source: defaultContainer.calendarReader, hiddenEventManager: defaultContainer.hiddenEventManager, selectedManager: defaultContainer.selectedEventManager, info: info, settings: getSettings(info: info), settingsWindow: defaultContainer.settingsWindow, timer: defaultContainer.timerContainer, listManager: defaultContainer.eventListSettingsManager, filtering: filtering, config: info)
     }
     
     private func updateSubscriptions() {
@@ -144,7 +135,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
     
  
     private func getSettings(info: StatusItemConfiguration) -> StatusItemSettings {
-        if info.isCustom {
+        if info.isCustom &&  info.useDefaultSettings {
             return settingsStore.getSettings(withId: info.identifier!)
         } else {
             return settingsStore.getDefaultSettings()

@@ -9,8 +9,8 @@ import Foundation
 import Settings
 
 extension Settings.PaneIdentifier {
-    @MainActor static let general = Self("general")
-    @MainActor static let calendars = Self("calendars")
-    @MainActor static let statusbar = Self("statusbar")
-    @MainActor static let hidden = Self("hidden")
+    static let general = Self("general")
+    static let calendars = Self("calendars")
+    static let statusbar = Self("statusbar")
+    static let hidden = Self("hidden")
 }

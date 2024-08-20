@@ -32,7 +32,7 @@ struct StatusItemContentView: View {
     @ViewBuilder
     private func content(for date: Date) -> some View {
         Group {
-            if menuConfiguration.showCountdowns(), let event = getEvent(at: date) {
+            if settings.showCountdowns, let event = getEvent(at: date) {
                 eventCountdownView(for: event, at: date)
             } else {
                 Image(systemName: "clock")
@@ -48,13 +48,11 @@ struct StatusItemContentView: View {
     @ViewBuilder
     private func eventCountdownView(for event: Event, at date: Date) -> some View {
         HStack(alignment: .center, spacing: 7) {
-            if menuConfiguration.showIndicators() {
+            if settings.showIndicatorDot {
                 Circle()
-                
                     .foregroundStyle(calendarSource.getColor(calendarID: event.calendarID))
                     .frame(width: 7.5)
                     .opacity(0.9)
-                    .shadow(radius: 20)
             }
             
             Text(textGenerator.getStatusItemText(for: event, at: date))
@@ -73,8 +71,8 @@ struct StatusItemContentView: View {
             return event
         }
         
-       
-        return point.fetchSingleEvent(accordingTo: .soonestCountdownDate)
+        let rule = SingleEventFetchRule(rawValue: Int(settings.eventFetchRule))!
+        return point.fetchSingleEvent(accordingTo: rule)
     }
     
     static var previousSecondWithMillisecondZero: Date = {

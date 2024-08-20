@@ -8,7 +8,6 @@
 import Foundation
 import HowLongLeftKit
 
-@MainActor
 class StatusBarPaneModel: ObservableObject {
     
     

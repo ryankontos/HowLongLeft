@@ -12,7 +12,6 @@ import FluidMenuBarExtra
 import AppKit
 import SwiftUI
 
-@MainActor
 class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     
     let id: String
@@ -40,7 +39,6 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         selectedManager: StoredEventManager,
         info: StatusItemConfiguration,
         settings: StatusItemSettings,
-        defaultSettings: StatusItemSettings,
         settingsWindow: SettingsWindow,
         timer: GlobalTimerContainer,
         listManager: EventListSettingsManager,
@@ -75,7 +73,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         
         self.pointStore = TimePointStore(eventCache: menuCache)
         self.statusItemPointStore = TimePointStore(eventCache: statusItemCache)
-        self.infoObject = MenuConfigurationInfo(info: info, settings: nil, defaultSettings: defaultSettings)
+        self.infoObject = MenuConfigurationInfo(info: info, settings: nil)
         
         setupFilteringObservation()
         setupStatusItemPointStoreObservation()
@@ -172,11 +170,11 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         self.menubarExtra?.destroy()
     }
     
-    nonisolated static func == (lhs: StatusItemContainer, rhs: StatusItemContainer) -> Bool {
+    static func == (lhs: StatusItemContainer, rhs: StatusItemContainer) -> Bool {
         return lhs.id == rhs.id
     }
     
-    nonisolated func hash(into hasher: inout Hasher) {
+    func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
     

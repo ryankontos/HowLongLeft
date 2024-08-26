@@ -41,6 +41,7 @@
 		BF9D25F52C6894900072329F /* CalendarsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F42C6894900072329F /* CalendarsListView.swift */; };
 		BF9D25F72C68DBAC0072329F /* StatusBarPaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F62C68DBAC0072329F /* StatusBarPaneModel.swift */; };
 		BF9D25F92C68DC510072329F /* StatusBarPaneContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F82C68DC510072329F /* StatusBarPaneContent.swift */; };
+		BFA0B5E82C7C59F500FBFD8B /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFA0B5E72C7C59F500FBFD8B /* HowLongLeftKit */; };
 		BFAC93E92C09FE0C00AB66BF /* PositionObservingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */; };
 		BFAC93EB2C09FE5B00AB66BF /* OffsetObservingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */; };
 		BFB075072C3134E800018A28 /* StatusItemSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB075062C3134E800018A28 /* StatusItemSettingsStore.swift */; };
@@ -49,7 +50,6 @@
 		BFB1FBC12C0DF42400D04B84 /* FluidMenuBarExtra in Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBC02C0DF42400D04B84 /* FluidMenuBarExtra */; };
 		BFB1FBC32C0DF4CC00D04B84 /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */; };
 		BFB1FBC42C0DF4CC00D04B84 /* HowLongLeftKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		BFBF9F092C27DB3F00B32D26 /* MacDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F072C27DB3F00B32D26 /* MacDataModel.xcdatamodeld */; };
 		BFBF9F0B2C27DE8A00B32D26 /* MacPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */; };
 		BFBF9F0D2C27E26D00B32D26 /* StatusItemConfigurationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0C2C27E26D00B32D26 /* StatusItemConfigurationStore.swift */; };
 		BFBF9F0F2C27EC0000B32D26 /* SettingsWindowContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0E2C27EC0000B32D26 /* SettingsWindowContentView.swift */; };
@@ -64,6 +64,7 @@
 		BFDC7ACB2C2132C200EF8AF5 /* EventInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */; };
 		BFDDA3DB2C25B406001160A1 /* MenuNoCalendarAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */; };
 		BFDDA3DD2C25B77C001160A1 /* MenuNoEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */; };
+		BFDE32312C7C58FC0056B553 /* MacDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFDE322F2C7C58FC0056B553 /* MacDataModel.xcdatamodeld */; };
 		BFE2328A2BF4F1E9004F55D8 /* StatusItemCountdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE232892BF4F1E9004F55D8 /* StatusItemCountdown.swift */; };
 		BFE2A09B2BE3C7290063B227 /* CalendarReadConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE2A09A2BE3C7290063B227 /* CalendarReadConfiguration.swift */; };
 		BFE7114D2BF27211000A167E /* PushLeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7114C2BF27211000A167E /* PushLeading.swift */; };
@@ -171,7 +172,6 @@
 		BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionObservingView.swift; sourceTree = "<group>"; };
 		BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetObservingScrollView.swift; sourceTree = "<group>"; };
 		BFB075062C3134E800018A28 /* StatusItemSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemSettingsStore.swift; sourceTree = "<group>"; };
-		BFBF9F082C27DB3F00B32D26 /* MacDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MacDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPersistence.swift; sourceTree = "<group>"; };
 		BFBF9F0C2C27E26D00B32D26 /* StatusItemConfigurationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemConfigurationStore.swift; sourceTree = "<group>"; };
 		BFBF9F0E2C27EC0000B32D26 /* SettingsWindowContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowContentView.swift; sourceTree = "<group>"; };
@@ -186,6 +186,7 @@
 		BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoItemView.swift; sourceTree = "<group>"; };
 		BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNoCalendarAccessView.swift; sourceTree = "<group>"; };
 		BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNoEventsView.swift; sourceTree = "<group>"; };
+		BFDE32302C7C58FC0056B553 /* MacDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MacDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BFE232892BF4F1E9004F55D8 /* StatusItemCountdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemCountdown.swift; sourceTree = "<group>"; };
 		BFE2A09A2BE3C7290063B227 /* CalendarReadConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarReadConfiguration.swift; sourceTree = "<group>"; };
 		BFE7114C2BF27211000A167E /* PushLeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushLeading.swift; sourceTree = "<group>"; };
@@ -243,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFB1FBBC2C0DF3C800D04B84 /* Defaults in Frameworks */,
+				BFA0B5E82C7C59F500FBFD8B /* HowLongLeftKit in Frameworks */,
 				BFB1FBC12C0DF42400D04B84 /* FluidMenuBarExtra in Frameworks */,
 				BFB1FBB92C0DF3B500D04B84 /* Settings in Frameworks */,
 				BF28597A2C281F2B00CCF31C /* SwiftUIIntrospect in Frameworks */,
@@ -440,7 +442,7 @@
 				BF3CAF4E2BF4D0DC003035C7 /* main.swift */,
 				BFF0E6792BE6881F0023AB22 /* AppDelegate.swift */,
 				BF94648C2C4D680F00CC8A9E /* ActivationObserver.swift */,
-				BFBF9F072C27DB3F00B32D26 /* MacDataModel.xcdatamodeld */,
+				BFDE322F2C7C58FC0056B553 /* MacDataModel.xcdatamodeld */,
 				BFC6AD222C29387400DEB881 /* StatusItem */,
 				BF2759FC2C01973C00595A87 /* Main Menu */,
 				BF3CAF102BF4AC4C003035C7 /* MacDefaultContainer.swift */,
@@ -563,6 +565,7 @@
 				BFB1FBC02C0DF42400D04B84 /* FluidMenuBarExtra */,
 				BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */,
 				BF2859792C281F2B00CCF31C /* SwiftUIIntrospect */,
+				BFA0B5E72C7C59F500FBFD8B /* HowLongLeftKit */,
 			);
 			productName = "How Long Left Mac";
 			productReference = BFF0E6772BE6881F0023AB22 /* How Long Left Mac.app */;
@@ -650,9 +653,9 @@
 			packageReferences = (
 				BFB1FBB72C0DF3B500D04B84 /* XCRemoteSwiftPackageReference "Settings" */,
 				BFB1FBBA2C0DF3C800D04B84 /* XCRemoteSwiftPackageReference "Defaults" */,
-				BFB1FBBE2C0DF3EE00D04B84 /* XCLocalSwiftPackageReference "../How Long Left Kit" */,
 				BFB1FBBF2C0DF42400D04B84 /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */,
 				BF2859782C281F2A00CCF31C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				BFA0B5E62C7C59F500FBFD8B /* XCLocalSwiftPackageReference "../HowLongLeftKit" */,
 			);
 			productRefGroup = BFE8F0C22BE3602000083FD6 /* Products */;
 			projectDirPath = "";
@@ -776,11 +779,11 @@
 				BF3CAF4F2BF4D0DC003035C7 /* main.swift in Sources */,
 				BFAC93EB2C09FE5B00AB66BF /* OffsetObservingScrollView.swift in Sources */,
 				BFC6AD212C285DD400DEB881 /* EditCustomMenuView.swift in Sources */,
-				BFBF9F092C27DB3F00B32D26 /* MacDataModel.xcdatamodeld in Sources */,
 				BF8A5A602C23272C001A4701 /* MacDefaults.swift in Sources */,
 				BFC6AD1E2C285C6C00DEB881 /* ManageCustomMenusView.swift in Sources */,
 				BF91A61D2BF1D6BA0047D534 /* MainMenuContentView.swift in Sources */,
 				BF2759FE2C01A1A500595A87 /* ArrowKeyDetector.swift in Sources */,
+				BFDE32312C7C58FC0056B553 /* MacDataModel.xcdatamodeld in Sources */,
 				BF3CAF092BF4A7C2003035C7 /* Panes.swift in Sources */,
 				BF4A0A602C1783E70094A170 /* MenuTimelineView.swift in Sources */,
 				BF9D25F52C6894900072329F /* CalendarsListView.swift in Sources */,
@@ -1356,9 +1359,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		BFB1FBBE2C0DF3EE00D04B84 /* XCLocalSwiftPackageReference "../How Long Left Kit" */ = {
+		BFA0B5E62C7C59F500FBFD8B /* XCLocalSwiftPackageReference "../HowLongLeftKit" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../How Long Left Kit";
+			relativePath = ../HowLongLeftKit;
 		};
 		BFB1FBBF2C0DF42400D04B84 /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */ = {
 			isa = XCLocalSwiftPackageReference;
@@ -1403,6 +1406,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = HowLongLeftKit;
 		};
+		BFA0B5E72C7C59F500FBFD8B /* HowLongLeftKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HowLongLeftKit;
+		};
 		BFB1FBB82C0DF3B500D04B84 /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BFB1FBB72C0DF3B500D04B84 /* XCRemoteSwiftPackageReference "Settings" */;
@@ -1434,14 +1441,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		BFBF9F072C27DB3F00B32D26 /* MacDataModel.xcdatamodeld */ = {
+		BFDE322F2C7C58FC0056B553 /* MacDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				BFBF9F082C27DB3F00B32D26 /* MacDataModel.xcdatamodel */,
+				BFDE32302C7C58FC0056B553 /* MacDataModel.xcdatamodel */,
 			);
-			currentVersion = BFBF9F082C27DB3F00B32D26 /* MacDataModel.xcdatamodel */;
-			name = MacDataModel.xcdatamodeld;
-			path = "/Users/ryankontos/Developer/How Long Left/How Long Left Mac/MacDataModel.xcdatamodeld";
+			currentVersion = BFDE32302C7C58FC0056B553 /* MacDataModel.xcdatamodel */;
+			path = MacDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

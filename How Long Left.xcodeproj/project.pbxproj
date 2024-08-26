@@ -46,14 +46,12 @@
 		BFB075072C3134E800018A28 /* StatusItemSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB075062C3134E800018A28 /* StatusItemSettingsStore.swift */; };
 		BFB1FBB92C0DF3B500D04B84 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBB82C0DF3B500D04B84 /* Settings */; };
 		BFB1FBBC2C0DF3C800D04B84 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBBB2C0DF3C800D04B84 /* Defaults */; };
-		BFB1FBC12C0DF42400D04B84 /* FluidMenuBarExtra in Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBC02C0DF42400D04B84 /* FluidMenuBarExtra */; };
-		BFB1FBC32C0DF4CC00D04B84 /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */; };
-		BFB1FBC42C0DF4CC00D04B84 /* HowLongLeftKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		BFBF9F092C27DB3F00B32D26 /* MacDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F072C27DB3F00B32D26 /* MacDataModel.xcdatamodeld */; };
 		BFBF9F0B2C27DE8A00B32D26 /* MacPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */; };
 		BFBF9F0D2C27E26D00B32D26 /* StatusItemConfigurationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0C2C27E26D00B32D26 /* StatusItemConfigurationStore.swift */; };
 		BFBF9F0F2C27EC0000B32D26 /* SettingsWindowContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0E2C27EC0000B32D26 /* SettingsWindowContentView.swift */; };
 		BFC313C32C0094FC00778D52 /* MenuEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC313C22C0094FC00778D52 /* MenuEventView.swift */; };
+		BFC607A62C745CF40031B040 /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFC607A52C745CF40031B040 /* HowLongLeftKit */; };
+		BFC607A72C745CF40031B040 /* HowLongLeftKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BFC607A52C745CF40031B040 /* HowLongLeftKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BFC6AD1C2C285C0600DEB881 /* MacSettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD1B2C285C0600DEB881 /* MacSettingsTab.swift */; };
 		BFC6AD1E2C285C6C00DEB881 /* ManageCustomMenusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD1D2C285C6C00DEB881 /* ManageCustomMenusView.swift */; };
 		BFC6AD212C285DD400DEB881 /* EditCustomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD202C285DD400DEB881 /* EditCustomMenuView.swift */; };
@@ -83,6 +81,8 @@
 		BFF0E6962BE688220023AB22 /* How_Long_Left_MacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF0E6952BE688220023AB22 /* How_Long_Left_MacUITests.swift */; };
 		BFF0E6982BE688220023AB22 /* How_Long_Left_MacUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF0E6972BE688220023AB22 /* How_Long_Left_MacUITestsLaunchTests.swift */; };
 		BFF0E6A32BE90F1C0023AB22 /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF0E6A22BE90F1C0023AB22 /* EventCardView.swift */; };
+		BFF196A62C745C4F00EC7C94 /* MacDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFF196A42C745C4F00EC7C94 /* MacDataModel.xcdatamodeld */; };
+		BFF196AA2C745CC500EC7C94 /* FluidMenuBarExtra in Frameworks */ = {isa = PBXBuildFile; productRef = BFF196A92C745CC500EC7C94 /* FluidMenuBarExtra */; };
 		BFF586642BEA520200EF4C9E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF586632BEA520200EF4C9E /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,7 +124,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BFB1FBC42C0DF4CC00D04B84 /* HowLongLeftKit in Embed Frameworks */,
+				BFC607A72C745CF40031B040 /* HowLongLeftKit in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,7 +171,6 @@
 		BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionObservingView.swift; sourceTree = "<group>"; };
 		BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetObservingScrollView.swift; sourceTree = "<group>"; };
 		BFB075062C3134E800018A28 /* StatusItemSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemSettingsStore.swift; sourceTree = "<group>"; };
-		BFBF9F082C27DB3F00B32D26 /* MacDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MacDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPersistence.swift; sourceTree = "<group>"; };
 		BFBF9F0C2C27E26D00B32D26 /* StatusItemConfigurationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemConfigurationStore.swift; sourceTree = "<group>"; };
 		BFBF9F0E2C27EC0000B32D26 /* SettingsWindowContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowContentView.swift; sourceTree = "<group>"; };
@@ -212,6 +211,7 @@
 		BFF0E6952BE688220023AB22 /* How_Long_Left_MacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = How_Long_Left_MacUITests.swift; sourceTree = "<group>"; };
 		BFF0E6972BE688220023AB22 /* How_Long_Left_MacUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = How_Long_Left_MacUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BFF0E6A22BE90F1C0023AB22 /* EventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
+		BFF196A52C745C4F00EC7C94 /* MacDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MacDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BFF586632BEA520200EF4C9E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -243,10 +243,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFB1FBBC2C0DF3C800D04B84 /* Defaults in Frameworks */,
-				BFB1FBC12C0DF42400D04B84 /* FluidMenuBarExtra in Frameworks */,
 				BFB1FBB92C0DF3B500D04B84 /* Settings in Frameworks */,
 				BF28597A2C281F2B00CCF31C /* SwiftUIIntrospect in Frameworks */,
-				BFB1FBC32C0DF4CC00D04B84 /* HowLongLeftKit in Frameworks */,
+				BFF196AA2C745CC500EC7C94 /* FluidMenuBarExtra in Frameworks */,
+				BFC607A62C745CF40031B040 /* HowLongLeftKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +440,7 @@
 				BF3CAF4E2BF4D0DC003035C7 /* main.swift */,
 				BFF0E6792BE6881F0023AB22 /* AppDelegate.swift */,
 				BF94648C2C4D680F00CC8A9E /* ActivationObserver.swift */,
-				BFBF9F072C27DB3F00B32D26 /* MacDataModel.xcdatamodeld */,
+				BFF196A42C745C4F00EC7C94 /* MacDataModel.xcdatamodeld */,
 				BFC6AD222C29387400DEB881 /* StatusItem */,
 				BF2759FC2C01973C00595A87 /* Main Menu */,
 				BF3CAF102BF4AC4C003035C7 /* MacDefaultContainer.swift */,
@@ -560,9 +560,9 @@
 			packageProductDependencies = (
 				BFB1FBB82C0DF3B500D04B84 /* Settings */,
 				BFB1FBBB2C0DF3C800D04B84 /* Defaults */,
-				BFB1FBC02C0DF42400D04B84 /* FluidMenuBarExtra */,
-				BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */,
 				BF2859792C281F2B00CCF31C /* SwiftUIIntrospect */,
+				BFF196A92C745CC500EC7C94 /* FluidMenuBarExtra */,
+				BFC607A52C745CF40031B040 /* HowLongLeftKit */,
 			);
 			productName = "How Long Left Mac";
 			productReference = BFF0E6772BE6881F0023AB22 /* How Long Left Mac.app */;
@@ -612,7 +612,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					BFE8F0C02BE3602000083FD6 = {
 						CreatedOnToolsVersion = 15.3;
@@ -650,9 +650,9 @@
 			packageReferences = (
 				BFB1FBB72C0DF3B500D04B84 /* XCRemoteSwiftPackageReference "Settings" */,
 				BFB1FBBA2C0DF3C800D04B84 /* XCRemoteSwiftPackageReference "Defaults" */,
-				BFB1FBBE2C0DF3EE00D04B84 /* XCLocalSwiftPackageReference "../How Long Left Kit" */,
-				BFB1FBBF2C0DF42400D04B84 /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */,
 				BF2859782C281F2A00CCF31C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				BFF1969E2C745C1200EC7C94 /* XCLocalSwiftPackageReference "../../fluid-menu-bar-extra" */,
+				BFF196A12C745C2100EC7C94 /* XCLocalSwiftPackageReference "../HowLongLeftKit" */,
 			);
 			productRefGroup = BFE8F0C22BE3602000083FD6 /* Products */;
 			projectDirPath = "";
@@ -776,11 +776,11 @@
 				BF3CAF4F2BF4D0DC003035C7 /* main.swift in Sources */,
 				BFAC93EB2C09FE5B00AB66BF /* OffsetObservingScrollView.swift in Sources */,
 				BFC6AD212C285DD400DEB881 /* EditCustomMenuView.swift in Sources */,
-				BFBF9F092C27DB3F00B32D26 /* MacDataModel.xcdatamodeld in Sources */,
 				BF8A5A602C23272C001A4701 /* MacDefaults.swift in Sources */,
 				BFC6AD1E2C285C6C00DEB881 /* ManageCustomMenusView.swift in Sources */,
 				BF91A61D2BF1D6BA0047D534 /* MainMenuContentView.swift in Sources */,
 				BF2759FE2C01A1A500595A87 /* ArrowKeyDetector.swift in Sources */,
+				BFF196A62C745C4F00EC7C94 /* MacDataModel.xcdatamodeld in Sources */,
 				BF3CAF092BF4A7C2003035C7 /* Panes.swift in Sources */,
 				BF4A0A602C1783E70094A170 /* MenuTimelineView.swift in Sources */,
 				BF9D25F52C6894900072329F /* CalendarsListView.swift in Sources */,
@@ -920,6 +920,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -975,6 +976,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1056,7 +1058,6 @@
 		BFE8F0EB2BE3602200083FD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1076,7 +1077,6 @@
 		BFE8F0EC2BE3602200083FD6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1096,7 +1096,6 @@
 		BFE8F0EE2BE3602200083FD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
@@ -1116,7 +1115,6 @@
 		BFE8F0EF2BE3602200083FD6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5AMFX8X5ZN;
@@ -1136,7 +1134,6 @@
 		BFF0E6992BE688220023AB22 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "How Long Left Mac/How_Long_Left_Mac.entitlements";
@@ -1165,6 +1162,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_SUPPRESS_WARNINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -1172,7 +1170,6 @@
 		BFF0E69A2BE688220023AB22 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "How Long Left Mac/How_Long_Left_Mac.entitlements";
@@ -1201,6 +1198,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_SUPPRESS_WARNINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -1208,7 +1206,6 @@
 		BFF0E69B2BE688220023AB22 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1229,7 +1226,6 @@
 		BFF0E69C2BE688220023AB22 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1250,7 +1246,6 @@
 		BFF0E69D2BE688220023AB22 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -1270,7 +1265,6 @@
 		BFF0E69E2BE688220023AB22 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -1356,13 +1350,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		BFB1FBBE2C0DF3EE00D04B84 /* XCLocalSwiftPackageReference "../How Long Left Kit" */ = {
+		BFF1969E2C745C1200EC7C94 /* XCLocalSwiftPackageReference "../../fluid-menu-bar-extra" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../How Long Left Kit";
+			relativePath = "../../fluid-menu-bar-extra";
 		};
-		BFB1FBBF2C0DF42400D04B84 /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */ = {
+		BFF196A12C745C2100EC7C94 /* XCLocalSwiftPackageReference "../HowLongLeftKit" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../fluid-menu-bar-extra";
+			relativePath = ../HowLongLeftKit;
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -1413,11 +1407,7 @@
 			package = BFB1FBBA2C0DF3C800D04B84 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
 		};
-		BFB1FBC02C0DF42400D04B84 /* FluidMenuBarExtra */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FluidMenuBarExtra;
-		};
-		BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */ = {
+		BFC607A52C745CF40031B040 /* HowLongLeftKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HowLongLeftKit;
 		};
@@ -1431,17 +1421,21 @@
 			package = BFB1FBB72C0DF3B500D04B84 /* XCRemoteSwiftPackageReference "Settings" */;
 			productName = Settings;
 		};
+		BFF196A92C745CC500EC7C94 /* FluidMenuBarExtra */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FluidMenuBarExtra;
+		};
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		BFBF9F072C27DB3F00B32D26 /* MacDataModel.xcdatamodeld */ = {
+		BFF196A42C745C4F00EC7C94 /* MacDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				BFBF9F082C27DB3F00B32D26 /* MacDataModel.xcdatamodel */,
+				BFF196A52C745C4F00EC7C94 /* MacDataModel.xcdatamodel */,
 			);
-			currentVersion = BFBF9F082C27DB3F00B32D26 /* MacDataModel.xcdatamodel */;
+			currentVersion = BFF196A52C745C4F00EC7C94 /* MacDataModel.xcdatamodel */;
 			name = MacDataModel.xcdatamodeld;
-			path = "/Users/ryankontos/Developer/How Long Left/How Long Left Mac/MacDataModel.xcdatamodeld";
+			path = "/Users/ryankontos/Developer/How Long Left/HowLongLeft/How Long Left Mac/MacDataModel.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

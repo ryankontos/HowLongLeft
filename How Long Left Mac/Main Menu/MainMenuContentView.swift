@@ -182,6 +182,7 @@ class MainMenuEnvironment: ObservableObject {
 }
 
 
+@MainActor
 class MainMenuViewModel: MenuSelectableItemsProvider {
     
     

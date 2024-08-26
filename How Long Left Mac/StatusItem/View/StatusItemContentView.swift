@@ -93,6 +93,6 @@ struct StatusItemContentView: View {
 }
 
 #Preview {
-    StatusItemContentView(selectedManager: StoredEventManager(domain: "Preview_SelectedManager", limit: 1))
+    StatusItemContentView(selectedManager: StoredEventManager(domain: "Preview_SelectedManager", limit: 1, context: HLLPersistenceController()))
 }
 

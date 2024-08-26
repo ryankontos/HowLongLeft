@@ -8,6 +8,7 @@
 import Foundation
 import HowLongLeftKit
 
+@MainActor
 class StatusItemCountdown {
     
     public static func countdownString(for event: Event, at now: Date = Date()) -> String {

@@ -12,6 +12,7 @@ import FluidMenuBarExtra
 import AppKit
 import SwiftUI
 
+@MainActor
 class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     
     let id: String

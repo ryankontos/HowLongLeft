@@ -10,6 +10,7 @@ import HowLongLeftKit
 import Combine
 import SwiftUI
 
+@MainActor
 class StatusItemStore: EventCacheObserver, ObservableObject {
     
     var defaultContainer: MacDefaultContainer
@@ -88,7 +89,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
                 domain: "HLLMac_CustomStatusItem_\(info.identifier!)",
                 defaultContextsForNonMatches: appSet)
             
-                filtering = EventFetchSettingsManager(calendarSource: defaultContainer.calendarReader, config: config)
+            filtering = EventFetchSettingsManager(calendarSource: defaultContainer.calendarReader, config: config, context: defaultContainer.persistenceController)
             
         }
         

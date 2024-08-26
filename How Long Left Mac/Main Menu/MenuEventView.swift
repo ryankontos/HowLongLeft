@@ -208,35 +208,7 @@ struct MenuEventView: View {
     
     
     
-    func setLocation() {
-        
-        Task {
-            
-            
-            if let locationName = event.locationName {
-                
-                do {
-                    let location = try await LocationConverter.shared.convertToCLLocation(locationName: locationName)
-        
-                    let region = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-                    
-                    self.mapLocation = region
-                    
-                    let item = MapAnnotationItem(coordinate: location.coordinate)
-                    
-                    annotationItems = [item]
-                    
-                        
-                    } catch {
-                        print("Error: \(error.localizedDescription)")
-                    }
-                
-               
-            }
-            
-        }
-        
-    }
+  
     
 }
 

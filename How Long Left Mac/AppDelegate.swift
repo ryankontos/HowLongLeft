@@ -11,7 +11,7 @@ import HowLongLeftKit
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItemStore: StatusItemStore?
-    let container = MacDefaultContainer()
+    var container: MacDefaultContainer!
     var window: NSWindow!
 
     static var initTime = Date()
@@ -20,8 +20,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
        // //print("Launched")
         // Initialize the status item store
       
-        
-    
+        Task { @MainActor in
+            
+            container = MacDefaultContainer()
+            
+        }
+
        
     }
     

@@ -34,6 +34,7 @@ class MacDefaultContainer: DefaultContainer {
     override init() {
         super.init()
         // Explicitly access the lazy property to trigger initialization
-        _ = statusItemStore
+        let store = statusItemStore
+        store?.loadMainStatusItem()
     }
 }

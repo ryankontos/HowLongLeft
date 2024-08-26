@@ -8,6 +8,7 @@
 import Foundation
 import HowLongLeftKit
 
+@MainActor
 class StatusTextGenerator {
     
     private let settings: StatusItemSettings

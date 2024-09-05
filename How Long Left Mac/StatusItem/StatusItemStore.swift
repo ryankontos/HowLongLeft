@@ -9,9 +9,9 @@ import FluidMenuBarExtra
 import HowLongLeftKit
 import Combine
 import SwiftUI
+import EventKit
 
-@MainActor
-class StatusItemStore: EventCacheObserver, ObservableObject {
+class StatusItemStore: ObservableObject {
     
     var defaultContainer: MacDefaultContainer
 
@@ -28,7 +28,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
     
     init(container: MacDefaultContainer) {
         self.defaultContainer = container
-        super.init(eventCache: container.eventCache)
+       // super.init(eventCache: container.eventCache)
         
     }
     
@@ -40,14 +40,16 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         return container
     }
     
-    func loadMainStatusItem() {
+    
+    
+    func loadMainStatusItem() async {
         guard mainStatusItemContainer == nil else { return }
         let info = statusItemDataStore.getMainStatusItem()
         mainStatusItemContainer = initalizeCustomStatusItemContainer(from: info)
-        mainStatusItemContainer?.setSettings(to: getSettings(info: info))
+        await mainStatusItemContainer?.setSettings(to: getSettings(info: info))
     }
     
-    func loadCustomStatusItemContainers() {
+    func loadCustomStatusItemContainers() async {
         
         print("Loading containers, there are currently \(self.customStatusItemContainers.count)")
         var newContainers = Set<StatusItemContainer>()
@@ -66,7 +68,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         
         // Destroy items that are in the original set but not in the new set
         for existingItem in existing where !newContainers.contains(existingItem) {
-            existingItem.destroy()
+            await existingItem.destroy()
         }
         
         newContainers.forEach { container in
@@ -74,7 +76,9 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         }
         
         print("Finished loading containers, there are now \(newContainers.count)")
-        self.customStatusItemContainers = newContainers
+        await MainActor.run {
+            self.customStatusItemContainers = newContainers
+        }
         updateSubscriptions()
     }
     
@@ -102,7 +106,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         cancellables.forEach { $0.cancel() }
         cancellables.removeAll()
         
-        customStatusItemContainers.forEach { container in
+       /* customStatusItemContainers.forEach { container in
             container.objectWillChange
                 .sink { [weak self] _ in
                     DispatchQueue.main.async {
@@ -110,10 +114,10 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
                     }
                 }
                 .store(in: &cancellables)
-        }
+        } */
     }
     
-    private func setUpCustomItemStoreSubscription() {
+   /* private func setUpCustomItemStoreSubscription() {
         self.customItemStoreSubscription?.cancel()
         self.customItemStoreSubscription = nil
         
@@ -126,11 +130,11 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
             }
            
         
-    }
+    } */
     
-    private func customStatusItemContainerDidChange(_ container: StatusItemContainer) {
+    private func customStatusItemContainerDidChange(_ container: StatusItemContainer) async {
         // Handle the change and update the array if necessary
-        loadCustomStatusItemContainers()
+        await loadCustomStatusItemContainers()
         objectWillChange.send()
     }
     
@@ -143,11 +147,11 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         }
     }
     
-    override func eventsChanged() {
+    func eventsChanged() {
         if defaultContainer.calendarReader.authorization != .notDetermined {
-            setUpCustomItemStoreSubscription()
-            loadMainStatusItem()
-            loadCustomStatusItemContainers()
+            //setUpCustomItemStoreSubscription()
+            //loadMainStatusItem()
+           // loadCustomStatusItemContainers()
         }
     }
 }

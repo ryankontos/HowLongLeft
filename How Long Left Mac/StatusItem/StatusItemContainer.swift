@@ -12,7 +12,6 @@ import FluidMenuBarExtra
 import AppKit
 import SwiftUI
 
-@MainActor
 class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     
     let id: String
@@ -73,13 +72,23 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         
         
         self.pointStore = TimePointStore(eventCache: menuCache)
+        
+    
+        
         self.statusItemPointStore = TimePointStore(eventCache: statusItemCache)
         self.infoObject = MenuConfigurationInfo(info: info, settings: nil)
         
         setupFilteringObservation()
         setupStatusItemPointStoreObservation()
-        checkActivation()
+        
         evaluateVisibility()
+        
+        Task {
+            await checkActivation()
+            
+            await pointStore.setup()
+            
+        }
     }
     
     func setSettings(to: StatusItemSettings) {
@@ -117,7 +126,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         
     }
     
-    func checkActivation() {
+    @MainActor func checkActivation() {
         
         if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
             return
@@ -140,7 +149,9 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
                     .environmentObject(pointStore)
                     .environmentObject(source)
                     .environmentObject(timer)
-                    .environmentObject(infoObject))
+                    .environmentObject(infoObject)
+                    .frame(minWidth: 300, maxWidth: 400, maxHeight: 450))
+                
             },
             statusItemContent: { [self] in
                 AnyView(StatusItemContentView(selectedManager: selectedEventManager)
@@ -167,8 +178,8 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         return "All: \(allAllowed.count), Menu Only: \(onlyMenu.count)"
     }
     
-    func destroy() {
-        self.menubarExtra?.destroy()
+    func destroy() async {
+        await self.menubarExtra?.destroy()
     }
     
     static func == (lhs: StatusItemContainer, rhs: StatusItemContainer) -> Bool {

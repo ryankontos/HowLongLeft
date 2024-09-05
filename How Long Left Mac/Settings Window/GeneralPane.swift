@@ -120,7 +120,7 @@ struct GeneralPane: View {
 #Preview {
     let container = MacDefaultContainer()
     
-    return GeneralPane()
+    GeneralPane()
         .environmentObject(container.calendarPrefsManager)
         .environmentObject(container.eventListSettingsManager)
 }

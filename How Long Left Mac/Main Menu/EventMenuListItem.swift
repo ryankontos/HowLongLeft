@@ -22,7 +22,7 @@ struct EventMenuListItem: View {
     
     @EnvironmentObject var source: CalendarSource
     
-    @ObservedObject var progressManager: EventProgressManager
+    //@ObservedObject var progressManager: EventProgressManager
     
     var event: Event
     
@@ -36,7 +36,7 @@ struct EventMenuListItem: View {
         
         self.event = event
         self.selectedManager = selectedManager
-        self.progressManager = EventProgressManager(event: event)
+      //  self.progressManager = EventProgressManager(event: event)
         self.timerContainer = timerContainer
         self.forceProminent = forceProminent
         
@@ -62,13 +62,13 @@ struct EventMenuListItem: View {
     
     var body: some View {
         
+       
+        
         VStack {
             
             HStack(spacing: 8) {
             
-                if selectedManager.isEventStored(event: event) {
-                    Image(systemName: "checkmark")
-                }
+               
                 
                 if !getProminence() {
                     
@@ -124,7 +124,7 @@ struct EventMenuListItem: View {
                 Spacer()
                 
                 if event.status() == .inProgress {
-                    ProgressRingView(progress: progressManager.progress, ringWidth: 4, ringSize: 22, percentageRingWidth: 4, percentageRingSize: 26, color: getColor())
+                   // ProgressRingView(progress: progressManager.progress, ringWidth: 4, ringSize: 22, percentageRingWidth: 4, percentageRingSize: 26, color: getColor())
                 }
                 
             }

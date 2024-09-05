@@ -30,6 +30,7 @@ struct MainMenuContentView: View {
     
     @Environment(\.scenePhase) var phase
     
+    @State var groups = [TitledEventGroup]()
     
     
     @StateObject var menuEnv = MainMenuEnvironment()
@@ -38,14 +39,8 @@ struct MainMenuContentView: View {
     
     var body: some View {
         Group {
-            ZStack {
-                ArrowKeySelectionManagingView(id: "Main", selectionManager: selectionManager)
-                
-                VStack {
-                    
-                   
-                    
-                    let groups = model.getEventGroups(at: Date())
+            
+        
                     
                     if !groups.isEmpty {
                         
@@ -89,45 +84,58 @@ struct MainMenuContentView: View {
                     
                     bottomView
                     
-                }
+                
                
-            }
+            
         }
         .padding(.horizontal, 6)
         .padding(.vertical, 10)
         
-        .frame(minWidth: 300, maxWidth: 350, maxHeight: 450)
+        
+        .onAppear() {
+            groups = model.getEventGroups(at: Date())
+        }
     }
     
     func getEventGroupsView(groups: [TitledEventGroup]) -> some View {
-        VStack {
-            ScrollViewReader { proxy in
-                ScrollView(showsIndicators: false) {
-                    VStack {
+
+        
+                
+                List {
+
                         
-                        ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
-                            
-                            MenuEventListSection(id: group.title ?? "nil", title: group.title, info: group.info, allDayEvents: [], events: group.events, forceProminence: group.flags.contains(.prominentSection), mainMenuModel: selectionManager, eventSelectionManager: selectedManager, timerContainer: GlobalTimerContainer())
-                            
-                            
-                            if index < groups.endIndex-1 && groups.count > 1 {
-                                Divider()
+               
+                            ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
+                                
+                                MenuEventListSection(id: group.title ?? "nil", title: group.title, info: group.info, allDayEvents: [], events: group.events, forceProminence: group.flags.contains(.prominentSection), mainMenuModel: selectionManager, eventSelectionManager: selectedManager, timerContainer: GlobalTimerContainer())
+                                    .listRowSeparator(.hidden)
+                                
+                                if index < groups.endIndex-1 && groups.count > 1 {
+                                    Divider()
+                                }
                             }
-                        }
-                    }
+                            
+                        
+                        
+                    
                 }
-                .coordinateSpace(name: "scroll")
+                .scrollIndicators(.hidden)
+                .background(Color.clear) // Make the background transparent
+                        .scrollContentBackground(.hidden)
+                .listStyle(.plain)
+                .frame(height: 400)
+               
                 
                 .onAppear() {
                 
                     selectionManager.submenuManager = windowManager
                     windowManager.window?.hoverManager = selectionManager
-                    selectionManager.scrollProxy = proxy
+                    //selectionManager.scrollProxy = proxy
                 }
-            }
+            
             
            
-        }
+        
         
       
     }
@@ -182,10 +190,7 @@ class MainMenuEnvironment: ObservableObject {
 }
 
 
-@MainActor
 class MainMenuViewModel: MenuSelectableItemsProvider {
-    
-    
     
     var pointStore: TimePointStore
     
@@ -209,6 +214,7 @@ class MainMenuViewModel: MenuSelectableItemsProvider {
     }
     
     public func getEventGroups(at date: Date) -> [TitledEventGroup] {
+        print("Get event groups")
         guard let currentPoint = pointStore.getPointAt(date: date) else { return [] }
         return eventListProvider.getGroups(from: currentPoint, selected: nil)
     }

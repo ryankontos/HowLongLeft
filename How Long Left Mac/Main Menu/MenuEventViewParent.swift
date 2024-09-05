@@ -17,7 +17,7 @@ struct MenuEventViewParent: View {
     
     var menuModel: WindowSelectionManager!
     
-    @ObservedObject var event: Event
+    var event: Event
     
     init(event: Event) {
         

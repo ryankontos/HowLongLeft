@@ -34,7 +34,12 @@ struct StatusBarPane: View {
 
 #Preview {
     let container = MacDefaultContainer()
-    container.statusItemStore?.loadMainStatusItem()
+    
+    Task {
+        await container.statusItemStore?.loadMainStatusItem()
+    }
+    
+   
     
     let settings = container.statusItemStore!.mainStatusItemContainer!.statusItemSettings
     let store = container.statusItemStore!

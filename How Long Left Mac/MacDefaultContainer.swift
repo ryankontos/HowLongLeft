@@ -34,7 +34,26 @@ class MacDefaultContainer: DefaultContainer {
     override init() {
         super.init()
         // Explicitly access the lazy property to trigger initialization
-        let store = statusItemStore
-        store?.loadMainStatusItem()
+        
+        
+        
+        Task {
+            let store = statusItemStore
+            await store?.loadMainStatusItem()
+        }
+        
+       
+    }
+    
+    override func setup() async {
+        
+        await self.calendarPrefsManager.setup()
+        await statusItemEventFilter.setup()
+        
+        
+        
+        
+        await super.setup()
+      
     }
 }

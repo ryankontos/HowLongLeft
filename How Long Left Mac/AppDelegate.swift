@@ -20,9 +20,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
        // //print("Launched")
         // Initialize the status item store
       
-        Task { @MainActor in
+        
+        
+        Task.detached { [self] in
             
             container = MacDefaultContainer()
+            await container.setup()
             
         }
 

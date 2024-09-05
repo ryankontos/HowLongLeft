@@ -11,7 +11,7 @@ import FluidMenuBarExtra
 
 struct MenuButton<Content: View>: View {
 
-    @ObservedObject var model: WindowSelectionManager
+    var model: WindowSelectionManager
     @EnvironmentObject var windowManager: FMBEWindowProxy
     
     @State private var isHovering = false
@@ -96,7 +96,10 @@ struct MenuButton<Content: View>: View {
         
         .onHover { hovering in
            
-            model.setMenuItemHovering(id: hovering ? idForHover : nil, hovering: hovering)
+            
+            isHovering = hovering
+            //model.setMenuItemHovering(id: hovering ? idForHover : nil, hovering: hovering)
+            
             
         }
         .onChange(of: model.clickID) { newValue in
@@ -118,20 +121,28 @@ struct MenuButton<Content: View>: View {
                     }
                     .onAppear {
                        
-                        globalPosition = geo.frame(in: .global).origin
-                        windowManager.window?.registerSubwindowButtonPosition(point: globalPosition, for: idForHover)
+                        DispatchQueue.main.async {
+                            
+                            globalPosition = geo.frame(in: .global).origin
+                            windowManager.window?.registerSubwindowButtonPosition(point: globalPosition, for: idForHover)
+                        }
                     }
                     .onChange(of: geo.frame(in: .global).origin) { newOrigin in
                         //print("Frame changed")
                         
-                        globalPosition = newOrigin
-                        windowManager.window?.registerSubwindowButtonPosition(point: globalPosition, for: idForHover)
+                        DispatchQueue.main.async {
+                            
+                            globalPosition = newOrigin
+                            windowManager.window?.registerSubwindowButtonPosition(point: globalPosition, for: idForHover)
+                            
+                        }
                         
                         
                         
                     }
             }
         }
+        .drawingGroup()
     }
     
     private func getBackgroundColor() -> Color {
@@ -149,7 +160,7 @@ struct MenuButton<Content: View>: View {
     
     func isHighlighted() -> Bool {
         
-       return (idForHover == model.menuSelection) && !isFlashing
+        return isHovering && !isFlashing
         
     }
     

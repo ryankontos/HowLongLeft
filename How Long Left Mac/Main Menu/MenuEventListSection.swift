@@ -44,22 +44,43 @@ struct MenuEventListSection: View {
     var body: some View {
         
 
-        
-        VStack(alignment: .leading, spacing: 0) {
-            
+     
             
             Section(content: {
                 
-                VStack {
+               
                     
                     
                     ForEach(events) { event in
-                        getMenuButton(for: event)
+                       
+                        MenuButton(model: mainMenuModel, idForHover: "\(self.id)-\(event.id)", cornerRadius: event.isAllDay ? 12 : 5, customHighlight: getColor(for: event), fill: getColor(for: event) != nil, submenuContent: {
+                            AnyView(MenuEventView(event: event)
+                                .environmentObject(eventInfoSource)
+                                .environmentObject(reader)
+                                .environmentObject(timerContainer)
+                            
+                            )
+                        }, content: {
+                            EventMenuListItem(event: event, selectedManager: eventSelectionManager, timerContainer: timerContainer, forceProminent: forceProminence)
+                                
+                            
+                        }, action: {
+                            
+                            withAnimation {
+                                
+                                eventSelectionManager.addEventToStore(event: event, removeIfExists: true)
+                            }
+                        })
+                        
+                        .id(event.id)
+                        .drawingGroup()
+                        
                     }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     
                     
                     
-                }
+                
                 
                 
             }, header: {
@@ -93,39 +114,18 @@ struct MenuEventListSection: View {
                     
                     .frame(maxWidth: .infinity)
                     
+                    
                 }
             })
             
             
-        }
+        
         .padding(.vertical, 7)
+       
      
         
     }
     
-    @ViewBuilder
-    func getMenuButton(for event: Event) -> some View {
-        
-        MenuButton(model: mainMenuModel, idForHover: "\(self.id)-\(event.id)", cornerRadius: event.isAllDay ? 12 : 5, customHighlight: getColor(for: event), fill: getColor(for: event) != nil, submenuContent: {
-            AnyView(MenuEventView(event: event)
-                .environmentObject(eventInfoSource)
-                .environmentObject(reader)
-                .environmentObject(timerContainer)
-            
-            )
-        }, content: {
-            EventMenuListItem(event: event, selectedManager: eventSelectionManager, timerContainer: timerContainer, forceProminent: forceProminence)
-            
-            
-        }, action: {
-            
-            withAnimation {
-                
-                eventSelectionManager.addEventToStore(event: event, removeIfExists: true)
-            }
-        })
-        .id(event.id)
-        
-    }
+   
 }
 

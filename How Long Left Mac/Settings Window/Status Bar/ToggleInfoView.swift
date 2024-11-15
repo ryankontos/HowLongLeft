@@ -32,26 +32,8 @@ struct ToggleInfoView: View {
                 })
                 .buttonStyle(BorderlessButtonStyle())
                 .disabled(!isOn)
-             
+
             }
         }
-    }
-}
-
-struct ToggleInfoView_Previews: PreviewProvider {
-    @State static var toggleState = false
-
-    static var previews: some View {
-        ToggleInfoView(isOn: $toggleState, labelText: "Show In-Progress Events") {
-            VStack {
-                Text("Popover Content")
-                Button("Close") {
-                    // Action to close the popover can be handled here
-                }
-            }
-            .padding()
-        }
-        .padding()
-        .previewLayout(.sizeThatFits)
     }
 }

@@ -4,5 +4,9 @@
 <dict>
 	<key>NSCalendarsFullAccessUsageDescription</key>
 	<string>This allows How Long Left to display your events.</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>WidgetConfigurationIntentIntent</string>
+	</array>
 </dict>
 </plist>

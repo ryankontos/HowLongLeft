@@ -10,14 +10,11 @@ import SwiftUI
 struct MenuNoCalendarAccessView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
-            
-            
-            
+
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: "calendar.badge.exclamationmark")
                     .symbolRenderingMode(.palette)
-                    
-                   
+
                     .foregroundStyle(
                         .orange,
                         .white
@@ -28,29 +25,25 @@ struct MenuNoCalendarAccessView: View {
                     .multilineTextAlignment(.leading)
 
             }
-            
-        
-           
-            
+
         }
-        
+
         .padding(.horizontal, 10)
         .padding(.vertical, 0)
         .frame(height: 60)
     }
-    
+
     private var macOS14Avaliable: Bool {
             guard #available(macOS 14, *) else {
                 return true
             }
             return false
         }
-        
-    
+
 }
 
 #Preview {
     MenuNoCalendarAccessView()
         .frame(width: 300)
-       
+
 }

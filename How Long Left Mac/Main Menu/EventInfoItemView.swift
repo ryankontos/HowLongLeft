@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct EventInfoItemView<Content: View>: View {
-    
+
     var title: String
     var symbol: String
     var color: Color
     var infoView: () -> Content
-    
+
     var body: some View {
         /*  HStack(alignment: .top, spacing: 10) {
          
@@ -31,32 +31,31 @@ struct EventInfoItemView<Content: View>: View {
          }
          // .background(Color.red)
          } */
-        
+
         VStack(alignment: .leading, spacing: 5) {
-            
+
             Text(title)
                 .textCase(.uppercase)
                 .foregroundStyle(.secondary)
                 .fontWeight(.medium)
-            
+
             infoView()
-            
+
         }
-        
+
     }
-        
+
 }
 
-
 #Preview {
-    
+
     VStack {
-        
+
         EventInfoItemView(title: "Location", symbol: "location.fill", color: .blue, infoView: {
             Text("3 Maxim Street, West Ryde, NSW, 2114")
         })
         .frame(width: 200)
-        
+
     }
 
     .frame(width: 300, height: 300)

@@ -8,14 +8,13 @@
 import Foundation
 
 enum MacSettingsTab: String, Hashable, CaseIterable, Identifiable {
- 
+
     case general
     case calendars
     case menuBar
     case customMenuBarItems
     case hidden
-    
-    
+
     var id: String { return self.rawValue }
-    
+
 }

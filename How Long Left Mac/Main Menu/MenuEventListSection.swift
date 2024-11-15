@@ -10,122 +10,118 @@ import HowLongLeftKit
 import FluidMenuBarExtra
 
 struct MenuEventListSection: View {
-    
     var id: String
-    
     var title: String?
     var info: String?
     var allDayEvents: [Event]
     var events: [Event]
     var forceProminence: Bool
     var mainMenuModel: WindowSelectionManager
-    
+
     @ObservedObject var eventSelectionManager: StoredEventManager
-    
+
     @EnvironmentObject var env: MainMenuEnvironment
     @EnvironmentObject var reader: CalendarSource
     @EnvironmentObject var eventInfoSource: StoredEventManager
+    
+    @EnvironmentObject var eventWindowManager: EventWindowManager
+    
     var timerContainer: GlobalTimerContainer
-    
-    func getColor(for event: Event) -> Color? {
-        
-        
-        
-        guard event.isAllDay && event.status() == .upcoming && !forceProminence else { return nil }
-        
-        if let cg = reader.lookupCalendar(withID: event.calendarID)?.cgColor {
-            return Color(cg)
-        }
-        
-        return nil
-        
-    }
-    
+
     var body: some View {
         
+        
+        Section(
+            content: {
 
-        
-        VStack(alignment: .leading, spacing: 0) {
-            
-            
-            Section(content: {
-                
-                VStack {
-                    
-                    
-                    ForEach(events) { event in
-                        getMenuButton(for: event)
-                    }
-                    
-                    
-                    
-                }
-                
-                
-            }, header: {
-                if let title {
-                    
-                    HStack {
+                VStack(spacing: 6) {
+
+                    ForEach(events, content: getSubmenuButton(for:))
+                        .drawingGroup()
                         
-                        Text(title)
-                            .fontWeight(.semibold)
-                            .opacity(0.9)
-                            
-                        
-                        
-                        Spacer()
-                        
-                        
-                        if let info {
-                            
-                            Text(info)
-                            
-                                .opacity(0.9)
-                                .foregroundStyle(.secondary)
-                            
+                    if allDayEvents.isEmpty == false {
+
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(allDayEvents, content: getSubmenuButton(for:))
+                                Spacer()
+                            }
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                            .drawingGroup()
                         }
-                        
                     }
-                    .padding(.bottom, 15)
-                    .padding(.horizontal, 10)
-                    
-                   
-                    
-                    .frame(maxWidth: .infinity)
-                    
+
                 }
-            })
-            
-            
-        }
-        .padding(.vertical, 7)
-     
-        
-    }
-    
-    @ViewBuilder
-    func getMenuButton(for event: Event) -> some View {
-        
-        MenuButton(model: mainMenuModel, idForHover: "\(self.id)-\(event.id)", cornerRadius: event.isAllDay ? 12 : 5, customHighlight: getColor(for: event), fill: getColor(for: event) != nil, submenuContent: {
-            AnyView(MenuEventView(event: event)
-                .environmentObject(eventInfoSource)
-                .environmentObject(reader)
-                .environmentObject(timerContainer)
-            
-            )
-        }, content: {
-            EventMenuListItem(event: event, selectedManager: eventSelectionManager, timerContainer: timerContainer, forceProminent: forceProminence)
-            
-            
-        }, action: {
-            
-            withAnimation {
-                
-                eventSelectionManager.addEventToStore(event: event, removeIfExists: true)
+
+            },
+            header: {
+                if let title = title {
+                    headerView(title: title, info: info)
+                        .drawingGroup()
+                }
             }
-        })
+        )
+        // .background(Color.blue)
+       // .padding(.vertical, 7)
+    }
+
+    private func headerView(title: String, info: String?) -> some View {
+        HStack {
+            Text(title)
+                .fontWeight(.semibold)
+                .opacity(0.9)
+            Spacer()
+            if let info = info {
+                Text(info)
+                    .opacity(0.9)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(.bottom, 5)
+        .padding(.horizontal, 10)
+        // .background(Color.red)
+    }
+
+    @ViewBuilder
+    private func getSubmenuButton(for event: Event) -> some View {
+        let buttonID = "\(id)-\(event.id)"
+        let highlightColor = getColor(for: event)
+
+        SubmenuButton(
+            model: mainMenuModel,
+            idForHover: buttonID,
+            cornerRadius: event.isAllDay ? 5 : 5,
+            padding: event.isAllDay ? 3 : 6,
+            horizontalPadding: event.isAllDay ? 7 : 10,
+            customHighlight: highlightColor,
+            fill: highlightColor != nil,
+            showChevron: !event.isAllDay,
+            submenuContent: {
+                AnyView(MenuEventViewParent(event: event)
+                    .environmentObject(eventInfoSource)
+                    .environmentObject(reader)
+                    .environmentObject(timerContainer)
+                    .environmentObject(eventWindowManager)
+                )
+            },
+            content: {
+                
+                EventMenuItemView(event: event, selectedManager: eventSelectionManager, timerContainer: timerContainer, forceProminent: forceProminence)
+                    .id(event.id)
+            },
+            action: {
+                withAnimation {
+                    eventSelectionManager.addEventToStore(event: event, removeIfExists: true)
+                }
+            }
+        )
         .id(event.id)
         
     }
-}
 
+    private func getColor(for event: Event) -> Color? {
+        guard event.isAllDay, !forceProminence else { return nil }
+        return Color(reader.lookupCalendar(withID: event.calendarID)?.color ?? .orange)
+    }
+}

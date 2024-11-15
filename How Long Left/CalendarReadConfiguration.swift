@@ -8,8 +8,8 @@
 import Foundation
 
 struct CalendarReadConfiguration {
-    
+
     var calendarIDs = [String]()
-    var includeAllDayEvents = false     
-    
+    var includeAllDayEvents = false
+
 }

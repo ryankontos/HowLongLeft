@@ -7,20 +7,19 @@
 
 import Foundation
 
-
 class DefaultContainer {
-    
+
     init() {
-        
+
         calendarReader = CalendarSource(requestCalendarAccessImmediately: true)
-        
+
         let appSet: Set<String> = [HLLiOSCalendarContexts.app.rawValue]
         let config = EventFilterDefaultsManager.Configuration(domain: "app", defaultContextsForNonMatches: appSet, fetchedContexts: appSet)
         calendarPrefsManager = EventFilterDefaultsManager(calendarSource: calendarReader, config: config)
-        
+
         eventCache = EventCache(calendarReader: calendarReader, calendarProvider: calendarPrefsManager)
         pointStore = TimePointStore(eventCache: eventCache)
-        
+
     }
-    
+
 }

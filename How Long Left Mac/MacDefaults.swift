@@ -10,7 +10,7 @@ import Defaults
 import HowLongLeftKit
 
 extension Defaults.Keys {
-    
+
     static let showLocationsInMainMenu = Key<Bool>("HowLongLeft_Mac_MainMenu_ShowLocations", default: true)
 
 }

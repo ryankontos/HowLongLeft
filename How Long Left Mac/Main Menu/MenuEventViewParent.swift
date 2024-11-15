@@ -10,32 +10,42 @@ import HowLongLeftKit
 import FluidMenuBarExtra
 
 struct MenuEventViewParent: View {
-    
+
     @EnvironmentObject var menuEnv: MainMenuEnvironment
     @EnvironmentObject var calSource: CalendarSource
     @EnvironmentObject var windowManager: FMBEWindowProxy
-    
-    var menuModel: WindowSelectionManager!
-    
+
     @ObservedObject var event: Event
-    
+
     init(event: Event) {
-        
+
         self.event = event
-        
-        
+
     }
-    
+
     var body: some View {
         Group {
-            
-            MenuEventView(event: event)
-            
+
+            if windowManager.isAttached {
+                
+                MenuEventView(event: event)
+            } else {
+                
+                ScrollView {
+                    
+                    Spacer()
+                    
+                    Text("Detached")
+                        
+                
+                    Spacer()
+                    
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+            }
+
         }
-        .onAppear() {
-            windowManager.window?.hoverManager = menuModel
-            menuModel.submenuManager = windowManager
-        }
+      
     }
 }
-

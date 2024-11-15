@@ -10,28 +10,24 @@ import SwiftUIIntrospect
 import HowLongLeftKit
 
 struct SettingsWindowContentView: View {
-    
+
     let container: MacDefaultContainer
-    
+
     @State var selection: MacSettingsTab = .general
-    
+
     var body: some View {
-        
+
         NavigationSplitView( sidebar: {
-            
-            
-            
+
             List(selection: $selection) {
-               
+
                 ForEach(MacSettingsTab.allCases) { tab in
-                    
-                    
+
                     getTabButton(tab: tab)
                         .tag(tab)
-                    
-                    
+
                 }
-                
+
             }
             .frame(minWidth: 215, maxWidth: 215)
             .fixedSize(horizontal: true, vertical: false)
@@ -41,8 +37,8 @@ struct SettingsWindowContentView: View {
                             } else {
                                 $0
                             }
-                        } 
-            
+                        }
+
             .toolbar {
                                 // Force the toolbar to have a full height
                                 ToolbarItem(placement: .navigation) {
@@ -50,21 +46,20 @@ struct SettingsWindowContentView: View {
                                         .frame(height: 20) // Adjust the height if needed
                                 }
                             }
-            
-           
+
         }, detail: {
-            
+
             NavigationStack {
-                
+
                 switch selection {
                 case .general:
                     GeneralPane()
-                       
+
                         .toolbarRole(.editor)
                         .navigationTitle("General")
                         .environmentObject(container.eventListSettingsManager)
                         .environmentObject(container.calendarPrefsManager)
-                       
+
                 case .calendars:
                     CalendarsPane(contexts: [HLLStandardCalendarContexts.app.rawValue])
                         .navigationTitle("Calendars")
@@ -76,10 +71,10 @@ struct SettingsWindowContentView: View {
                         .environmentObject(container.calendarPrefsManager)
                         .environmentObject(container.hiddenEventManager)
                 case .menuBar:
-                    
+
                     let settings = container.statusItemStore!.mainStatusItemContainer!.statusItemSettings
                     let store = container.statusItemStore!
-                    
+
                     StatusBarPane(model: StatusBarPaneModel(settings: settings, store: store))
                         .environmentObject(container.statusItemStore!.mainStatusItemContainer!.info)
                         .environmentObject(settings)
@@ -90,25 +85,21 @@ struct SettingsWindowContentView: View {
                     ManageCustomMenusView()
                         .environmentObject(container.statusItemStore!)
                 }
-                
-                
+
             }
-            
+
         })
-        
-        
-        
+
         .navigationSplitViewStyle(.automatic)
     }
-    
+
     @ViewBuilder
     func getTabButton(tab: MacSettingsTab) -> some View {
         switch tab {
         case .general:
-            
+
             Label("General", systemImage: "gear")
-            
-           
+
         case .calendars:
             Label("Calendars", systemImage: "calendar")
         case .hidden:
@@ -119,17 +110,12 @@ struct SettingsWindowContentView: View {
             Label("Custom Menus", systemImage: "star.fill")
         }
     }
-    
-   
+
 }
-
-
-
 
 #Preview {
-    SettingsWindowContentView(container: MacDefaultContainer())
+    SettingsWindowContentView(container: MacDefaultContainer(id: "MacPreview"))
 }
-
 
 extension View {
     func conditionalModifier<T: View>(@ViewBuilder transform: (Self) -> T) -> some View {

@@ -10,33 +10,29 @@ import HowLongLeftKit
 import EventKit
 
 struct EnabledCalendarsView: View {
-    
+
     @EnvironmentObject var manager: EventFetchSettingsManager
-    
+
     var body: some View {
-        
+
         NavigationStack {
-            
+
             Form {
-                
+
                 ForEach($manager.calendarItems) { $cal in
-                    
+
                     ToggleCalendarStateView(calendarInfo: cal, toggleContext: HLLStandardCalendarContexts.app.rawValue)
-                    
-                    
-                    
+
                 }
-                
-               
-                
+
             }
-            
+
         }
-        
+
     }
-    
+
     func getColor(from cal: EKCalendar?) -> Color {
-        
+
         guard let col = cal?.cgColor else { return .primary }
         return Color(col)
     }

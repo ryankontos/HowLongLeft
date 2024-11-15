@@ -10,214 +10,165 @@ import HowLongLeftKit
 import FluidMenuBarExtra
 
 struct MainMenuContentView: View {
-    
     @EnvironmentObject var pointStore: TimePointStore
     @EnvironmentObject var settingsWindow: SettingsWindow
     @EnvironmentObject var windowManager: FMBEWindowProxy
     @EnvironmentObject var calendarSource: CalendarSource
-    
-    var selectedManager: StoredEventManager
-    
-    @EnvironmentObject var eventListSettingsManager: EventListSettingsManager
-    
     @EnvironmentObject var configInfo: MenuConfigurationInfo
-    
+
+    @State var isScrolling = false
+
+    var selectedManager: StoredEventManager
     var selectionManager: WindowSelectionManager
-    
     var model: MainMenuViewModel
-    
-    @State var displayEvent: Event?
-    
-    @Environment(\.scenePhase) var phase
-    
-    
-    
-    @StateObject var menuEnv = MainMenuEnvironment()
-    @State private var scrollPosition: CGPoint = .zero
-    
-    
+
+    @StateObject private var menuEnv = MainMenuEnvironment()
+    @State private var displayEvent: Event?
+
     var body: some View {
-        Group {
-            ZStack {
-                ArrowKeySelectionManagingView(id: "Main", selectionManager: selectionManager)
-                
-                VStack {
-                    
-                   
-                    
-                    let groups = model.getEventGroups(at: Date())
-                    
-                    if !groups.isEmpty {
-                        
-                        if let title = configInfo.getTitle() {
-                            
-                            HStack {
-                                
-                                VStack(alignment: .leading) {
-                                    
-                                    Text(title)
-                                        .font(.system(size: 15, weight: .semibold))
-                                        .padding(.vertical, 4)
-                                    
-                                    Divider()
-                                    
-                                }
-                                
-                                Spacer()
-                                
-                            }
-                            
-                            .padding(.horizontal, 10)
-                            
-                        }
-                        
-                        getEventGroupsView(groups: groups)
-                            .transition(.opacity)
-                            .environmentObject(menuEnv)
-                    } else {
-                        
-                        if calendarSource.authorization == .denied {
-                            MenuNoCalendarAccessView()
-                            
-                        } else {
-                            
-                            MenuNoEventsView()
-                            
-                        }
-                        
-                    }
-                    
-                    bottomView
-                    
-                }
-               
+        let groups = model.getEventGroups(at: Date())
+        VStack {
+            if !groups.isEmpty {
+                titleView()
+                eventGroupsView(groups: groups)
+            } else {
+                noEventsView()
             }
+            bottomView()
         }
         .padding(.horizontal, 6)
-        .padding(.vertical, 10)
-        
-        .frame(minWidth: 300, maxWidth: 350, maxHeight: 450)
+        .padding(.vertical, 3)
+        .frame(minWidth: 315, maxWidth: 315, maxHeight: 480)
+        .environmentObject(menuEnv)
     }
-    
-    func getEventGroupsView(groups: [TitledEventGroup]) -> some View {
-        VStack {
-            ScrollViewReader { proxy in
-                ScrollView(showsIndicators: false) {
-                    VStack {
-                        
-                        ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
-                            
-                            MenuEventListSection(id: group.title ?? "nil", title: group.title, info: group.info, allDayEvents: [], events: group.events, forceProminence: group.flags.contains(.prominentSection), mainMenuModel: selectionManager, eventSelectionManager: selectedManager, timerContainer: GlobalTimerContainer())
-                            
-                            
-                            if index < groups.endIndex-1 && groups.count > 1 {
-                                Divider()
-                            }
-                        }
-                    }
+
+    @ViewBuilder
+    private func titleView() -> some View {
+        if let title = configInfo.getTitle() {
+            HStack {
+                Text(title)
+                    .font(.system(size: 15, weight: .semibold))
+                    .padding(.vertical, 4)
+                Spacer()
+            }
+            .padding(.horizontal, 10)
+        }
+    }
+
+    @ViewBuilder
+    private func noEventsView() -> some View {
+        if calendarSource.authorization == .denied {
+            MenuNoCalendarAccessView()
+        } else {
+            MenuNoEventsView()
+        }
+    }
+    @ViewBuilder
+    private func eventGroupsView(groups: EventGroups) -> some View {
+        ScrollView(showsIndicators: false) {
+            LazyVStack(spacing: 10) {
+                renderEventGroupSections(groups.headerGroups)
+
+                if !groups.headerGroups.isEmpty && !groups.upcomingGroups.isEmpty {
+                    Divider()
                 }
-                .coordinateSpace(name: "scroll")
-                
-                .onAppear() {
-                
-                    selectionManager.submenuManager = windowManager
-                    windowManager.window?.hoverManager = selectionManager
-                    selectionManager.scrollProxy = proxy
-                }
+
+                renderEventGroupSections(groups.upcomingGroups)
             }
             
-           
+            .padding(.top, 10)
+            .background {
+                ScrollViewOffsetReader(
+                    onScrollingStarted: {
+                        print("Scrolling started")
+                        isScrolling = true
+                    },
+                    onScrollingFinished: {
+                        print("Scrolling finished")
+                        isScrolling = false
+                    }
+                )
+            }
         }
-        
-      
+        .onAppear {
+            setupSelectionManager()
+        }
     }
-    
-    var bottomView: some View {
-        
+
+    @ViewBuilder
+    private func renderEventGroupSections(_ groupSections: [TitledEventGroup]) -> some View {
+        ForEach(groupSections.indices, id: \.self) { index in
+            let group = groupSections[index]
+            MenuEventListSection(
+                id: group.title ?? "nil",
+                title: group.title,
+                info: group.info,
+                allDayEvents: group.allDayEvents,
+                events: group.events,
+                forceProminence: group.flags.contains(.prominentSection),
+                mainMenuModel: selectionManager,
+                eventSelectionManager: selectedManager,
+                timerContainer: GlobalTimerContainer()
+            )
+
+            if index < groupSections.endIndex - 1 {
+                Divider()
+            }
+        }
+    }
+
+    private func setupSelectionManager() {
+        selectionManager.submenuManager = windowManager
+        windowManager.window?.hoverManager = selectionManager
+    }
+
+    @ViewBuilder
+    private func bottomView() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Divider()
                 .padding(.horizontal, 10)
                 .padding(.bottom, 4)
-            
-            MenuButton(model: selectionManager, idForHover: OptionsSectionButton.settings.rawValue, padding: 4, content: {
-                HStack {
-                    Text("Settings...")
-                    Spacer()
-                    Text("⌘ ,")
-                        .foregroundColor(.secondary)
-                        //.foregroundStyle(.secondary)
-                        .font(.system(size: 12, weight: .regular))
-                }
-            }, action: {
+
+            getSubmenuButton(
+                title: "Settings...",
+                shortcut: "⌘ ,",
+                idForHover: OptionsSectionButton.settings.rawValue
+            ) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    //settingsWindow.open()
                     windowManager.window?.resignKey()
                     settingsWindow.open()
                 }
-            })
-            
-            MenuButton(model: selectionManager, idForHover: OptionsSectionButton.quit.rawValue, padding: 4, content: {
+            }
+
+            getSubmenuButton(
+                title: "Quit How Long Left",
+                shortcut: "⌘ Q",
+                idForHover: OptionsSectionButton.quit.rawValue
+            ) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    NSApp.terminate(nil)
+
+                }
+            }
+        }
+    }
+
+    private func getSubmenuButton(title: String, shortcut: String, idForHover: String, action: @escaping () -> Void) -> some View {
+
+        SubmenuButton(
+            model: selectionManager,
+            idForHover: idForHover,
+            padding: 4,
+            content: {
                 HStack {
-                    Text("Quit How Long Left")
+                    Text(title)
                     Spacer()
-                    Text("⌘ Q")
+                    Text(shortcut)
                         .foregroundColor(.secondary)
                         .font(.system(size: 12, weight: .regular))
                 }
-            }, action: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                    NSApp.terminate(nil)
-                }
-            })
-        }
-        
+            },
+            action: action
+        )
     }
-    
-  
-    
-}
-
-class MainMenuEnvironment: ObservableObject {
-    @Published var displayEvent: Event?
-}
-
-
-class MainMenuViewModel: MenuSelectableItemsProvider {
-    
-    
-    
-    var pointStore: TimePointStore
-    
-    var selectedManager: StoredEventManager
-    
-    var listSettings: EventListSettingsManager
-    
-    lazy var eventListProvider = EventListGroupProvider(settingsManager: listSettings)
-    
-    func getItems() -> [String] {
-        let groups = getEventGroups(at: Date())
-        return groups.flatMap { group in
-            group.events.map { getEventId(eventId: $0.id, groupId: group.title ?? "nil") }
-        } + OptionsSectionButton.allCases.map { $0.rawValue }
-    }
-    
-    func getEventId(eventId: String, groupId: String) -> String {
-        
-        return "\(groupId)-(\(eventId)"
-        
-    }
-    
-    public func getEventGroups(at date: Date) -> [TitledEventGroup] {
-        guard let currentPoint = pointStore.getPointAt(date: date) else { return [] }
-        return eventListProvider.getGroups(from: currentPoint, selected: nil)
-    }
-    
-    init(timePointStore: TimePointStore, listSettings: EventListSettingsManager, selectedManager: StoredEventManager) {
-        
-        self.pointStore = timePointStore
-        self.listSettings = listSettings
-        self.selectedManager = selectedManager
-        
-    }
-    
 }

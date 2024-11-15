@@ -9,16 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-   
-    
+
     var body: some View {
-        
+
         TabView {
             EventList()
                 .tabItem {
                     Label("Events", systemImage: "list.bullet")
                 }
-            
+
             EnabledCalendarsView()
                 .tabItem {
                     Label("Settings", systemImage: "gear")
@@ -26,10 +25,9 @@ struct ContentView: View {
         }
     }
 
-   
 }
 
 #Preview {
     ContentView()
-        
+
 }

@@ -21,7 +21,9 @@ struct OffsetObservingScrollView<Content: View>: View {
             PositionObservingView(
                 coordinateSpace: .named(coordinateSpaceName),
                 onChange: { newOffset in
-                    onOffsetChange(CGPoint(x: -newOffset.x, y: -newOffset.y))
+                    DispatchQueue.main.async {
+                        onOffsetChange(CGPoint(x: -newOffset.x, y: -newOffset.y))
+                    }
                 },
                 content: content
             )

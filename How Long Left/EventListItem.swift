@@ -10,27 +10,25 @@ import HowLongLeftKit
 import EventKit
 
 struct EventListItem: View {
-    
+
     @ObservedObject var event: Event
     @EnvironmentObject var calendarSource: CalendarSource
-    
+
     var body: some View {
-        
+
         VStack(alignment: .leading) {
-            
+
             Circle()
-                .foregroundStyle(calendarSource.getColor(calendarID: event.calendarId))
+                .foregroundStyle(calendarSource.getColor(calendarID: $event.calendarID.wrappedValue))
                 .frame(width: 10)
-                
-            
+
             Text(event.title)
-            
+
             Text("\(event.startDate.formatted()) - \(event.endDate.formatted())")
-            
+
         }
     }
-    
-    
+
 }
 
 #Preview {

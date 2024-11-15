@@ -13,6 +13,17 @@ class StatusItemSettingsStore: ObservableObject {
     
     let context = MacPersistentContainer.shared.container.viewContext
     private var cache = [String: StatusItemSettings]()
+    private var saveSubject = PassthroughSubject<StatusItemSettings, Never>()
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        saveSubject
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main) // Adjust interval as needed
+            .sink { [weak self] settings in
+                self?.performSave(settings: settings)
+            }
+            .store(in: &cancellables)
+    }
     
     func getSettings() -> [StatusItemSettings] {
         let fetchRequest: NSFetchRequest<StatusItemSettings> = StatusItemSettings.fetchRequest()
@@ -70,17 +81,23 @@ class StatusItemSettingsStore: ObservableObject {
     }
     
     func saveSettings(settings: StatusItemSettings) {
-        if context.insertedObjects.contains(settings) {
-            try? context.save()
-        } else {
-            context.insert(settings)
-            try? context.save()
+        saveSubject.send(settings)
+    }
+    
+    private func performSave(settings: StatusItemSettings) {
+        DispatchQueue.main.async { [self] in
+            if context.insertedObjects.contains(settings) {
+                try? context.save()
+            } else {
+                context.insert(settings)
+                try? context.save()
+            }
         }
         // Update the cache
         cache[settings.identifier!] = settings
         objectWillChange.send()
     }
-    
+
     func removeSettings(settings: StatusItemSettings) {
         context.delete(settings)
         try? context.save()

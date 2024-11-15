@@ -8,8 +8,8 @@
 import Foundation
 
 enum MacCalendarContexts: String, CaseIterable {
-    
+
     case menu
     case statusItem
-    
+
 }

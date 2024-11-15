@@ -18,9 +18,9 @@ struct HiddenEventsPane: View {
     var body: some View {
 
         Group {
-            
+
             let hidden = storedEventManager.getAllStoredEvents()
-            
+
             if hidden.isEmpty {
                 Text("No Hidden Events")
                     .foregroundColor(.secondary)
@@ -28,7 +28,7 @@ struct HiddenEventsPane: View {
             } else {
                 hiddenEventsForm(hidden: hidden)
             }
-            
+
         }
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
@@ -64,21 +64,17 @@ struct HiddenEventsPane: View {
                     }
                 }
             }
-            
+
         }
         .formStyle(.grouped)
-       
-        
-        
+
     }
 }
 
 #Preview {
-    
-    let defaultContainer = MacDefaultContainer()
-    
-    
-    
+
+    let defaultContainer = MacDefaultContainer(id: "MacPreview")
+
     return HiddenEventsPane()
         .environmentObject(defaultContainer.calendarReader)
         .environmentObject(defaultContainer.hiddenEventManager)

@@ -11,31 +11,31 @@ struct ProgressRingView: View {
     var progress: Double // Progress should be a value between 0 and 1
     var ringWidth: CGFloat
     var ringSize: CGFloat
-    
+
     var percentageRingWidth: CGFloat = 0
     var percentageRingSize: CGFloat = 0
-    
+
     var width: CGFloat {
         if showPercentage {
             return percentageRingWidth
         }
-        
+
         return ringWidth
     }
-    
+
     var size: CGFloat {
         if showPercentage {
             return percentageRingSize
         }
-        
+
         return ringSize
     }
-    
+
     var color: Color
     @State var showPercentage: Bool = true
 
     var body: some View {
-        
+
         Button(action: {
             withAnimation {
                 showPercentage.toggle()
@@ -53,25 +53,22 @@ struct ProgressRingView: View {
                     .foregroundColor(color.opacity(0.7))
                     .rotationEffect(Angle(degrees: 270.0))
                     .animation(.linear, value: progress)
-                
-              
+
                     Text("\(Int(progress * 100))")
                         .font(.system(size: size / 2.5))
                         .fontWeight(.regular)
                         .foregroundColor(.secondary)
                         .opacity(showPercentage ? 1 : 0)
-                
+
             }
             .contentShape(Rectangle())
 
         })
         .buttonStyle(PlainButtonStyle())
-        
-      
+
         .frame(width: size, height: size)
         .padding(width / 2)
-        
-        
+
     }
 }
 

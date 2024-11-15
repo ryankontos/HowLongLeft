@@ -9,8 +9,5 @@ import Foundation
 import Combine
 
 protocol MenuWindowController: ObservableObject {
-    
-    
-    
-    
+
 }

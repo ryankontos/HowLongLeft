@@ -9,38 +9,36 @@ import Foundation
 import SwiftUI
 import HowLongLeftKit
 
-
 class MenuConfigurationInfo: ObservableObject {
-    
+
     init(info: StatusItemConfiguration? = nil, settings: StatusItemSettings?) {
         self.info = info
     }
-    
+
     private var info: StatusItemConfiguration?
     private var settings: StatusItemSettings?
-    
+
     func getColor() -> Color? {
-        
-        
+
         guard let info else { return nil }
         guard info.useCustomColor else { return nil }
         guard let code = info.customColorCode else { return nil }
-        
+
         return Color(CGColor.fromHex(code)!)
     }
-    
+
     func showTitles() -> Bool {
         guard let settings else { return false }
         return settings.showTitles
     }
-    
+
     func getTitle() -> String? {
-        
+
         if let info, info.isCustom {
             return info.title
         }
-        
+
         return nil
     }
-    
+
 }

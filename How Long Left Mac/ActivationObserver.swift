@@ -9,7 +9,5 @@ import Foundation
 import Combine
 
 class ActivationObserver: ObservableObject {
-    
-    
-    
+
 }

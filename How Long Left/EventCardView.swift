@@ -56,4 +56,3 @@ struct EventCardView: View {
 #Preview {
     EventCardView(eventName: "Sample Event", endDate: Date().addingTimeInterval(86400 * 5))
 }
-        

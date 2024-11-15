@@ -12,7 +12,7 @@ struct TestPieProgress: View {
 
     var body: some View {
         VStack(spacing:20) {
-            HStack{
+            HStack {
                 Text("0%")
                 Slider(value: self.$progress)
                 Text("100%")
@@ -27,9 +27,7 @@ struct TestPieProgress: View {
         }
     }
 
-
 }
-
 
 struct PieProgress: View {
     @Binding var progress: Float
@@ -39,7 +37,7 @@ struct PieProgress: View {
             let minDimension = min(geometry.size.width, geometry.size.height)
             let strokeWidth = minDimension * 0.05 // Adjust stroke width relative to view size
             let paddingAmount = strokeWidth * 1.2 // Adjust padding relative to stroke width
-            
+
             Circle()
                 .stroke(Color.primary, lineWidth: strokeWidth)
                 .overlay(
@@ -81,7 +79,6 @@ struct PieShape: Shape {
         return path
     }
 }
-
 
 struct TestPieProgress_Previews: PreviewProvider {
     static var previews: some View {

@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 struct ArrowKeyDetector: NSViewRepresentable {
-    
+
     var id: String
-    
+
     var onLeftArrow: (() -> Void)?
     var onRightArrow: (() -> Void)?
     var onUpArrow: (() -> Void)?
@@ -25,7 +25,7 @@ struct ArrowKeyDetector: NSViewRepresentable {
         init(_ parent: ArrowKeyDetector) {
             self.parent = parent
         }
-        
+
         @objc func keyDown(with event: NSEvent) {
             switch event.keyCode {
             case 123: // Left arrow key code
@@ -82,7 +82,7 @@ struct ArrowKeyDetector: NSViewRepresentable {
         override func viewDidMoveToWindow() {
            // print("Make FR \(coordinator!.parent.id)")
            // window!.makeFirstResponder(self)
-            
+
         }
     }
 }

@@ -22,7 +22,9 @@ struct PositionObservingView<Content: View>: View {
                 )
             })
             .onPreferenceChange(PositionPreferenceKey.self) { position in
-                onChange(position)
+                DispatchQueue.main.async {
+                    onChange(position)
+                }
             }
     }
 }

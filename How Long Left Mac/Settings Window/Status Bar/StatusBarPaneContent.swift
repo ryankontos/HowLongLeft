@@ -10,20 +10,18 @@ import SwiftUI
 import HowLongLeftKit
 
 struct StatusBarPaneContent: View {
-    
+
     @EnvironmentObject var statusItemContainer: StatusItemContainer
     @ObservedObject var model: StatusBarPaneModel
     @State private var showManageCals = false
     @State private var titleLimit: Int = 0
-    
-    var body: some View {
 
-   
-        
-            Section() {
-                Toggle("Show Countdown Text in Status Bar Item", isOn: $model.showCountdowns)
-            }
-        
+    var body: some View {
+            
+        Section {
+            Toggle("Show Countdown Text in Status Bar Item", isOn: $model.showCountdowns)
+        }
+
         .onAppear {
             self.titleLimit = Int(model.titleLimit)
         }
@@ -37,16 +35,15 @@ struct StatusBarPaneContent: View {
                         })
                     }
                 }
-                
+
         }
-            
+
             if model.showCountdowns {
                 Section("Events") {
                     Toggle("Show In-Progress Events", isOn: $model.showCurrentEvents)
                     Toggle("Show Upcoming Events", isOn: $model.showUpcomingEvents)
                 }
-                
-       
+
                 Section("Appearance") {
                     Toggle("Show Event Titles", isOn: $model.showTitles)
                     if model.showTitles {
@@ -57,13 +54,14 @@ struct StatusBarPaneContent: View {
                                     .foregroundStyle(.secondary)
                             }
                         }
-                        .onChange(of: model.titleLimit) { old in
+                        .onChange(of: model.titleLimit) { _, _ in
+                            print("OC 4")
                             let hapticManager = NSHapticFeedbackManager.defaultPerformer
                             hapticManager.perform(.alignment, performanceTime: .default)
                         }
                     }
                 }
-                
+
                 Section {
                     Picker("Countdown Style", selection: .constant(1)) {
                         Text("Positional")
@@ -73,7 +71,7 @@ struct StatusBarPaneContent: View {
                         Text("Show Seconds")
                     }
                 }
-                
+
                 Section {
                     Toggle(isOn: $model.showIndicatorDot) {
                         Text("Show Calendar Indicator Dot")
@@ -85,7 +83,7 @@ struct StatusBarPaneContent: View {
                         Text("Show Completion Percentage")
                     }
                 }
-                
+
                 Section(header: Text("Advanced")) {
                     Toggle(isOn: .constant(true)) {
                         VStack(alignment: .leading, spacing: 5) {
@@ -98,8 +96,20 @@ struct StatusBarPaneContent: View {
                     }
                 }
             }
-  
-       
+
     }
 }
 
+#Preview {
+    let container = MacDefaultContainer(id: "MacApp")
+
+    let store = container.statusItemStore!
+    let _ = store.loadMainStatusItem()
+    let mainContainer = store.mainStatusItemContainer!
+
+    Form {
+        StatusBarPaneContent(model: StatusBarPaneModel(settings: mainContainer.statusItemSettings, store: container.statusItemStore!))
+    }
+    .formStyle(.grouped)
+
+}

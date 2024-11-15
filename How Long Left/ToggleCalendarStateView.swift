@@ -12,7 +12,7 @@ struct ToggleCalendarStateView: View {
     @EnvironmentObject var manager: EventFetchSettingsManager
     @ObservedObject var calendarInfo: CalendarInfo
     let toggleContext: String
-    
+
     var body: some View {
         Toggle(isOn: Binding(
             get: {
@@ -26,27 +26,25 @@ struct ToggleCalendarStateView: View {
                 }
             }
         )) {
-            
+
             HStack {
                 Circle()
                     .frame(width: 9)
                     .foregroundStyle(getColor())
                 Text(calendarInfo.title!)
             }
-            
-            
+
         }
     }
-    
+
     func getColor() -> Color {
-        
+
         if let cal = manager.getEKCalendar(for: calendarInfo) {
             return Color(cal.cgColor)
         }
-        
-        return .gray
-        
-    }
-   
-}
 
+        return .gray
+
+    }
+
+}

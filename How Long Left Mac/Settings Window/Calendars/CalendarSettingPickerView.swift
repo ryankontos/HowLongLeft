@@ -12,29 +12,28 @@ import Combine
 struct CalendarSettingPickerView: View {
     @EnvironmentObject var manager: EventFetchSettingsManager
     @ObservedObject var calendarInfo: CalendarInfo
-    
-    
+
     @State private var selection: CalendarsPane.Option = .full
     private var selectionPublisher: PassthroughSubject<CalendarsPane.Option, Never>
-    
+
     init(calendarInfo: CalendarInfo) {
         self.calendarInfo = calendarInfo
-        
+
         self.selectionPublisher = PassthroughSubject<CalendarsPane.Option, Never>()
     }
-    
+
     var body: some View {
         HStack {
             HStack {
                 Circle()
                     .foregroundStyle(getColor())
                     .frame(width: 9)
-                
+
                 Text(calendarInfo.title!)
                     .lineLimit(1)
                 Spacer()
             }
-            
+
             Picker(selection: $selection, content: {
                 ForEach(CalendarsPane.Option.allCases) {
                     Text($0.rawValue)
@@ -45,21 +44,22 @@ struct CalendarSettingPickerView: View {
             })
             .frame(width: 160)
             .pickerStyle(.menu)
-            .onChange(of: selection) { newValue in
+            .onChange(of: selection) { _, newValue in
+                print("OC 5")
                 selectionPublisher.send(newValue)
             }
         }
-        .onAppear() {
+        .onAppear {
             updateSelectionFromItem()
         }
         .onReceive(calendarInfo.objectWillChange, perform: { _ in
             updateSelectionFromItem()
         })
-        .onChange(of: calendarInfo, perform: { new in
-            
+        .onChange(of: calendarInfo) { _, _ in
+            print("OC 6")
             updateSelectionFromItem()
-            
-        })
+
+        }
         .onReceive(selectionPublisher) { newSelection in
             switch newSelection {
             case .full:
@@ -71,19 +71,19 @@ struct CalendarSettingPickerView: View {
             }
         }
     }
-    
+
     func getColor() -> Color {
         if let cal = manager.getEKCalendar(for: calendarInfo) {
             return Color(cal.cgColor)
         }
         return .gray
     }
-    
+
     func updateSelectionFromItem() {
-        
+
         let containsApp = manager.containsContext(calendarInfo: calendarInfo, contextID: HLLStandardCalendarContexts.app.rawValue)
         let containsStatusItem = manager.containsContext(calendarInfo: calendarInfo, contextID: MacCalendarContexts.statusItem.rawValue)
-        
+
         if containsApp && containsStatusItem {
             selection = .full
         } else if containsApp {
@@ -91,6 +91,6 @@ struct CalendarSettingPickerView: View {
         } else {
             selection = .off
         }
-        
+
     }
 }

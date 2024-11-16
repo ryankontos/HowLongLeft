@@ -5,15 +5,13 @@
 //  Created by Ryan on 22/9/2024.
 //
 
-import WidgetKit
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
+import WidgetKit
 
 struct Provider: AppIntentTimelineProvider {
     func recommendations() -> [AppIntentRecommendation<HLLWidgetConfigurationIntent>] {
-
-        return [.init(intent: .init(), description: "Main")]
-
+        [.init(intent: .init(), description: "Main")]
     }
 
     typealias Intent = HLLWidgetConfigurationIntent
@@ -23,23 +21,21 @@ struct Provider: AppIntentTimelineProvider {
     let defaultContainer = HLLCoreServicesContainer(id: "iOSWidget")
 
     init() {
-
         widgetManager = WidgetTimePointManager(eventCache: defaultContainer.eventCache)
-
     }
 
     let widgetManager: WidgetTimePointManager
 
-    func placeholder(in context: Context) -> TimePointEntry {
+    func placeholder(in _: Context) -> TimePointEntry {
         TimePointEntry(date: Date(), timePoint: nil, configuration: HLLWidgetConfigurationIntent())
     }
 
-    func snapshot(for configuration: HLLWidgetConfigurationIntent, in context: Context) async -> TimePointEntry {
+    func snapshot(for configuration: HLLWidgetConfigurationIntent, in _: Context) async -> TimePointEntry {
         let currentPoint = widgetManager.timePointStore.currentPoint
         return TimePointEntry(date: Date(), timePoint: currentPoint, configuration: configuration)
     }
 
-    func timeline(for configuration: HLLWidgetConfigurationIntent, in context: Context) async -> Timeline<TimePointEntry> {
+    func timeline(for configuration: HLLWidgetConfigurationIntent, in _: Context) async -> Timeline<TimePointEntry> {
         var entries: [TimePointEntry] = []
 
         // Generate entries from the widget manager using its timeline conversion logic
@@ -54,9 +50,9 @@ struct Provider: AppIntentTimelineProvider {
         return Timeline(entries: entries, policy: .atEnd)
     }
 
-//    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
+    //    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
+    //        // Generate a list containing the contexts this widget is relevant in.
+    //    }
 }
 
 struct How_Long_Left_WidgetEntryView : View {
@@ -69,7 +65,6 @@ struct How_Long_Left_WidgetEntryView : View {
                 if let event = timePoint.fetchSingleEvent(accordingTo: .soonestCountdownDate) {
                     Text("\(event.title)")
                         .font(.headline)
-
                 } else {
                     Text("No events")
                         .font(.headline)
@@ -78,7 +73,6 @@ struct How_Long_Left_WidgetEntryView : View {
                 Text("No events available")
                     .font(.headline)
             }
-
         }
     }
 }
@@ -90,7 +84,6 @@ struct How_Long_Left_Widget: Widget {
         AppIntentConfiguration(kind: kind, intent: HLLWidgetConfigurationIntent.self, provider: Provider()) { entry in
             How_Long_Left_WidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
-
         }
         #if os(iOS)
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryRectangular])

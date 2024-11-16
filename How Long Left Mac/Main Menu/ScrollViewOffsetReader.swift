@@ -5,9 +5,9 @@
 //  Created by Ryan on 10/11/2024.
 //
 
+import Combine
 import Foundation
 import SwiftUI
-import Combine
 
 struct ScrollViewOffsetReader: View {
     private let onScrollingStarted: () -> Void

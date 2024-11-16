@@ -8,8 +8,8 @@
 #if canImport(ActivityKit)
 import ActivityKit
 #endif
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 struct How_Long_Left_WidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
@@ -30,10 +30,9 @@ struct How_Long_Left_WidgetLiveActivity: Widget {
             }
             .activityBackgroundTint(Color.cyan)
             .activitySystemActionForegroundColor(Color.black)
-
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
+                // Expanded UI goes here. Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
                     Text("Leading")
@@ -67,15 +66,15 @@ extension How_Long_Left_WidgetAttributes {
 extension How_Long_Left_WidgetAttributes.ContentState {
     fileprivate static var smiley: How_Long_Left_WidgetAttributes.ContentState {
         How_Long_Left_WidgetAttributes.ContentState(emoji: "😀")
-     }
+    }
 
-     fileprivate static var starEyes: How_Long_Left_WidgetAttributes.ContentState {
-         How_Long_Left_WidgetAttributes.ContentState(emoji: "🤩")
-     }
+    fileprivate static var starEyes: How_Long_Left_WidgetAttributes.ContentState {
+        How_Long_Left_WidgetAttributes.ContentState(emoji: "🤩")
+    }
 }
 
 #Preview("Notification", as: .content, using: How_Long_Left_WidgetAttributes.preview) {
-   How_Long_Left_WidgetLiveActivity()
+    How_Long_Left_WidgetLiveActivity()
 } contentStates: {
     How_Long_Left_WidgetAttributes.ContentState.smiley
     How_Long_Left_WidgetAttributes.ContentState.starEyes

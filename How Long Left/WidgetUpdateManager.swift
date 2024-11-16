@@ -5,10 +5,10 @@
 //  Created by Ryan on 23/9/2024.
 //
 
-import Foundation
-import WidgetKit
 import Combine
+import Foundation
 import HowLongLeftKit
+import WidgetKit
 
 class WidgetUpdateManager {
     private var eventCacheSubscription: AnyCancellable?
@@ -35,41 +35,36 @@ class WidgetUpdateManager {
         }
     }
 
-    public func checkIfWidgetNeedsReload() async {
+    func checkIfWidgetNeedsReload() async {
+        // Wait until the eventCache has been updated
+        let widgetEventCache = widgetContainer.eventCache
+        while widgetEventCache.cacheSummaryHash == nil {
+            try? await Task.sleep(nanoseconds: 500_000_000) // Wait 0.5 seconds
+        }
+        // Get the new hash
+        let newHash = widgetEventCache.cacheSummaryHash
+        // Get the last known hash from UserDefaults
+        let lastHash = defaults.string(forKey: userDefaultsKey)
 
-            // Wait until the eventCache has been updated
-            let widgetEventCache = widgetContainer.eventCache
-            while widgetEventCache.cacheSummaryHash == nil {
-                try? await Task.sleep(nanoseconds: 500_000_000) // Wait 0.5 seconds
-            }
-            // Get the new hash
-            let newHash = widgetEventCache.cacheSummaryHash
-            // Get the last known hash from UserDefaults
-            let lastHash = defaults.string(forKey: userDefaultsKey)
+        // print("Last Hash: \(lastHash ?? "Nil")")
+        // print("New Hash: \(newHash ?? "Nil")")
 
-            // print("Last Hash: \(lastHash ?? "Nil")")
-            // print("New Hash: \(newHash ?? "Nil")")
-
-            if newHash != lastHash {
-
-                if let latestHashReloadedFor {
-
-                    if latestHashReloadedFor == newHash {
-                        print("Already reloaded for this hash, skipping")
-                        return
-                    }
-
+        if newHash != lastHash {
+            if let latestHashReloadedFor {
+                if latestHashReloadedFor == newHash {
+                    print("Already reloaded for this hash, skipping")
+                    return
                 }
-
-                latestHashReloadedFor = newHash
-
-                print("Reloading Widget")
-
-                // Hashes differ, trigger widget reload
-                WidgetCenter.shared.reloadAllTimelines()
-                // Update the stored hash
-                // defaults.set(newHash, forKey: userDefaultsKey)
             }
 
+            latestHashReloadedFor = newHash
+
+            print("Reloading Widget")
+
+            // Hashes differ, trigger widget reload
+            WidgetCenter.shared.reloadAllTimelines()
+            // Update the stored hash
+            // defaults.set(newHash, forKey: userDefaultsKey)
+        }
     }
 }

@@ -5,27 +5,24 @@
 //  Created by Ryan on 24/9/2024.
 //
 
-import Foundation
 import AppIntents
+import Foundation
 
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
 struct CalendarAppEntity: AppEntity {
     static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Calendar Entity")
 
     struct CalendarAppEntityQuery: EntityStringQuery {
-        func entities(for identifiers: [CalendarAppEntity.ID]) async throws -> [CalendarAppEntity] {
-
-            return []
+        func entities(for _: [CalendarAppEntity.ID]) async throws -> [CalendarAppEntity] {
+            []
         }
 
-        func entities(matching string: String) async throws -> [CalendarAppEntity] {
-
-            return []
+        func entities(matching _: String) async throws -> [CalendarAppEntity] {
+            []
         }
 
         func suggestedEntities() async throws -> [CalendarAppEntity] {
-
-            return []
+            []
         }
     }
     static var defaultQuery = CalendarAppEntityQuery()

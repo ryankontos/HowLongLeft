@@ -8,13 +8,11 @@
 import XCTest
 
 final class How_Long_LeftUITests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
     }
 
     override func tearDownWithError() throws {
@@ -35,7 +33,6 @@ final class How_Long_LeftUITests: XCTestCase {
             measure(metrics: [XCTApplicationLaunchMetric()]) {
                 XCUIApplication().launch()
             }
-
         }
     }
 }

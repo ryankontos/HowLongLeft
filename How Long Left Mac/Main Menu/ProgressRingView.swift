@@ -32,10 +32,9 @@ struct ProgressRingView: View {
     }
 
     var color: Color
-    @State var showPercentage: Bool = true
+    @State private var showPercentage: Bool = true
 
     var body: some View {
-
         Button(action: {
             withAnimation {
                 showPercentage.toggle()
@@ -48,27 +47,24 @@ struct ProgressRingView: View {
                     .foregroundColor(Color.gray)
 
                 Circle() // Foreground circle showing progress
-                    .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0)))
+                    .trim(from: 0.0, to: CGFloat(min(progress, 1.0)))
                     .stroke(style: StrokeStyle(lineWidth: width, lineCap: .round, lineJoin: .round))
                     .foregroundColor(color.opacity(0.7))
                     .rotationEffect(Angle(degrees: 270.0))
                     .animation(.linear, value: progress)
 
-                    Text("\(Int(progress * 100))")
-                        .font(.system(size: size / 2.5))
-                        .fontWeight(.regular)
-                        .foregroundColor(.secondary)
-                        .opacity(showPercentage ? 1 : 0)
-
+                Text("\(Int(progress * 100))")
+                    .font(.system(size: size / 2.5))
+                    .fontWeight(.regular)
+                    .foregroundColor(.secondary)
+                    .opacity(showPercentage ? 1 : 0)
             }
             .contentShape(Rectangle())
-
         })
         .buttonStyle(PlainButtonStyle())
 
         .frame(width: size, height: size)
         .padding(width / 2)
-
     }
 }
 

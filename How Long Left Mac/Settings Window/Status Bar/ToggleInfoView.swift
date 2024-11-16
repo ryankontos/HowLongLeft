@@ -19,9 +19,9 @@ struct ToggleInfoView: View {
             Text(labelText)
             Spacer()
             HStack {
-                Toggle(isOn: $isOn.animation(.spring(duration: 0.5)), label: {
+                Toggle(isOn: $isOn.animation(.spring(duration: 0.5))) {
                     EmptyView()
-                })
+                }
                 .labelsHidden()
                 .toggleStyle(.switch)
 
@@ -32,7 +32,6 @@ struct ToggleInfoView: View {
                 })
                 .buttonStyle(BorderlessButtonStyle())
                 .disabled(!isOn)
-
             }
         }
     }

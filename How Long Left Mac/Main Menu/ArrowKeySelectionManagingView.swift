@@ -5,11 +5,10 @@
 //  Created by Ryan on 6/6/2024.
 //
 
-import SwiftUI
 import FluidMenuBarExtra
+import SwiftUI
 
 struct ArrowKeySelectionManagingView: View {
-
     var selectionManager: WindowSelectionManager
 
     var iden: String
@@ -23,9 +22,7 @@ struct ArrowKeySelectionManagingView: View {
 
     var body: some View {
         ArrowKeyDetector(id: iden, onLeftArrow: {
-
         }, onRightArrow: {
-
         }, onUpArrow: {
             selectionManager.selectPreviousItem()
         }, onDownArrow: {
@@ -33,7 +30,6 @@ struct ArrowKeySelectionManagingView: View {
         }, onEnter: {
             selectionManager.clickItem()
         }, onEsc: {
-
         })
     }
 }

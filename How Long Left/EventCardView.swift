@@ -41,9 +41,8 @@ struct EventCardView: View {
     private func countdownText(to date: Date) -> String {
         let current = Date()
         let components = Calendar.current.dateComponents([.day, .hour, .minute], from: current, to: date)
-        let formatted = String(format: "%02d days %02d hours %02d mins",
-                               components.day ?? 0, components.hour ?? 0, components.minute ?? 0)
-        return formatted
+        return String(format: "%02d days %02d hours %02d mins",
+                      components.day ?? 0, components.hour ?? 0, components.minute ?? 0)
     }
 
     private func progressValue(for date: Date) -> Double {
@@ -54,5 +53,5 @@ struct EventCardView: View {
 }
 
 #Preview {
-    EventCardView(eventName: "Sample Event", endDate: Date().addingTimeInterval(86400 * 5))
+    EventCardView(eventName: "Sample Event", endDate: Date().addingTimeInterval(86_400 * 5))
 }

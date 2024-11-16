@@ -8,9 +8,7 @@
 import Foundation
 
 class DefaultContainer {
-
     init() {
-
         calendarReader = CalendarSource(requestCalendarAccessImmediately: true)
 
         let appSet: Set<String> = [HLLiOSCalendarContexts.app.rawValue]
@@ -19,7 +17,5 @@ class DefaultContainer {
 
         eventCache = EventCache(calendarReader: calendarReader, calendarProvider: calendarPrefsManager)
         pointStore = TimePointStore(eventCache: eventCache)
-
     }
-
 }

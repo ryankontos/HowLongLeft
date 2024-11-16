@@ -5,11 +5,10 @@
 //  Created by Ryan on 5/5/2024.
 //
 
-import XCTest
 @testable import How_Long_Left_Mac
+import XCTest
 
 final class How_Long_Left_MacTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -32,5 +31,4 @@ final class How_Long_Left_MacTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
 }

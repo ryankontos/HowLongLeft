@@ -8,7 +8,6 @@
 import XCTest
 
 final class How_Long_Left_watchOS_Watch_AppUITestsLaunchTests: XCTestCase {
-
     override static var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

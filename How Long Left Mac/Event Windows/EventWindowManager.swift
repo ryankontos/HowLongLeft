@@ -5,15 +5,15 @@
 //  Created by Ryan on 13/11/2024.
 //
 
-import Foundation
-import SwiftUI
 import AppKit
+import Foundation
 import HowLongLeftKit
+import SwiftUI
 
 class EventWindowManager: NSObject, ObservableObject, NSWindowDelegate {
-    @Published private var eventWindows: [UUID: EventWindow] = [:]
+    @Published private var eventWindows: [UUID: EventWindowWeakWrapper] = [:]
     private var allowMultipleWindows: Bool
-    
+
     var container: MacDefaultContainer
 
     init(allowMultipleWindows: Bool, container: MacDefaultContainer) {
@@ -21,37 +21,45 @@ class EventWindowManager: NSObject, ObservableObject, NSWindowDelegate {
         self.container = container
     }
 
-    func openWindow(for event: Event) {
-        if !allowMultipleWindows, let existingWindow = eventWindows.values.first(where: { $0.event.id == event.id }) {
-            existingWindow.activate()
-        
+    func openWindow(for event: Event, withEventProvider: TimePointStore) {
+        if !allowMultipleWindows {
+            Task {
+                for wrapper in eventWindows.values {
+                    if let existingWindow = wrapper.value,
+                       let existingEvent = await existingWindow.getEvent(),
+                       existingEvent.eventID == event.eventID {
+                        existingWindow.activate()
+                        return
+                    }
+                }
+
+                // If no existing window is found, create a new one
+                createNewWindow(for: event, withEventProvider: withEventProvider)
+            }
         } else {
-     
-            let newWindow = EventWindow(event: event, container: container)
-
-            newWindow.window?.delegate = self
-            
-            eventWindows[newWindow.id] = newWindow
+            createNewWindow(for: event, withEventProvider: withEventProvider)
         }
     }
-    
+
+    private func createNewWindow(for event: Event, withEventProvider: TimePointStore) {
+        let newWindow = EventWindow(event: event, container: container, eventProvider: withEventProvider)
+        newWindow.window?.delegate = self
+        eventWindows[newWindow.id] = EventWindowWeakWrapper(value: newWindow)
+    }
+
     func windowWillClose(_ notification: Notification) {
-       
-        // Get window id from notification object
-        guard let window = notification.object as? NSWindow, let windowID = window.identifier else {
-            print("Failed to get window ID from windowWillClose notification")
-            return
-        }
-        
-        guard let windowID = UUID(uuidString: windowID.rawValue as String) else {
-            print("Failed to convert window ID to UUID")
-            return
-        }
-        
-        print("Window with ID \(windowID) closed")
-            
-        eventWindows.removeValue(forKey: windowID)
-        
-    }
+        guard let window = notification.object as? NSWindow,
+              let windowID = window.identifier?.rawValue,
+              let id = UUID(uuidString: windowID) else { return }
 
+        eventWindows[id] = nil
+        print("EventWindowWeakWrapper for \(id) removed.")
+    }
+}
+
+class EventWindowWeakWrapper {
+    weak var value: EventWindow?
+    init(value: EventWindow? = nil) {
+        self.value = value
+    }
 }

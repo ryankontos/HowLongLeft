@@ -5,13 +5,12 @@
 //  Created by Ryan on 15/5/2024.
 //
 
-import Foundation
-import Settings
 import AppKit
+import Foundation
 import HowLongLeftKit
+import Settings
 
 class SettingsWindow: NSObject, ObservableObject, NSWindowDelegate {
-
     let calendarManager: EventFilterDefaultsManager
     let eventListSettingsManager: EventListSettingsManager
 
@@ -23,7 +22,6 @@ class SettingsWindow: NSObject, ObservableObject, NSWindowDelegate {
     }
 
     func open() {
-
         NSApp.deactivate()
         NSApp.activate(ignoringOtherApps: true)
 
@@ -34,43 +32,39 @@ class SettingsWindow: NSObject, ObservableObject, NSWindowDelegate {
 
         let settingsWindowController = getSettingsController()
 
-            settingsWindowController.window!.delegate = self
+        settingsWindowController.window!.delegate = self
         settingsWindowController.window!.collectionBehavior = [.transient, .auxiliary]
 
         settingsWindowController.window!.hidesOnDeactivate = false
         settingsWindowController.window?.level = .floating
-            settingsWindowController.hidesToolbarForSingleItem = false
+        settingsWindowController.hidesToolbarForSingleItem = false
 
-            settingsWindowController.isAnimated = false
-            settingsWindowController.show()
+        settingsWindowController.isAnimated = false
+        settingsWindowController.show()
 
-            settingsWindowController.window!.makeMain()
-            settingsWindowController.window!.makeKeyAndOrderFront(nil)
+        settingsWindowController.window!.makeMain()
+        settingsWindowController.window!.makeKeyAndOrderFront(nil)
 
         NSApp.activate(ignoringOtherApps: true)
 
         self.controller = settingsWindowController
-
     }
 
-    func windowDidResignKey(_ notification: Notification) {
-
+    func windowDidResignKey(_: Notification) {
         print("Settings window resigned key")
     }
 
-    func windowWillClose(_ notification: Notification) {
+    func windowWillClose(_: Notification) {
         NSApp.setActivationPolicy(.accessory)
     }
 
     func getSettingsController() -> SettingsWindowController {
-
-        return SettingsWindowController(
+        SettingsWindowController(
             panes: [
                 Settings.Pane(
                     identifier: Settings.PaneIdentifier.general,
                     title: "General",
                     toolbarIcon: NSImage(systemSymbolName: "gear", accessibilityDescription: nil)!
-
                 ) {
                     GeneralPane()
                         .environmentObject(eventListSettingsManager)
@@ -81,7 +75,6 @@ class SettingsWindow: NSObject, ObservableObject, NSWindowDelegate {
                     identifier: Settings.PaneIdentifier.calendars,
                     title: "Calendars",
                     toolbarIcon: NSImage(systemSymbolName: "calendar", accessibilityDescription: nil)!
-
                 ) {
                     CalendarsPane()
                         .environmentObject(calendarManager)
@@ -91,15 +84,11 @@ class SettingsWindow: NSObject, ObservableObject, NSWindowDelegate {
                     identifier: Settings.PaneIdentifier.statusItem,
                     title: "Status Bar",
                     toolbarIcon: NSImage(systemSymbolName: "clock", accessibilityDescription: nil)!
-
                 ) {
                     StatusBarPane()
                         .environmentObject(calendarManager)
                 }
-
             ]
         )
-
     }
-
 }

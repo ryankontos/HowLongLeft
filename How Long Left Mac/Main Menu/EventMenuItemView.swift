@@ -5,20 +5,18 @@
 //  Created by Ryan on 13/5/2024.
 //
 
-import SwiftUI
-import HowLongLeftKit
-import FluidMenuBarExtra
 import Defaults
+import FluidMenuBarExtra
+import HowLongLeftKit
+import SwiftUI
 
 struct EventMenuItemView: View, Equatable {
-
     @Default(.showLocationsInMainMenu) var showLocations
 
     var timerContainer: GlobalTimerContainer
     var event: Event
     var forceProminent: Bool
 
-    //@ObservedObject private var progressManager: EventProgressManager
     @ObservedObject private var selectedManager: StoredEventManager
 
     @EnvironmentObject private var source: CalendarSource
@@ -28,18 +26,16 @@ struct EventMenuItemView: View, Equatable {
     init(event: Event, selectedManager: StoredEventManager, timerContainer: GlobalTimerContainer, forceProminent: Bool) {
         self.event = event
         self.selectedManager = selectedManager
-       
+
         self.timerContainer = timerContainer
         self.forceProminent = forceProminent
     }
 
-    static func == (lhs: EventMenuItemView, rhs: EventMenuItemView) -> Bool {
-        return lhs.event == rhs.event && lhs.forceProminent == rhs.forceProminent
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.event == rhs.event && lhs.forceProminent == rhs.forceProminent
     }
 
     var body: some View {
-        
-        
         VStack {
             HStack(spacing: 8) {
                 if selectedManager.isEventStored(event: event) {
@@ -66,38 +62,39 @@ struct EventMenuItemView: View, Equatable {
                         }.foregroundStyle(.secondary)
                     }
                 }.lineLimit(1)
-                if !event.isAllDay {
+
+                if !event.isAllDay || getProminence() {
                     Spacer()
                 }
-                if event.status() == .inProgress, getProminence() {
+
+                if event.status() == .inProgress {
                     ProgressRingView(
                         progress: 0.5,
                         ringWidth: 4,
                         ringSize: 22,
                         color: getColor()
                     )
+                    .background(Color(.red))
                 }
             }
         }
     }
 
     private func getProminence() -> Bool {
-        return forceProminent || event.status() != .upcoming
+        forceProminent || event.status() != .upcoming
     }
 
     private func getColor() -> Color {
         Color(source.lookupCalendar(withID: event.calendarID)?.cgColor ?? .white)
     }
 }
-
-
 /*
-#Preview {
-    EventMenuListItem(
-        event: Event(title: "Sample Event", start: Date(), end: Date().addingTimeInterval(1000)),
-        selectedManager: StoredEventManager(),
-        timerContainer: GlobalTimerContainer(),
-        forceProminent: false
-    )
-}
-*/
+ #Preview {
+ EventMenuListItem(
+ event: Event(title: "Sample Event", start: Date(), end: Date().addingTimeInterval(1000)),
+ selectedManager: StoredEventManager(),
+ timerContainer: GlobalTimerContainer(),
+ forceProminent: false
+ )
+ }
+ */

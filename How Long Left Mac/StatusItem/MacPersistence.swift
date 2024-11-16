@@ -5,8 +5,8 @@
 //  Created by Ryan on 23/6/2024.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 class MacPersistentContainer {
     static let shared = MacPersistentContainer()

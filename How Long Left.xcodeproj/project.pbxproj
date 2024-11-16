@@ -28,12 +28,15 @@
 		BF3CAF112BF4AC4C003035C7 /* MacDefaultContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF102BF4AC4C003035C7 /* MacDefaultContainer.swift */; };
 		BF3CAF142BF4C3F0003035C7 /* CalendarSettingPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF132BF4C3F0003035C7 /* CalendarSettingPickerView.swift */; };
 		BF3CAF162BF4C518003035C7 /* MacCalendarContexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF152BF4C518003035C7 /* MacCalendarContexts.swift */; };
+		BF3F0F962CE8CB13004785F6 /* StatusItemEventProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F0F952CE8CB13004785F6 /* StatusItemEventProvider.swift */; };
 		BF40D8B22BEC8AE200E26563 /* ToggleCalendarStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D8B12BEC8AE200E26563 /* ToggleCalendarStateView.swift */; };
 		BF46AA832C2055DE005A6E7A /* MenuEventViewParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF46AA822C2055DE005A6E7A /* MenuEventViewParent.swift */; };
 		BF4A055C2BF20A5B00678073 /* StatusItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */; };
 		BF4A0A602C1783E70094A170 /* MenuTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A0A5F2C1783E70094A170 /* MenuTimelineView.swift */; };
 		BF4D145D2C2149A000ED054C /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4D145C2C2149A000ED054C /* ProgressRingView.swift */; };
 		BF64830A2C27002F00C58A13 /* HiddenEventsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6483092C27002F00C58A13 /* HiddenEventsPane.swift */; };
+		BF65BCDE2CE776D100C4BD92 /* Card_EventPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF65BCDD2CE776D100C4BD92 /* Card_EventPickerView.swift */; };
+		BF65BCE02CE77C7200C4BD92 /* EventPickerViewGroupFetcherSettingsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF65BCDF2CE77C7200C4BD92 /* EventPickerViewGroupFetcherSettingsProvider.swift */; };
 		BF6688E12C25E4770075D69A /* StatusBarPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6688E02C25E4770075D69A /* StatusBarPane.swift */; };
 		BF66DA7D2C677D0E00C39EC9 /* ToggleInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF66DA7C2C677D0E00C39EC9 /* ToggleInfoView.swift */; };
 		BF6A0D792C5264C90082E6BB /* PieProgess.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A0D782C5264C90082E6BB /* PieProgess.swift */; };
@@ -290,12 +293,15 @@
 		BF3CAF102BF4AC4C003035C7 /* MacDefaultContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacDefaultContainer.swift; sourceTree = "<group>"; };
 		BF3CAF132BF4C3F0003035C7 /* CalendarSettingPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSettingPickerView.swift; sourceTree = "<group>"; };
 		BF3CAF152BF4C518003035C7 /* MacCalendarContexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCalendarContexts.swift; sourceTree = "<group>"; };
+		BF3F0F952CE8CB13004785F6 /* StatusItemEventProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemEventProvider.swift; sourceTree = "<group>"; };
 		BF40D8B12BEC8AE200E26563 /* ToggleCalendarStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCalendarStateView.swift; sourceTree = "<group>"; };
 		BF46AA822C2055DE005A6E7A /* MenuEventViewParent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEventViewParent.swift; sourceTree = "<group>"; };
 		BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemStore.swift; sourceTree = "<group>"; };
 		BF4A0A5F2C1783E70094A170 /* MenuTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTimelineView.swift; sourceTree = "<group>"; };
 		BF4D145C2C2149A000ED054C /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
 		BF6483092C27002F00C58A13 /* HiddenEventsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenEventsPane.swift; sourceTree = "<group>"; };
+		BF65BCDD2CE776D100C4BD92 /* Card_EventPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card_EventPickerView.swift; sourceTree = "<group>"; };
+		BF65BCDF2CE77C7200C4BD92 /* EventPickerViewGroupFetcherSettingsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPickerViewGroupFetcherSettingsProvider.swift; sourceTree = "<group>"; };
 		BF6688E02C25E4770075D69A /* StatusBarPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPane.swift; sourceTree = "<group>"; };
 		BF66DA7C2C677D0E00C39EC9 /* ToggleInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleInfoView.swift; sourceTree = "<group>"; };
 		BF6A0D782C5264C90082E6BB /* PieProgess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieProgess.swift; sourceTree = "<group>"; };
@@ -587,12 +593,23 @@
 			path = Calendars;
 			sourceTree = "<group>";
 		};
+		BF65BCDC2CE776BB00C4BD92 /* Event Picker Vew */ = {
+			isa = PBXGroup;
+			children = (
+				BF14D5572CE769FE00F211FE /* EventPickerView.swift */,
+				BF65BCDD2CE776D100C4BD92 /* Card_EventPickerView.swift */,
+				BF65BCDF2CE77C7200C4BD92 /* EventPickerViewGroupFetcherSettingsProvider.swift */,
+			);
+			path = "Event Picker Vew";
+			sourceTree = "<group>";
+		};
 		BF70D48F2C2B326F004833F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */,
 				BFD31F6A2C6600D100792CD5 /* StatusTextGenerator.swift */,
 				BF6A0D782C5264C90082E6BB /* PieProgess.swift */,
+				BF3F0F952CE8CB13004785F6 /* StatusItemEventProvider.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -731,7 +748,7 @@
 				BF8A5A5F2C23272C001A4701 /* MacDefaults.swift */,
 				BFF0E67B2BE6881F0023AB22 /* ContentView.swift */,
 				BF3CAF152BF4C518003035C7 /* MacCalendarContexts.swift */,
-				BF14D5572CE769FE00F211FE /* EventPickerView.swift */,
+				BF65BCDC2CE776BB00C4BD92 /* Event Picker Vew */,
 				BFE232892BF4F1E9004F55D8 /* StatusItemCountdown.swift */,
 				BF3CAF052BF4A7A2003035C7 /* Settings Window */,
 				BFE7114C2BF27211000A167E /* PushLeading.swift */,
@@ -1297,6 +1314,7 @@
 			files = (
 				BFC313C32C0094FC00778D52 /* MenuEventView.swift in Sources */,
 				BF9D25F92C68DC510072329F /* StatusBarPaneContent.swift in Sources */,
+				BF3F0F962CE8CB13004785F6 /* StatusItemEventProvider.swift in Sources */,
 				BF66DA7D2C677D0E00C39EC9 /* ToggleInfoView.swift in Sources */,
 				BFE7114D2BF27211000A167E /* PushLeading.swift in Sources */,
 				BFDC7ACB2C2132C200EF8AF5 /* EventInfoItemView.swift in Sources */,
@@ -1340,11 +1358,13 @@
 				BFF0E67A2BE6881F0023AB22 /* AppDelegate.swift in Sources */,
 				BF3CAF0F2BF4AB6F003035C7 /* GeneralPane.swift in Sources */,
 				BF3CAF142BF4C3F0003035C7 /* CalendarSettingPickerView.swift in Sources */,
+				BF65BCDE2CE776D100C4BD92 /* Card_EventPickerView.swift in Sources */,
 				BF6688E12C25E4770075D69A /* StatusBarPane.swift in Sources */,
 				BFC6AD242C29388100DEB881 /* StatusItemContainer.swift in Sources */,
 				BF7429252CE0A92A0071C7D4 /* ScrollViewOffsetReader.swift in Sources */,
 				BFAC93E92C09FE0C00AB66BF /* PositionObservingView.swift in Sources */,
 				BFBF9F0B2C27DE8A00B32D26 /* MacPersistence.swift in Sources */,
+				BF65BCE02CE77C7200C4BD92 /* EventPickerViewGroupFetcherSettingsProvider.swift in Sources */,
 				BFDDA3DB2C25B406001160A1 /* MenuNoCalendarAccessView.swift in Sources */,
 				BF4D145D2C2149A000ED054C /* ProgressRingView.swift in Sources */,
 			);

@@ -6,8 +6,8 @@
 //
 
 import Cocoa
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -17,29 +17,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     static var initTime = Date()
 
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-       // //print("Launched")
-        // Initialize the status item store
-
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        
     }
 
-    func applicationWillBecomeActive(_ notification: Notification) {
-
-        DispatchQueue.main.async {
-
-           // NSApplication.shared.windows.forEach({ print("Window: \($0.description), \($0.isVisible)") })
-
-            // print("Activating with \(windowsCount) visible windows")
-
-        }
-
+    func applicationWillBecomeActive(_: Notification) {
+            
+        print("Will become active")
+      
+    }
+    
+    func applicationDidBecomeActive(_ notification: Notification) {
+        
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
+    func applicationWillTerminate(_: Notification) {
+        
         // Insert code here to tear down your application
     }
 
-    func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
-        return true
+    func applicationSupportsSecureRestorableState(_: NSApplication) -> Bool {
+        true
     }
 }

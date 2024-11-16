@@ -14,7 +14,6 @@ struct MenuNoEventsView: View {
             Text("No Events")
                 .foregroundStyle(.secondary)
             Spacer()
-
         }
         .frame(height: 60)
     }

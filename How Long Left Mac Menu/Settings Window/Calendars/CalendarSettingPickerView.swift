@@ -5,9 +5,9 @@
 //  Created by Ryan on 15/5/2024.
 //
 
-import SwiftUI
-import HowLongLeftKit
 import Combine
+import HowLongLeftKit
+import SwiftUI
 
 struct CalendarSettingPickerView: View {
     @EnvironmentObject var manager: EventFilterDefaultsManager
@@ -23,7 +23,7 @@ struct CalendarSettingPickerView: View {
         case off = "Off"
 
         var id: String {
-            return self.rawValue
+            self.rawValue
         }
     }
 
@@ -79,11 +79,13 @@ struct CalendarSettingPickerView: View {
                 manager.updateContexts(
                     for: calendarInfo,
                     addContextIDs: [HLLStandardCalendarContexts.app.rawValue, MacCalendarContexts.statusItem.rawValue])
+
             case .menuOnly:
                 manager.updateContexts(
                     for: calendarInfo,
                     addContextIDs: [HLLStandardCalendarContexts.app.rawValue],
                     removeContextIDs: [MacCalendarContexts.statusItem.rawValue])
+
             case .off:
                 manager.updateContexts(
                     for: calendarInfo,

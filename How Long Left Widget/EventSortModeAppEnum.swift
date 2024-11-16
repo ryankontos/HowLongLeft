@@ -5,8 +5,8 @@
 //  Created by Ryan on 24/9/2024.
 //
 
-import Foundation
 import AppIntents
+import Foundation
 
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
 enum EventSortModeAppEnum: String, AppEnum {

@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct ArrowKeyDetector: NSViewRepresentable {
-
     var id: String
 
     var onLeftArrow: (() -> Void)?
@@ -40,6 +39,7 @@ struct ArrowKeyDetector: NSViewRepresentable {
                 parent.onEnter?()
             case 53: // Up arrow key code
                 parent.onEsc?()
+
             default:
                 break
             }
@@ -56,7 +56,7 @@ struct ArrowKeyDetector: NSViewRepresentable {
         return view
     }
 
-    func updateNSView(_ nsView: NSView, context: Context) {}
+    func updateNSView(_: NSView, context _: Context) {}
 
     class CustomKeyView: NSView {
         var coordinator: Coordinator?
@@ -76,12 +76,12 @@ struct ArrowKeyDetector: NSViewRepresentable {
         }
 
         override var acceptsFirstResponder: Bool {
-            return true
+            true
         }
 
         override func viewDidMoveToWindow() {
-           // print("Make FR \(coordinator!.parent.id)")
-           // window!.makeFirstResponder(self)
+            // print("Make FR \(coordinator!.parent.id)")
+            // window!.makeFirstResponder(self)
 
         }
     }

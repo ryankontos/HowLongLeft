@@ -10,7 +10,6 @@ import SwiftUI
 struct MenuNoCalendarAccessView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
-
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: "calendar.badge.exclamationmark")
                     .symbolRenderingMode(.palette)
@@ -23,9 +22,7 @@ struct MenuNoCalendarAccessView: View {
                 Text("How Long Left does not have access to your calendar.")
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.leading)
-
             }
-
         }
 
         .padding(.horizontal, 10)
@@ -34,16 +31,14 @@ struct MenuNoCalendarAccessView: View {
     }
 
     private var macOS14Avaliable: Bool {
-            guard #available(macOS 14, *) else {
-                return true
-            }
-            return false
+        guard #available(macOS 14, *) else {
+            return true
         }
-
+        return false
+    }
 }
 
 #Preview {
     MenuNoCalendarAccessView()
         .frame(width: 300)
-
 }

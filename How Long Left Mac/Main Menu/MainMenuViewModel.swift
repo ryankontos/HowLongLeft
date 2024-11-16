@@ -5,9 +5,9 @@
 //  Created by Ryan on 9/11/2024.
 //
 
+import FluidMenuBarExtra
 import Foundation
 import HowLongLeftKit
-import FluidMenuBarExtra
 
 class MainMenuEnvironment: ObservableObject {
     @Published var displayEvent: Event?
@@ -15,7 +15,6 @@ class MainMenuEnvironment: ObservableObject {
 
 @MainActor
 class MainMenuViewModel: @preconcurrency MenuSelectableItemsProvider {
-
     var pointStore: TimePointStore
     var selectedManager: StoredEventManager
     var listSettings: EventListSettingsManager
@@ -27,11 +26,11 @@ class MainMenuViewModel: @preconcurrency MenuSelectableItemsProvider {
             group.events.map { getEventId(eventId: $0.id, groupId: group.title ?? "nil") }
         } + groups.upcomingGroups.flatMap { group in
             group.events.map { getEventId(eventId: $0.id, groupId: group.title ?? "nil") }
-        } + OptionsSectionButton.allCases.map { $0.rawValue }
+        } + OptionsSectionButton.allCases.map(\.rawValue)
     }
 
     func getEventId(eventId: String, groupId: String) -> String {
-        return "\(groupId)-(\(eventId)"
+        "\(groupId)-(\(eventId)"
     }
 
     func getEventGroups(at date: Date) -> EventGroups {

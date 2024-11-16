@@ -6,75 +6,81 @@
 //
 
 import Foundation
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
 
 class EventWindow: ObservableObject, Identifiable {
-    
-    static let defaultSize: CGSize = CGSize(width: 250, height: 250)
-    
+    static let defaultSize = CGSize(width: 250, height: 250)
     static let aspectRatio: CGFloat = 1
-    
     static let minWidth: CGFloat = 200
     static let minHeight: CGFloat = 200
-    
     static let maxWidth: CGFloat = 450
     static let maxHeight: CGFloat = 450
-    
+
+    var eventProvider: TimePointStore
     let id = UUID()
-    let event: Event
+    @Published var selectedEventID: String?
     weak var window: NSWindow?
-    
     private var lastSavedSize: CGSize?
-    
+
+    @MainActor func getEvent() -> Event? {
+        let currentPoint = eventProvider.currentPoint
+        let event = getChosenEvent() ?? currentPoint?.fetchSingleEvent(accordingTo: .preferInProgress)
+
+        self.window?.title = event?.title ?? "No Event"
+
+        return event
+    }
+
+    @MainActor func getChosenEvent() -> Event? {
+        let currentPoint = eventProvider.currentPoint
+        return currentPoint?.allEvents.first { $0.eventID == selectedEventID }
+    }
+
     var floating: Bool {
         get {
-            return window?.level == .floating
+            window?.level == .floating
         }
-        
         set {
             window?.level = newValue ? .floating : .normal
             objectWillChange.send()
         }
     }
-    
-    init(event: Event, container: MacDefaultContainer) {
-        self.event = event
-        
-        let content = EventWindowViewContainer(event: event, calendarSource: container.calendarReader, eventWindow: self)
+
+    init(event: Event?, container: MacDefaultContainer, eventProvider: TimePointStore) {
+        self.selectedEventID = event?.eventID
+        self.eventProvider = eventProvider
+
+        let content = EventWindowViewContainer(calendarSource: container.calendarReader, eventWindow: self, defaultContainer: container, pointStore: eventProvider)
         let hostingController = NSHostingController(rootView: content)
-        
         let window = NSWindow()
-        
+
         window.identifier = NSUserInterfaceItemIdentifier(rawValue: id.uuidString)
         window.setFrameAutosaveName(id.uuidString)
-        window.setContentSize(EventWindow.defaultSize)
+        window.setContentSize(Self.defaultSize)
         window.aspectRatio = NSSize(width: 1, height: 1)
         window.contentAspectRatio = NSSize(width: 1, height: 1)
         window.isMovableByWindowBackground = true
-        // Configure style mask
         window.styleMask = [.titled, .closable, .resizable, .miniaturizable, .fullSizeContentView]
-        window.title = event.title
         window.center()
         window.makeKeyAndOrderFront(nil)
         window.isReleasedWhenClosed = false
         window.titlebarAppearsTransparent = true
         window.makeMain()
         NSApp.activate(ignoringOtherApps: true)
-        
-        // Enforce min and max size constraints using Auto Layout
-        let minSizeConstraintWidth = hostingController.view.widthAnchor.constraint(greaterThanOrEqualToConstant: EventWindow.minWidth)
-        let minSizeConstraintHeight = hostingController.view.heightAnchor.constraint(greaterThanOrEqualToConstant: EventWindow.minHeight)
-        let maxSizeConstraintWidth = hostingController.view.widthAnchor.constraint(lessThanOrEqualToConstant: EventWindow.maxWidth)
-        let maxSizeConstraintHeight = hostingController.view.heightAnchor.constraint(lessThanOrEqualToConstant: EventWindow.maxHeight)
-        
+
+        let minSizeConstraintWidth = hostingController.view.widthAnchor.constraint(greaterThanOrEqualToConstant: Self.minWidth)
+        let minSizeConstraintHeight = hostingController.view.heightAnchor.constraint(greaterThanOrEqualToConstant: Self.minHeight)
+        let maxSizeConstraintWidth = hostingController.view.widthAnchor.constraint(lessThanOrEqualToConstant: Self.maxWidth)
+        let maxSizeConstraintHeight = hostingController.view.heightAnchor.constraint(lessThanOrEqualToConstant: Self.maxHeight)
+
         NSLayoutConstraint.activate([
             minSizeConstraintWidth,
             minSizeConstraintHeight,
             maxSizeConstraintWidth,
             maxSizeConstraintHeight
         ])
-        
+
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         window.contentView?.addSubview(hostingController.view)
 
@@ -84,34 +90,27 @@ class EventWindow: ObservableObject, Identifiable {
             hostingController.view.topAnchor.constraint(equalTo: window.contentView!.topAnchor),
             hostingController.view.bottomAnchor.constraint(equalTo: window.contentView!.bottomAnchor)
         ])
-        
+
         self.window = window
     }
 
-    public func toggleMaxSizeLock(enabled: Bool) {
-        guard let window = window else { return }
-        
+    func toggleMaxSizeLock(enabled: Bool) {
+        guard let window else { return }
+
         if enabled {
-            // Save the current size
             lastSavedSize = window.frame.size
-            
-            // Animate to max size
+
             let maxSizeFrame = NSRect(
                 x: window.frame.origin.x,
-                y: window.frame.origin.y - (EventWindow.maxHeight - window.frame.size.height),
-                width: EventWindow.maxWidth,
-                height: EventWindow.maxHeight
+                y: window.frame.origin.y - (Self.maxHeight - window.frame.size.height),
+                width: Self.maxWidth,
+                height: Self.maxHeight
             )
             window.setFrame(maxSizeFrame, display: true, animate: true)
-            
-            // Disable resizing
             window.styleMask.remove(.resizable)
         } else {
-            // Enable resizing
             window.styleMask.insert(.resizable)
-            
-            // Animate back to last saved size or default size
-            let targetSize = lastSavedSize ?? EventWindow.defaultSize
+            let targetSize = lastSavedSize ?? Self.defaultSize
             let targetFrame = NSRect(
                 x: window.frame.origin.x,
                 y: window.frame.origin.y - (targetSize.height - window.frame.size.height),
@@ -125,7 +124,7 @@ class EventWindow: ObservableObject, Identifiable {
     func activate() {
         window?.makeKeyAndOrderFront(nil)
     }
-    
+
     deinit {
         print("Deinit EventWindow")
     }

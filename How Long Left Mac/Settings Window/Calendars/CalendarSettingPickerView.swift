@@ -5,9 +5,9 @@
 //  Created by Ryan on 15/5/2024.
 //
 
-import SwiftUI
-import HowLongLeftKit
 import Combine
+import HowLongLeftKit
+import SwiftUI
 
 struct CalendarSettingPickerView: View {
     @EnvironmentObject var manager: EventFetchSettingsManager
@@ -52,20 +52,21 @@ struct CalendarSettingPickerView: View {
         .onAppear {
             updateSelectionFromItem()
         }
-        .onReceive(calendarInfo.objectWillChange, perform: { _ in
+        .onReceive(calendarInfo.objectWillChange) { _ in
             updateSelectionFromItem()
-        })
+        }
         .onChange(of: calendarInfo) { _, _ in
             print("OC 6")
             updateSelectionFromItem()
-
         }
         .onReceive(selectionPublisher) { newSelection in
             switch newSelection {
             case .full:
                 manager.updateContexts(for: calendarInfo, addContextIDs: [HLLStandardCalendarContexts.app.rawValue, MacCalendarContexts.statusItem.rawValue], notify: true)
+
             case .menuOnly:
                 manager.updateContexts(for: calendarInfo, addContextIDs: [HLLStandardCalendarContexts.app.rawValue], removeContextIDs: [MacCalendarContexts.statusItem.rawValue], notify: true)
+
             case .off:
                 manager.updateContexts(for: calendarInfo, removeContextIDs: [MacCalendarContexts.statusItem.rawValue, HLLStandardCalendarContexts.app.rawValue], notify: true)
             }
@@ -80,7 +81,6 @@ struct CalendarSettingPickerView: View {
     }
 
     func updateSelectionFromItem() {
-
         let containsApp = manager.containsContext(calendarInfo: calendarInfo, contextID: HLLStandardCalendarContexts.app.rawValue)
         let containsStatusItem = manager.containsContext(calendarInfo: calendarInfo, contextID: MacCalendarContexts.statusItem.rawValue)
 
@@ -91,6 +91,5 @@ struct CalendarSettingPickerView: View {
         } else {
             selection = .off
         }
-
     }
 }

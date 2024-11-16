@@ -5,20 +5,17 @@
 //  Created by Ryan on 22/6/2024.
 //
 
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
 
 struct HiddenEventsPane: View {
-
     @EnvironmentObject var storedEventManager: StoredEventManager
     @EnvironmentObject var calendarSource: CalendarSource
 
     let formatter = DateFormatterUtility()
 
     var body: some View {
-
         Group {
-
             let hidden = storedEventManager.getAllStoredEvents()
 
             if hidden.isEmpty {
@@ -28,11 +25,10 @@ struct HiddenEventsPane: View {
             } else {
                 hiddenEventsForm(hidden: hidden)
             }
-
         }
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
-                Button("Add", systemImage: "plus", action: {})
+                Button("Add", systemImage: "plus") {}
             }
         }
     }
@@ -56,23 +52,20 @@ struct HiddenEventsPane: View {
                             .padding(.trailing, 20)
                         }
                         Spacer()
-                        Button("Unhide", action: {
+                        Button("Unhide") {
                             withAnimation {
                                 storedEventManager.removeEventFromStore(eventInfo: info)
                             }
-                        })
+                        }
                     }
                 }
             }
-
         }
         .formStyle(.grouped)
-
     }
 }
 
 #Preview {
-
     let defaultContainer = MacDefaultContainer(id: "MacPreview")
 
     return HiddenEventsPane()

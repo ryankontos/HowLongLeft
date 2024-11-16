@@ -5,9 +5,9 @@
 //  Created by Ryan on 13/5/2024.
 //
 
-import SwiftUI
-import HowLongLeftKit
 import FluidMenuBarExtra
+import HowLongLeftKit
+import SwiftUI
 
 struct MainMenuContentView: View {
     @EnvironmentObject var pointStore: TimePointStore
@@ -16,7 +16,9 @@ struct MainMenuContentView: View {
     @EnvironmentObject var calendarSource: CalendarSource
     @EnvironmentObject var configInfo: MenuConfigurationInfo
 
-    @State var isScrolling = false
+    @State private var isScrolling = false
+
+    var statusItemPointStore: TimePointStore
 
     var selectedManager: StoredEventManager
     var selectionManager: WindowSelectionManager
@@ -67,15 +69,15 @@ struct MainMenuContentView: View {
     private func eventGroupsView(groups: EventGroups) -> some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 10) {
-                renderEventGroupSections(groups.headerGroups)
+                renderEventGroupSections(groups.headerGroups, seperateAllDay: false)
 
                 if !groups.headerGroups.isEmpty && !groups.upcomingGroups.isEmpty {
                     Divider()
                 }
 
-                renderEventGroupSections(groups.upcomingGroups)
+                renderEventGroupSections(groups.upcomingGroups, seperateAllDay: true)
             }
-            
+
             .padding(.top, 10)
             .background {
                 ScrollViewOffsetReader(
@@ -96,17 +98,23 @@ struct MainMenuContentView: View {
     }
 
     @ViewBuilder
-    private func renderEventGroupSections(_ groupSections: [TitledEventGroup]) -> some View {
+    private func renderEventGroupSections(_ groupSections: [TitledEventGroup], seperateAllDay: Bool) -> some View {
         ForEach(groupSections.indices, id: \.self) { index in
             let group = groupSections[index]
+
+            let (events, allDay) = seperateAllDay
+                ? (group.events, group.allDayEvents)
+                : (group.combinedEvents, [])
+
             MenuEventListSection(
                 id: group.title ?? "nil",
                 title: group.title,
                 info: group.info,
-                allDayEvents: group.allDayEvents,
-                events: group.events,
+                allDayEvents: allDay,
+                events: events,
                 forceProminence: group.flags.contains(.prominentSection),
                 mainMenuModel: selectionManager,
+                statusItemPointStore: statusItemPointStore,
                 eventSelectionManager: selectedManager,
                 timerContainer: GlobalTimerContainer()
             )
@@ -147,14 +155,12 @@ struct MainMenuContentView: View {
             ) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                     NSApp.terminate(nil)
-
                 }
             }
         }
     }
 
     private func getSubmenuButton(title: String, shortcut: String, idForHover: String, action: @escaping () -> Void) -> some View {
-
         SubmenuButton(
             model: selectionManager,
             idForHover: idForHover,

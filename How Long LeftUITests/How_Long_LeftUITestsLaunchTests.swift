@@ -8,7 +8,6 @@
 import XCTest
 
 final class How_Long_LeftUITestsLaunchTests: XCTestCase {
-
     override static var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

@@ -5,12 +5,11 @@
 //  Created by Ryan on 23/6/2024.
 //
 
+import CoreData
 import Foundation
 import HowLongLeftKit
-import CoreData
 
 class StatusItemConfigurationStore: ObservableObject {
-
     let context = MacPersistentContainer.shared.container.viewContext
 
     init() {
@@ -30,7 +29,6 @@ class StatusItemConfigurationStore: ObservableObject {
     }
 
     func makeNewCustomStatusItem() -> StatusItemConfiguration {
-
         let item = StatusItemConfiguration(context: context)
 
         let uuidString = UUID().uuidString
@@ -39,7 +37,6 @@ class StatusItemConfigurationStore: ObservableObject {
         item.created = Date()
         item.isCustom = true
         return item
-
     }
 
     func saveItem(item: StatusItemConfiguration) {
@@ -55,7 +52,6 @@ class StatusItemConfigurationStore: ObservableObject {
     }
 
     func createDefaultStatusItemIfNeeded() {
-
         let fetchRequest: NSFetchRequest<StatusItemConfiguration> = StatusItemConfiguration.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "identifier == %@", "MainStatusItem")
 
@@ -70,5 +66,4 @@ class StatusItemConfigurationStore: ObservableObject {
             saveItem(item: item)
         }
     }
-
 }

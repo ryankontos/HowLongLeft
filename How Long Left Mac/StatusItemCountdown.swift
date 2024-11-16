@@ -9,8 +9,7 @@ import Foundation
 import HowLongLeftKit
 
 class StatusItemCountdown {
-
-    public static func countdownString(for event: Event, at now: Date = Date()) -> String {
+    static func countdownString(for event: Event, at now: Date = Date()) -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .positional
@@ -20,13 +19,12 @@ class StatusItemCountdown {
             let timeInterval = event.startDate.timeIntervalSince(now)
             let countdown = formatter.string(from: timeInterval) ?? "00:00:00"
             return "\(event.title): in \(countdown)"
-        } else if now >= event.startDate && now < event.endDate {
+        }
+        if now >= event.startDate && now < event.endDate {
             let timeInterval = event.endDate.timeIntervalSince(now)
             let countdown = formatter.string(from: timeInterval) ?? "00:00:00"
             return "\(event.title): \(countdown)"
-        } else {
-            return "\(event.title): Ended"
         }
+        return "\(event.title): Ended"
     }
-
 }

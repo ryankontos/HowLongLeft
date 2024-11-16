@@ -12,11 +12,9 @@ struct IconButton: View {
     var displayAsToggled: Bool
     let systemName: String
     let action: () -> Void
-    
-  
-    
+
     @State private var isHovering = false
-    
+
     var body: some View {
         Button(action: action) {
             Image(systemName: systemName)
@@ -25,7 +23,6 @@ struct IconButton: View {
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .fill(isHovering ? Color.gray.opacity(0.4) : Color.gray.opacity(0.0))
-                        //.fill(displayAsToggled ? Color.gray.opacity(0.4) : Color.gray.opacity(0.0))
                 )
         }
         .buttonStyle(.borderless)

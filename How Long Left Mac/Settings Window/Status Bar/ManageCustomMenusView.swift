@@ -5,48 +5,36 @@
 //  Created by Ryan on 23/6/2024.
 //
 
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
 
 struct ManageCustomMenusView: View {
-
     @EnvironmentObject var store: StatusItemStore
 
-    @State var editingItem: StatusItemContainer?
+    @State private var editingItem: StatusItemContainer?
 
-    @State var editingNewItem = false
+    @State private var editingNewItem = false
 
-    @State var showEditor = false
+    @State private var showEditor = false
 
     var body: some View {
-
         let items = Array(store.customStatusItemContainers)
 
         if items.isEmpty {
-
             VStack {
-
                 Text("You have no custom menus.")
-                Button("Create", action: {
+                Button("Create") {
                     editingNewItem = true
                     editingItem = store.createNewCustomStatusItem()
-                })
-
+                }
             }
-
         } else {
-
             Form {
-
                 ForEach(items) { item in
-
                     HStack {
-
                         VStack(alignment: .leading) {
-
                             Text("\(item.info.title ?? "No Title")")
                             Text("\(item.getCalendarsDescription())")
-
                         }
 
                         Spacer()
@@ -57,15 +45,10 @@ struct ManageCustomMenusView: View {
                         }
 
                         Button("Delete", role: .destructive) {
-
                             store.statusItemDataStore.removeCustomStatusItem(item: item.info)
-
                         }
-
                     }
-
                 }
-
             }
             .formStyle(.grouped)
             .toolbar {
@@ -76,12 +59,10 @@ struct ManageCustomMenusView: View {
             }
             .navigationTitle("Custom Menus")
             .sheet(item: $editingItem, onDismiss: {
-
                 store.loadCustomStatusItemContainers()
-
             }, content: { item in
                 NavigationStack {
-                    EditCustomMenuView(isItemNew: self.editingNewItem, item: item)
+                    EditCustomMenuView(isItemNew: editingNewItem, item: item)
                         .environmentObject(store)
                         .environmentObject(item)
                         .environmentObject(item.config!)
@@ -93,13 +74,10 @@ struct ManageCustomMenusView: View {
             .onDisappear {
                 editingItem = nil
             }
-
         }
-
     }
 }
 
 #Preview {
     ManageCustomMenusView()
-
 }

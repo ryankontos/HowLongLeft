@@ -5,30 +5,30 @@
 //  Created by Ryan on 14/11/2024.
 //
 
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
 
 struct EventWindowViewContainer: View {
-    
-    var event: Event
     var calendarSource: CalendarSource
-    @ObservedObject var eventWindow: EventWindow
-    
+    var eventWindow: EventWindow
+
+    var defaultContainer: MacDefaultContainer
+
+    var pointStore: TimePointStore
+
+    var selectedEventID: String?
+
     var body: some View {
-        
         VStack {
-            
-            EventWindowView(event: event, calendarSource: calendarSource)
+            EventWindowView(eventWindow: eventWindow, defaultContainer: defaultContainer, pointStore: pointStore)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .aspectRatio(1.0, contentMode: .fill)
-                .environmentObject(eventWindow)
-               
         }
         .edgesIgnoringSafeArea(.all)
     }
 }
 /*
-#Preview {
-    EventWindowViewContainer(event: .example)
-}
-*/
+ #Preview {
+ EventWindowViewContainer(event: .example)
+ }
+ */

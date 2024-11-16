@@ -19,7 +19,6 @@ struct CardView: View {
                 .foregroundStyle(Color(UIColor.secondarySystemGroupedBackground))
 
             HStack(spacing: 10) {
-
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 5)
                     .foregroundStyle(color)
@@ -50,6 +49,5 @@ struct CardView: View {
             .padding(.horizontal, 15)
         }
         .padding(.horizontal, 20)
-
     }
 }

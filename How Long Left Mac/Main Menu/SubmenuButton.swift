@@ -5,8 +5,8 @@
 //  Created by Ryan on 23/5/2024.
 //
 
-import SwiftUI
 import FluidMenuBarExtra
+import SwiftUI
 
 struct SubmenuButton<Content: View>: View {
     @ObservedObject var model: WindowSelectionManager
@@ -19,7 +19,7 @@ struct SubmenuButton<Content: View>: View {
     @State private var debounceTimer: Timer?
 
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
-    
+
     let content: Content
     let action: () -> Void
     let opacity: Double
@@ -52,7 +52,6 @@ struct SubmenuButton<Content: View>: View {
         submenuContent: (() -> AnyView)? = nil,
         @ViewBuilder content: () -> Content,
         action: @escaping () -> Void
-
     ) {
         self.model = model
         self.opacity = opacity
@@ -68,13 +67,9 @@ struct SubmenuButton<Content: View>: View {
         self.customHighlight = customHighlight
         self.fill = fill
         self.showChevron = showChevron
-
     }
 
     var body: some View {
-        
-       
-        
         HStack {
             content
             if submenuContent != nil, showChevron {
@@ -112,8 +107,8 @@ struct SubmenuButton<Content: View>: View {
         if isHighlighted, fill, let highlightColor = customHighlight {
             // Lighten or darken the colour based on the current appearance mode
             return (colorScheme == .dark)
-            ? highlightColor.lighter() // Dark mode - darken the highlight
-            : highlightColor.darker() // Light mode - lighten the highlight
+                ? highlightColor.lighter() // Dark mode - darken the highlight
+                : highlightColor.darker() // Light mode - lighten the highlight
         }
         return customHighlight ?? .primary
     }
@@ -144,10 +139,16 @@ struct SubmenuButton<Content: View>: View {
             isFlashing = true
         }
         Task {
-            try await Task.sleep(nanoseconds: 80_000_000)
-            if flashUUID == currentUUID {
-                isFlashing = false
+            
+            do {
+                try await Task.sleep(nanoseconds: 80_000_000)
+               if flashUUID == currentUUID {
+                   isFlashing = false
+               }
+            } catch {
+                print("Error flashing button: \(error)")
             }
+            
         }
     }
 
@@ -184,14 +185,13 @@ struct SubmenuButton<Content: View>: View {
     }
 }
 
-
 extension Color {
     func lighter(by percentage: CGFloat = 30.0) -> Color {
-        return adjustBrightness(by: abs(percentage))
+        adjustBrightness(by: abs(percentage))
     }
 
     func darker(by percentage: CGFloat = 30.0) -> Color {
-        return adjustBrightness(by: -abs(percentage))
+        adjustBrightness(by: -abs(percentage))
     }
 
     private func adjustBrightness(by percentage: CGFloat) -> Color {
@@ -203,7 +203,6 @@ extension Color {
         let red = components[0]
         let green = components[1]
         let blue = components[2]
-       
 
         // Adjust the RGB values to lighten or darken the color
         let adjustment = percentage / 100.0

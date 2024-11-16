@@ -5,11 +5,10 @@
 //  Created by Ryan on 22/6/2024.
 //
 
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
 
 struct StatusBarPane: View {
-
     @EnvironmentObject var store: StatusItemStore
     @EnvironmentObject var config: StatusItemConfiguration
     @EnvironmentObject var settings: StatusItemSettings
@@ -25,9 +24,7 @@ struct StatusBarPane: View {
                     .navigationTitle("Status Bar")
             }
             .formStyle(.grouped)
-
         }
-
     }
 }
 

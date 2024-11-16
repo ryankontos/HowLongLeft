@@ -5,13 +5,12 @@
 //  Created by Ryan on 13/5/2024.
 //
 
+import Combine
 import FluidMenuBarExtra
 import HowLongLeftKit
-import Combine
 import SwiftUI
 
 class StatusItemStore: EventCacheObserver, ObservableObject {
-
     var defaultContainer: MacDefaultContainer
 
     @Published var mainStatusItemContainer: StatusItemContainer?
@@ -26,7 +25,6 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
     init(container: MacDefaultContainer) {
         self.defaultContainer = container
         super.init(eventCache: container.eventCache)
-
     }
 
     @MainActor
@@ -48,8 +46,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
 
     @MainActor
     func loadCustomStatusItemContainers() {
-
-        print("Loading containers, there are currently \(self.customStatusItemContainers.count)")
+        
         var newContainers = Set<StatusItemContainer>()
         let existing = customStatusItemContainers
         let newInfos = statusItemDataStore.getCustomStatusItems()
@@ -73,14 +70,13 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
             container.setSettings(newValue: getSettings(info: container.info))
         }
 
-        print("Finished loading containers, there are now \(newContainers.count)")
+       // print("Finished loading containers, there are now \(newContainers.count)")
         self.customStatusItemContainers = newContainers
         updateSubscriptions()
     }
 
     @MainActor
     private func initalizeCustomStatusItemContainer(from info: StatusItemConfiguration) -> StatusItemContainer {
-
         var filtering = defaultContainer.calendarPrefsManager
 
         if info.isCustom {
@@ -89,8 +85,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
                 domain: "HLLMac_CustomStatusItem_\(info.identifier!)",
                 defaultContextsForNonMatches: appSet)
 
-                filtering = EventFetchSettingsManager(calendarSource: defaultContainer.calendarReader, config: config)
-
+            filtering = EventFetchSettingsManager(calendarSource: defaultContainer.calendarReader, config: config)
         }
 
         return StatusItemContainer(
@@ -106,7 +101,7 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
             filtering: filtering,
             config: info)
     }
-    
+
     @MainActor
 
     private func updateSubscriptions() {
@@ -136,33 +131,28 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
                     self?.objectWillChange.send()
                 }
             }
-
     }
 
-    @MainActor private func customStatusItemContainerDidChange(_ container: StatusItemContainer) {
+    @MainActor private func customStatusItemContainerDidChange(_: StatusItemContainer) {
         // Handle the change and update the array if necessary
         loadCustomStatusItemContainers()
         objectWillChange.send()
     }
 
     private func getSettings(info: StatusItemConfiguration) -> StatusItemSettings {
-        if info.isCustom &&  info.useDefaultSettings {
+        if info.isCustom && info.useDefaultSettings {
             return settingsStore.getSettings(withId: info.identifier!)
-        } else {
-            return settingsStore.getDefaultSettings()
         }
+        return settingsStore.getDefaultSettings()
     }
 
     override func eventsChanged() {
-
         DispatchQueue.main.async { [self] in
-
             if defaultContainer.calendarReader.authorization != .notDetermined {
                 setUpCustomItemStoreSubscription()
                 loadMainStatusItem()
                 loadCustomStatusItemContainers()
             }
-
         }
     }
 }

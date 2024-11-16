@@ -1,69 +1,75 @@
 //
-//  EventWindowSettingsVIew.swift
+//  EventWindowSettingsView.swift
 //  How Long Left Mac
 //
 //  Created by Ryan on 15/11/2024.
 //
 
+import HowLongLeftKit
 import SwiftUI
 
 struct EventWindowSettingsView: View {
-    
     @Binding var isPresented: Bool
-    
+    @ObservedObject var timePointStore: TimePointStore
+    @EnvironmentObject var eventWindow: EventWindow
+
+    @State private var showEventPicker = false
+    @State private var events: [Event] = []
+
     var body: some View {
-        
         NavigationStack {
-            
             Form {
-                
-                Section(footer: Text("Configure the event window's appearance and behaviour.")) {
-                    
-                    NavigationLink("Event") {
-                        ScrollView {
-                            
-                            VStack {
-                                
+                Section {
+                    HStack {
+                        Text("Event Selection")
+                        Spacer()
+
+                            MenuButton(label:
+                                        Text(eventWindow.getChosenEvent()?.title ?? "Automatic")
+                                            .multilineTextAlignment(.trailing)) {
+                                            
+                                Button("Automatic", role: .destructive) {
+                                    eventWindow.selectedEventID = nil
+                                }
+                                            
+                                Button("Choose Event...") {
+                                    showEventPicker = true
+                                }
                                 
                             }
+                             .fixedSize()
 
-                        }
                     }
-                    
                 }
-                
                 Section {
-                    
                     Toggle("Float on Top", isOn: .constant(true))
-                    
-                }
-                
-                Section {
-                    
-                    Toggle("Auto-Advance Events", isOn: .constant(true))
-                    
                 }
                 
             }
-            .background {
-                Color(.windowBackgroundColor)
-            }
-            .background(ignoresSafeAreaEdges: .all)
-            .formStyle(.grouped)
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button("Done") {
                         isPresented = false
                     }
                 }
-                        
             }
-           
+            .formStyle(.grouped)
         }
         .frame(width: 350, height: 350)
+        .sheet(isPresented: $showEventPicker) {
+            EventPickerView(selectedEvents: $events, timePointStore: timePointStore)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            showEventPicker = false
+                        }
+                    }
+                }
+                .frame(width: 350, height: 350)
+        }
+        .onChange(of: events) { _, new in
+            eventWindow.selectedEventID = new.first?.eventID
+            showEventPicker = false
+        }
     }
-}
-
-#Preview {
-    EventWindowSettingsView(isPresented: .constant(true))
 }

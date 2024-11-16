@@ -5,11 +5,10 @@
 //  Created by Ryan on 2/5/2024.
 //
 
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
 
 struct EventList: View {
-
     @EnvironmentObject var pointStore: TimePointStore
     @EnvironmentObject var calendarSource: CalendarSource
 
@@ -44,7 +43,6 @@ struct EventList: View {
                 .padding(.top, 30)
             }
             .navigationTitle("Home")
-
         }
     }
 }

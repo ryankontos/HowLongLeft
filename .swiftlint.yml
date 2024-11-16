@@ -4,4 +4,6 @@ disabled_rules:
   - type_name
   - redundant_discardable_let
   - trailing_whitespace
+  - explicit_acl
+  - explicit_type_interface
 

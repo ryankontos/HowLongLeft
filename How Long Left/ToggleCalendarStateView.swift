@@ -5,8 +5,8 @@
 //  Created by Ryan on 9/5/2024.
 //
 
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
 
 struct ToggleCalendarStateView: View {
     @EnvironmentObject var manager: EventFetchSettingsManager
@@ -16,7 +16,7 @@ struct ToggleCalendarStateView: View {
     var body: some View {
         Toggle(isOn: Binding(
             get: {
-                return manager.containsContext(calendarInfo: calendarInfo, contextID: toggleContext)
+                manager.containsContext(calendarInfo: calendarInfo, contextID: toggleContext)
             },
             set: { newValue in
                 if newValue {
@@ -26,25 +26,20 @@ struct ToggleCalendarStateView: View {
                 }
             }
         )) {
-
             HStack {
                 Circle()
                     .frame(width: 9)
                     .foregroundStyle(getColor())
                 Text(calendarInfo.title!)
             }
-
         }
     }
 
     func getColor() -> Color {
-
         if let cal = manager.getEKCalendar(for: calendarInfo) {
             return Color(cal.cgColor)
         }
 
         return .gray
-
     }
-
 }

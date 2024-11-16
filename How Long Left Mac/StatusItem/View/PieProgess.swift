@@ -14,7 +14,7 @@ struct TestPieProgress: View {
         VStack(spacing:20) {
             HStack {
                 Text("0%")
-                Slider(value: self.$progress)
+                Slider(value: $progress)
                 Text("100%")
             }.padding()
             PieProgress(progress: $progress)
@@ -22,11 +22,10 @@ struct TestPieProgress: View {
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.progress = 0.72
+                progress = 0.72
             }
         }
     }
-
 }
 
 struct PieProgress: View {
@@ -41,7 +40,7 @@ struct PieProgress: View {
             Circle()
                 .stroke(Color.primary, lineWidth: strokeWidth)
                 .overlay(
-                    PieShape(progress: Double(self.progress))
+                    PieShape(progress: Double(progress))
                         .padding(paddingAmount)
                         .foregroundColor(.primary)
                 )
@@ -66,7 +65,7 @@ struct PieShape: Shape {
 
     private let startAngle: Double = (Double.pi) * 1.5
     private var endAngle: Double {
-        return self.startAngle + Double.pi * 2 * self.progress
+        self.startAngle + Double.pi * 2 * self.progress
     }
 
     func path(in rect: CGRect) -> Path {

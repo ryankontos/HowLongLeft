@@ -6,15 +6,14 @@
 //
 
 import Foundation
-import XCTest
 @testable import HowLongLeftKit
+import XCTest
 
-class TimePointGeneratorTests: XCTestCase {
+final class TimePointGeneratorTests: XCTestCase {
+    private var generator: TimePointGenerator!
+    private var mockEvents: [Event]!
 
-    var generator: TimePointGenerator!
-    var mockEvents: [Event]!
-
-    func generateEvents(currentEventsCount: Int, upcomingEventsCount: Int) -> [Event] {
+    private func generateEvents(currentEventsCount: Int, upcomingEventsCount: Int) -> [Event] {
         var events = [Event]()
 
         let currentDate = Date()
@@ -23,8 +22,8 @@ class TimePointGeneratorTests: XCTestCase {
         for index in 1...currentEventsCount {
             let currentEvent = Event(
                 title: "Event \(index)",
-                start: currentDate.addingTimeInterval(TimeInterval(-index * 3600)),
-                end: currentDate.addingTimeInterval(TimeInterval(index * 3600)))
+                start: currentDate.addingTimeInterval(TimeInterval(-index * 3_600)),
+                end: currentDate.addingTimeInterval(TimeInterval(index * 3_600)))
             events.append(currentEvent)
         }
 
@@ -32,8 +31,8 @@ class TimePointGeneratorTests: XCTestCase {
         for index in 1...upcomingEventsCount {
             let upcomingEvent = Event(
                 title: "Event \(index + currentEventsCount)",
-                start: currentDate.addingTimeInterval(TimeInterval(index * 3600)),
-                end: currentDate.addingTimeInterval(TimeInterval((index + 1) * 3600)))
+                start: currentDate.addingTimeInterval(TimeInterval(index * 3_600)),
+                end: currentDate.addingTimeInterval(TimeInterval((index + 1) * 3_600)))
             events.append(upcomingEvent)
         }
 
@@ -43,7 +42,7 @@ class TimePointGeneratorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         generator = TimePointGenerator(groupingMode: .countdownDate)
-        mockEvents = generateEvents(currentEventsCount: 1000, upcomingEventsCount: 1000)
+        mockEvents = generateEvents(currentEventsCount: 1_000, upcomingEventsCount: 1_000)
     }
 
     override func tearDown() {

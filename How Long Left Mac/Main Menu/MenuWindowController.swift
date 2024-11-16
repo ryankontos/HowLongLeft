@@ -5,9 +5,8 @@
 //  Created by Ryan on 17/6/2024.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 protocol MenuWindowController: ObservableObject {
-
 }

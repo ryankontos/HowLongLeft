@@ -5,14 +5,13 @@
 //  Created by Ryan on 15/5/2024.
 //
 
-import Foundation
-import Settings
 import AppKit
+import Foundation
 import HowLongLeftKit
+import Settings
 import SwiftUI
 
 class SettingsWindow: ObservableObject {
-
     let calendarManager: EventFetchSettingsManager
     let eventListSettingsManager: EventListSettingsManager
     unowned var container: MacDefaultContainer

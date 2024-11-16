@@ -5,14 +5,13 @@
 //  Created by Ryan on 22/9/2024.
 //
 
-import Foundation
-import WidgetKit
 import Combine
+import Foundation
 import HowLongLeftKit
+import WidgetKit
 
 class WidgetTimePointManager {
-
-    public let timePointStore: TimePointStore
+    let timePointStore: TimePointStore
 
     private let userDefaults = UserDefaults(suiteName: "group.ryankontos.howlongleft")!
     private let userDefaultsKey = "WidgetComputedHash"
@@ -22,7 +21,6 @@ class WidgetTimePointManager {
     }
 
     func generateTimelineEntries() -> [TimePointEntry] {
-
         let currentDate = Date()
         var entries: [TimePointEntry] = []
         let upcomingPoints = timePointStore.points.filter { $0.date > currentDate }
@@ -47,7 +45,6 @@ class WidgetTimePointManager {
     private func saveCacheHash(_ hash: String) {
         userDefaults.set(hash, forKey: userDefaultsKey)
     }
-
 }
 
 struct TimePointEntry: TimelineEntry {

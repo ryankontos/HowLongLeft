@@ -5,8 +5,8 @@
 //  Created by Ryan on 24/9/2024.
 //
 
-import Foundation
 import AppIntents
+import Foundation
 import WidgetKit
 
 @available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
@@ -43,8 +43,7 @@ struct HLLWidgetConfigurationIntent: AppIntent, WidgetConfigurationIntent {
     }
 
     func perform() async throws -> some IntentResult {
-
-        return .result()
+        .result()
     }
 }
 

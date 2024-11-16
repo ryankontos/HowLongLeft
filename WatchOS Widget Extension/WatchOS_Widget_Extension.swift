@@ -5,93 +5,93 @@
 //  Created by Ryan on 24/9/2024.
 //
 
-import WidgetKit
 import SwiftUI
+import WidgetKit
 /*
-struct Provider: AppIntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
-    }
+ struct Provider: AppIntentTimelineProvider {
+ func placeholder(in context: Context) -> SimpleEntry {
+ SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
+ }
 
-    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration)
-    }
-    
-    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        var entries: [SimpleEntry] = []
+ func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
+ SimpleEntry(date: Date(), configuration: configuration)
+ }
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
-        }
+ func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
+ var entries: [SimpleEntry] = []
 
-        return Timeline(entries: entries, policy: .atEnd)
-    }
+ // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+ let currentDate = Date()
+ for hourOffset in 0 ..< 5 {
+ let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+ let entry = SimpleEntry(date: entryDate, configuration: configuration)
+ entries.append(entry)
+ }
 
-    func recommendations() -> [AppIntentRecommendation<ConfigurationAppIntent>] {
-        // Create an array with all the preconfigured widgets to show.
-        [AppIntentRecommendation(intent: ConfigurationAppIntent(), description: "Example Widget")]
-    }
+ return Timeline(entries: entries, policy: .atEnd)
+ }
 
-//    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
-}
+ func recommendations() -> [AppIntentRecommendation<ConfigurationAppIntent>] {
+ // Create an array with all the preconfigured widgets to show.
+ [AppIntentRecommendation(intent: ConfigurationAppIntent(), description: "Example Widget")]
+ }
 
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-    let configuration: ConfigurationAppIntent
-}
+ //    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
+ //        // Generate a list containing the contexts this widget is relevant in.
+ //    }
+ }
 
-struct WatchOS_Widget_ExtensionEntryView : View {
-    var entry: Provider.Entry
+ struct SimpleEntry: TimelineEntry {
+ let date: Date
+ let configuration: ConfigurationAppIntent
+ }
 
-    var body: some View {
-        VStack {
-            HStack {
-                Text("Time:")
-                Text(entry.date, style: .time)
-            }
-        
-            Text("Favorite Emoji:")
-            Text(entry.configuration.favoriteEmoji)
-        }
-    }
-}
+ struct WatchOS_Widget_ExtensionEntryView : View {
+ var entry: Provider.Entry
 
-@main
-struct WatchOS_Widget_Extension: Widget {
-    let kind: String = "WatchOS_Widget_Extension"
+ var body: some View {
+ VStack {
+ HStack {
+ Text("Time:")
+ Text(entry.date, style: .time)
+ }
 
-    var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
-            WatchOS_Widget_ExtensionEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
-        }
-    }
-}
+ Text("Favorite Emoji:")
+ Text(entry.configuration.favoriteEmoji)
+ }
+ }
+ }
 
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
-    }
-    
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
-        return intent
-    }
-}
+ @main
+ struct WatchOS_Widget_Extension: Widget {
+ let kind: String = "WatchOS_Widget_Extension"
 
-#Preview(as: .accessoryRectangular) {
-    WatchOS_Widget_Extension()
-} timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
-}    
-*/
+ var body: some WidgetConfiguration {
+ AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
+ WatchOS_Widget_ExtensionEntryView(entry: entry)
+ .containerBackground(.fill.tertiary, for: .widget)
+ }
+ }
+ }
+
+ extension ConfigurationAppIntent {
+ fileprivate static var smiley: ConfigurationAppIntent {
+ let intent = ConfigurationAppIntent()
+ intent.favoriteEmoji = "😀"
+ return intent
+ }
+
+ fileprivate static var starEyes: ConfigurationAppIntent {
+ let intent = ConfigurationAppIntent()
+ intent.favoriteEmoji = "🤩"
+ return intent
+ }
+ }
+
+ #Preview(as: .accessoryRectangular) {
+ WatchOS_Widget_Extension()
+ } timeline: {
+ SimpleEntry(date: .now, configuration: .smiley)
+ SimpleEntry(date: .now, configuration: .starEyes)
+ }
+ */

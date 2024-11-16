@@ -5,12 +5,11 @@
 //  Created by Ryan on 24/9/2024.
 //
 
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
 
 @main
 struct How_Long_Left_watchOS_Watch_AppApp: App {
-
     let container = HLLCoreServicesContainer(id: "WatchApp")
 
     var body: some Scene {

@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
 
 class MenuConfigurationInfo: ObservableObject {
-
-    init(info: StatusItemConfiguration? = nil, settings: StatusItemSettings?) {
+    init(info: StatusItemConfiguration? = nil, settings _: StatusItemSettings?) {
         self.info = info
     }
 
@@ -19,7 +18,6 @@ class MenuConfigurationInfo: ObservableObject {
     private var settings: StatusItemSettings?
 
     func getColor() -> Color? {
-
         guard let info else { return nil }
         guard info.useCustomColor else { return nil }
         guard let code = info.customColorCode else { return nil }
@@ -33,12 +31,10 @@ class MenuConfigurationInfo: ObservableObject {
     }
 
     func getTitle() -> String? {
-
         if let info, info.isCustom {
             return info.title
         }
 
         return nil
     }
-
 }

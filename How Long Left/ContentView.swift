@@ -5,13 +5,11 @@
 //  Created by Ryan on 2/5/2024.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ContentView: View {
-
     var body: some View {
-
         TabView {
             EventList()
                 .tabItem {
@@ -24,10 +22,8 @@ struct ContentView: View {
                 }
         }
     }
-
 }
 
 #Preview {
     ContentView()
-
 }

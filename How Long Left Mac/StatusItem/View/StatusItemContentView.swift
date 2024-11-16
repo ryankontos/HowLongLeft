@@ -5,11 +5,11 @@
 //  Created by Ryan on 11/5/2024.
 //
 
-import SwiftUI
 import HowLongLeftKit
+import SwiftUI
 
 struct StatusItemContentView: View {
-
+    
     @Environment(\.self) var environment
     @EnvironmentObject var pointStore: TimePointStore
     @EnvironmentObject var menuConfiguration: MenuConfigurationInfo
@@ -17,12 +17,14 @@ struct StatusItemContentView: View {
     @EnvironmentObject var calendarSource: CalendarSource
     @ObservedObject var selectedManager: StoredEventManager
 
+    let eventProvider: StatusItemEventProvider
+    
     private var textGenerator: StatusTextGenerator {
         StatusTextGenerator(settings: settings)
     }
 
     var body: some View {
-        TimelineView(.periodic(from: Self.previousSecondWithMillisecondZero, by: 1)) { context in
+        TimelineView(.periodic(from: Date.previousSecondWithMillisecondZero, by: 1)) { context in
             content(for: context.date)
         }
         .padding(.horizontal, 4)
@@ -32,7 +34,7 @@ struct StatusItemContentView: View {
     @ViewBuilder
     private func content(for date: Date) -> some View {
         Group {
-            if settings.showCountdowns, let event = getEvent(at: date) {
+            if settings.showCountdowns, let event = eventProvider.getEvent(at: date) {
                 eventCountdownView(for: event, at: date)
             } else {
                 Image(systemName: "clock")
@@ -41,7 +43,7 @@ struct StatusItemContentView: View {
         }
         .foregroundColor(menuConfiguration.getColor())
         .transaction { _ in
-           // transaction.animation = nil
+            // transaction.animation = nil
         }
     }
 
@@ -62,40 +64,9 @@ struct StatusItemContentView: View {
         }
     }
 
-    private func getEvent(at date: Date) -> Event? {
-
-        guard let point = pointStore.getPointAt(date: date) else { return nil }
-
-        if let selectedEvent = selectedManager.getAllStoredEvents().first,
-           let selectedID = selectedEvent.eventID,
-           let event = point.allEvents.first(where: { $0.eventID == selectedID }) {
-            return event
-        }
-
-        let rule = EventFetchRule(rawValue: Int(settings.eventFetchRule))!
-        let event = point.fetchSingleEvent(accordingTo: rule)
-        return event
-    }
-
-    static var previousSecondWithMillisecondZero: Date = {
-        let currentDate = Date()
-        let calendar = Calendar.current
-
-        guard let previousSecondDate = calendar.date(byAdding: .second, value: -1, to: currentDate) else {
-            fatalError("Failed to create the date with millisecond set to zero.")
-        }
-
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second],
-                                                 from: previousSecondDate)
-        components.nanosecond = 0
-
-        return calendar.date(from: components) ?? {
-            fatalError("Failed to create the date with millisecond set to zero.")
-        }()
-    }()
-
 }
-
+/*
 #Preview {
     StatusItemContentView(selectedManager: StoredEventManager(domain: "Preview_SelectedManager", limit: 1))
 }
+*/

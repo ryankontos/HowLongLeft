@@ -5,16 +5,15 @@
 //  Created by Ryan on 24/6/2024.
 //
 
-import Foundation
-import HowLongLeftKit
+import AppKit
 import Combine
 import FluidMenuBarExtra
-import AppKit
+import Foundation
+import HowLongLeftKit
 import SwiftUI
 
-class StatusItemContainer: Identifiable, ObservableObject, Hashable {
-
-    let id: String
+public class StatusItemContainer: Identifiable, ObservableObject, Hashable {
+    public var id: String
     let hiddenEventManager: StoredEventManager
     let selectedEventManager: StoredEventManager
     let settingsWindow: SettingsWindow
@@ -32,6 +31,8 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     let config: StatusItemConfiguration?
     var menubarExtra: FluidMenuBarExtraWindowManager?
     let eventWindowManager: EventWindowManager
+    let eventProvider: StatusItemEventProvider
+    
     private var cancellables: Set<AnyCancellable> = []
 
     init(
@@ -59,7 +60,7 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         self.statusItemSettings = settings
         self.filtering = filtering
         self.eventWindowManager = eventWindowManager
-        
+
         self.menuCache = EventCache(
             calendarReader: source,
             calendarProvider: filtering,
@@ -76,6 +77,8 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         self.statusItemPointStore = TimePointStore(eventCache: statusItemCache)
         self.infoObject = MenuConfigurationInfo(info: info, settings: nil)
 
+        self.eventProvider = StatusItemEventProvider(pointStore: statusItemPointStore, selectedManager: selectedEventManager, settings: settings)
+        
         setupFilteringObservation()
         setupStatusItemPointStoreObservation()
 
@@ -83,13 +86,10 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
             await checkActivation()
             await evaluateVisibility()
         }
-
     }
 
     func setSettings(newValue: StatusItemSettings) {
-
         self.statusItemSettings = newValue
-
     }
 
     private func setupStatusItemPointStoreObservation() {
@@ -111,16 +111,14 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     }
 
     @MainActor func evaluateVisibility() {
-
         /*guard let currentPoint = statusItemPointStore.currentPoint else { return }
-        
-        let event = currentPoint.fetchSingleEvent(accordingTo: .preferInProgress)
-     
-        */
+
+         let event = currentPoint.fetchSingleEvent(accordingTo: .preferInProgress)
+
+         */
     }
 
     @MainActor func checkActivation() {
-
         if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
             return
         }
@@ -134,24 +132,23 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         let extra = FluidMenuBarExtraWindowManager(
             title: "\(info.title!)",
             windowContent: { [self] in
-
-                AnyView(MainMenuContentView(selectedManager: selectedEventManager, selectionManager: WindowSelectionManager(itemsProvider: model), model: model)
-                    .environmentObject(hiddenEventManager)
-                    .environmentObject(listManager)
-                    .environmentObject(settingsWindow)
-                    .environmentObject(pointStore)
-                    .environmentObject(source)
-                    .environmentObject(timer)
-                    .environmentObject(infoObject)
-                    .environmentObject(eventWindowManager)
+                AnyView(MainMenuContentView(statusItemPointStore: statusItemPointStore, selectedManager: selectedEventManager, selectionManager: WindowSelectionManager(itemsProvider: model), model: model)
+                            .environmentObject(hiddenEventManager)
+                            .environmentObject(listManager)
+                            .environmentObject(settingsWindow)
+                            .environmentObject(pointStore)
+                            .environmentObject(source)
+                            .environmentObject(timer)
+                            .environmentObject(infoObject)
+                            .environmentObject(eventWindowManager)
                 )
             },
             statusItemContent: { [self] in
-                AnyView(StatusItemContentView(selectedManager: selectedEventManager)
-                    .environmentObject(statusItemPointStore)
-                    .environmentObject(infoObject)
-                    .environmentObject(statusItemSettings)
-                    .environmentObject(source)
+                AnyView(StatusItemContentView(selectedManager: selectedEventManager, eventProvider: eventProvider)
+                            .environmentObject(statusItemPointStore)
+                            .environmentObject(infoObject)
+                            .environmentObject(statusItemSettings)
+                            .environmentObject(source)
                 )
             }
         )
@@ -175,11 +172,11 @@ class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         self.menubarExtra?.destroy()
     }
 
-    static func == (lhs: StatusItemContainer, rhs: StatusItemContainer) -> Bool {
-        return lhs.id == rhs.id
+    static public func == (lhs: StatusItemContainer, rhs: StatusItemContainer) -> Bool {
+        lhs.id == rhs.id
     }
 
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 

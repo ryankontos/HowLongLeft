@@ -45,7 +45,7 @@ struct CalendarSettingPickerView: View {
             .frame(width: 160)
             .pickerStyle(.menu)
             .onChange(of: selection) { _, newValue in
-                print("OC 5")
+               // //print("OC 5")
                 selectionPublisher.send(newValue)
             }
         }
@@ -56,7 +56,7 @@ struct CalendarSettingPickerView: View {
             updateSelectionFromItem()
         }
         .onChange(of: calendarInfo) { _, _ in
-            print("OC 6")
+            //print("OC 6")
             updateSelectionFromItem()
         }
         .onReceive(selectionPublisher) { newSelection in

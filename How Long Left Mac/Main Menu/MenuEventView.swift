@@ -10,6 +10,7 @@ import HowLongLeftKit
 import MapKit
 import SwiftUI
 
+@MainActor
 struct MenuEventView: View {
     @EnvironmentObject var calSource: CalendarSource
     @EnvironmentObject var eventInfoSource: StoredEventManager
@@ -178,7 +179,7 @@ struct MenuEventView: View {
 
                     annotationItems = [item]
                 } catch {
-                    print("Error: \(error.localizedDescription)")
+                    //print("Error: \(error.localizedDescription)")
                 }
             }
         }
@@ -191,17 +192,7 @@ extension MenuEventView: MenuSelectableItemsProvider {
     }
 }
 
-#Preview {
-    let container = MacDefaultContainer(id: "MacPreview")
 
-    let window = ModernMenuBarExtraWindow(title: "Title") {
-        AnyView(Text("Content"))
-    }
-
-    MenuEventView(event: .init(title: "Reception", start: Date(), end: Date().addingTimeInterval(10)), statusItemPointStore: container.pointStore)
-        .environmentObject(container.calendarReader)
-        .environmentObject(window.proxy)
-}
 
 struct MapAnnotationItem: Identifiable {
     var coordinate: CLLocationCoordinate2D

@@ -9,32 +9,44 @@ import AppIntents
 import Foundation
 
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
-struct CalendarAppEntity: AppEntity {
-    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Calendar Entity")
 
-    struct CalendarAppEntityQuery: EntityStringQuery {
-        func entities(for _: [CalendarAppEntity.ID]) async throws -> [CalendarAppEntity] {
-            []
-        }
+public struct CalendarAppEntity: AppEntity {
+    public static let typeDisplayRepresentation = TypeDisplayRepresentation(name: "Calendar Entity")
 
-        func entities(matching _: String) async throws -> [CalendarAppEntity] {
-            []
-        }
+    
+    public static let defaultQuery = CalendarAppEntityQuery()
 
-        func suggestedEntities() async throws -> [CalendarAppEntity] {
-            []
-        }
-    }
-    static var defaultQuery = CalendarAppEntityQuery()
-
-    var id: String // if your identifier is not a String, conform the entity to EntityIdentifierConvertible.
+    public var id: String // if your identifier is not a String, conform the entity to EntityIdentifierConvertible.
     var displayString: String
-    var displayRepresentation: DisplayRepresentation {
+    public var displayRepresentation: DisplayRepresentation {
         DisplayRepresentation(title: "\(displayString)")
     }
 
     init(id: String, displayString: String) {
         self.id = id
         self.displayString = displayString
+    }
+}
+
+public struct CalendarAppEntityQuery: EntityStringQuery {
+    
+    public init() {
+        
+    }
+    
+    public func defaultResult() async -> CalendarAppEntity? {
+        return nil
+    }
+    
+    public func entities(for _: [CalendarAppEntity.ID]) async throws -> [CalendarAppEntity] {
+        []
+    }
+
+    public func entities(matching _: String) async throws -> [CalendarAppEntity] {
+        []
+    }
+
+    public func suggestedEntities() async throws -> [CalendarAppEntity] {
+        []
     }
 }

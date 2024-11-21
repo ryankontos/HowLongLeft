@@ -9,13 +9,13 @@ import AppIntents
 import Foundation
 
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
-enum EventSortModeAppEnum: String, AppEnum {
+public enum EventSortModeAppEnum: String, AppEnum {
     case inProgressOnly
     case upcomingOnly
     case soonestToStartOrEnd
 
-    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Event Sort Mode")
-    static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+    public static let typeDisplayRepresentation = TypeDisplayRepresentation(name: "Event Sort Mode")
+    public static let caseDisplayRepresentations: [Self: DisplayRepresentation] = [
         .inProgressOnly: "In Progress Only",
         .upcomingOnly: "Upcoming Only",
         .soonestToStartOrEnd: "Next To Start or End"

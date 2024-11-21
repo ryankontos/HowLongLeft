@@ -31,15 +31,15 @@ struct How_Long_LeftApp: App {
                 .environmentObject(container.pointStore)
                 .onChange(of: scenePhase) { _, newPhase in
                     if newPhase == .active {
-                        // print("Active")
+                        // //print("Active")
 
                         Task {
                             await widgetUpdateManager.checkIfWidgetNeedsReload()
                         }
                     } else if newPhase == .inactive {
-                        // print("Inactive")
+                        // //print("Inactive")
                     } else if newPhase == .background {
-                        // print("Background")
+                        // //print("Background")
                     }
                 }
         }
@@ -49,7 +49,7 @@ struct How_Long_LeftApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions
                         _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        print("App has launched")
+        //print("App has launched")
         return true
     }
 

@@ -12,8 +12,9 @@ import Foundation
 import HowLongLeftKit
 import SwiftUI
 
-public class StatusItemContainer: Identifiable, ObservableObject, Hashable {
-    public var id: String
+@MainActor
+final public class StatusItemContainer: @preconcurrency Identifiable, ObservableObject, @preconcurrency Hashable {
+    public let id: String
     let hiddenEventManager: StoredEventManager
     let selectedEventManager: StoredEventManager
     let settingsWindow: SettingsWindow
@@ -32,6 +33,11 @@ public class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     var menubarExtra: FluidMenuBarExtraWindowManager?
     let eventWindowManager: EventWindowManager
     let eventProvider: StatusItemEventProvider
+    var forceVisible = false {
+        didSet {
+            evaluateVisibility()
+        }
+    }
     
     private var cancellables: Set<AnyCancellable> = []
 
@@ -81,11 +87,11 @@ public class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         
         setupFilteringObservation()
         setupStatusItemPointStoreObservation()
+        setupStatusItemSettingsObservation()
 
-        Task {
-            await checkActivation()
-            await evaluateVisibility()
-        }
+        checkActivation()
+        evaluateVisibility()
+        
     }
 
     func setSettings(newValue: StatusItemSettings) {
@@ -96,7 +102,7 @@ public class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         statusItemPointStore.objectWillChange
             .sink { [weak self] _ in
                 Task {
-                    await self?.evaluateVisibility()
+                    self?.evaluateVisibility()
                 }
             }
             .store(in: &cancellables)
@@ -109,16 +115,36 @@ public class StatusItemContainer: Identifiable, ObservableObject, Hashable {
             }
             .store(in: &cancellables)
     }
+    
+    private func setupStatusItemSettingsObservation() {
+        statusItemSettings.objectWillChange
+            .sink { [weak self] _ in
+                Task {
+                    self?.evaluateVisibility()
+                }
+            }
+            .store(in: &cancellables)
+    }
 
-    @MainActor func evaluateVisibility() {
-        /*guard let currentPoint = statusItemPointStore.currentPoint else { return }
+    func evaluateVisibility() {
 
-         let event = currentPoint.fetchSingleEvent(accordingTo: .preferInProgress)
-
-         */
+        guard statusItemSettings.hidesWhenEmpty && !forceVisible else {
+            menubarExtra?.setStatusItemVisible(true)
+            return
+        }
+        
+      //  //print("Evaluating visibility for \(info.title!)")
+        
+        let eventExists = eventProvider.getEvent(at: Date()) != nil
+        
+       // //print("Event exists: \(eventExists)")
+        
+        menubarExtra?.setStatusItemVisible(true)
+        
     }
 
     @MainActor func checkActivation() {
+        
         if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
             return
         }
@@ -128,7 +154,7 @@ public class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         guard self.menubarExtra == nil else { return }
 
         let model = MainMenuViewModel(timePointStore: pointStore, listSettings: listManager, selectedManager: selectedEventManager)
-
+        
         let extra = FluidMenuBarExtraWindowManager(
             title: "\(info.title!)",
             windowContent: { [self] in
@@ -168,6 +194,7 @@ public class StatusItemContainer: Identifiable, ObservableObject, Hashable {
         return "All: \(allAllowed.count), Menu Only: \(onlyMenu.count)"
     }
 
+    @MainActor
     func destroy() {
         self.menubarExtra?.destroy()
     }
@@ -181,6 +208,6 @@ public class StatusItemContainer: Identifiable, ObservableObject, Hashable {
     }
 
     deinit {
-        print("Deinit CustomStatusItemContainer")
+        //print("Deinit CustomStatusItemContainer")
     }
 }

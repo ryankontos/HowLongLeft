@@ -68,7 +68,7 @@ struct MainMenuContentView: View {
     @ViewBuilder
     private func eventGroupsView(groups: EventGroups) -> some View {
         ScrollView(showsIndicators: false) {
-            LazyVStack(spacing: 10) {
+            VStack(spacing: 10) {
                 renderEventGroupSections(groups.headerGroups, seperateAllDay: false)
 
                 if !groups.headerGroups.isEmpty && !groups.upcomingGroups.isEmpty {
@@ -76,25 +76,28 @@ struct MainMenuContentView: View {
                 }
 
                 renderEventGroupSections(groups.upcomingGroups, seperateAllDay: true)
+                
             }
 
             .padding(.top, 10)
-            .background {
-                ScrollViewOffsetReader(
-                    onScrollingStarted: {
-                        print("Scrolling started")
-                        isScrolling = true
-                    },
-                    onScrollingFinished: {
-                        print("Scrolling finished")
-                        isScrolling = false
-                    }
-                )
-            }
+          
         }
+        .onScrollPhaseChange { _, new in
+            
+            
+            switch new {
+            case .idle, .decelerating:
+                selectionManager.setScrollLock(false)
+            case .tracking, .interacting, .animating:
+                selectionManager.setScrollLock(true)
+            }
+
+        }
+        
         .onAppear {
             setupSelectionManager()
         }
+     
     }
 
     @ViewBuilder

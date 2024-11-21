@@ -36,7 +36,7 @@ public struct EditCustomMenuView: View {
                     set: { field1 = $0 }
                 )) {
                     DispatchQueue.main.async {
-                        print("Resigning first responder")
+                        //print("Resigning first responder")
                         NSApp.keyWindow?.makeFirstResponder(nil)
                     }
                 }

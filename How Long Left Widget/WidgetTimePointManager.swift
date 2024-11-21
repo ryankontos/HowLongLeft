@@ -10,6 +10,7 @@ import Foundation
 import HowLongLeftKit
 import WidgetKit
 
+@MainActor
 class WidgetTimePointManager {
     let timePointStore: TimePointStore
 
@@ -23,7 +24,7 @@ class WidgetTimePointManager {
     func generateTimelineEntries() -> [TimePointEntry] {
         let currentDate = Date()
         var entries: [TimePointEntry] = []
-        let upcomingPoints = timePointStore.points.filter { $0.date > currentDate }
+        let upcomingPoints = timePointStore.points.filter { $0.date >= currentDate-1 }
 
         if let currentPoint = timePointStore.currentPoint {
             let entry = TimePointEntry(date: currentDate, timePoint: currentPoint, configuration: HLLWidgetConfigurationIntent())
@@ -49,6 +50,6 @@ class WidgetTimePointManager {
 
 struct TimePointEntry: TimelineEntry {
     let date: Date
-    let timePoint: TimePoint?
+    let timePoint: TimePoint
     let configuration: HLLWidgetConfigurationIntent
 }

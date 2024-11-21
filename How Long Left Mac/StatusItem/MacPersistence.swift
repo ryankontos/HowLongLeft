@@ -8,7 +8,7 @@
 import CoreData
 import Foundation
 
-class MacPersistentContainer {
+final class MacPersistentContainer: Sendable {
     static let shared = MacPersistentContainer()
 
     let container: NSPersistentCloudKitContainer
@@ -30,9 +30,8 @@ class MacPersistentContainer {
         }
 
         container.viewContext.automaticallyMergesChangesFromParent = true
-        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
+        // Use a new instance of the merge policy
+        container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
     }
 }
-
-// Usage:
-// let context = PersistentContainer.shared.container.viewContext

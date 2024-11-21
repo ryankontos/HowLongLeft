@@ -94,6 +94,7 @@ struct SubmenuButton<Content: View>: View {
             }
         }
         .background(geometryObserver)
+        .drawingGroup()
     }
 
     private var backgroundView: some View {
@@ -146,7 +147,7 @@ struct SubmenuButton<Content: View>: View {
                    isFlashing = false
                }
             } catch {
-                print("Error flashing button: \(error)")
+                //print("Error flashing button: \(error)")
             }
             
         }
@@ -171,14 +172,11 @@ struct SubmenuButton<Content: View>: View {
     }
 
     private func debounceOrThrottlePositionUpdate(newOrigin: CGPoint) {
-        debounceTimer?.invalidate()
-        debounceTimer = Timer.scheduledTimer(withTimeInterval: debounceInterval, repeats: false) { _ in
-            if newOrigin != globalPosition {
-                updateGlobalPosition(from: newOrigin)
-            }
+        if newOrigin != self.globalPosition {
+            self.updateGlobalPosition(from: newOrigin)
         }
     }
-
+    
     private func updateGlobalPosition(from position: CGPoint) {
         globalPosition = position
         windowManager.window?.registerSubwindowButtonPosition(point: globalPosition, for: idForHover)

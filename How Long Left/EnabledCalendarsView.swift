@@ -9,13 +9,14 @@ import EventKit
 import HowLongLeftKit
 import SwiftUI
 
+@MainActor
 struct EnabledCalendarsView: View {
     @EnvironmentObject var manager: EventFetchSettingsManager
 
     var body: some View {
         NavigationStack {
             Form {
-                ForEach($manager.calendarItems) { $cal _ in
+                ForEach($manager.calendarItems) { $cal in
                     ToggleCalendarStateView(calendarInfo: cal, toggleContext: HLLStandardCalendarContexts.app.rawValue)
                 }
             }

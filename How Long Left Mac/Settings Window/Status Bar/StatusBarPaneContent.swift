@@ -52,7 +52,7 @@ struct StatusBarPaneContent: View {
                         }
                     }
                     .onChange(of: model.titleLimit) { _, _ in
-                        print("OC 4")
+                        //print("OC 4")
                         let hapticManager = NSHapticFeedbackManager.defaultPerformer
                         hapticManager.perform(.alignment, performanceTime: .default)
                     }

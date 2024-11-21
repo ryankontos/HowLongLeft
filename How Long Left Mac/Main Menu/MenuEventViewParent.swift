@@ -14,7 +14,7 @@ struct MenuEventViewParent: View {
     @EnvironmentObject var calSource: CalendarSource
     @EnvironmentObject var windowManager: FMBEWindowProxy
 
-    @ObservedObject var event: Event
+    var event: Event
 
     var statusItemPointStore: TimePointStore
 

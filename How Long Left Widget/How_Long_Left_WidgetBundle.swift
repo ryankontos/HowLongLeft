@@ -12,7 +12,7 @@ import WidgetKit
 struct How_Long_Left_WidgetBundle: WidgetBundle {
     var body: some Widget {
         How_Long_Left_Widget()
-        #if os(iOS)
+        #if !targetEnvironment(macCatalyst) && os(iOS)
         How_Long_Left_WidgetControl()
         How_Long_Left_WidgetLiveActivity()
         #endif

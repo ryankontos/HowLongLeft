@@ -22,6 +22,9 @@ class StatusItemEventProvider {
         
     @MainActor
     public func getEvent(at date: Date) -> Event? {
+        
+        guard settings.showCountdowns else { return nil }
+        
         guard let point = pointStore.getPointAt(date: date) else { return nil }
 
         if let selectedEvent = selectedManager.getAllStoredEvents().first,

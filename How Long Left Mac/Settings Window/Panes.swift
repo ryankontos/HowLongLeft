@@ -8,6 +8,7 @@
 import Foundation
 import Settings
 
+@MainActor
 extension Settings.PaneIdentifier {
     static let general = Self("general")
     static let calendars = Self("calendars")

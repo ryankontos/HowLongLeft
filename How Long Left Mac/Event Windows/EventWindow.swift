@@ -37,6 +37,7 @@ class EventWindow: ObservableObject, Identifiable {
         return currentPoint?.allEvents.first { $0.eventID == selectedEventID }
     }
 
+    @MainActor
     var floating: Bool {
         get {
             window?.level == .floating
@@ -47,6 +48,7 @@ class EventWindow: ObservableObject, Identifiable {
         }
     }
 
+    @MainActor
     init(event: Event?, container: MacDefaultContainer, eventProvider: TimePointStore) {
         self.selectedEventID = event?.eventID
         self.eventProvider = eventProvider
@@ -94,6 +96,7 @@ class EventWindow: ObservableObject, Identifiable {
         self.window = window
     }
 
+    @MainActor
     func toggleMaxSizeLock(enabled: Bool) {
         guard let window else { return }
 
@@ -121,11 +124,12 @@ class EventWindow: ObservableObject, Identifiable {
         }
     }
 
+    @MainActor
     func activate() {
         window?.makeKeyAndOrderFront(nil)
     }
 
     deinit {
-        print("Deinit EventWindow")
+        //print("Deinit EventWindow")
     }
 }

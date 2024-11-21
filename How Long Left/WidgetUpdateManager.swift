@@ -10,6 +10,7 @@ import Foundation
 import HowLongLeftKit
 import WidgetKit
 
+@MainActor
 class WidgetUpdateManager {
     private var eventCacheSubscription: AnyCancellable?
     private let defaults = UserDefaults(suiteName: "group.ryankontos.howlongleft")!
@@ -46,20 +47,20 @@ class WidgetUpdateManager {
         // Get the last known hash from UserDefaults
         let lastHash = defaults.string(forKey: userDefaultsKey)
 
-        // print("Last Hash: \(lastHash ?? "Nil")")
-        // print("New Hash: \(newHash ?? "Nil")")
+        // //print("Last Hash: \(lastHash ?? "Nil")")
+        // //print("New Hash: \(newHash ?? "Nil")")
 
         if newHash != lastHash {
             if let latestHashReloadedFor {
                 if latestHashReloadedFor == newHash {
-                    print("Already reloaded for this hash, skipping")
+                    //print("Already reloaded for this hash, skipping")
                     return
                 }
             }
 
             latestHashReloadedFor = newHash
 
-            print("Reloading Widget")
+            //print("Reloading Widget")
 
             // Hashes differ, trigger widget reload
             WidgetCenter.shared.reloadAllTimelines()

@@ -9,7 +9,8 @@ import Cocoa
 import HowLongLeftKit
 import SwiftUI
 
-@NSApplicationMain
+@main
+@MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItemStore: StatusItemStore?
     let container = MacDefaultContainer(id: "MacApp")
@@ -23,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillBecomeActive(_: Notification) {
             
-        print("Will become active")
+        //print("Will become active")
       
     }
     

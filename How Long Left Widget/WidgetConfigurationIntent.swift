@@ -13,8 +13,8 @@ import WidgetKit
 struct HLLWidgetConfigurationIntent: AppIntent, WidgetConfigurationIntent {
     static let intentClassName = "WidgetConfigurationIntentIntent"
 
-    static var title: LocalizedStringResource = "Widget Configuration Intent"
-    static var description = IntentDescription("")
+    static let title: LocalizedStringResource = "Widget Configuration Intent"
+    static let description = IntentDescription("")
 
     @Parameter(title: "Mirror App Settings", default: true)
     var mirrorApp: Bool?
@@ -28,19 +28,7 @@ struct HLLWidgetConfigurationIntent: AppIntent, WidgetConfigurationIntent {
     @Parameter(title: "Sort", default: .soonestToStartOrEnd)
     var sort: EventSortModeAppEnum?
 
-    static var parameterSummary: some ParameterSummary {
-        Switch(\.$mirrorApp) {
-            Case(true) {
-                Summary()
-            }
-
-            DefaultCase {
-                Summary {
-                    \.$mirrorApp
-                }
-            }
-        }
-    }
+   
 
     func perform() async throws -> some IntentResult {
         .result()

@@ -9,6 +9,7 @@ import Combine
 import CoreData
 import Foundation
 
+@MainActor
 class StatusItemSettingsStore: ObservableObject {
     let context = MacPersistentContainer.shared.container.viewContext
     private var cache = [String: StatusItemSettings]()

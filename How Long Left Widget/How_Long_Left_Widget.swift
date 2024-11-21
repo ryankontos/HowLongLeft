@@ -15,23 +15,23 @@ struct Provider: AppIntentTimelineProvider {
     }
 
     typealias Intent = HLLWidgetConfigurationIntent
-
     typealias Entry = TimePointEntry
 
-    let defaultContainer = HLLCoreServicesContainer(id: "iOSWidget")
+    @MainActor let defaultContainer: HLLCoreServicesContainer
+    @MainActor let widgetManager: WidgetTimePointManager
 
+    @MainActor
     init() {
-        widgetManager = WidgetTimePointManager(eventCache: defaultContainer.eventCache)
+        self.defaultContainer = HLLCoreServicesContainer(id: "iOSWidget")
+        self.widgetManager = WidgetTimePointManager(eventCache: defaultContainer.eventCache)
     }
 
-    let widgetManager: WidgetTimePointManager
-
     func placeholder(in _: Context) -> TimePointEntry {
-        TimePointEntry(date: Date(), timePoint: nil, configuration: HLLWidgetConfigurationIntent())
+        TimePointEntry(date: Date(), timePoint: .makeEmpty(), configuration: HLLWidgetConfigurationIntent())
     }
 
     func snapshot(for configuration: HLLWidgetConfigurationIntent, in _: Context) async -> TimePointEntry {
-        let currentPoint = widgetManager.timePointStore.currentPoint
+        let currentPoint = await widgetManager.timePointStore.currentPoint ?? .makeEmpty()
         return TimePointEntry(date: Date(), timePoint: currentPoint, configuration: configuration)
     }
 
@@ -39,41 +39,43 @@ struct Provider: AppIntentTimelineProvider {
         var entries: [TimePointEntry] = []
 
         // Generate entries from the widget manager using its timeline conversion logic
-        let timePointEntries = widgetManager.generateTimelineEntries()
+        let timePointEntries = await widgetManager.generateTimelineEntries()
 
         // Convert timePointEntries to SimpleEntry objects for the WidgetKit timeline
         for timePointEntry in timePointEntries {
+            
+            let event = timePointEntry.timePoint.fetchSingleEvent(accordingTo: .inProgressOnly)
+            
+            print("Adding entry for \(timePointEntry.date.formatted(date: .numeric, time: .shortened)), event: \(event?.title ?? "No Event")")
             let entry = TimePointEntry(date: timePointEntry.date, timePoint: timePointEntry.timePoint, configuration: configuration)
             entries.append(entry)
         }
 
         return Timeline(entries: entries, policy: .atEnd)
     }
-
-    //    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
-    //        // Generate a list containing the contexts this widget is relevant in.
-    //    }
 }
 
-struct How_Long_Left_WidgetEntryView : View {
+struct How_Long_Left_WidgetEntryView: View {
     var entry: Provider.Entry
 
+    // Get widget size
+    @Environment(\.widgetFamily) var family
+
     var body: some View {
-        VStack {
-            if let timePoint = entry.timePoint {
-                // Show the next upcoming event and countdown to it
-                if let event = timePoint.fetchSingleEvent(accordingTo: .soonestCountdownDate) {
-                    Text("\(event.title)")
-                        .font(.headline)
-                } else {
-                    Text("No events")
-                        .font(.headline)
-                }
-            } else {
-                Text("No events available")
-                    .font(.headline)
-            }
+        if let event = entry.timePoint.fetchSingleEvent(accordingTo: .inProgressOnly) {
+            platformSpecificView(displayDate: entry.date, event: event)
+        } else {
+            Text("No Events")
         }
+    }
+
+    @ViewBuilder
+    private func platformSpecificView(displayDate: Date, event: Event) -> some View {
+        #if os(iOS)
+        CircularProgressWidget(displayDate: displayDate, event: event)
+        #elseif os(watchOS)
+        WatchCircularWidgetView(displayDate: displayDate, event: event)
+        #endif
     }
 }
 
@@ -85,21 +87,30 @@ struct How_Long_Left_Widget: Widget {
             How_Long_Left_WidgetEntryView(entry: entry)
                 .containerBackground(.fill.tertiary, for: .widget)
         }
+        .supportedFamilies(platformSupportedFamilies())
+    }
+
+    private func platformSupportedFamilies() -> [WidgetFamily] {
         #if os(iOS)
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryRectangular])
+        return [.systemSmall, .systemMedium, .systemLarge, .accessoryRectangular, .accessoryCircular]
+        #elseif os(macOS)
+        return [.systemSmall, .systemMedium, .systemLarge]
         #elseif os(watchOS)
-        .supportedFamilies([.accessoryRectangular])
+        return [.accessoryRectangular, .accessoryInline, .accessoryCircular]
         #endif
     }
 }
 
-#if os(iOS)
+// MARK: - Platform-Specific Customisation
 
-#Preview(as: .systemSmall) {
-    How_Long_Left_Widget()
-} timeline: {
-    TimePointEntry(date: .now, timePoint: nil, configuration: .init())
-    TimePointEntry(date: .now, timePoint: nil, configuration: .init())
+#if os(watchOS)
+struct WatchCircularWidgetView: View {
+    let displayDate: Date
+    let event: Event
+
+    var body: some View {
+        Text("watchOS Circular Progress") // Replace with actual implementation
+    }
 }
-
 #endif
+

@@ -8,6 +8,7 @@
 import Foundation
 import HowLongLeftKit
 
+@MainActor
 class StatusBarPaneModel: ObservableObject {
     enum MultiTypeEventDisplayPickerOptions: Int, CaseIterable, Identifiable {
         case soonest

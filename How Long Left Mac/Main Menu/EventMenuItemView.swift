@@ -10,7 +10,7 @@ import FluidMenuBarExtra
 import HowLongLeftKit
 import SwiftUI
 
-struct EventMenuItemView: View, Equatable {
+struct EventMenuItemView: View, @preconcurrency Equatable {
     @Default(.showLocationsInMainMenu) var showLocations
 
     var timerContainer: GlobalTimerContainer
@@ -36,6 +36,7 @@ struct EventMenuItemView: View, Equatable {
     }
 
     var body: some View {
+         
         VStack {
             HStack(spacing: 8) {
                 if selectedManager.isEventStored(event: event) {

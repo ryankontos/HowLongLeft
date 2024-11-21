@@ -34,7 +34,7 @@ struct StatusItemContentView: View {
     @ViewBuilder
     private func content(for date: Date) -> some View {
         Group {
-            if settings.showCountdowns, let event = eventProvider.getEvent(at: date) {
+            if let event = eventProvider.getEvent(at: date) {
                 eventCountdownView(for: event, at: date)
             } else {
                 Image(systemName: "clock")

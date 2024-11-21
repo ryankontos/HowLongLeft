@@ -59,7 +59,12 @@ struct ManageCustomMenusView: View {
             }
             .navigationTitle("Custom Menus")
             .sheet(item: $editingItem, onDismiss: {
-                store.loadCustomStatusItemContainers()
+                
+                Task {
+                    await store.loadCustomStatusItemContainers()
+                
+                }
+           
             }, content: { item in
                 NavigationStack {
                     EditCustomMenuView(isItemNew: editingNewItem, item: item)

@@ -31,46 +31,43 @@ struct MenuEventListSection: View {
     var timerContainer: GlobalTimerContainer
 
     var body: some View {
-        Section(
-            content: {
-                VStack(spacing: 6) {
+        
+        if let title {
+           
+            VStack(spacing: 6) {
+                
+                
+                headerView(title: title, info: info)
+                
+                
+                
+               /* if events.isEmpty, allDayEvents.isEmpty {
+                    Text("No Events")
+                        .foregroundStyle(.secondary)
+                        .padding(.vertical, 7)
+                        .padding(.bottom, 5)
+                } */
+                
+                if !events.isEmpty {
                     
-                    if events.isEmpty, allDayEvents.isEmpty {
-                        Text("No Events")
-                            .foregroundStyle(.secondary)
-                            .padding(.vertical, 7)
-                            .padding(.bottom, 5)
-                    }
+                    ForEach(events, content: getSubmenuButton(for:))
+                      //  .drawingGroup()
                     
-                    if !events.isEmpty {
-                        
-                        ForEach(events, content: getSubmenuButton(for:))
-                            .drawingGroup()
-                        
-                    }
-
-                    if !allDayEvents.isEmpty {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(allDayEvents, content: getSubmenuButton(for:))
-                                Spacer()
-                            }
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
-                            .drawingGroup()
-                        }
-                    }
                 }
-            },
-            header: {
-                if let title {
-                    headerView(title: title, info: info)
-                        .drawingGroup()
+
+                if !allDayEvents.isEmpty {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(allDayEvents, content: getSubmenuButton(for:))
+                            Spacer()
+                        }
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                    }
                 }
             }
-        )
-        // .background(Color.blue)
-        // .padding(.vertical, 7)
+            
+        }
     }
 
     private func headerView(title: String, info: String?) -> some View {

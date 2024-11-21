@@ -5,9 +5,8 @@
 //  Created by Ryan on 22/9/2024.
 //
 
-#if canImport(ActivityKit)
+#if !targetEnvironment(macCatalyst)
 import ActivityKit
-#endif
 import SwiftUI
 import WidgetKit
 
@@ -79,3 +78,5 @@ extension How_Long_Left_WidgetAttributes.ContentState {
     How_Long_Left_WidgetAttributes.ContentState.smiley
     How_Long_Left_WidgetAttributes.ContentState.starEyes
 }
+
+#endif

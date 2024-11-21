@@ -10,6 +10,7 @@ import FluidMenuBarExtra
 import HowLongLeftKit
 import SwiftUI
 
+@MainActor
 class StatusItemStore: EventCacheObserver, ObservableObject {
     var defaultContainer: MacDefaultContainer
 
@@ -25,9 +26,11 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
     init(container: MacDefaultContainer) {
         self.defaultContainer = container
         super.init(eventCache: container.eventCache)
+        
+        
     }
 
-    @MainActor
+ 
     func createNewCustomStatusItem() -> StatusItemContainer {
         let newInfo = statusItemDataStore.makeNewCustomStatusItem()
         let container = initalizeCustomStatusItemContainer(from: newInfo)
@@ -36,16 +39,16 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         return container
     }
 
-    @MainActor
-    func loadMainStatusItem() {
+
+    @MainActor func loadMainStatusItem() {
         guard mainStatusItemContainer == nil else { return }
         let info = statusItemDataStore.getMainStatusItem()
         mainStatusItemContainer = initalizeCustomStatusItemContainer(from: info)
         mainStatusItemContainer?.setSettings(newValue: getSettings(info: info))
     }
 
-    @MainActor
-    func loadCustomStatusItemContainers() {
+    
+    func loadCustomStatusItemContainers() async {
         
         var newContainers = Set<StatusItemContainer>()
         let existing = customStatusItemContainers
@@ -63,19 +66,19 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
 
         // Destroy items that are in the original set but not in the new set
         for existingItem in existing where !newContainers.contains(existingItem) {
-            existingItem.destroy()
+            await existingItem.destroy()
         }
 
         newContainers.forEach { container in
             container.setSettings(newValue: getSettings(info: container.info))
         }
 
-       // print("Finished loading containers, there are now \(newContainers.count)")
+       // //print("Finished loading containers, there are now \(newContainers.count)")
         self.customStatusItemContainers = newContainers
         updateSubscriptions()
     }
 
-    @MainActor
+
     private func initalizeCustomStatusItemContainer(from info: StatusItemConfiguration) -> StatusItemContainer {
         var filtering = defaultContainer.calendarPrefsManager
 
@@ -102,8 +105,6 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
             config: info)
     }
 
-    @MainActor
-
     private func updateSubscriptions() {
         cancellables.forEach { $0.cancel() }
         cancellables.removeAll()
@@ -111,32 +112,39 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         customStatusItemContainers.forEach { container in
             container.objectWillChange
                 .sink { [weak self] _ in
-                    DispatchQueue.main.async {
-                        self?.customStatusItemContainerDidChange(container)
+                    Task {
+                        await self?.customStatusItemContainerDidChange(container)
                     }
                 }
                 .store(in: &cancellables)
         }
     }
 
-    @MainActor
     private func setUpCustomItemStoreSubscription() {
         self.customItemStoreSubscription?.cancel()
         self.customItemStoreSubscription = nil
 
         self.customItemStoreSubscription = statusItemDataStore.objectWillChange
             .sink { [weak self] _ in
-                DispatchQueue.main.async {
-                    self?.loadCustomStatusItemContainers()
-                    self?.objectWillChange.send()
+                
+                Task {
+                    await self?.loadCustomStatusItemContainers()
+                    await MainActor.run {
+                        self?.objectWillChange.send()
+                    }
                 }
+                
+              
             }
     }
 
-    @MainActor private func customStatusItemContainerDidChange(_: StatusItemContainer) {
+    private func customStatusItemContainerDidChange(_: StatusItemContainer) async {
         // Handle the change and update the array if necessary
-        loadCustomStatusItemContainers()
-        objectWillChange.send()
+        await loadCustomStatusItemContainers()
+        await MainActor.run {
+            objectWillChange.send()
+        }
+        
     }
 
     private func getSettings(info: StatusItemConfiguration) -> StatusItemSettings {
@@ -146,13 +154,16 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
         return settingsStore.getDefaultSettings()
     }
 
-    override func eventsChanged() {
-        DispatchQueue.main.async { [self] in
+    override func eventsChanged() async {
+        
+
+            
             if defaultContainer.calendarReader.authorization != .notDetermined {
                 setUpCustomItemStoreSubscription()
                 loadMainStatusItem()
-                loadCustomStatusItemContainers()
+                await loadCustomStatusItemContainers()
             }
-        }
+        
+        
     }
 }

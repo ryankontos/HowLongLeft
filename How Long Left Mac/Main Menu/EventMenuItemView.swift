@@ -51,7 +51,7 @@ struct EventMenuItemView: View, @preconcurrency Equatable {
                         .lineLimit(1)
                         .font(.system(size: getProminence() ? 14 : 13, weight: .medium))
                     if getProminence() {
-                        EventCountdownText(event)
+                        EventInfoText(event)
                             .frame(height: 15)
                             .fontWeight(.medium)
                             .foregroundStyle(.secondary)

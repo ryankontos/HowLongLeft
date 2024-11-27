@@ -72,7 +72,7 @@ struct How_Long_Left_WidgetEntryView: View {
     @ViewBuilder
     private func platformSpecificView(displayDate: Date, event: Event) -> some View {
         #if os(iOS)
-        CircularProgressWidget(displayDate: displayDate, event: event)
+        Widget_EventView(displayDate: displayDate, progress: 0.2, event: event)
         #elseif os(watchOS)
         WatchCircularWidgetView(displayDate: displayDate, event: event)
         #endif

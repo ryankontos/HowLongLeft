@@ -15,31 +15,42 @@ struct CircularProgressWidget: View {
     var event: Event
     
     var body: some View {
-        
-        VStack {
-            ProgressCircle(progress: 0.27, lineWidth: 10, trackColor: .gray.opacity(0.3), progressColor: .green, isRounded: true, size: 121, content: {
-               
-               VStack(spacing: 2) {
-                   
-                   Text("Event")
-                       .lineLimit(1)
-                        .font(.system(size: 12, weight: .semibold, design: .rounded))
-                        .foregroundColor(.secondary)
-                   
-                   Text(.now, format: .timer(countingDownIn: event.startDate..<event.endDate, showsHours: false, maxFieldCount: 3))
-                       .font(.system(size: 25, weight: .semibold, design: .rounded))
-                       .lineLimit(1)
-                   
-                   Text("remaining")
-                       .font(.system(size: 12, weight: .semibold, design: .rounded))
-                       .lineLimit(1)
-                   
-                       .foregroundColor(.secondary)
-                   
-               }
-         
-                    
-            })
+        VStack(spacing: 8) { // Reduced spacing
+            
+            // Event Title
+            Text(event.title)
+                .lineLimit(1)
+                .font(.system(size: 14, weight: .semibold, design: .rounded)) // Smaller font
+                .foregroundColor(.secondary)
+                .truncationMode(.middle)
+                .padding(.horizontal, 5)
+            
+            // Progress Circle
+            ProgressCircle(
+                progress: 0.27,
+                lineWidth: 10,
+                trackColor: .gray.opacity(0.3),
+                progressColor: event.color,
+                isRounded: true
+            ) {
+                VStack(alignment: .center, spacing: -2) { // Fine-tuned alignment
+                    Text(event.endDate, style: .timer)
+                        .minimumScaleFactor(0.7) // Allow shrinking for longer times
+                        .monospacedDigit()
+                        .font(.system(size: 25, weight: .semibold, design: .rounded))
+                        .lineLimit(1)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 10)
+                }
+            }
+            
+            // Remaining Label
+            Text("remaining")
+                .lineLimit(1)
+                .font(.system(size: 14, weight: .medium, design: .rounded)) // Adjusted font weight
+                .foregroundColor(.secondary)
+                .truncationMode(.middle)
+                .padding(.horizontal, 5)
         }
         .containerBackground(for: .widget) {
             Color(.systemBackground)
@@ -47,16 +58,4 @@ struct CircularProgressWidget: View {
     }
 }
 
-// Preview with small widget context
 
-#if os(iOS)
-
-struct CircularProgressWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        CircularProgressWidget(displayDate: Date(), event: .example)
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
-}
-
-#endif

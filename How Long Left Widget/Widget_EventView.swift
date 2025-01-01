@@ -77,7 +77,7 @@ struct Widget_EventView_Previews: PreviewProvider {
             displayDate: Date(),
             progress: 0.2,
             event: .makeExampleEvent(
-                title: "Da twenty one pilots experiment",
+                title: "Event",
                 start: Date(),
                 end: Date().addingTimeInterval(5990)
             )

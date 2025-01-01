@@ -68,8 +68,9 @@ struct StatusBarPaneContent: View {
                     Text("Show Seconds")
                 }
             }
-
-            Section {
+            
+            
+            Section(content: {
                 Toggle(isOn: $model.showIndicatorDot) {
                     Text("Show Calendar Indicator Dot")
                 }
@@ -79,7 +80,20 @@ struct StatusBarPaneContent: View {
                 Toggle(isOn: $model.showPercentageText) {
                     Text("Show Completion Percentage")
                 }
-            }
+            }, footer: {
+                
+                HStack {
+                    Text("The system may hide longer status items when menu bar space is limited, especially on MacBooks with a display cutout.")
+                    Spacer()
+                
+                }
+                .multilineTextAlignment(.leading)
+                .padding(.horizontal, 10)
+                .foregroundStyle(.secondary)
+                
+            })
+
+            
 
             Section(header: Text("Advanced")) {
                 Toggle(isOn: $model.hidesWhenEmpty) {

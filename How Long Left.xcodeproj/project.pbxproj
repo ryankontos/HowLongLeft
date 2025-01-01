@@ -15,6 +15,7 @@
 		BF0149E32CA2ECF20050B4EF /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF0149E22CA2ECF20050B4EF /* HowLongLeftKit */; };
 		BF0149E42CA2ECF20050B4EF /* HowLongLeftKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF0149E22CA2ECF20050B4EF /* HowLongLeftKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF0FCC642CA19A17003F92E9 /* WidgetUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */; };
+		BF11A8932CFACA0B00FF3AA0 /* EventListContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF11A8922CFACA0B00FF3AA0 /* EventListContent.swift */; };
 		BF14D5582CE769FE00F211FE /* EventPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14D5572CE769FE00F211FE /* EventPickerView.swift */; };
 		BF28597A2C281F2B00CCF31C /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = BF2859792C281F2B00CCF31C /* SwiftUIIntrospect */; };
 		BF29C31C2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29C31B2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift */; };
@@ -56,10 +57,14 @@
 		BF91A6152BEF1E120047D534 /* StatusItemContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */; };
 		BF91A61D2BF1D6BA0047D534 /* MainMenuContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */; };
 		BF94648D2C4D680F00CC8A9E /* ActivationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF94648C2C4D680F00CC8A9E /* ActivationObserver.swift */; };
+		BF9A4AFF2D2284970095D4E3 /* EventListGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A4AFE2D2284970095D4E3 /* EventListGrid.swift */; };
+		BF9A4B012D228B0E0095D4E3 /* CountdownGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A4B002D228B0E0095D4E3 /* CountdownGrid.swift */; };
 		BF9D25F52C6894900072329F /* CalendarsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F42C6894900072329F /* CalendarsListView.swift */; };
 		BF9D25F72C68DBAC0072329F /* StatusBarPaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F62C68DBAC0072329F /* StatusBarPaneModel.swift */; };
 		BF9D25F92C68DC510072329F /* StatusBarPaneContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F82C68DC510072329F /* StatusBarPaneContent.swift */; };
 		BFA0B5E82C7C59F500FBFD8B /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFA0B5E72C7C59F500FBFD8B /* HowLongLeftKit */; };
+		BFA7E7492CF9C6400028FA56 /* ColorKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFA7E7482CF9C6400028FA56 /* ColorKit */; };
+		BFA7E74B2CFA22E00028FA56 /* StretchableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA7E74A2CFA22E00028FA56 /* StretchableScrollView.swift */; };
 		BFAC93E92C09FE0C00AB66BF /* PositionObservingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */; };
 		BFAC93EB2C09FE5B00AB66BF /* OffsetObservingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */; };
 		BFAC9BBC2CE33DF500422555 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFAC9BBB2CE33DF500422555 /* MainMenu.xib */; };
@@ -309,6 +314,7 @@
 		BF0149CE2CA2EC140050B4EF /* WatchOS Widget ExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchOS Widget ExtensionExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF0149EF2CA2EEE10050B4EF /* WatchOS Widget ExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchOS Widget ExtensionExtension.entitlements"; sourceTree = "<group>"; };
 		BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUpdateManager.swift; sourceTree = "<group>"; };
+		BF11A8922CFACA0B00FF3AA0 /* EventListContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListContent.swift; sourceTree = "<group>"; };
 		BF14D5572CE769FE00F211FE /* EventPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPickerView.swift; sourceTree = "<group>"; };
 		BF29C31B2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWithStickyHeader.swift; sourceTree = "<group>"; };
 		BF30A99F2BE3BA1F007850EE /* How-Long-LeftUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-LeftUITests-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -347,9 +353,12 @@
 		BF91A6182BEF1EBE0047D534 /* How-Long-Left-Mac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-Left-Mac-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuContentView.swift; sourceTree = "<group>"; };
 		BF94648C2C4D680F00CC8A9E /* ActivationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationObserver.swift; sourceTree = "<group>"; };
+		BF9A4AFE2D2284970095D4E3 /* EventListGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListGrid.swift; sourceTree = "<group>"; };
+		BF9A4B002D228B0E0095D4E3 /* CountdownGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownGrid.swift; sourceTree = "<group>"; };
 		BF9D25F42C6894900072329F /* CalendarsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarsListView.swift; sourceTree = "<group>"; };
 		BF9D25F62C68DBAC0072329F /* StatusBarPaneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPaneModel.swift; sourceTree = "<group>"; };
 		BF9D25F82C68DC510072329F /* StatusBarPaneContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPaneContent.swift; sourceTree = "<group>"; };
+		BFA7E74A2CFA22E00028FA56 /* StretchableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchableScrollView.swift; sourceTree = "<group>"; };
 		BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionObservingView.swift; sourceTree = "<group>"; };
 		BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetObservingScrollView.swift; sourceTree = "<group>"; };
 		BFAC9BBB2CE33DF500422555 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
@@ -534,6 +543,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA7E7492CF9C6400028FA56 /* ColorKit in Frameworks */,
 				BFBFBAAF2C8DFFB700EB5CE8 /* HowLongLeftKit in Frameworks */,
 				BF29C31F2CF2285F0073D118 /* ScalingHeaderScrollView in Frameworks */,
 			);
@@ -741,7 +751,11 @@
 				BFE2A09A2BE3C7290063B227 /* CalendarReadConfiguration.swift */,
 				BF30A9A12BE3BA71007850EE /* EventListItem.swift */,
 				BF30A9A32BE3BB26007850EE /* EventList.swift */,
+				BF9A4B002D228B0E0095D4E3 /* CountdownGrid.swift */,
+				BF9A4AFE2D2284970095D4E3 /* EventListGrid.swift */,
+				BF11A8922CFACA0B00FF3AA0 /* EventListContent.swift */,
 				BF29C31B2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift */,
+				BFA7E74A2CFA22E00028FA56 /* StretchableScrollView.swift */,
 				BFD988BC2CF5821A00FE4199 /* EventListHeader.swift */,
 				BFBCF3442CAE7703008CB14C /* CardView.swift */,
 				BFF0E6A22BE90F1C0023AB22 /* EventCardView.swift */,
@@ -1002,6 +1016,7 @@
 			packageProductDependencies = (
 				BF30A9912BE369D8007850EE /* HowLongLeftKit */,
 				BF29C31E2CF2285F0073D118 /* ScalingHeaderScrollView */,
+				BFA7E7482CF9C6400028FA56 /* ColorKit */,
 			);
 			productName = "How Long Left";
 			productReference = BFE8F0C12BE3602000083FD6 /* How Long Left.app */;
@@ -1183,6 +1198,7 @@
 				BF2859782C281F2A00CCF31C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				BFA0B5E62C7C59F500FBFD8B /* XCLocalSwiftPackageReference "../HowLongLeftKit" */,
 				BF29C31D2CF2285F0073D118 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
+				BFA7E7472CF9C6400028FA56 /* XCRemoteSwiftPackageReference "ColorKit" */,
 			);
 			productRefGroup = BFE8F0C22BE3602000083FD6 /* Products */;
 			projectDirPath = "";
@@ -1368,6 +1384,7 @@
 			files = (
 				BF89C1F92BEA13AC001B73C1 /* EnabledCalendarsView.swift in Sources */,
 				BFD988BD2CF5821A00FE4199 /* EventListHeader.swift in Sources */,
+				BFA7E74B2CFA22E00028FA56 /* StretchableScrollView.swift in Sources */,
 				BFF0E6A32BE90F1C0023AB22 /* EventCardView.swift in Sources */,
 				BF29C31C2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift in Sources */,
 				BFE2A09B2BE3C7290063B227 /* CalendarReadConfiguration.swift in Sources */,
@@ -1376,9 +1393,12 @@
 				BFE8F0C72BE3602000083FD6 /* ContentView.swift in Sources */,
 				BFE8F0C92BE3602000083FD6 /* Item.swift in Sources */,
 				BF40D8B22BEC8AE200E26563 /* ToggleCalendarStateView.swift in Sources */,
+				BF11A8932CFACA0B00FF3AA0 /* EventListContent.swift in Sources */,
+				BF9A4B012D228B0E0095D4E3 /* CountdownGrid.swift in Sources */,
 				BF7E03A52BEC7F7800FD3B31 /* How_Long_LeftApp.swift in Sources */,
 				BF30A9A42BE3BB26007850EE /* EventList.swift in Sources */,
 				BFBCF3452CAE7704008CB14C /* CardView.swift in Sources */,
+				BF9A4AFF2D2284970095D4E3 /* EventListGrid.swift in Sources */,
 				BF30A9A22BE3BA71007850EE /* EventListItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2452,6 +2472,14 @@
 				minimumVersion = 1.1.5;
 			};
 		};
+		BFA7E7472CF9C6400028FA56 /* XCRemoteSwiftPackageReference "ColorKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Boris-Em/ColorKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		BFB1FBB72C0DF3B500D04B84 /* XCRemoteSwiftPackageReference "Settings" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Settings.git";
@@ -2505,6 +2533,11 @@
 		BFA0B5E72C7C59F500FBFD8B /* HowLongLeftKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HowLongLeftKit;
+		};
+		BFA7E7482CF9C6400028FA56 /* ColorKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BFA7E7472CF9C6400028FA56 /* XCRemoteSwiftPackageReference "ColorKit" */;
+			productName = ColorKit;
 		};
 		BFB1FBB82C0DF3B500D04B84 /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;

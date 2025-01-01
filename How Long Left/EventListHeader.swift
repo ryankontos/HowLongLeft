@@ -33,8 +33,9 @@ struct EventListHeader: View {
         TimelineView(.periodic(from: Date.previousSecondWithMillisecondZero, by: 1)) { context in
             
             ZStack {
-                backgroundColor
                 
+                Rectangle().fill(backgroundColor.gradient)
+               
                 HStack(alignment: .center) {
                     
                     VStack {
@@ -56,11 +57,14 @@ struct EventListHeader: View {
                             
                             let timerColor = getTimerTint(event: keyEvent)
                             
-                            ProgressCircle(progress: keyEvent.completion(), lineWidth: 12, trackColor: timerColor.opacity(0.3), progressColor: timerColor, isRounded: true, progressType: .deplete, content: {
+                            ProgressCircle(progress: keyEvent.completion(), lineWidth: 8, trackColor: timerColor.opacity(0.3), progressColor: timerColor, isRounded: true, progressType: .deplete, content: {
                                 Text(gen.getString(from: keyEvent, at: Date()))
-                                    .font(.system(size: 44, weight: .bold, design: .default))
+                                    .font(.system(size: 44, weight: .semibold, design: .default))
                                     .foregroundStyle(.white)
                                     .monospacedDigit()
+                                    .lineLimit(1)
+                                    .padding(.horizontal, 28)
+                                    .minimumScaleFactor(0.5)
                             })
                             .frame(height: 190)
                             .padding(.horizontal, 32)
@@ -80,8 +84,20 @@ struct EventListHeader: View {
                 }
                 
             }
-            .shadow(radius: 9)
+            
+            .shadow(radius: 6)
+            .drawingGroup()
             
         }
     }
+}
+
+#Preview {
+    
+    VStack {
+        GeometryReader { geometry in
+            EventListHeader(keyEvent: Event.init(title: "Event", start: Date(), end: .now.addingTimeInterval(10000)), geometry: geometry, collapseProgress: 0, backgroundColor: .blue)
+        }
+    }
+    
 }

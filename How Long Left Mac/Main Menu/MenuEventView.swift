@@ -149,7 +149,8 @@ struct MenuEventView: View {
                 HStack(spacing: 5) {
                     Image(systemName: "timer")
 
-                    EventInfoText(event)
+                    EventInfoText(event, stringGenerator: EventCountdownTextGenerator(showContext: true, postional: false))
+                        
                 }
                 .font(.system(size: 13.5, weight: .medium, design: .default))
                 .opacity(0.75)

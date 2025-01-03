@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF009AE02D27B503004457C5 /* CalendarEventListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF009ADF2D27B503004457C5 /* CalendarEventListProvider.swift */; };
+		BF009AE22D27B9E2004457C5 /* CalendarEventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF009AE12D27B9E2004457C5 /* CalendarEventListView.swift */; };
 		BF0149B92CA2E3B70050B4EF /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF0149B82CA2E3B70050B4EF /* HowLongLeftKit */; };
 		BF0149BA2CA2E3B70050B4EF /* HowLongLeftKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF0149B82CA2E3B70050B4EF /* HowLongLeftKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF0149CF2CA2EC140050B4EF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC5304E2CA0307B004EA49A /* WidgetKit.framework */; };
@@ -311,6 +313,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BF009ADF2D27B503004457C5 /* CalendarEventListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventListProvider.swift; sourceTree = "<group>"; };
+		BF009AE12D27B9E2004457C5 /* CalendarEventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventListView.swift; sourceTree = "<group>"; };
 		BF0149CE2CA2EC140050B4EF /* WatchOS Widget ExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchOS Widget ExtensionExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF0149EF2CA2EEE10050B4EF /* WatchOS Widget ExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchOS Widget ExtensionExtension.entitlements"; sourceTree = "<group>"; };
 		BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUpdateManager.swift; sourceTree = "<group>"; };
@@ -747,6 +751,7 @@
 				BF30A9A02BE3BA4E007850EE /* How-Long-Left-Info.plist */,
 				BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */,
 				BFE8F0C62BE3602000083FD6 /* ContentView.swift */,
+				BF009AE12D27B9E2004457C5 /* CalendarEventListView.swift */,
 				BFF586632BEA520200EF4C9E /* SettingsView.swift */,
 				BFE2A09A2BE3C7290063B227 /* CalendarReadConfiguration.swift */,
 				BF30A9A12BE3BA71007850EE /* EventListItem.swift */,
@@ -763,6 +768,7 @@
 				BFE8F0C82BE3602000083FD6 /* Item.swift */,
 				BF89C1F82BEA13AC001B73C1 /* EnabledCalendarsView.swift */,
 				BF40D8B12BEC8AE200E26563 /* ToggleCalendarStateView.swift */,
+				BF009ADF2D27B503004457C5 /* CalendarEventListProvider.swift */,
 				BFE8F0CA2BE3602200083FD6 /* Assets.xcassets */,
 				BFE8F0CC2BE3602200083FD6 /* Preview Content */,
 			);
@@ -1386,11 +1392,13 @@
 				BFD988BD2CF5821A00FE4199 /* EventListHeader.swift in Sources */,
 				BFA7E74B2CFA22E00028FA56 /* StretchableScrollView.swift in Sources */,
 				BFF0E6A32BE90F1C0023AB22 /* EventCardView.swift in Sources */,
+				BF009AE02D27B503004457C5 /* CalendarEventListProvider.swift in Sources */,
 				BF29C31C2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift in Sources */,
 				BFE2A09B2BE3C7290063B227 /* CalendarReadConfiguration.swift in Sources */,
 				BF0FCC642CA19A17003F92E9 /* WidgetUpdateManager.swift in Sources */,
 				BFF586642BEA520200EF4C9E /* SettingsView.swift in Sources */,
 				BFE8F0C72BE3602000083FD6 /* ContentView.swift in Sources */,
+				BF009AE22D27B9E2004457C5 /* CalendarEventListView.swift in Sources */,
 				BFE8F0C92BE3602000083FD6 /* Item.swift in Sources */,
 				BF40D8B22BEC8AE200E26563 /* ToggleCalendarStateView.swift in Sources */,
 				BF11A8932CFACA0B00FF3AA0 /* EventListContent.swift in Sources */,

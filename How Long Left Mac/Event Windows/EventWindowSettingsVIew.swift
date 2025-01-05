@@ -14,7 +14,7 @@ struct EventWindowSettingsView: View {
     @EnvironmentObject var eventWindow: EventWindow
 
     @State private var showEventPicker = false
-    @State private var events: [Event] = []
+    @State private var events: [HLLEvent] = []
 
     var body: some View {
         NavigationStack {
@@ -68,7 +68,7 @@ struct EventWindowSettingsView: View {
                 .frame(width: 350, height: 350)
         }
         .onChange(of: events) { _, new in
-            eventWindow.selectedEventID = new.first?.eventID
+            eventWindow.selectedEventID = new.first?.eventIdentifier
             showEventPicker = false
         }
     }

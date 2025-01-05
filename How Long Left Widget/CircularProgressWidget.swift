@@ -12,7 +12,7 @@ import WidgetKit
 struct CircularProgressWidget: View {
     
     var displayDate: Date
-    var event: Event
+    var event: HLLEvent
     
     var body: some View {
         VStack(spacing: 8) { // Reduced spacing

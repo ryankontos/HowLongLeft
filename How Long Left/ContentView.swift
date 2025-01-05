@@ -15,7 +15,7 @@ struct ContentView: View {
     
     var body: some View {
 
-        if let currentPoint = pointStore.currentPoint, let event = currentPoint.fetchSingleEvent(accordingTo: .soonestCountdownDate) {
+        if let currentPoint = pointStore.currentPoint, let _ = currentPoint.fetchSingleEvent(accordingTo: .soonestCountdownDate) {
             
             CalendarEventListView(calendarEventListProvider: .init(pointStore: pointStore))
             

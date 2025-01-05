@@ -18,7 +18,7 @@ struct CircularCountdownView: View {
 
     @ObservedObject var pointStore: TimePointStore
 
-    var event: Event
+    var event: HLLEvent
 
     // MARK: - Body
     var body: some View {

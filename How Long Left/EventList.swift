@@ -13,9 +13,9 @@ struct EventListView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    var keyEvent: Event
-    var upcomingEvents: [Event]
-    var inProgressEvents: [Event]
+    var keyEvent: HLLEvent
+    var upcomingEvents: [HLLEvent]
+    var inProgressEvents: [HLLEvent]
     
     var eventTitle: String = "Upcoming Event"
     var infoText: String = "Starts in 2 hours"
@@ -24,7 +24,7 @@ struct EventListView: View {
     @State var collapseProgress: CGFloat = 0
     @State var scrollProgress: CGFloat = 0
     
-    func getBackgroundColor(event: Event) -> Color {
+    func getBackgroundColor(event: HLLEvent) -> Color {
         collapseProgress >= 1.0 ? Color(uiColor: .secondarySystemBackground) : (colorScheme == .light ? Color.cyan : Color(uiColor: .systemBackground))
     }
     

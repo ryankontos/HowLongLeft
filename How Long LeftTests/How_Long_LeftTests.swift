@@ -11,16 +11,16 @@ import XCTest
 
 final class TimePointGeneratorTests: XCTestCase {
     private var generator: TimePointGenerator!
-    private var mockEvents: [Event]!
+    private var mockEvents: [HLLEvent]!
 
-    private func generateEvents(currentEventsCount: Int, upcomingEventsCount: Int) -> [Event] {
-        var events = [Event]()
+    private func generateEvents(currentEventsCount: Int, upcomingEventsCount: Int) -> [HLLEvent] {
+        var events = [HLLEvent]()
 
         let currentDate = Date()
 
         // Generating current events
         for index in 1...currentEventsCount {
-            let currentEvent = Event(
+            let currentEvent = HLLEvent(
                 title: "Event \(index)",
                 start: currentDate.addingTimeInterval(TimeInterval(-index * 3_600)),
                 end: currentDate.addingTimeInterval(TimeInterval(index * 3_600)))
@@ -29,7 +29,7 @@ final class TimePointGeneratorTests: XCTestCase {
 
         // Generating upcoming events
         for index in 1...upcomingEventsCount {
-            let upcomingEvent = Event(
+            let upcomingEvent = HLLEvent(
                 title: "Event \(index + currentEventsCount)",
                 start: currentDate.addingTimeInterval(TimeInterval(index * 3_600)),
                 end: currentDate.addingTimeInterval(TimeInterval((index + 1) * 3_600)))

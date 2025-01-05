@@ -10,7 +10,7 @@ import HowLongLeftKit
 import SwiftUI
 
 struct EventListItem: View {
-    @ObservedObject var event: Event
+    @ObservedObject var event: HLLEvent
     @EnvironmentObject var calendarSource: CalendarSource
 
     var body: some View {
@@ -27,5 +27,5 @@ struct EventListItem: View {
 }
 
 #Preview {
-    EventListItem(event: Event(title: "Event", start: Date(), end: Date().addingTimeInterval(1_000)))
+    EventListItem(event: HLLEvent(title: "Event", start: Date(), end: Date().addingTimeInterval(1_000)))
 }

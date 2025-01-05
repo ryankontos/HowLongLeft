@@ -56,7 +56,6 @@ struct CalendarSettingPickerView: View {
             updateSelectionFromItem()
         }
         .onChange(of: calendarInfo) { _, _ in
-            //print("OC 6")
             updateSelectionFromItem()
         }
         .onReceive(selectionPublisher) { newSelection in
@@ -74,7 +73,7 @@ struct CalendarSettingPickerView: View {
     }
 
     func getColor() -> Color {
-        if let cal = manager.getEKCalendar(for: calendarInfo) {
+        if let cal = manager.getHLLCalendar(for: calendarInfo) {
             return Color(cal.cgColor)
         }
         return .gray

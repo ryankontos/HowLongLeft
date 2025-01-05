@@ -9,7 +9,7 @@ import Foundation
 import HowLongLeftKit
 
 class StatusItemCountdown {
-    static func countdownString(for event: Event, at now: Date = Date()) -> String {
+    static func countdownString(for event: HLLEvent, at now: Date = Date()) -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .positional

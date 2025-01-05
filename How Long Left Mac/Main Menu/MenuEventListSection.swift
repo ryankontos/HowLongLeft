@@ -13,8 +13,8 @@ struct MenuEventListSection: View {
     var id: String
     var title: String?
     var info: String?
-    var allDayEvents: [Event]
-    var events: [Event]
+    var allDayEvents: [HLLEvent]
+    var events: [HLLEvent]
     var forceProminence: Bool
     var mainMenuModel: WindowSelectionManager
 
@@ -88,7 +88,7 @@ struct MenuEventListSection: View {
     }
 
     @ViewBuilder
-    private func getSubmenuButton(for event: Event) -> some View {
+    private func getSubmenuButton(for event: HLLEvent) -> some View {
         let buttonID = "\(id)-\(event.id)"
         let highlightColor = getColor(for: event)
 
@@ -122,8 +122,9 @@ struct MenuEventListSection: View {
         .id(event.id)
     }
 
-    private func getColor(for event: Event) -> Color? {
+    private func getColor(for event: HLLEvent) -> Color? {
         guard event.isAllDay, event.status() == .upcoming, !forceProminence else { return nil }
-        return Color(reader.lookupCalendar(withID: event.calendarID)?.color ?? .orange)
+        guard let color = reader.lookupCalendar(withID: event.calendarID)?.cgColor else { return .orange }
+        return Color(color)
     }
 }

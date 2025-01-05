@@ -21,7 +21,7 @@ class StatusItemEventProvider {
     private var settings: StatusItemSettings
         
     @MainActor
-    public func getEvent(at date: Date) -> Event? {
+    public func getEvent(at date: Date) -> HLLEvent? {
         
         guard settings.showCountdowns else { return nil }
         
@@ -29,7 +29,7 @@ class StatusItemEventProvider {
 
         if let selectedEvent = selectedManager.getAllStoredEvents().first,
            let selectedID = selectedEvent.eventID,
-           let event = point.allEvents.first(where: { $0.eventID == selectedID }) {
+           let event = point.allEvents.first(where: { $0.eventIdentifier == selectedID }) {
             return event
         }
 

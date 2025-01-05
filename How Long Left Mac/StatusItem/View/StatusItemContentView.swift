@@ -48,7 +48,7 @@ struct StatusItemContentView: View {
     }
 
     @ViewBuilder
-    private func eventCountdownView(for event: Event, at date: Date) -> some View {
+    private func eventCountdownView(for event: HLLEvent, at date: Date) -> some View {
         HStack(alignment: .center, spacing: 7) {
             if settings.showIndicatorDot {
                 Circle()

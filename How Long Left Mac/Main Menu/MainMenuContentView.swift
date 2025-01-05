@@ -25,7 +25,7 @@ struct MainMenuContentView: View {
     var model: MainMenuViewModel
 
     @StateObject private var menuEnv = MainMenuEnvironment()
-    @State private var displayEvent: Event?
+    @State private var displayEvent: HLLEvent?
 
     var body: some View {
         let groups = model.getEventGroups(at: Date())

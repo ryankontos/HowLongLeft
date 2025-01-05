@@ -64,7 +64,7 @@ public struct CalendarEventContainer: Identifiable {
         return calendar.calendarIdentifier + (event?.id ?? "")
     }
     
-    public var calendar: EKCalendar
-    public var event: Event?
+    public var calendar: HLLCalendar
+    public var event: HLLEvent?
     
 }

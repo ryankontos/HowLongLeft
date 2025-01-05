@@ -10,7 +10,7 @@ import Foundation
 import HowLongLeftKit
 
 class MainMenuEnvironment: ObservableObject {
-    @Published var displayEvent: Event?
+    @Published var displayEvent: HLLEvent?
 }
 
 @MainActor

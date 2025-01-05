@@ -12,7 +12,7 @@ import WidgetKit
 struct Widget_EventView: View {
     var displayDate: Date
     var progress: Double
-    var event: Event
+    var event: HLLEvent
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {

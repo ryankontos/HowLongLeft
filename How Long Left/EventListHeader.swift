@@ -12,7 +12,7 @@ struct EventListHeader: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    var keyEvent: Event
+    var keyEvent: HLLEvent
     
     var geometry: GeometryProxy
     
@@ -22,7 +22,7 @@ struct EventListHeader: View {
     
     let gen = EventCountdownTextGenerator(showContext: false, postional: true)
 
-    func getTimerTint(event: Event) -> Color {
+    func getTimerTint(event: HLLEvent) -> Color {
         colorScheme == .light ? .white : event.color
     }
 
@@ -96,7 +96,7 @@ struct EventListHeader: View {
     
     VStack {
         GeometryReader { geometry in
-            EventListHeader(keyEvent: Event.init(title: "Event", start: Date(), end: .now.addingTimeInterval(10000)), geometry: geometry, collapseProgress: 0, backgroundColor: .blue)
+            EventListHeader(keyEvent: HLLEvent.init(title: "Event", start: Date(), end: .now.addingTimeInterval(10000)), geometry: geometry, collapseProgress: 0, backgroundColor: .blue)
         }
     }
     

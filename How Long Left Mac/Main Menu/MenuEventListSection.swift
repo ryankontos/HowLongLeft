@@ -124,7 +124,7 @@ struct MenuEventListSection: View {
 
     private func getColor(for event: HLLEvent) -> Color? {
         guard event.isAllDay, event.status() == .upcoming, !forceProminence else { return nil }
-        guard let color = reader.lookupCalendar(withID: event.calendarID)?.cgColor else { return .orange }
+        guard let color = reader.lookupCalendar(withID: event.calendarID)?.color else { return .orange }
         return Color(color)
     }
 }

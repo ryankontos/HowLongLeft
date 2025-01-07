@@ -74,7 +74,7 @@ struct CalendarSettingPickerView: View {
 
     func getColor() -> Color {
         if let cal = manager.getHLLCalendar(for: calendarInfo) {
-            return Color(cal.cgColor)
+            return cal.color
         }
         return .gray
     }

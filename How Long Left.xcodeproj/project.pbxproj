@@ -22,8 +22,6 @@
 		BF28597A2C281F2B00CCF31C /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = BF2859792C281F2B00CCF31C /* SwiftUIIntrospect */; };
 		BF29C31C2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29C31B2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift */; };
 		BF29C31F2CF2285F0073D118 /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = BF29C31E2CF2285F0073D118 /* ScalingHeaderScrollView */; };
-		BF30A9A22BE3BA71007850EE /* EventListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A9A12BE3BA71007850EE /* EventListItem.swift */; };
-		BF30A9A42BE3BB26007850EE /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF30A9A32BE3BB26007850EE /* EventList.swift */; };
 		BF3CAF092BF4A7C2003035C7 /* Panes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF082BF4A7C2003035C7 /* Panes.swift */; };
 		BF3CAF0B2BF4A821003035C7 /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF0A2BF4A821003035C7 /* SettingsWindow.swift */; };
 		BF3CAF0D2BF4A8F3003035C7 /* CalendarsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF0C2BF4A8F3003035C7 /* CalendarsPane.swift */; };
@@ -98,7 +96,6 @@
 		BFC6AD282C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD272C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift */; };
 		BFCC9D772C036E57003475C8 /* MenuEventListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */; };
 		BFD31F6B2C6600D100792CD5 /* StatusTextGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD31F6A2C6600D100792CD5 /* StatusTextGenerator.swift */; };
-		BFD988BD2CF5821A00FE4199 /* EventListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD988BC2CF5821A00FE4199 /* EventListHeader.swift */; };
 		BFDC7ACB2C2132C200EF8AF5 /* EventInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */; };
 		BFDDA3DB2C25B406001160A1 /* MenuNoCalendarAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */; };
 		BFDDA3DD2C25B77C001160A1 /* MenuNoEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */; };
@@ -323,8 +320,6 @@
 		BF29C31B2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWithStickyHeader.swift; sourceTree = "<group>"; };
 		BF30A99F2BE3BA1F007850EE /* How-Long-LeftUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-LeftUITests-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BF30A9A02BE3BA4E007850EE /* How-Long-Left-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-Left-Info.plist"; sourceTree = SOURCE_ROOT; };
-		BF30A9A12BE3BA71007850EE /* EventListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListItem.swift; sourceTree = "<group>"; };
-		BF30A9A32BE3BB26007850EE /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 		BF30A9A52BE3BD75007850EE /* How Long Left.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "How Long Left.entitlements"; sourceTree = "<group>"; };
 		BF3CAF082BF4A7C2003035C7 /* Panes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panes.swift; sourceTree = "<group>"; };
 		BF3CAF0A2BF4A821003035C7 /* SettingsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindow.swift; sourceTree = "<group>"; };
@@ -387,7 +382,6 @@
 		BFC6AD272C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuCalendarPrefsContainerView.swift; sourceTree = "<group>"; };
 		BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuEventListSection.swift; sourceTree = "<group>"; };
 		BFD31F6A2C6600D100792CD5 /* StatusTextGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTextGenerator.swift; sourceTree = "<group>"; };
-		BFD988BC2CF5821A00FE4199 /* EventListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListHeader.swift; sourceTree = "<group>"; };
 		BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoItemView.swift; sourceTree = "<group>"; };
 		BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNoCalendarAccessView.swift; sourceTree = "<group>"; };
 		BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNoEventsView.swift; sourceTree = "<group>"; };
@@ -754,14 +748,11 @@
 				BF009AE12D27B9E2004457C5 /* CalendarEventListView.swift */,
 				BFF586632BEA520200EF4C9E /* SettingsView.swift */,
 				BFE2A09A2BE3C7290063B227 /* CalendarReadConfiguration.swift */,
-				BF30A9A12BE3BA71007850EE /* EventListItem.swift */,
-				BF30A9A32BE3BB26007850EE /* EventList.swift */,
 				BF9A4B002D228B0E0095D4E3 /* CountdownGrid.swift */,
 				BF9A4AFE2D2284970095D4E3 /* EventListGrid.swift */,
 				BF11A8922CFACA0B00FF3AA0 /* EventListContent.swift */,
 				BF29C31B2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift */,
 				BFA7E74A2CFA22E00028FA56 /* StretchableScrollView.swift */,
-				BFD988BC2CF5821A00FE4199 /* EventListHeader.swift */,
 				BFBCF3442CAE7703008CB14C /* CardView.swift */,
 				BFF0E6A22BE90F1C0023AB22 /* EventCardView.swift */,
 				BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */,
@@ -1389,7 +1380,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF89C1F92BEA13AC001B73C1 /* EnabledCalendarsView.swift in Sources */,
-				BFD988BD2CF5821A00FE4199 /* EventListHeader.swift in Sources */,
 				BFA7E74B2CFA22E00028FA56 /* StretchableScrollView.swift in Sources */,
 				BFF0E6A32BE90F1C0023AB22 /* EventCardView.swift in Sources */,
 				BF009AE02D27B503004457C5 /* CalendarEventListProvider.swift in Sources */,
@@ -1404,10 +1394,8 @@
 				BF11A8932CFACA0B00FF3AA0 /* EventListContent.swift in Sources */,
 				BF9A4B012D228B0E0095D4E3 /* CountdownGrid.swift in Sources */,
 				BF7E03A52BEC7F7800FD3B31 /* How_Long_LeftApp.swift in Sources */,
-				BF30A9A42BE3BB26007850EE /* EventList.swift in Sources */,
 				BFBCF3452CAE7704008CB14C /* CardView.swift in Sources */,
 				BF9A4AFF2D2284970095D4E3 /* EventListGrid.swift in Sources */,
-				BF30A9A22BE3BA71007850EE /* EventListItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

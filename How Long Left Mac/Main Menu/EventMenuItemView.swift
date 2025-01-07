@@ -86,7 +86,7 @@ struct EventMenuItemView: View, @preconcurrency Equatable {
     }
 
     private func getColor() -> Color {
-        Color(source.lookupCalendar(withID: event.calendarID)?.cgColor ?? .white)
+        source.lookupCalendar(withID: event.calendarID)?.color ?? .white
     }
 }
 /*

@@ -159,11 +159,7 @@ struct MenuEventView: View {
     }
 
     func getColor() -> Color {
-        if let cgCol = calSource.lookupCalendar(withID: event.calendarID)?.cgColor {
-            return Color(cgCol)
-        }
-
-        return .blue
+        return calSource.lookupCalendar(withID: event.calendarID)?.color ?? .blue
     }
 
     func setLocation() {

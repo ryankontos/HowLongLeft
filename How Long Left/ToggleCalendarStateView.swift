@@ -36,8 +36,8 @@ struct ToggleCalendarStateView: View {
     }
 
     func getColor() -> Color {
-        if let cal = manager.getEKCalendar(for: calendarInfo) {
-            return Color(cal.cgColor)
+        if let cal = manager.getHLLCalendar(for: calendarInfo) {
+            return cal.color
         }
 
         return .gray

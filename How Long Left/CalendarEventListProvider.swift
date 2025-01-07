@@ -37,34 +37,52 @@ class CalendarEventListProvider: ObservableObject {
         self.eventList = getEventList()
     }
     
-    private func getEventList() -> [CalendarEventContainer] {
+    func getEventList() -> [CalendarEventContainer] {
         guard let calendars = pointStore.eventCache.getAllowedCalendars() else {
            return []
         }
         
-        var returnArray: [CalendarEventContainer] = []
+        var containersWithEvents: [CalendarEventContainer] = []
+        var containersWithoutEvents: [CalendarEventContainer] = []
         
         let currentPoint = pointStore.currentPoint
         
         for calendar in calendars {
             if let event = currentPoint?.fetchSingleEvent(accordingTo: .preferInProgress, for: calendar.calendarIdentifier) {
-                returnArray.append(CalendarEventContainer(calendar: calendar, event: event))
+                print("Creating CalendarEventContainer with event \(event.title)")
+                containersWithEvents.append(CalendarEventContainer(calendar: calendar, event: event))
+                
             } else {
-                returnArray.append(CalendarEventContainer(calendar: calendar, event: nil))
+                print("Creating CalendarEventContainer without event")
+                containersWithoutEvents.append(CalendarEventContainer(calendar: calendar, event: nil))
             }
         }
         
-        return returnArray
+        // Sort containers with events by the event's start date
+        containersWithEvents.sort { lhs, rhs in
+            guard let lhsEventStart = lhs.event?.startDate, let rhsEventStart = rhs.event?.startDate else {
+                return false
+            }
+            return lhsEventStart < rhsEventStart
+        }
+        
+        // Combine the two lists: events first, no-events last
+        return containersWithEvents + containersWithoutEvents
     }
 }
 
-public struct CalendarEventContainer: Identifiable {
+@MainActor
+class MockCalendarEventListProvider: CalendarEventListProvider {
     
-    public var id: String {
-        return calendar.calendarIdentifier + (event?.id ?? "")
+    private let generator: MockEventDataGenerator
+    
+    init(generator: MockEventDataGenerator = MockEventDataGenerator(), timePointStore: TimePointStore) {
+        self.generator = generator
+        super.init(pointStore: timePointStore) // Replace with an appropriate mock or stub for TimePointStore
+        self.eventList = getEventList()
     }
     
-    public var calendar: HLLCalendar
-    public var event: HLLEvent?
-    
+    override func getEventList() -> [CalendarEventContainer] {
+        return generator.getFirstEventFromEachCalendar()
+    }
 }

@@ -623,6 +623,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BF3903622D2D05BF00567AF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BFE8F0C62BE3602000083FD6 /* ContentView.swift */,
+				BF009AE12D27B9E2004457C5 /* CalendarEventListView.swift */,
+				BFF586632BEA520200EF4C9E /* SettingsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BF3CAF052BF4A7A2003035C7 /* Settings Window */ = {
 			isa = PBXGroup;
 			children = (
@@ -744,9 +754,7 @@
 				BF30A9A52BE3BD75007850EE /* How Long Left.entitlements */,
 				BF30A9A02BE3BA4E007850EE /* How-Long-Left-Info.plist */,
 				BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */,
-				BFE8F0C62BE3602000083FD6 /* ContentView.swift */,
-				BF009AE12D27B9E2004457C5 /* CalendarEventListView.swift */,
-				BFF586632BEA520200EF4C9E /* SettingsView.swift */,
+				BF3903622D2D05BF00567AF0 /* View */,
 				BFE2A09A2BE3C7290063B227 /* CalendarReadConfiguration.swift */,
 				BF9A4B002D228B0E0095D4E3 /* CountdownGrid.swift */,
 				BF9A4AFE2D2284970095D4E3 /* EventListGrid.swift */,

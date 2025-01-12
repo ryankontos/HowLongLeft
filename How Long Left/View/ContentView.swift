@@ -12,6 +12,7 @@ import HowLongLeftKit
 struct ContentView: View {
     
     @EnvironmentObject var pointStore: TimePointStore
+    @EnvironmentObject var calendarSource: CalendarSource
     
     var body: some View {
 
@@ -25,6 +26,5 @@ struct ContentView: View {
         
        
                 
-        
     }
 }

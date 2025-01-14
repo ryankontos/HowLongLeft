@@ -10,7 +10,7 @@ import HowLongLeftKit
 import SwiftUI
 
 struct CalendarSettingPickerView: View {
-    @EnvironmentObject var manager: EventFetchSettingsManager
+    @EnvironmentObject var manager: CalendarSettingsStore
     @ObservedObject var calendarInfo: CalendarInfo
 
     @State private var selection: CalendarsPane.Option = .full

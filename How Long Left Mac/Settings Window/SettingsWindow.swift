@@ -13,7 +13,7 @@ import SwiftUI
 
 @MainActor
 class SettingsWindow: ObservableObject {
-    let calendarManager: EventFetchSettingsManager
+    let calendarManager: CalendarSettingsStore
     let eventListSettingsManager: EventListSettingsManager
     unowned var container: MacDefaultContainer
 

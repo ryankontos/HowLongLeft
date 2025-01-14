@@ -9,7 +9,7 @@ import HowLongLeftKit
 import SwiftUI
 
 struct CalendarsListView: View {
-    @EnvironmentObject var calPrefs: EventFetchSettingsManager
+    @EnvironmentObject var calPrefs: CalendarSettingsStore
 
     var body: some View {
         ForEach(calPrefs.calendarItems) { displayInfo in

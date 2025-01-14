@@ -11,7 +11,7 @@ import Settings
 import SwiftUI
 
 struct GeneralPane: View {
-    @EnvironmentObject var filteringManager: EventFetchSettingsManager
+    @EnvironmentObject var filteringManager: CalendarSettingsStore
 
     @EnvironmentObject var listSettingsModel: EventListSettingsManager
 

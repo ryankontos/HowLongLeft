@@ -84,11 +84,11 @@ class StatusItemStore: EventCacheObserver, ObservableObject {
 
         if info.isCustom {
             let appSet: Set<String> = []
-            let config = EventFetchSettingsManager.Configuration(
+            let config = CalendarSettingsStore.Configuration(
                 domain: "HLLMac_CustomStatusItem_\(info.identifier!)",
                 defaultContextsForNonMatches: appSet)
 
-            filtering = EventFetchSettingsManager(calendarSource: defaultContainer.calendarReader, config: config)
+            filtering = CalendarSettingsStore(calendarSource: defaultContainer.calendarReader, config: config)
         }
 
         return StatusItemContainer(

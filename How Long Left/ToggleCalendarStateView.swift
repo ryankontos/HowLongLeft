@@ -9,7 +9,7 @@ import HowLongLeftKit
 import SwiftUI
 
 struct ToggleCalendarStateView: View {
-    @EnvironmentObject var manager: EventFetchSettingsManager
+    @EnvironmentObject var manager: CalendarSettingsStore
     @ObservedObject var calendarInfo: CalendarInfo
     let toggleContext: String
 
@@ -20,9 +20,9 @@ struct ToggleCalendarStateView: View {
             },
             set: { newValue in
                 if newValue {
-                    manager.updateContexts(for: calendarInfo, addContextIDs: [toggleContext])
+                    manager.updateContexts(for: calendarInfo, addContextIDs: [toggleContext], notify: true)
                 } else {
-                    manager.updateContexts(for: calendarInfo, removeContextIDs: [toggleContext])
+                    manager.updateContexts(for: calendarInfo, removeContextIDs: [toggleContext], notify: true)
                 }
             }
         )) {

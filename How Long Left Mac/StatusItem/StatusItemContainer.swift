@@ -25,7 +25,7 @@ final public class StatusItemContainer: @preconcurrency Identifiable, Observable
     let source: CalendarSource
     let menuCache: EventCache
     let statusItemCache: EventCache
-    let filtering: EventFetchSettingsManager?
+    let filtering: CalendarSettingsStore?
     let listManager: EventListSettingsManager
     var infoObject: MenuConfigurationInfo
     var statusItemSettings: StatusItemSettings
@@ -51,7 +51,7 @@ final public class StatusItemContainer: @preconcurrency Identifiable, Observable
         eventWindowManager: EventWindowManager,
         timer: GlobalTimerContainer,
         listManager: EventListSettingsManager,
-        filtering: EventFetchSettingsManager,
+        filtering: CalendarSettingsStore,
         config: StatusItemConfiguration?
     ) {
         self.config = config

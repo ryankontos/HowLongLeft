@@ -29,6 +29,8 @@ struct StatusItemContentView: View {
         }
         .padding(.horizontal, 4)
         .fixedSize(horizontal: true, vertical: true)
+        
+        
     }
 
     @ViewBuilder

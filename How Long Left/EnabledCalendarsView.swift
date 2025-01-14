@@ -11,7 +11,7 @@ import SwiftUI
 
 @MainActor
 struct EnabledCalendarsView: View {
-    @EnvironmentObject var manager: EventFetchSettingsManager
+    @EnvironmentObject var manager: CalendarSettingsStore
 
     var body: some View {
         NavigationStack {
@@ -30,5 +30,9 @@ struct EnabledCalendarsView: View {
 }
 
 #Preview {
+    
+    let container = HLLCoreServicesContainer(id: "iOS")
+    
     EnabledCalendarsView()
+        .environmentObject(container.calendarPrefsManager)
 }

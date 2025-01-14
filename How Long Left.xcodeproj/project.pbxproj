@@ -17,10 +17,8 @@
 		BF0149E32CA2ECF20050B4EF /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF0149E22CA2ECF20050B4EF /* HowLongLeftKit */; };
 		BF0149E42CA2ECF20050B4EF /* HowLongLeftKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF0149E22CA2ECF20050B4EF /* HowLongLeftKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF0FCC642CA19A17003F92E9 /* WidgetUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */; };
-		BF11A8932CFACA0B00FF3AA0 /* EventListContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF11A8922CFACA0B00FF3AA0 /* EventListContent.swift */; };
 		BF14D5582CE769FE00F211FE /* EventPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14D5572CE769FE00F211FE /* EventPickerView.swift */; };
 		BF28597A2C281F2B00CCF31C /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = BF2859792C281F2B00CCF31C /* SwiftUIIntrospect */; };
-		BF29C31C2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29C31B2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift */; };
 		BF29C31F2CF2285F0073D118 /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = BF29C31E2CF2285F0073D118 /* ScalingHeaderScrollView */; };
 		BF3CAF092BF4A7C2003035C7 /* Panes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF082BF4A7C2003035C7 /* Panes.swift */; };
 		BF3CAF0B2BF4A821003035C7 /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3CAF0A2BF4A821003035C7 /* SettingsWindow.swift */; };
@@ -34,6 +32,7 @@
 		BF46AA832C2055DE005A6E7A /* MenuEventViewParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF46AA822C2055DE005A6E7A /* MenuEventViewParent.swift */; };
 		BF4A055C2BF20A5B00678073 /* StatusItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */; };
 		BF4A0A602C1783E70094A170 /* MenuTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A0A5F2C1783E70094A170 /* MenuTimelineView.swift */; };
+		BF4A55BF2D364E8200AD3EBB /* CalendarEventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A55BE2D364E8200AD3EBB /* CalendarEventCardView.swift */; };
 		BF4D145D2C2149A000ED054C /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4D145C2C2149A000ED054C /* ProgressRingView.swift */; };
 		BF61A9022CEC96C700FCAEF3 /* EmbededNSTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61A9012CEC96C700FCAEF3 /* EmbededNSTableView.swift */; };
 		BF64830A2C27002F00C58A13 /* HiddenEventsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6483092C27002F00C58A13 /* HiddenEventsPane.swift */; };
@@ -42,6 +41,7 @@
 		BF6688E12C25E4770075D69A /* StatusBarPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6688E02C25E4770075D69A /* StatusBarPane.swift */; };
 		BF66DA7D2C677D0E00C39EC9 /* ToggleInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF66DA7C2C677D0E00C39EC9 /* ToggleInfoView.swift */; };
 		BF6A0D792C5264C90082E6BB /* PieProgess.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A0D782C5264C90082E6BB /* PieProgess.swift */; };
+		BF6E7D792D350C9D0091B068 /* CalendarEventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6E7D782D350C9D0091B068 /* CalendarEventDetailView.swift */; };
 		BF70D48E2C2AE618004833F0 /* MenuConfigurationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF70D48D2C2AE618004833F0 /* MenuConfigurationInfo.swift */; };
 		BF7429252CE0A92A0071C7D4 /* ScrollViewOffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7429242CE0A92A0071C7D4 /* ScrollViewOffsetReader.swift */; };
 		BF7465EA2BF237B3009C373D /* EventMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7465E92BF237B3009C373D /* EventMenuItemView.swift */; };
@@ -57,14 +57,12 @@
 		BF91A6152BEF1E120047D534 /* StatusItemContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */; };
 		BF91A61D2BF1D6BA0047D534 /* MainMenuContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */; };
 		BF94648D2C4D680F00CC8A9E /* ActivationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF94648C2C4D680F00CC8A9E /* ActivationObserver.swift */; };
-		BF9A4AFF2D2284970095D4E3 /* EventListGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A4AFE2D2284970095D4E3 /* EventListGrid.swift */; };
 		BF9A4B012D228B0E0095D4E3 /* CountdownGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A4B002D228B0E0095D4E3 /* CountdownGrid.swift */; };
 		BF9D25F52C6894900072329F /* CalendarsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F42C6894900072329F /* CalendarsListView.swift */; };
 		BF9D25F72C68DBAC0072329F /* StatusBarPaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F62C68DBAC0072329F /* StatusBarPaneModel.swift */; };
 		BF9D25F92C68DC510072329F /* StatusBarPaneContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F82C68DC510072329F /* StatusBarPaneContent.swift */; };
 		BFA0B5E82C7C59F500FBFD8B /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFA0B5E72C7C59F500FBFD8B /* HowLongLeftKit */; };
 		BFA7E7492CF9C6400028FA56 /* ColorKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFA7E7482CF9C6400028FA56 /* ColorKit */; };
-		BFA7E74B2CFA22E00028FA56 /* StretchableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA7E74A2CFA22E00028FA56 /* StretchableScrollView.swift */; };
 		BFAC93E92C09FE0C00AB66BF /* PositionObservingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */; };
 		BFAC93EB2C09FE5B00AB66BF /* OffsetObservingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */; };
 		BFAC9BBC2CE33DF500422555 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFAC9BBB2CE33DF500422555 /* MainMenu.xib */; };
@@ -77,7 +75,6 @@
 		BFB1FBC42C0DF4CC00D04B84 /* HowLongLeftKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BFB1FBC22C0DF4CC00D04B84 /* HowLongLeftKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BFB520522CE2246600EAFE1B /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BFB520512CE2246600EAFE1B /* .swiftlint.yml */; };
 		BFB520532CE2246600EAFE1B /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BFB520512CE2246600EAFE1B /* .swiftlint.yml */; };
-		BFBCF3452CAE7704008CB14C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBCF3442CAE7703008CB14C /* CardView.swift */; };
 		BFBF9F0B2C27DE8A00B32D26 /* MacPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */; };
 		BFBF9F0D2C27E26D00B32D26 /* StatusItemConfigurationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0C2C27E26D00B32D26 /* StatusItemConfigurationStore.swift */; };
 		BFBF9F0F2C27EC0000B32D26 /* SettingsWindowContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBF9F0E2C27EC0000B32D26 /* SettingsWindowContentView.swift */; };
@@ -105,7 +102,6 @@
 		BFE7114D2BF27211000A167E /* PushLeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7114C2BF27211000A167E /* PushLeading.swift */; };
 		BFE7114F2BF2816A000A167E /* SubmenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7114E2BF2816A000A167E /* SubmenuButton.swift */; };
 		BFE8F0C72BE3602000083FD6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8F0C62BE3602000083FD6 /* ContentView.swift */; };
-		BFE8F0C92BE3602000083FD6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8F0C82BE3602000083FD6 /* Item.swift */; };
 		BFE8F0CB2BE3602200083FD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFE8F0CA2BE3602200083FD6 /* Assets.xcassets */; };
 		BFE8F0CE2BE3602200083FD6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFE8F0CD2BE3602200083FD6 /* Preview Assets.xcassets */; };
 		BFE8F0D82BE3602200083FD6 /* How_Long_LeftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8F0D72BE3602200083FD6 /* How_Long_LeftTests.swift */; };
@@ -119,7 +115,6 @@
 		BFF0E68C2BE688220023AB22 /* How_Long_Left_MacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF0E68B2BE688220023AB22 /* How_Long_Left_MacTests.swift */; };
 		BFF0E6962BE688220023AB22 /* How_Long_Left_MacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF0E6952BE688220023AB22 /* How_Long_Left_MacUITests.swift */; };
 		BFF0E6982BE688220023AB22 /* How_Long_Left_MacUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF0E6972BE688220023AB22 /* How_Long_Left_MacUITestsLaunchTests.swift */; };
-		BFF0E6A32BE90F1C0023AB22 /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF0E6A22BE90F1C0023AB22 /* EventCardView.swift */; };
 		BFF586642BEA520200EF4C9E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF586632BEA520200EF4C9E /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -315,9 +310,7 @@
 		BF0149CE2CA2EC140050B4EF /* WatchOS Widget ExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchOS Widget ExtensionExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF0149EF2CA2EEE10050B4EF /* WatchOS Widget ExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchOS Widget ExtensionExtension.entitlements"; sourceTree = "<group>"; };
 		BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUpdateManager.swift; sourceTree = "<group>"; };
-		BF11A8922CFACA0B00FF3AA0 /* EventListContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListContent.swift; sourceTree = "<group>"; };
 		BF14D5572CE769FE00F211FE /* EventPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPickerView.swift; sourceTree = "<group>"; };
-		BF29C31B2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWithStickyHeader.swift; sourceTree = "<group>"; };
 		BF30A99F2BE3BA1F007850EE /* How-Long-LeftUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-LeftUITests-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BF30A9A02BE3BA4E007850EE /* How-Long-Left-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-Left-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BF30A9A52BE3BD75007850EE /* How Long Left.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "How Long Left.entitlements"; sourceTree = "<group>"; };
@@ -333,6 +326,7 @@
 		BF46AA822C2055DE005A6E7A /* MenuEventViewParent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEventViewParent.swift; sourceTree = "<group>"; };
 		BF4A055B2BF20A5B00678073 /* StatusItemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemStore.swift; sourceTree = "<group>"; };
 		BF4A0A5F2C1783E70094A170 /* MenuTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTimelineView.swift; sourceTree = "<group>"; };
+		BF4A55BE2D364E8200AD3EBB /* CalendarEventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventCardView.swift; sourceTree = "<group>"; };
 		BF4D145C2C2149A000ED054C /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
 		BF61A9012CEC96C700FCAEF3 /* EmbededNSTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbededNSTableView.swift; sourceTree = "<group>"; };
 		BF6483092C27002F00C58A13 /* HiddenEventsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenEventsPane.swift; sourceTree = "<group>"; };
@@ -341,6 +335,7 @@
 		BF6688E02C25E4770075D69A /* StatusBarPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPane.swift; sourceTree = "<group>"; };
 		BF66DA7C2C677D0E00C39EC9 /* ToggleInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleInfoView.swift; sourceTree = "<group>"; };
 		BF6A0D782C5264C90082E6BB /* PieProgess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieProgess.swift; sourceTree = "<group>"; };
+		BF6E7D782D350C9D0091B068 /* CalendarEventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventDetailView.swift; sourceTree = "<group>"; };
 		BF70D48D2C2AE618004833F0 /* MenuConfigurationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuConfigurationInfo.swift; sourceTree = "<group>"; };
 		BF7429242CE0A92A0071C7D4 /* ScrollViewOffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffsetReader.swift; sourceTree = "<group>"; };
 		BF7465E92BF237B3009C373D /* EventMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenuItemView.swift; sourceTree = "<group>"; };
@@ -352,12 +347,10 @@
 		BF91A6182BEF1EBE0047D534 /* How-Long-Left-Mac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-Left-Mac-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuContentView.swift; sourceTree = "<group>"; };
 		BF94648C2C4D680F00CC8A9E /* ActivationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationObserver.swift; sourceTree = "<group>"; };
-		BF9A4AFE2D2284970095D4E3 /* EventListGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListGrid.swift; sourceTree = "<group>"; };
 		BF9A4B002D228B0E0095D4E3 /* CountdownGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownGrid.swift; sourceTree = "<group>"; };
 		BF9D25F42C6894900072329F /* CalendarsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarsListView.swift; sourceTree = "<group>"; };
 		BF9D25F62C68DBAC0072329F /* StatusBarPaneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPaneModel.swift; sourceTree = "<group>"; };
 		BF9D25F82C68DC510072329F /* StatusBarPaneContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPaneContent.swift; sourceTree = "<group>"; };
-		BFA7E74A2CFA22E00028FA56 /* StretchableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchableScrollView.swift; sourceTree = "<group>"; };
 		BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionObservingView.swift; sourceTree = "<group>"; };
 		BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetObservingScrollView.swift; sourceTree = "<group>"; };
 		BFAC9BBB2CE33DF500422555 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
@@ -366,7 +359,6 @@
 		BFAD41402CA2DF5700042074 /* How Long Left watchOS Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "How Long Left watchOS Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB075062C3134E800018A28 /* StatusItemSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemSettingsStore.swift; sourceTree = "<group>"; };
 		BFB520512CE2246600EAFE1B /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		BFBCF3442CAE7703008CB14C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		BFBF9F0A2C27DE8A00B32D26 /* MacPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPersistence.swift; sourceTree = "<group>"; };
 		BFBF9F0C2C27E26D00B32D26 /* StatusItemConfigurationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemConfigurationStore.swift; sourceTree = "<group>"; };
 		BFBF9F0E2C27EC0000B32D26 /* SettingsWindowContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowContentView.swift; sourceTree = "<group>"; };
@@ -392,7 +384,6 @@
 		BFE7114E2BF2816A000A167E /* SubmenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmenuButton.swift; sourceTree = "<group>"; };
 		BFE8F0C12BE3602000083FD6 /* How Long Left.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "How Long Left.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFE8F0C62BE3602000083FD6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		BFE8F0C82BE3602000083FD6 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BFE8F0CA2BE3602200083FD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFE8F0CD2BE3602200083FD6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BFE8F0D32BE3602200083FD6 /* How Long LeftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "How Long LeftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -412,7 +403,6 @@
 		BFF0E6912BE688220023AB22 /* How Long Left MacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "How Long Left MacUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF0E6952BE688220023AB22 /* How_Long_Left_MacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = How_Long_Left_MacUITests.swift; sourceTree = "<group>"; };
 		BFF0E6972BE688220023AB22 /* How_Long_Left_MacUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = How_Long_Left_MacUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		BFF0E6A22BE90F1C0023AB22 /* EventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
 		BFF586632BEA520200EF4C9E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -628,6 +618,8 @@
 			children = (
 				BFE8F0C62BE3602000083FD6 /* ContentView.swift */,
 				BF009AE12D27B9E2004457C5 /* CalendarEventListView.swift */,
+				BF4A55BE2D364E8200AD3EBB /* CalendarEventCardView.swift */,
+				BF6E7D782D350C9D0091B068 /* CalendarEventDetailView.swift */,
 				BFF586632BEA520200EF4C9E /* SettingsView.swift */,
 			);
 			path = View;
@@ -757,14 +749,7 @@
 				BF3903622D2D05BF00567AF0 /* View */,
 				BFE2A09A2BE3C7290063B227 /* CalendarReadConfiguration.swift */,
 				BF9A4B002D228B0E0095D4E3 /* CountdownGrid.swift */,
-				BF9A4AFE2D2284970095D4E3 /* EventListGrid.swift */,
-				BF11A8922CFACA0B00FF3AA0 /* EventListContent.swift */,
-				BF29C31B2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift */,
-				BFA7E74A2CFA22E00028FA56 /* StretchableScrollView.swift */,
-				BFBCF3442CAE7703008CB14C /* CardView.swift */,
-				BFF0E6A22BE90F1C0023AB22 /* EventCardView.swift */,
 				BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */,
-				BFE8F0C82BE3602000083FD6 /* Item.swift */,
 				BF89C1F82BEA13AC001B73C1 /* EnabledCalendarsView.swift */,
 				BF40D8B12BEC8AE200E26563 /* ToggleCalendarStateView.swift */,
 				BF009ADF2D27B503004457C5 /* CalendarEventListProvider.swift */,
@@ -1388,22 +1373,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF89C1F92BEA13AC001B73C1 /* EnabledCalendarsView.swift in Sources */,
-				BFA7E74B2CFA22E00028FA56 /* StretchableScrollView.swift in Sources */,
-				BFF0E6A32BE90F1C0023AB22 /* EventCardView.swift in Sources */,
 				BF009AE02D27B503004457C5 /* CalendarEventListProvider.swift in Sources */,
-				BF29C31C2CF1CD330073D118 /* ScrollViewWithStickyHeader.swift in Sources */,
+				BF4A55BF2D364E8200AD3EBB /* CalendarEventCardView.swift in Sources */,
 				BFE2A09B2BE3C7290063B227 /* CalendarReadConfiguration.swift in Sources */,
 				BF0FCC642CA19A17003F92E9 /* WidgetUpdateManager.swift in Sources */,
 				BFF586642BEA520200EF4C9E /* SettingsView.swift in Sources */,
+				BF6E7D792D350C9D0091B068 /* CalendarEventDetailView.swift in Sources */,
 				BFE8F0C72BE3602000083FD6 /* ContentView.swift in Sources */,
 				BF009AE22D27B9E2004457C5 /* CalendarEventListView.swift in Sources */,
-				BFE8F0C92BE3602000083FD6 /* Item.swift in Sources */,
 				BF40D8B22BEC8AE200E26563 /* ToggleCalendarStateView.swift in Sources */,
-				BF11A8932CFACA0B00FF3AA0 /* EventListContent.swift in Sources */,
 				BF9A4B012D228B0E0095D4E3 /* CountdownGrid.swift in Sources */,
 				BF7E03A52BEC7F7800FD3B31 /* How_Long_LeftApp.swift in Sources */,
-				BFBCF3452CAE7704008CB14C /* CardView.swift in Sources */,
-				BF9A4AFF2D2284970095D4E3 /* EventListGrid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@ import HowLongLeftKit
 import SwiftUI
 
 struct CalendarsPane: View {
-    @EnvironmentObject var calPrefs: EventFetchSettingsManager
+    @EnvironmentObject var calPrefs: CalendarSettingsStore
 
     var contexts: Set<String>
 

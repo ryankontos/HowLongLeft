@@ -15,15 +15,23 @@ struct ContentView: View {
     
     var body: some View {
         
-        if let currentPoint = pointStore.currentPoint {
-                CountdownList(events: currentPoint.inProgressEvents.map({ HLLEventViewModel(event: $0) }))
-                
-               
-                
+        
+        TabView(content: {
             
-        } else {
-            Text("No Events")
-        }
+            CountdownListContainer()
+                .toolbarBackground(.visible, for: .tabBar)
+                .tabItem {
+                    Label("Countdowns", systemImage: "timer")
+                }
+            
+            SettingsView()
+                .toolbarBackground(.visible, for: .tabBar)
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape")
+                }
+            
+        })
+       
         
         
     }

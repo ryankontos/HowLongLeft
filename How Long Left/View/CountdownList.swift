@@ -7,11 +7,18 @@
 
 import SwiftUI
 import FluidGradient
+import HowLongLeftKit
 
 struct CountdownList: View {
-    var events: [HLLEventViewModel]
+    @EnvironmentObject var pointStore: TimePointStore
+    
+    @State var showCustomEventSheet = false
+    @State var showSettingsSheet = false
+    @EnvironmentObject var customEventManager: UserEventSource
     
     @Environment(\.colorScheme) var colorScheme
+    
+    @State var settingsDetent: PresentationDetent = .medium
     
     @State private var hasAppeared = false
     
@@ -29,32 +36,23 @@ struct CountdownList: View {
     
     @Namespace private var namespace
     
+    var events: [HLLEvent] {
+        pointStore.currentPoint?.inProgressEvents ?? []
+    }
+    
     var body: some View {
         ZStack {
-            FluidGradient(blobs: colours,
-                          highlights: coloursWithBackground,
-                          speed: 0.2,
-                          blur: 0.75)
             
             NavigationStack {
                 ScrollView {
                     LazyVStack(spacing: 19) {
-                        ForEach(Array(events.enumerated()), id: \.element.id) { index, event in
-                            NavigationLink(destination: {
-                                EventDetailView(event: event)
-                                    
-                            }, label: {
+                        ForEach(events) { event in
+                            NavigationLink(destination: EventDetailView(event: event), label: {
                                 CountdownCard(event: event)
-                                    .matchedTransitionSource(id: event.id, in: namespace)
-                                    .opacity(hasAppeared ? 1 : 0)
-                                    .offset(y: hasAppeared ? 0 : 20)
-                                    .animation(
-                                        .easeOut(duration: 0.45)
-                                            .delay(Double(index) * 0.07),
-                                        value: hasAppeared
-                                    )
+                             
                             })
-                            .buttonStyle(ImmediateHighlightButtonStyle())
+                            .buttonStyle(.plain)
+                          
                         }
                     }
                     .padding(.horizontal)
@@ -64,36 +62,42 @@ struct CountdownList: View {
                 .navigationBarTitleDisplayMode(.large)
                 .onAppear {
                     hasAppeared = true
+                    print(events.map { $0.title })
                 }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            showCustomEventSheet.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundStyle(.primary)
+                        }
+                    }
+                    
+                  
+                        
+                }
+                
             }
         }
+        
+     
+        .sheet(isPresented: $showCustomEventSheet, content: {
+            
+            CustomEventFormView() { title, startDate, endDate, isAllDay, color in
+                
+                customEventManager.add(title: title, start: startDate, end: endDate, color: color)
+                
+            }
+        })
+        
+            
     }
+    
 }
 
-#Preview {
-    CountdownList(events: [
-        .init(title: "Design Presentation",
-              start: Calendar.current.date(bySettingHour: 9,  minute: 0, second: 0, of: .now)!,
-              end:   Calendar.current.date(bySettingHour: 12, minute: 30, second: 0, of: .now)!,
-              calendar: "Work",
-              color: .red),
-        .init(title: "Dentist Appointment",
-              start: Calendar.current.date(bySettingHour: 14, minute: 0, second: 0, of: .now)!,
-              end:   Calendar.current.date(bySettingHour: 15, minute: 0, second: 0, of: .now)!,
-              calendar: "Home",
-              color: .blue),
-        .init(title: "Anniversary Dinner",
-              start: Calendar.current.date(from: .init(year: 2025, month: 4, day: 24, hour: 19))!,
-              end:   Calendar.current.date(from: .init(year: 2025, month: 4, day: 24, hour: 22))!,
-              calendar: "Friends",
-              color: .yellow),
-        .init(title: "Family Reunion",
-              start: Calendar.current.date(from: .init(year: 2025, month: 4, day: 28, hour: 13))!,
-              end:   Calendar.current.date(from: .init(year: 2025, month: 4, day: 28, hour: 17))!,
-              calendar: "Family",
-              color: .green)
-    ])
-}
+
 
 struct ImmediateHighlightButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {

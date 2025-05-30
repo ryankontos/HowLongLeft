@@ -14,74 +14,28 @@ import HowLongLeftKit
 
 struct EventDetailView: View {
 
-    private var event: HLLEventViewModel
+    @ObservedObject private var event: HLLEvent
 
-    @ObservedObject var progressManager: DurationProgressManager
-    
-    @Environment(\.colorScheme) var colorScheme
+    @ObservedObject private var progressManager: DurationProgressManager
+    @Environment(\.colorScheme) private var colorScheme
 
-    init(event: HLLEventViewModel) {
+    @State private var mode: CountdownMode = .countdown
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+
+    init(event: HLLEvent) {
         self.event = event
-        self.progressManager = DurationProgressManager(start: event.startDate, end: event.endDate)
+        self._progressManager = ObservedObject(wrappedValue:
+            DurationProgressManager(start: event.startDate, end: event.endDate)
+        )
     }
 
     var body: some View {
         ZStack {
-            //radialBackground
-
             GeometryReader { geo in
                 ScrollView {
                     VStack(spacing: 50) {
-                        
-                        VStack() {
-                            
-                            
-                            VStack(spacing: 10) {
-                                
-                                Text("IN-PROGRESS")
-                                
-                                    .font(.system(size: 15, weight: .semibold, design: .default))
-                                    .multilineTextAlignment(.center)
-                                    .padding(.horizontal)
-                                    .opacity(0.8)
-                                    .foregroundStyle(.secondary)
-                                
-                                Text(event.title)
-                                
-                                    .font(.system(size: 32, weight: .semibold, design: .default))
-                                    .multilineTextAlignment(.center)
-                                    .padding(.horizontal)
-                                    .opacity(0.8)
-                                
-                            }
-                               
-                                
-                            
-                            Spacer()
-
-                            CountdownRing(startDate: event.startDate, endDate: event.endDate, color: event.color, lineWidth: 7, fontSize: 50, fontWeight: .medium)
-                                
-                                
-                            
-                          
-                            .shadow(radius: 7)
-                            .frame(width: 260, height: 260)
-                            
-                            Spacer()
-
-                            Text("\(progressManager.percentageString) Complete")
-                                .font(.system(size: 19, weight: .regular))
-                                .foregroundStyle(.secondary)
-                        }
-                        
-                        .padding(.vertical, 0)
-                        
-                        .frame(height: geo.size.height * 0.55)
-                        .padding(.top, 10)
-                        
-                        
-                        
-
+                        mainCountdownSection(height: geo.size.height * 0.55)
                         aboutCard
                             .padding(.horizontal)
                             .glassCardBackground(cornerRadius: 25)
@@ -89,69 +43,149 @@ struct EventDetailView: View {
                     }
                 }
             }
-            
         }
         .tint(event.color)
+        .onAppear {
+            feedbackGenerator.prepare()
+        }
+        .onReceive(timer) { now in
+            if now > event.endDate && mode == .elapsed {
+                withAnimation(.interactiveSpring(response: 0.4,
+                                                 dampingFraction: 0.7,
+                                                 blendDuration: 0.25)) {
+                    mode = .countdown
+                }
+            }
+        }
         .toolbar {
-            ToolbarItem(placement: .automatic, content: {
+            ToolbarItem(placement: .automatic) {
                 Button(action: {}, label: {
                     Image(systemName: "ellipsis.circle.fill")
                 })
                 .tint(.primary)
-            })
+            }
         }
     }
 
-    var background: Color {
-        return colorScheme == .dark ? .black : .white
+    private func mainCountdownSection(height: CGFloat) -> some View {
+        VStack {
+            VStack(spacing: 10) {
+                Text("IN-PROGRESS")
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.secondary)
+
+                Text(event.title)
+                    .font(.system(size: 32, weight: .semibold))
+                    .multilineTextAlignment(.center)
+            }
+
+            Spacer()
+
+            CountdownRing(
+                startDate: event.startDate,
+                endDate:   event.endDate,
+                color:     event.color,
+                lineWidth: 7
+            ) {
+                Group {
+                    VStack(spacing: 6) {
+                        countdownText
+                            .font(.system(size: 40, weight: .semibold))
+                            .multilineTextAlignment(.center)
+
+                        Text(modeLabel)
+                            .font(.system(size: 19, weight: .regular))
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .id(mode)
+                .transition(
+                    .scale(scale: 0.9)
+                    .combined(with: .opacity)
+                )
+                .animation(
+                    .interactiveSpring(response: 0.4,
+                                       dampingFraction: 0.7,
+                                       blendDuration: 0.25),
+                    value: mode
+                )
+               /* .onTapGesture {
+                    withAnimation(
+                        .interactiveSpring(response: 0.4,
+                                           dampingFraction: 0.7,
+                                           blendDuration: 0.25)
+                    ) {
+                        toggleMode()
+                    }
+                } */
+            }
+            .shadow(radius: 7)
+            .frame(width: 260, height: 260)
+
+            Spacer()
+
+            Text("\(DurationProgressManager(start: event.startDate, end: event.endDate).percentageString) Complete")
+                .font(.system(size: 19, weight: .regular))
+                .foregroundStyle(.secondary)
+        }
+        .frame(height: height)
+        .padding(.top, 10)
     }
 
-    private var radialBackground: some View {
-        FluidGradient(blobs: [event.color.opacity(0.5)],
-                      highlights: [background, event.color.opacity(0.2)],
-                      speed: 0.1,
-                      blur: 0.75)
-        .ignoresSafeArea()
+    private var countdownText: EventInfoText {
+        if mode == .countdown {
+            return EventInfoText(
+                event,
+                stringGenerator: EventCountdownTextGenerator(
+                    showContext: false,
+                    postional:   true,
+                    mode:        .remaining
+                )
+            )
+        } else {
+            return EventInfoText(
+                event,
+                stringGenerator: EventCountdownTextGenerator(
+                    showContext: false,
+                    postional:   true,
+                    mode:        .elapsed
+                )
+            )
+        }
+    }
+
+    private var modeLabel: String {
+        switch mode {
+        case .countdown: return "Remaining"
+        case .elapsed:   return "Elapsed"
+        }
     }
 
     private var aboutCard: some View {
         VStack(alignment: .leading, spacing: 20) {
-            infoRow(icon: "calendar.badge.clock",
-                    title: "Starts",
+            infoRow(icon: "calendar.badge.clock", title: "Starts",
                     value: event.startDate.formatted(date: .abbreviated, time: .shortened))
 
             Divider().background(Color.white.opacity(0.12))
 
-            infoRow(icon: "flag.checkered",
-                    title: "Ends",
+            infoRow(icon: "flag.checkered", title: "Ends",
                     value: event.endDate.formatted(date: .abbreviated, time: .shortened))
 
             Divider().background(Color.white.opacity(0.12))
 
-            infoRow(icon: "clock.arrow.circlepath",
-                    title: "Duration",
-                    value: event.durationString)
+            infoRow(icon: "clock.arrow.circlepath", title: "Duration",
+                    value: formatDuration())
 
-            Divider().background(Color.white.opacity(0.12))
+           
 
-            infoRow(icon: "calendar",
-                    title: "Calendar",
-                    value: event.calendarName,
-                    tint: event.color)
-
-            if let location = event.locationName {
+            if let calendarEvent = event as? HLLCalendarEvent {
+                
                 Divider().background(Color.white.opacity(0.12))
-                infoRow(icon: "mappin.and.ellipse",
-                        title: "Location",
-                        value: location,
-                        linkAction: {})
-            }
-
-            if let notes = event.notes {
-                Divider().background(Color.white.opacity(0.12))
-                infoRow(icon: "note.text",
-                        title: "Notes",
-                        value: notes)
+                
+                infoRow(icon: "calendar",
+                        title: "Calendar",
+                        value: calendarEvent.calendar.title,
+                        tint: event.color)
             }
         }
         .padding(22)
@@ -181,18 +215,40 @@ struct EventDetailView: View {
             Spacer(minLength: 0)
         }
     }
-}
 
+    private func toggleMode() {
+        let now = Date()
+        if mode == .countdown && now >= event.startDate {
+            feedbackGenerator.impactOccurred()
+            mode = .elapsed
+        } else if mode == .elapsed {
+            feedbackGenerator.impactOccurred()
+            mode = .countdown
+        }
+    }
+
+    private func formatDuration() -> String {
+        let interval = event.endDate.timeIntervalSince(event.startDate)
+        let hours = Int(interval) / 3600
+        let minutes = Int(interval.truncatingRemainder(dividingBy: 3600)) / 60
+        return String(format: "%02d:%02d", hours, minutes)
+    }
+
+    private enum CountdownMode {
+        case countdown
+        case elapsed
+    }
+}
 
 #Preview {
     NavigationStack {
         EventDetailView(
             event: .init(
                 title: "Session 1 Recess",
-                start: Date()-1000,
-                end: Date()+1000,
-                calendar: "Ryan Uni",
-                color: .yellow
+                startDate: Date() - 1000,
+                endDate:   Date() + 1000,
+                isAllDay:  false,
+                color:     .yellow
             )
         )
     }

@@ -9,16 +9,27 @@ import SwiftUI
 import HowLongLeftKit
 
 struct CountdownCard: View {
-    let event: HLLEventViewModel
+    @ObservedObject var event: HLLEvent
     
     var body: some View {
         
-            let remaining = max(event.endDate.timeIntervalSince(Date()), 0)
-            let progress  = 1 - remaining / event.endDate.timeIntervalSince(event.startDate)
-            
+        let _ = Self._printChanges()
+        
             HStack {
                 VStack(alignment: .leading, spacing: 10) {
-                    pill
+                   
+                    if let calendarEvent = event as? HLLCalendarEvent {
+                        
+                        Text(calendarEvent.calendar.title)
+                            .font(.system(size: 14.5).weight(.semibold))
+                            .padding(.vertical, 3)
+                            .padding(.horizontal, 9)
+                            .shadow(radius: 2)
+                            .background(Capsule().fill(event.color))
+                            .foregroundStyle(.white.opacity(0.9))
+                        
+                    }
+                    
                     VStack(alignment: .leading, spacing: 7) {
                         title
                         timeLabel
@@ -28,26 +39,32 @@ struct CountdownCard: View {
                 }
                 Spacer(minLength: 12)
                 
-                CountdownRing(startDate: event.startDate, endDate: event.endDate, color: event.color, lineWidth: 6, fontSize: 15, fontWeight: .semibold)
+                CountdownRing(startDate: event.startDate, endDate: event.endDate, color: event.color, lineWidth: 6, content: {
+                    return EventInfoText(
+                        event,
+                        stringGenerator: EventCountdownTextGenerator(
+                            showContext: false,
+                            postional:   true,
+                            mode:        .remaining)
+                        )
+                    .fontWeight(.semibold)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.4)
+                    .monospacedDigit()
+                    .padding(.horizontal, 4)
+                })
                 
                
                 .frame(width: 75, height: 75)
             }
             .padding(20)
+            .onAppear() {
+                print("CountdownCard appeared for event: \(event.title)")
+            }
             .glassCardBackground()
         
     }
-    
-    private var pill: some View {
-        Text(event.calendarName)
-            .font(.system(size: 14.5).weight(.semibold))
-            .padding(.vertical, 3)
-            .padding(.horizontal, 9)
-            .shadow(radius: 2)
-            .background(Capsule().fill(event.color))
-            .foregroundStyle(.white.opacity(0.9))
-            
-    }
+   
     private var title: some View {
         Text(event.title)
             .font(.system(size: 23, weight: .bold))
@@ -72,8 +89,8 @@ struct CountdownCard: View {
 
 #Preview {
     CountdownCard(event: .init(title: "Anniversary Dinner",
-                               start: Calendar.current.date(from: .init(year: 2025, month: 4, day: 24, hour: 19))!,
-                               end:   Calendar.current.date(from: .init(year: 2025, month: 4, day: 24, hour: 22))!,
-                               calendar: "Friends",
+                               startDate: Date().addingTimeInterval(-1000),
+                               endDate:  Date().addingTimeInterval(1000), isAllDay: false,
+                              
                                color: .yellow))
 }

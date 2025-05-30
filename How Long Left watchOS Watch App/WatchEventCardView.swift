@@ -10,8 +10,8 @@ import HowLongLeftKit
 
 struct WatchEventCardView: View {
     
-    var event: HLLCalendarEvent
-    
+    var event: HLLEvent
+
     var displayMode: DisplayMode = .rightProgressCircle
     
     enum DisplayMode {

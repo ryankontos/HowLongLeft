@@ -33,6 +33,7 @@ struct ToggleCalendarStateView: View {
                 Text(calendarInfo.title!)
             }
         }
+        .tint(getColor())
     }
 
     func getColor() -> Color {

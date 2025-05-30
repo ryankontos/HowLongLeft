@@ -28,6 +28,7 @@ struct How_Long_LeftApp: App {
                 .environmentObject(container.calendarPrefsManager)
                 .environmentObject(container.eventCache)
                 .environmentObject(container.pointStore)
+                .environmentObject(container.userEventSource)
                 .onChange(of: scenePhase) { _, newPhase in
                     if newPhase == .active {
                         // //print("Active")

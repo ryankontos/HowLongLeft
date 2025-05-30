@@ -32,7 +32,7 @@ struct Provider: @preconcurrency AppIntentTimelineProvider {
     }
 
     func snapshot(for configuration: HLLWidgetConfigurationIntent, in _: Context) async -> TimePointEntry {
-        let currentPoint = await widgetManager.timePointStore.currentPoint ?? .makeEmpty()
+        let currentPoint = widgetManager.timePointStore.currentPoint ?? .makeEmpty()
         return TimePointEntry(date: Date(), timePoint: currentPoint, configuration: configuration)
     }
 
@@ -40,7 +40,7 @@ struct Provider: @preconcurrency AppIntentTimelineProvider {
         var entries: [TimePointEntry] = []
 
         // Generate entries from the widget manager using its timeline conversion logic
-        let timePointEntries = await widgetManager.generateTimelineEntries()
+        let timePointEntries = widgetManager.generateTimelineEntries()
 
         // Convert timePointEntries to SimpleEntry objects for the WidgetKit timeline
         for timePointEntry in timePointEntries {
@@ -71,7 +71,7 @@ struct How_Long_Left_WidgetEntryView: View {
     }
 
     @ViewBuilder
-    private func platformSpecificView(displayDate: Date, event: HLLCalendarEvent) -> some View {
+    private func platformSpecificView(displayDate: Date, event: HLLEvent) -> some View {
         #if os(iOS)
         Widget_EventView(displayDate: displayDate, progress: 0.2, event: event)
         #elseif os(watchOS)
@@ -107,7 +107,7 @@ struct How_Long_Left_Widget: Widget {
 #if os(watchOS)
 struct WatchCircularWidgetView: View {
     let displayDate: Date
-    let event: HLLCalendarEvent
+    let event: HLLEvent
 
     var body: some View {
         Text("watchOS Circular Progress") // Replace with actual implementation

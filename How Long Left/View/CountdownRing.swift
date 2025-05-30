@@ -7,50 +7,59 @@
 
 import SwiftUI
 
-struct CountdownRing: View {
+struct CountdownRing<Content: View>: View {
     let startDate: Date
     let endDate: Date
     let color: Color
     let lineWidth: CGFloat
-    let fontSize: CGFloat
-    let fontWeight: Font.Weight
+    let content: () -> Content
 
     @Environment(\.colorScheme) private var scheme
     @State private var now: Date = .now
     @State private var animatedProgress: Double = 0.0
     @State private var timer: Timer?
 
+    init(startDate: Date, endDate: Date, color: Color, lineWidth: CGFloat, @ViewBuilder content: @escaping () -> Content) {
+        self.startDate = startDate
+        self.endDate = endDate
+        self.color = color
+        self.lineWidth = lineWidth
+        self.content = content
+    }
+
     var body: some View {
-        ZStack {
-            Circle()
-                .trim(from: 0, to: 1)
-                .stroke(
-                    (scheme == .dark ? Color.white : Color.black).opacity(0.1),
-                    style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
-                )
-                .rotationEffect(.degrees(-90))
+        GeometryReader { geometry in
+            let size = min(geometry.size.width, geometry.size.height)
 
-            Circle()
-                .trim(from: 0, to: animatedProgress)
-                .stroke(
-                    color,
-                    style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
-                )
-                .rotationEffect(.degrees(-90))
-                .animation(
-                    .interpolatingSpring(stiffness: 60, damping: 17),
-                    value: animatedProgress
-                )
+            ZStack {
+                Circle()
+                    .trim(from: 0, to: 1)
+                    .stroke(
+                        (scheme == .dark ? Color.white : Color.black).opacity(0.1),
+                        style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
+                    )
+                    .rotationEffect(.degrees(-90))
 
-            Text(remainingString)
-                .font(.system(size: fontSize, weight: fontWeight, design: .default))
-               
-                .foregroundStyle(.primary)
-                .minimumScaleFactor(0.5)
-                .lineLimit(1)
-                .monospacedDigit()
-                .padding(.horizontal, 40)
-                .lineLimit(1)
+                Circle()
+                    .trim(from: 0, to: animatedProgress)
+                    .stroke(
+                        color,
+                        style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
+                    )
+                    .rotationEffect(.degrees(-90))
+                    .animation(
+                        .interpolatingSpring(stiffness: 60, damping: 17),
+                        value: animatedProgress
+                    )
+
+                content()
+                    .frame(width: size - lineWidth * 2, height: size - lineWidth * 2)
+                    .clipped()
+            }
+            
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .padding(lineWidth / 2)
+            .drawingGroup()
         }
         .onAppear {
             update()
@@ -59,10 +68,11 @@ struct CountdownRing: View {
         .onDisappear {
             stopTimer()
         }
+        
     }
 
     private var totalDuration: TimeInterval {
-        max(endDate.timeIntervalSince(startDate), 1) // Avoid division by zero
+        max(endDate.timeIntervalSince(startDate), 1)
     }
 
     private var remaining: TimeInterval {
@@ -72,33 +82,6 @@ struct CountdownRing: View {
     private var progress: Double {
         let elapsed = now.timeIntervalSince(startDate)
         return min(max(elapsed / totalDuration, 0), 1)
-    }
-
-    private var remainingString: String {
-        let totalSeconds = Int(remaining)
-        let days = totalSeconds / 86400
-        let hours = (totalSeconds % 86400) / 3600
-        let minutes = (totalSeconds % 3600) / 60
-        let seconds = totalSeconds % 60
-
-        if days > 0 {
-            var components: [String] = []
-            components.append("\(days)d")
-            if hours > 0 {
-                components.append("\(hours)h")
-            }
-            return components.joined(separator: " ")
-        } else {
-            var components: [String] = []
-            if hours > 0 {
-                components.append(String(format: "%02d", hours))
-            }
-            if minutes > 0 || hours > 0 {
-                components.append(String(format: "%02d", minutes))
-            }
-            components.append(String(format: "%02d", seconds))
-            return components.joined(separator: ":")
-        }
     }
 
     private func update() {
@@ -125,10 +108,16 @@ struct CountdownRing: View {
         startDate: Date(),
         endDate: Date().addingTimeInterval(86400),
         color: .blue,
-        lineWidth: 10,
-        fontSize: 70,
-        fontWeight: .bold
-    )
-    .frame(width: 300, height: 300)
+        lineWidth: 10
+    ) {
+        VStack {
+            Text("1d")
+                .font(.headline)
+            Text("00:00")
+                .font(.subheadline)
+        }
+        .foregroundStyle(.primary)
+    }
+    .frame(width: 100, height: 100)
     .padding()
 }

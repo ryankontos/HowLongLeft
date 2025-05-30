@@ -15,12 +15,12 @@ class WidgetUpdateManager {
     private var eventCacheSubscription: AnyCancellable?
     private let defaults = UserDefaults(suiteName: "group.ryankontos.howlongleft")!
     private let widgetContainer: HLLCoreServicesContainer
-    private let appEventCache: CalendarEventCache
+    private let appEventCache: CompositeEventCache
     private let userDefaultsKey = "WidgetComputedHash"
 
     private var latestHashReloadedFor: String?
 
-    init(appEventCache: CalendarEventCache) {
+    init(appEventCache: CompositeEventCache) {
         self.appEventCache = appEventCache
         // Create the widgetContainer with the same configuration as the widget
         self.widgetContainer = HLLCoreServicesContainer(id: "iOSWidget")

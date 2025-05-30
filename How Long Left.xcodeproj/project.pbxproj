@@ -50,6 +50,11 @@
 		BF6688E12C25E4770075D69A /* StatusBarPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6688E02C25E4770075D69A /* StatusBarPane.swift */; };
 		BF66DA7D2C677D0E00C39EC9 /* ToggleInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF66DA7C2C677D0E00C39EC9 /* ToggleInfoView.swift */; };
 		BF66E36A2DDDB76F005784FE /* CustomEventFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF66E3692DDDB76F005784FE /* CustomEventFormView.swift */; };
+		BF67B3992DEA112D00F5F751 /* CountdownListDisplaySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67B3982DEA112D00F5F751 /* CountdownListDisplaySettings.swift */; };
+		BF67B39A2DEA112D00F5F751 /* CountdownListDisplaySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67B3982DEA112D00F5F751 /* CountdownListDisplaySettings.swift */; };
+		BF67B39C2DEA17F800F5F751 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67B39B2DEA17F800F5F751 /* SettingsView.swift */; };
+		BF67B39E2DEA18D100F5F751 /* CountdownListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67B39D2DEA18D100F5F751 /* CountdownListContainer.swift */; };
+		BF67B3A02DEA1B0C00F5F751 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67B39F2DEA1B0C00F5F751 /* SettingsRowView.swift */; };
 		BF6A0D792C5264C90082E6BB /* PieProgess.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A0D782C5264C90082E6BB /* PieProgess.swift */; };
 		BF70D48E2C2AE618004833F0 /* MenuConfigurationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF70D48D2C2AE618004833F0 /* MenuConfigurationInfo.swift */; };
 		BF7429252CE0A92A0071C7D4 /* ScrollViewOffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7429242CE0A92A0071C7D4 /* ScrollViewOffsetReader.swift */; };
@@ -59,7 +64,6 @@
 		BF7944862DBDEC390036975F /* CountdownCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7944852DBDEC390036975F /* CountdownCard.swift */; };
 		BF7944882DBDED950036975F /* CountdownRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7944872DBDED950036975F /* CountdownRing.swift */; };
 		BF7E03A52BEC7F7800FD3B31 /* How_Long_LeftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */; };
-		BF89C1F92BEA13AC001B73C1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89C1F82BEA13AC001B73C1 /* SettingsView.swift */; };
 		BF8A5A602C23272C001A4701 /* MacDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8A5A5F2C23272C001A4701 /* MacDefaults.swift */; };
 		BF8FBFF62CEF1054006A29D9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC5304E2CA0307B004EA49A /* WidgetKit.framework */; };
 		BF8FBFF72CEF1054006A29D9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC530502CA0307B004EA49A /* SwiftUI.framework */; };
@@ -365,6 +369,10 @@
 		BF6688E02C25E4770075D69A /* StatusBarPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPane.swift; sourceTree = "<group>"; };
 		BF66DA7C2C677D0E00C39EC9 /* ToggleInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleInfoView.swift; sourceTree = "<group>"; };
 		BF66E3692DDDB76F005784FE /* CustomEventFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEventFormView.swift; sourceTree = "<group>"; };
+		BF67B3982DEA112D00F5F751 /* CountdownListDisplaySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownListDisplaySettings.swift; sourceTree = "<group>"; };
+		BF67B39B2DEA17F800F5F751 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		BF67B39D2DEA18D100F5F751 /* CountdownListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownListContainer.swift; sourceTree = "<group>"; };
+		BF67B39F2DEA1B0C00F5F751 /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		BF6A0D782C5264C90082E6BB /* PieProgess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieProgess.swift; sourceTree = "<group>"; };
 		BF70D48D2C2AE618004833F0 /* MenuConfigurationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuConfigurationInfo.swift; sourceTree = "<group>"; };
 		BF7429242CE0A92A0071C7D4 /* ScrollViewOffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffsetReader.swift; sourceTree = "<group>"; };
@@ -374,7 +382,6 @@
 		BF7944852DBDEC390036975F /* CountdownCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownCard.swift; sourceTree = "<group>"; };
 		BF7944872DBDED950036975F /* CountdownRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownRing.swift; sourceTree = "<group>"; };
 		BF7E03A42BEC7F7800FD3B31 /* How_Long_LeftApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = How_Long_LeftApp.swift; sourceTree = "<group>"; };
-		BF89C1F82BEA13AC001B73C1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BF8A5A5F2C23272C001A4701 /* MacDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacDefaults.swift; sourceTree = "<group>"; };
 		BF8FBFF52CEF1054006A29D9 /* How Long Left Mac Widget ExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "How Long Left Mac Widget ExtensionExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemContentView.swift; sourceTree = "<group>"; };
@@ -660,12 +667,14 @@
 			isa = PBXGroup;
 			children = (
 				BF7944812DBDEBEC0036975F /* ContentView.swift */,
+				BF67B39F2DEA1B0C00F5F751 /* SettingsRowView.swift */,
+				BF67B39D2DEA18D100F5F751 /* CountdownListContainer.swift */,
 				BF42604A2DBDF2FF00E3E184 /* CountdownList.swift */,
 				BF66E3692DDDB76F005784FE /* CustomEventFormView.swift */,
 				BF7944852DBDEC390036975F /* CountdownCard.swift */,
 				BF4260482DBDEF3C00E3E184 /* HLLEventViewModel.swift */,
-				BF89C1F82BEA13AC001B73C1 /* SettingsView.swift */,
 				BF7944832DBDEC250036975F /* GlassCardModifier.swift */,
+				BF67B39B2DEA17F800F5F751 /* SettingsView.swift */,
 				BF7944872DBDED950036975F /* CountdownRing.swift */,
 				BF14879D2DBE010E001B8765 /* EventDetailView.swift */,
 			);
@@ -825,6 +834,7 @@
 				BFE2A09A2BE3C7290063B227 /* CalendarReadConfiguration.swift */,
 				BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */,
 				BF40D8B12BEC8AE200E26563 /* ToggleCalendarStateView.swift */,
+				BF67B3982DEA112D00F5F751 /* CountdownListDisplaySettings.swift */,
 				BFE8F0CA2BE3602200083FD6 /* Assets.xcassets */,
 				BFE8F0CC2BE3602200083FD6 /* Preview Content */,
 			);
@@ -1441,6 +1451,7 @@
 				BF2255AA2D43CAF3001913D4 /* CalendarReadConfiguration.swift in Sources */,
 				BF2255AC2D43CAF3001913D4 /* ToggleCalendarStateView.swift in Sources */,
 				BF2255AD2D43CAF3001913D4 /* WidgetUpdateManager.swift in Sources */,
+				BF67B39A2DEA112D00F5F751 /* CountdownListDisplaySettings.swift in Sources */,
 				BF2255B72D43CF54001913D4 /* CalendarEventListProvider.swift in Sources */,
 				BF2255B02D43CB46001913D4 /* DefaultsKeys.swift in Sources */,
 			);
@@ -1471,10 +1482,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF89C1F92BEA13AC001B73C1 /* SettingsView.swift in Sources */,
 				BF66E36A2DDDB76F005784FE /* CustomEventFormView.swift in Sources */,
 				BF4A55C12D3662F400AD3EBB /* DefaultsKeys.swift in Sources */,
 				BF7944822DBDEBEC0036975F /* ContentView.swift in Sources */,
+				BF67B39E2DEA18D100F5F751 /* CountdownListContainer.swift in Sources */,
 				BF7944882DBDED950036975F /* CountdownRing.swift in Sources */,
 				BF009AE02D27B503004457C5 /* CalendarEventListProvider.swift in Sources */,
 				BF14879E2DBE010E001B8765 /* EventDetailView.swift in Sources */,
@@ -1482,10 +1493,13 @@
 				BF7944842DBDEC250036975F /* GlassCardModifier.swift in Sources */,
 				BFE2A09B2BE3C7290063B227 /* CalendarReadConfiguration.swift in Sources */,
 				BF42604B2DBDF2FF00E3E184 /* CountdownList.swift in Sources */,
+				BF67B3992DEA112D00F5F751 /* CountdownListDisplaySettings.swift in Sources */,
 				BF0FCC642CA19A17003F92E9 /* WidgetUpdateManager.swift in Sources */,
 				BF40D8B22BEC8AE200E26563 /* ToggleCalendarStateView.swift in Sources */,
 				BF7E03A52BEC7F7800FD3B31 /* How_Long_LeftApp.swift in Sources */,
 				BF7944862DBDEC390036975F /* CountdownCard.swift in Sources */,
+				BF67B39C2DEA17F800F5F751 /* SettingsView.swift in Sources */,
+				BF67B3A02DEA1B0C00F5F751 /* SettingsRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

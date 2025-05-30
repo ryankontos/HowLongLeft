@@ -12,7 +12,7 @@ import WidgetKit
 struct Widget_EventView: View {
     var displayDate: Date
     var progress: Double
-    var event: HLLCalendarEvent
+    var event: HLLEvent
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -79,7 +79,8 @@ struct Widget_EventView_Previews: PreviewProvider {
             event: .makeExampleEvent(
                 title: "Event",
                 start: Date(),
-                end: Date().addingTimeInterval(5990)
+                end: Date().addingTimeInterval(5990),
+                color: .blue
             )
         )
         .previewContext(WidgetPreviewContext(family: .systemSmall))

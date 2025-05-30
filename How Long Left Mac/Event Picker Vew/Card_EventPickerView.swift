@@ -9,7 +9,7 @@ import HowLongLeftKit
 import SwiftUI
 
 struct Card_EventPickerView: View {
-    var event: HLLEvent
+    var event: HLLCalendarEvent
 
     var action: () -> Void
 

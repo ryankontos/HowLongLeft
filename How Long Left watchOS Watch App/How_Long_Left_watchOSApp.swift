@@ -10,7 +10,17 @@ import SwiftUI
 
 @main
 struct How_Long_Left_watchOS_Watch_AppApp: App {
-    let container = HLLCoreServicesContainer(id: "WatchApp")
+   
+    @Environment(\.scenePhase) var scenePhase
+
+    
+
+    let container = HLLCoreServicesContainer(id: "iOSApp")
+    let widgetUpdateManager: WidgetUpdateManager
+
+    init() {
+        widgetUpdateManager = WidgetUpdateManager(appEventCache: container.eventCache)
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -19,6 +29,20 @@ struct How_Long_Left_watchOS_Watch_AppApp: App {
                 .environmentObject(container.calendarPrefsManager)
                 .environmentObject(container.eventCache)
                 .environmentObject(container.pointStore)
+                .onChange(of: scenePhase) { _, newPhase in
+                    if newPhase == .active {
+                        // //print("Active")
+
+                        Task {
+                            await widgetUpdateManager.checkIfWidgetNeedsReload()
+                        }
+                    } else if newPhase == .inactive {
+                        // //print("Inactive")
+                    } else if newPhase == .background {
+                        // //print("Background")
+                    }
+                }
         }
     }
+    
 }

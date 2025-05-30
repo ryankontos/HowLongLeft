@@ -14,7 +14,7 @@ struct EventMenuItemView: View, @preconcurrency Equatable {
     @Default(.showLocationsInMainMenu) var showLocations
 
     var timerContainer: GlobalTimerContainer
-    var event: HLLEvent
+    var event: HLLCalendarEvent
     var forceProminent: Bool
 
     @ObservedObject private var selectedManager: StoredEventManager
@@ -23,7 +23,7 @@ struct EventMenuItemView: View, @preconcurrency Equatable {
 
     private let dateFormatter = DateFormatterUtility()
 
-    init(event: HLLEvent, selectedManager: StoredEventManager, timerContainer: GlobalTimerContainer, forceProminent: Bool) {
+    init(event: HLLCalendarEvent, selectedManager: StoredEventManager, timerContainer: GlobalTimerContainer, forceProminent: Bool) {
         self.event = event
         self.selectedManager = selectedManager
 

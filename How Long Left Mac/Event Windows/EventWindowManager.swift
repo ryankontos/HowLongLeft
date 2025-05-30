@@ -22,7 +22,7 @@ class EventWindowManager: NSObject, ObservableObject, NSWindowDelegate {
     }
 
     @MainActor
-    func openWindow(for event: HLLEvent, withEventProvider: TimePointStore) {
+    func openWindow(for event: HLLCalendarEvent, withEventProvider: TimePointStore) {
         if !allowMultipleWindows {
             Task {
                 for wrapper in eventWindows.values {
@@ -42,7 +42,7 @@ class EventWindowManager: NSObject, ObservableObject, NSWindowDelegate {
         }
     }
 
-    @MainActor private func createNewWindow(for event: HLLEvent, withEventProvider: TimePointStore) {
+    @MainActor private func createNewWindow(for event: HLLCalendarEvent, withEventProvider: TimePointStore) {
         let newWindow = EventWindow(event: event, container: container, eventProvider: withEventProvider)
         newWindow.window?.delegate = self
         eventWindows[newWindow.id] = EventWindowWeakWrapper(value: newWindow)

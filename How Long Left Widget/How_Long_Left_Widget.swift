@@ -9,7 +9,8 @@ import HowLongLeftKit
 import SwiftUI
 import WidgetKit
 
-struct Provider: AppIntentTimelineProvider {
+@MainActor
+struct Provider: @preconcurrency AppIntentTimelineProvider {
     func recommendations() -> [AppIntentRecommendation<HLLWidgetConfigurationIntent>] {
         [.init(intent: .init(), description: "Main")]
     }
@@ -70,7 +71,7 @@ struct How_Long_Left_WidgetEntryView: View {
     }
 
     @ViewBuilder
-    private func platformSpecificView(displayDate: Date, event: HLLEvent) -> some View {
+    private func platformSpecificView(displayDate: Date, event: HLLCalendarEvent) -> some View {
         #if os(iOS)
         Widget_EventView(displayDate: displayDate, progress: 0.2, event: event)
         #elseif os(watchOS)
@@ -106,7 +107,7 @@ struct How_Long_Left_Widget: Widget {
 #if os(watchOS)
 struct WatchCircularWidgetView: View {
     let displayDate: Date
-    let event: HLLEvent
+    let event: HLLCalendarEvent
 
     var body: some View {
         Text("watchOS Circular Progress") // Replace with actual implementation

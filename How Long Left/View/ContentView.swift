@@ -6,12 +6,29 @@
 //
 
 import SwiftUI
+import HowLongLeftKit
 
 struct ContentView: View {
+    
+    @EnvironmentObject var pointStore: TimePointStore
+    
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        if let currentPoint = pointStore.currentPoint {
+                CountdownList(events: currentPoint.inProgressEvents.map({ HLLEventViewModel(event: $0) }))
+                
+               
+                
+            
+        } else {
+            Text("No Events")
+        }
+        
+        
     }
 }
+
 
 #Preview {
     ContentView()

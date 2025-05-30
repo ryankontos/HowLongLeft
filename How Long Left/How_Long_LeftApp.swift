@@ -2,7 +2,6 @@
 //  How_Long_LeftApp.swift
 //  How Long Left
 //
-//  Created by Ryan on 2/5/2024.
 //
 
 import HowLongLeftKit
@@ -11,8 +10,8 @@ import WidgetKit
 
 @main
 struct How_Long_LeftApp: App {
+    
     @Environment(\.scenePhase) var scenePhase
-
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     let container = HLLCoreServicesContainer(id: "iOSApp")
@@ -40,6 +39,14 @@ struct How_Long_LeftApp: App {
                         // //print("Inactive")
                     } else if newPhase == .background {
                         // //print("Background")
+                    }
+                }
+                .onAppear() {
+                    for family in UIFont.familyNames {
+                        print(family)
+                        for name in UIFont.fontNames(forFamilyName: family) {
+                            print(" - \(name)")
+                        }
                     }
                 }
         }

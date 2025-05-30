@@ -22,8 +22,8 @@ class MacDefaultContainer: HLLCoreServicesContainer {
         SettingsWindow(container: self)
     }()
 
-    lazy var statusItemEventFilter: EventCache = {
-        EventCache(
+    lazy var statusItemEventFilter: CalendarEventCache = {
+        CalendarEventCache(
             calendarReader: self.calendarReader,
             calendarProvider: self.calendarPrefsManager,
             calendarContexts: [MacCalendarContexts.statusItem.rawValue],

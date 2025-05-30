@@ -14,11 +14,11 @@ struct CircularCountdownView: View {
     @ObservedObject var eventWindow: EventWindow
     var defaultContainer: MacDefaultContainer
 
-    private let lineWidth: CGFloat = 13
+    private let lineWidth: CGFloat = 10
 
     @ObservedObject var pointStore: TimePointStore
 
-    var event: HLLEvent
+    var event: HLLCalendarEvent
 
     // MARK: - Body
     var body: some View {
@@ -46,7 +46,7 @@ struct CircularCountdownView: View {
             .cornerRadius(20)
             .shadow(radius: 10)
             .frame(minWidth: 150, maxWidth: .infinity, minHeight: 150, maxHeight: .infinity)
-            .animation(.easeInOut, value: countdownComplete)
+            .drawingGroup()
         }
     }
 

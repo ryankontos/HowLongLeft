@@ -20,9 +20,9 @@ struct MenuEventView: View {
     var statusItemPointStore: TimePointStore
 
     var menuModel: WindowSelectionManager!
-    var event: HLLEvent
+    var event: HLLCalendarEvent
 
-    init(event: HLLEvent, statusItemPointStore: TimePointStore) {
+    init(event: HLLCalendarEvent, statusItemPointStore: TimePointStore) {
         self.event = event
         self.statusItemPointStore = statusItemPointStore
         self.menuModel = WindowSelectionManager(itemsProvider: self)

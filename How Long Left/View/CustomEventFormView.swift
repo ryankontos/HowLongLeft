@@ -1,18 +1,147 @@
 //
 //  CustomEventFormView.swift
-//  How Long Left
+//  HowLongLeft
 //
 //  Created by Ryan on 21/5/2025.
 //
 
 import SwiftUI
+import UIKit
 
+/// A SwiftUI form for creating a user-defined countdown,
+/// with a swatch-based colour picker + optional custom colour.
 struct CustomEventFormView: View {
+
+    @Environment(\.dismiss) private var dismiss
+
+    /// Called on Save with title, start/end, all-day flag & hex colour.
+    let onSave: (_ title: String,
+                 _ startDate: Date,
+                 _ endDate: Date,
+                 _ isAllDay: Bool,
+                 _ colorHex: String) -> Void
+
+    // MARK: - Form States
+
+    @State private var title: String = ""
+    @State private var startDate: Date = Date()
+    @State private var endDate: Date = Date().addingTimeInterval(3600)
+    @State private var isAllDay: Bool = false
+
+    @State private var selectedColor: Color = .blue
+    @State private var useCustomColour: Bool = false
+
+    private let defaultSwatches: [Color] = [
+        .red, .orange, .yellow, .green,
+        .blue, .purple, .pink, .gray
+    ]
+
+    /// Hex string for the current colour
+    private var hexString: String {
+        selectedColor.toHex()
+    }
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            Form {
+                Section("Details") {
+                    TextField("Title", text: $title)
+                    Toggle("All day", isOn: $isAllDay)
+                }
+
+                Section("When") {
+                    DatePicker("Starts",
+                               selection: $startDate,
+                               displayedComponents: isAllDay ? .date : [.date, .hourAndMinute])
+                    DatePicker("Ends",
+                               selection: $endDate,
+                               displayedComponents: isAllDay ? .date : [.date, .hourAndMinute])
+                }
+
+                Section("Colour") {
+                    // Swatch grid
+                    let columns = Array(repeating: GridItem(.flexible(), spacing: 12), count: 4)
+                    
+                    LazyVGrid(columns: columns, spacing: 12) {
+                        ForEach(defaultSwatches, id: \.self) { swatch in
+                            Circle()
+                                .fill(swatch)
+                                .frame(width: 30, height: 30)
+                                .overlay(
+                                    Circle()
+                                        .stroke(
+                                            selectedColor == swatch && !useCustomColour ? Color.primary : Color.clear,
+                                            lineWidth: 3
+                                        )
+                                )
+                                .onTapGesture {
+                                    selectedColor = swatch
+                                    useCustomColour = false
+                                }
+                        }
+                    }
+                    .padding(.vertical, 8)
+                    .padding(.vertical, 8)
+
+                    Toggle("Custom", isOn: $useCustomColour.animation())
+
+                    if useCustomColour {
+                        ColorPicker("Choose Color", selection: $selectedColor, supportsOpacity: false)
+                    }
+
+                  
+                }
+            }
+            .navigationTitle("New Countdown")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", role: .cancel) {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        guard !title.trimmingCharacters(in: .whitespaces).isEmpty,
+                              endDate >= startDate else { return }
+                        onSave(title, startDate, endDate, isAllDay, hexString)
+                        dismiss()
+                    }
+                    .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty || endDate < startDate)
+                }
+            }
+        }
     }
 }
 
-#Preview {
-    CustomEventFormView()
+// MARK: – Colour → Hex helpers
+
+fileprivate extension Color {
+    /// Convert SwiftUI Color into "#RRGGBB"
+    func toHex() -> String {
+        UIColor(self).toHexString()
+    }
+}
+
+fileprivate extension UIColor {
+    /// Extract RGB and format a "#RRGGBB" string
+    func toHexString() -> String {
+        var (r, g, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0,0,0,0)
+        guard getRed(&r, green: &g, blue: &b, alpha: &a) else {
+            return "#000000"
+        }
+        let rgb = (Int(r * 255) << 16)
+                | (Int(g * 255) << 8)
+                |  Int(b * 255)
+        return String(format: "#%06X", rgb)
+    }
+}
+
+// MARK: – Preview
+
+struct CustomEventFormView_Previews: PreviewProvider {
+    static var previews: some View {
+        CustomEventFormView { title, start, end, allday, hex in
+            print("Saved:", title, start, end, allday, hex)
+        }
+    }
 }

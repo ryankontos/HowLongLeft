@@ -16,17 +16,29 @@ class CalendarEventListProvider: ObservableObject {
     
     @Published var containersWithEvent: [CalendarEventContainer] = []
     @Published var containersWithoutEvent: [CalendarEventContainer] = []
+    @Published var listShowEmptyCalendars: Bool = Defaults[.listShowEmptyCalendars] {
+        didSet {
+            updateContainers()
+        }
+    }
+    
     private var cancellables: Set<AnyCancellable> = []
     private var pointStore: TimePointStore
     
     init(pointStore: TimePointStore) {
         self.pointStore = pointStore
-        updateContainers()
         setupBindings()
+        
+        Task {
+            for await value in Defaults.updates(.listShowEmptyCalendars) {
+                self.listShowEmptyCalendars = value
+            }
+        }
+        
+        updateContainers()
     }
     
     private func setupBindings() {
-        
         pointStore.objectWillChange
             .sink { [weak self] _ in
                 self?.updateContainers()
@@ -37,11 +49,10 @@ class CalendarEventListProvider: ObservableObject {
     func updateContainers() {
         let (withEvent, withoutEvent) = getContainers()
         self.containersWithEvent = sortEventContainers(withEvent)
-        self.containersWithoutEvent = withoutEvent
+        self.containersWithoutEvent = listShowEmptyCalendars ? withoutEvent : []
     }
     
     func getContainers() -> ([CalendarEventContainer], [CalendarEventContainer]) {
-        
         guard let calendars = pointStore.eventCache.getAllowedCalendars() else {
             return ([], [])
         }
@@ -87,7 +98,6 @@ class MockCalendarEventListProvider: CalendarEventListProvider {
         let mockContainers = generator.getFirstEventFromEachCalendar()
         let withEvent = mockContainers.filter { $0.event != nil }
         let withoutEvent = mockContainers.filter { $0.event == nil }
-        return (withEvent, withoutEvent)
+        return (sortEventContainers(withEvent), listShowEmptyCalendars ? withoutEvent : [])
     }
-    
 }

@@ -15,7 +15,7 @@ class StatusTextGenerator {
         self.settings = settings
     }
 
-    func getStatusItemText(for event: HLLEvent, at date: Date) -> String {
+    func getStatusItemText(for event: HLLCalendarEvent, at date: Date) -> String {
         let countdownText = createCountdownText(for: event, at: date)
         var statusText = event.status(at: date) == .upcoming ? "in \(countdownText)" : countdownText
 
@@ -26,7 +26,7 @@ class StatusTextGenerator {
         return statusText
     }
 
-    private func createCountdownText(for event: HLLEvent, at date: Date) -> String {
+    private func createCountdownText(for event: HLLCalendarEvent, at date: Date) -> String {
         let countdownDate = event.countdownDate(at: date)
         let percentDate = event.status(at: date) == .inProgress ? event.startDate : nil
         return countdown(endDate: countdownDate, percentageStartDate: percentDate, at: date, showSeconds: true)

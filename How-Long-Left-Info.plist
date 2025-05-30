@@ -8,5 +8,10 @@
 	<array>
 		<string>WidgetConfigurationIntentIntent</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Manrope-Bold.ttf</string>
+		<string>Manrope-Regular.ttf</string>
+	</array>
 </dict>
 </plist>

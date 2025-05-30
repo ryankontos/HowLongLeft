@@ -1,18 +1,38 @@
 //
-//  SettingsView.swift
+//  EnabledCalendarsView.swift
 //  How Long Left
 //
 //  Created by Ryan on 7/5/2024.
 //
 
+import EventKit
+import HowLongLeftKit
 import SwiftUI
 
-struct SettingsView: View {
+@MainActor
+struct EnabledCalendarsView: View {
+    @EnvironmentObject var manager: CalendarSettingsStore
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            Form {
+                ForEach($manager.calendarItems) { $cal in
+                    ToggleCalendarStateView(calendarInfo: cal, toggleContext: HLLStandardCalendarContexts.app.rawValue)
+                }
+            }
+        }
+    }
+
+    func getColor(from cal: EKCalendar?) -> Color {
+        guard let col = cal?.cgColor else { return .primary }
+        return Color(col)
     }
 }
 
 #Preview {
-    SettingsView()
+    
+    let container = HLLCoreServicesContainer(id: "iOS")
+    
+    EnabledCalendarsView()
+        .environmentObject(container.calendarPrefsManager)
 }

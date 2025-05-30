@@ -18,6 +18,7 @@ struct CountdownRing<Content: View>: View {
     @State private var now: Date = .now
     @State private var animatedProgress: Double = 0.0
     @State private var timer: Timer?
+    @State private var hasAppeared = false
 
     init(startDate: Date, endDate: Date, color: Color, lineWidth: CGFloat, @ViewBuilder content: @escaping () -> Content) {
         self.startDate = startDate
@@ -47,36 +48,33 @@ struct CountdownRing<Content: View>: View {
                         style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
                     )
                     .rotationEffect(.degrees(-90))
-                    .animation(
-                        .interpolatingSpring(stiffness: 60, damping: 17),
-                        value: animatedProgress
-                    )
 
                 content()
                     .frame(width: size - lineWidth * 2, height: size - lineWidth * 2)
                     .clipped()
             }
-            
             .frame(width: geometry.size.width, height: geometry.size.height)
             .padding(lineWidth / 2)
             .drawingGroup()
         }
         .onAppear {
-            update()
+            if !hasAppeared {
+                hasAppeared = true
+                animatedProgress = 0
+                now = Date()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    update(animated: true)
+                }
+            }
             startTimer()
         }
         .onDisappear {
             stopTimer()
         }
-        
     }
 
     private var totalDuration: TimeInterval {
         max(endDate.timeIntervalSince(startDate), 1)
-    }
-
-    private var remaining: TimeInterval {
-        max(endDate.timeIntervalSince(now), 0)
     }
 
     private var progress: Double {
@@ -84,15 +82,28 @@ struct CountdownRing<Content: View>: View {
         return min(max(elapsed / totalDuration, 0), 1)
     }
 
-    private func update() {
-        now = Date()
-        animatedProgress = progress
+    private func update(animated: Bool = true) {
+        let newNow = Date()
+        let newProgress = {
+            let elapsed = newNow.timeIntervalSince(startDate)
+            return min(max(elapsed / totalDuration, 0), 1)
+        }()
+
+        if animated {
+            withAnimation(.interpolatingSpring(stiffness: 60, damping: 17)) {
+                now = newNow
+                animatedProgress = newProgress
+            }
+        } else {
+            now = newNow
+            animatedProgress = newProgress
+        }
     }
 
     private func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             DispatchQueue.main.async {
-                update()
+                update(animated: true)
             }
         }
     }

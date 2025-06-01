@@ -1818,7 +1818,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ryankontos.How-Long-Left.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ryankontos.How-Long-Left.watchkit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1852,7 +1852,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ryankontos.How-Long-Left.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ryankontos.How-Long-Left.watchkit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -2151,7 +2151,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ryankontos.How-Long-Left";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ryankontos.How-Long-Left";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
@@ -2192,7 +2192,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ryankontos.How-Long-Left";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ryankontos.How-Long-Left";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;

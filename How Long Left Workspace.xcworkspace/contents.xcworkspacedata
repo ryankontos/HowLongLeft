@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../fluid-menu-bar-extra">
+   </FileRef>
+   <FileRef
+      location = "group:HowLongLeftKit">
+   </FileRef>
+   <FileRef
+      location = "group:HowLongLeft/How Long Left.xcodeproj">
+   </FileRef>
+</Workspace>

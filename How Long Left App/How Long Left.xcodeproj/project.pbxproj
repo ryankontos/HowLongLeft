@@ -73,6 +73,7 @@
 		BF8FC0162CEF10CF006A29D9 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = BF8FC0152CEF10CF006A29D9 /* Defaults */; };
 		BF91A6152BEF1E120047D534 /* StatusItemContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91A6142BEF1E120047D534 /* StatusItemContentView.swift */; };
 		BF91A61D2BF1D6BA0047D534 /* MainMenuContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF91A61C2BF1D6BA0047D534 /* MainMenuContentView.swift */; };
+		BF9301C72DEA36A6004BD4BF /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF9301C62DEA36A6004BD4BF /* HowLongLeftKit */; };
 		BF94648D2C4D680F00CC8A9E /* ActivationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF94648C2C4D680F00CC8A9E /* ActivationObserver.swift */; };
 		BF9D25F52C6894900072329F /* CalendarsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F42C6894900072329F /* CalendarsListView.swift */; };
 		BF9D25F72C68DBAC0072329F /* StatusBarPaneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F62C68DBAC0072329F /* StatusBarPaneModel.swift */; };
@@ -580,6 +581,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFA7E7492CF9C6400028FA56 /* ColorKit in Frameworks */,
+				BF9301C72DEA36A6004BD4BF /* HowLongLeftKit in Frameworks */,
 				BF1487A42DBE4C32001B8765 /* FluidGradient in Frameworks */,
 				BFBFBAAF2C8DFFB700EB5CE8 /* HowLongLeftKit in Frameworks */,
 				BF1487A12DBE41F6001B8765 /* BezelKit in Frameworks */,
@@ -1091,6 +1093,7 @@
 				BFA7E7482CF9C6400028FA56 /* ColorKit */,
 				BF1487A02DBE41F6001B8765 /* BezelKit */,
 				BF1487A32DBE4C32001B8765 /* FluidGradient */,
+				BF9301C62DEA36A6004BD4BF /* HowLongLeftKit */,
 			);
 			productName = "How Long Left";
 			productReference = BFE8F0C12BE3602000083FD6 /* How Long Left.app */;
@@ -1270,11 +1273,11 @@
 				BFB1FBBA2C0DF3C800D04B84 /* XCRemoteSwiftPackageReference "Defaults" */,
 				BFB1FBBF2C0DF42400D04B84 /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */,
 				BF2859782C281F2A00CCF31C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				BFA0B5E62C7C59F500FBFD8B /* XCLocalSwiftPackageReference "../HowLongLeftKit" */,
 				BF29C31D2CF2285F0073D118 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
 				BFA7E7472CF9C6400028FA56 /* XCRemoteSwiftPackageReference "ColorKit" */,
 				BF14879F2DBE41F6001B8765 /* XCRemoteSwiftPackageReference "BezelKit" */,
 				BF1487A22DBE4C32001B8765 /* XCRemoteSwiftPackageReference "FluidGradient" */,
+				BF9301C52DEA36A6004BD4BF /* XCLocalSwiftPackageReference "../HowLongLeftKit" */,
 			);
 			productRefGroup = BFE8F0C22BE3602000083FD6 /* Products */;
 			projectDirPath = "";
@@ -2551,7 +2554,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		BFA0B5E62C7C59F500FBFD8B /* XCLocalSwiftPackageReference "../HowLongLeftKit" */ = {
+		BF9301C52DEA36A6004BD4BF /* XCLocalSwiftPackageReference "../HowLongLeftKit" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../HowLongLeftKit;
 		};
@@ -2661,6 +2664,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BFB1FBBA2C0DF3C800D04B84 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
+		};
+		BF9301C62DEA36A6004BD4BF /* HowLongLeftKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HowLongLeftKit;
 		};
 		BFA0B5E72C7C59F500FBFD8B /* HowLongLeftKit */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -20,6 +20,7 @@
 		BF1487A12DBE41F6001B8765 /* BezelKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF1487A02DBE41F6001B8765 /* BezelKit */; };
 		BF1487A42DBE4C32001B8765 /* FluidGradient in Frameworks */ = {isa = PBXBuildFile; productRef = BF1487A32DBE4C32001B8765 /* FluidGradient */; };
 		BF14D5582CE769FE00F211FE /* EventPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14D5572CE769FE00F211FE /* EventPickerView.swift */; };
+		BF163A2A2DEC6FD200ED605F /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF163A292DEC6FD200ED605F /* HowLongLeftKit */; };
 		BF2255AA2D43CAF3001913D4 /* CalendarReadConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE2A09A2BE3C7290063B227 /* CalendarReadConfiguration.swift */; };
 		BF2255AC2D43CAF3001913D4 /* ToggleCalendarStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40D8B12BEC8AE200E26563 /* ToggleCalendarStateView.swift */; };
 		BF2255AD2D43CAF3001913D4 /* WidgetUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */; };
@@ -586,6 +587,7 @@
 				BFBFBAAF2C8DFFB700EB5CE8 /* HowLongLeftKit in Frameworks */,
 				BF1487A12DBE41F6001B8765 /* BezelKit in Frameworks */,
 				BF29C31F2CF2285F0073D118 /* ScalingHeaderScrollView in Frameworks */,
+				BF163A2A2DEC6FD200ED605F /* HowLongLeftKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1094,6 +1096,7 @@
 				BF1487A02DBE41F6001B8765 /* BezelKit */,
 				BF1487A32DBE4C32001B8765 /* FluidGradient */,
 				BF9301C62DEA36A6004BD4BF /* HowLongLeftKit */,
+				BF163A292DEC6FD200ED605F /* HowLongLeftKit */,
 			);
 			productName = "How Long Left";
 			productReference = BFE8F0C12BE3602000083FD6 /* How Long Left.app */;
@@ -1271,13 +1274,13 @@
 			packageReferences = (
 				BFB1FBB72C0DF3B500D04B84 /* XCRemoteSwiftPackageReference "Settings" */,
 				BFB1FBBA2C0DF3C800D04B84 /* XCRemoteSwiftPackageReference "Defaults" */,
-				BFB1FBBF2C0DF42400D04B84 /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */,
 				BF2859782C281F2A00CCF31C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				BF29C31D2CF2285F0073D118 /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
 				BFA7E7472CF9C6400028FA56 /* XCRemoteSwiftPackageReference "ColorKit" */,
 				BF14879F2DBE41F6001B8765 /* XCRemoteSwiftPackageReference "BezelKit" */,
 				BF1487A22DBE4C32001B8765 /* XCRemoteSwiftPackageReference "FluidGradient" */,
-				BF9301C52DEA36A6004BD4BF /* XCLocalSwiftPackageReference "../HowLongLeftKit" */,
+				BF163A252DEC6FC600ED605F /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */,
+				BF163A282DEC6FD200ED605F /* XCLocalSwiftPackageReference "../HowLongLeftKit" */,
 			);
 			productRefGroup = BFE8F0C22BE3602000083FD6 /* Products */;
 			projectDirPath = "";
@@ -2554,13 +2557,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		BF9301C52DEA36A6004BD4BF /* XCLocalSwiftPackageReference "../HowLongLeftKit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../HowLongLeftKit;
-		};
-		BFB1FBBF2C0DF42400D04B84 /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */ = {
+		BF163A252DEC6FC600ED605F /* XCLocalSwiftPackageReference "../fluid-menu-bar-extra" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../fluid-menu-bar-extra";
+		};
+		BF163A282DEC6FD200ED605F /* XCLocalSwiftPackageReference "../HowLongLeftKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../HowLongLeftKit;
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -2641,6 +2644,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BF1487A22DBE4C32001B8765 /* XCRemoteSwiftPackageReference "FluidGradient" */;
 			productName = FluidGradient;
+		};
+		BF163A292DEC6FD200ED605F /* HowLongLeftKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HowLongLeftKit;
 		};
 		BF2859792C281F2B00CCF31C /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;

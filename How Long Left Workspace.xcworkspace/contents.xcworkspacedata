@@ -2,12 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../fluid-menu-bar-extra">
+      location = "group:fluid-menu-bar-extra">
    </FileRef>
    <FileRef
       location = "group:HowLongLeftKit">
    </FileRef>
    <FileRef
-      location = "group:HowLongLeft/How Long Left.xcodeproj">
+      location = "group:How Long Left App/How Long Left.xcodeproj">
    </FileRef>
 </Workspace>

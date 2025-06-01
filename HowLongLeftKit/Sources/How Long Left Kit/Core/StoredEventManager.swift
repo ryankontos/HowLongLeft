@@ -36,7 +36,7 @@ public class StoredEventManager: ObservableObject {
         
     }
     
-    public func addEventToStore(event: HLLCalendarEvent, removeIfExists: Bool = false) {
+    public func addEventToStore(event: HLLEvent, removeIfExists: Bool = false) {
         if removeIfExists {
             if let existingEventInfo = fetchEventInfo(matching: event.eventIdentifier) {
                 removeEventFromStore(eventInfo: existingEventInfo)
@@ -74,7 +74,7 @@ public class StoredEventManager: ObservableObject {
         }
     }
     
-    public func isEventStored(event: HLLCalendarEvent) -> Bool {
+    public func isEventStored(event: HLLEvent) -> Bool {
         return isEventStoredWith(eventID: event.eventIdentifier)
     }
     
@@ -112,18 +112,22 @@ public class StoredEventManager: ObservableObject {
     }
     
     // Create HiddenEventInfo
-    private func createEventInfo(with event: HLLCalendarEvent) {
+    private func createEventInfo(with event: HLLEvent) {
         
         let newHiddenEventInfo = StoredEventInfo(context: context)
         newHiddenEventInfo.eventID = event.eventIdentifier
         newHiddenEventInfo.domain = domainObject
         newHiddenEventInfo.title = event.title
-        newHiddenEventInfo.calendarID = event.calendar.calendarIdentifier
+       
         newHiddenEventInfo.startDate = event.startDate
         newHiddenEventInfo.endDate = event.endDate
         newHiddenEventInfo.isAllDay = event.isAllDay
         newHiddenEventInfo.domain = domainObject
         newHiddenEventInfo.storedDate = Date()
+        
+        if let calEvent = event as? HLLCalendarEvent {
+            newHiddenEventInfo.calendarID = calEvent.calendarID
+        }
         
         domainObject?.addToEventInfos(newHiddenEventInfo)
         

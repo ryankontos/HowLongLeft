@@ -21,7 +21,7 @@ class StatusItemEventProvider {
     private var settings: StatusItemSettings
         
     @MainActor
-    public func getEvent(at date: Date) -> HLLCalendarEvent? {
+    public func getEvent(at date: Date) -> HLLEvent? {
         
         guard settings.showCountdowns else { return nil }
         

@@ -9,13 +9,13 @@ import HowLongLeftKit
 import SwiftUI
 
 struct EventPickerView: View {
-    @Binding var selectedEvents: [HLLCalendarEvent]
+    @Binding var selectedEvents: [HLLEvent]
 
     @ObservedObject var timePointStore: TimePointStore
 
     var groupFetcher: EventListGroupProvider
 
-    init(selectedEvents: Binding<[HLLCalendarEvent]>, timePointStore: TimePointStore) {
+    init(selectedEvents: Binding<[HLLEvent]>, timePointStore: TimePointStore) {
         self._selectedEvents = selectedEvents
 
         self.timePointStore = timePointStore

@@ -14,7 +14,7 @@ struct EventMenuItemView: View, @preconcurrency Equatable {
     @Default(.showLocationsInMainMenu) var showLocations
 
     var timerContainer: GlobalTimerContainer
-    var event: HLLCalendarEvent
+    var event: HLLEvent
     var forceProminent: Bool
 
     @ObservedObject private var selectedManager: StoredEventManager
@@ -23,7 +23,7 @@ struct EventMenuItemView: View, @preconcurrency Equatable {
 
     private let dateFormatter = DateFormatterUtility()
 
-    init(event: HLLCalendarEvent, selectedManager: StoredEventManager, timerContainer: GlobalTimerContainer, forceProminent: Bool) {
+    init(event: HLLEvent, selectedManager: StoredEventManager, timerContainer: GlobalTimerContainer, forceProminent: Bool) {
         self.event = event
         self.selectedManager = selectedManager
 
@@ -86,7 +86,7 @@ struct EventMenuItemView: View, @preconcurrency Equatable {
     }
 
     private func getColor() -> Color {
-        source.lookupCalendar(withID: event.calendarID)?.color ?? .white
+        return event.color
     }
 }
 /*

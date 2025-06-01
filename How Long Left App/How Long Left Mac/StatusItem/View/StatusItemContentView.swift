@@ -50,11 +50,11 @@ struct StatusItemContentView: View {
     }
 
     @ViewBuilder
-    private func eventCountdownView(for event: HLLCalendarEvent, at date: Date) -> some View {
+    private func eventCountdownView(for event: HLLEvent, at date: Date) -> some View {
         HStack(alignment: .center, spacing: 7) {
-            if settings.showIndicatorDot {
+            if settings.showIndicatorDot, let calEvent = event as? HLLCalendarEvent {
                 Circle()
-                    .foregroundStyle(calendarSource.getColor(calendarID: event.calendarID))
+                    .foregroundStyle(calendarSource.getColor(calendarID: calEvent.calendarID))
                     .frame(width: 7.5)
                     .opacity(0.9)
             }

@@ -36,10 +36,7 @@ struct CustomEventFormView: View {
         .blue, .purple, .pink, .gray
     ]
 
-    /// Hex string for the current colour
-    private var hexString: String {
-        selectedColor.toHex()
-    }
+   
 
     var body: some View {
         NavigationView {
@@ -103,7 +100,7 @@ struct CustomEventFormView: View {
                     Button("Save") {
                         guard !title.trimmingCharacters(in: .whitespaces).isEmpty,
                               endDate >= startDate else { return }
-                        onSave(title, startDate, endDate, isAllDay, hexString)
+                        onSave(title, startDate, endDate, isAllDay, "")
                         dismiss()
                     }
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty || endDate < startDate)
@@ -115,26 +112,8 @@ struct CustomEventFormView: View {
 
 // MARK: – Colour → Hex helpers
 
-fileprivate extension Color {
-    /// Convert SwiftUI Color into "#RRGGBB"
-    func toHex() -> String {
-        UIColor(self).toHexString()
-    }
-}
 
-fileprivate extension UIColor {
-    /// Extract RGB and format a "#RRGGBB" string
-    func toHexString() -> String {
-        var (r, g, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0,0,0,0)
-        guard getRed(&r, green: &g, blue: &b, alpha: &a) else {
-            return "#000000"
-        }
-        let rgb = (Int(r * 255) << 16)
-                | (Int(g * 255) << 8)
-                |  Int(b * 255)
-        return String(format: "#%06X", rgb)
-    }
-}
+
 
 // MARK: – Preview
 

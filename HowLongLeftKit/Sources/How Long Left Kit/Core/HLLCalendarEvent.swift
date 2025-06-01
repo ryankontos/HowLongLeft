@@ -22,14 +22,6 @@ public class HLLCalendarEvent: HLLEvent {
         return calendar.calendarIdentifier
     }
     
-    public var locationName: String? {
-        if let locationName = structuredLocation?.title?.trimmingCharacters(in: .whitespacesAndNewlines),
-           !locationName.isEmpty, locationName.rangeOfCharacter(from: .alphanumerics) != nil {
-            return locationName
-        }
-        return nil
-    }
-    
     public var location: CLLocation? {
         return structuredLocation?.geoLocation
     }

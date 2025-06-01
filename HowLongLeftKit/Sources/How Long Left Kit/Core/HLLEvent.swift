@@ -24,6 +24,7 @@ open class HLLEvent: ObservableObject, Equatable, Hashable, Identifiable {
         return infoHash
     }
     
+    @Published open var locationName: String?
     @Published open var title: String
     @Published open var startDate: Date
     @Published open var endDate: Date

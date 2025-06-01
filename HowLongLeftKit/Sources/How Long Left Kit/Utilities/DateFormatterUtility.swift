@@ -12,7 +12,7 @@ public class DateFormatterUtility {
     public init() { }
     
     
-    public func getEventIntervalString(event: HLLCalendarEvent, newLineForEnd: Bool) -> String {
+    public func getEventIntervalString(event: HLLEvent, newLineForEnd: Bool) -> String {
         return getIntervalString(start: event.startDate, end: event.endDate, isAllDay: event.isAllDay, newLineForEnd: newLineForEnd)
     }
     

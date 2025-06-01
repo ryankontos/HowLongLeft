@@ -23,7 +23,7 @@ class EventWindow: ObservableObject, Identifiable {
     weak var window: NSWindow?
     private var lastSavedSize: CGSize?
 
-    @MainActor func getEvent() -> HLLCalendarEvent? {
+    @MainActor func getEvent() -> HLLEvent? {
         let currentPoint = eventProvider.currentPoint
         let event = getChosenEvent() ?? currentPoint?.fetchSingleEvent(accordingTo: .preferInProgress)
 
@@ -32,7 +32,7 @@ class EventWindow: ObservableObject, Identifiable {
         return event
     }
 
-    @MainActor func getChosenEvent() -> HLLCalendarEvent? {
+    @MainActor func getChosenEvent() -> HLLEvent? {
         let currentPoint = eventProvider.currentPoint
         return currentPoint?.allEvents.first { $0.eventIdentifier == selectedEventID }
     }
@@ -49,7 +49,7 @@ class EventWindow: ObservableObject, Identifiable {
     }
 
     @MainActor
-    init(event: HLLCalendarEvent?, container: MacDefaultContainer, eventProvider: TimePointStore) {
+    init(event: HLLEvent?, container: MacDefaultContainer, eventProvider: TimePointStore) {
         self.selectedEventID = event?.eventIdentifier
         self.eventProvider = eventProvider
 

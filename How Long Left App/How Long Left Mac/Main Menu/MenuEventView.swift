@@ -20,9 +20,9 @@ struct MenuEventView: View {
     var statusItemPointStore: TimePointStore
 
     var menuModel: WindowSelectionManager!
-    var event: HLLCalendarEvent
+    var event: HLLEvent
 
-    init(event: HLLCalendarEvent, statusItemPointStore: TimePointStore) {
+    init(event: HLLEvent, statusItemPointStore: TimePointStore) {
         self.event = event
         self.statusItemPointStore = statusItemPointStore
         self.menuModel = WindowSelectionManager(itemsProvider: self)
@@ -159,7 +159,7 @@ struct MenuEventView: View {
     }
 
     func getColor() -> Color {
-        return calSource.lookupCalendar(withID: event.calendarID)?.color ?? .blue
+        return event.color
     }
 
     func setLocation() {

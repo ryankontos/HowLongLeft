@@ -23,8 +23,8 @@ final public class StatusItemContainer: @preconcurrency Identifiable, Observable
     let pointStore: TimePointStore
     let statusItemPointStore: TimePointStore
     let source: CalendarSource
-    let menuCache: CalendarEventCache
-    let statusItemCache: CalendarEventCache
+    let menuCache: CompositeEventCache
+    let statusItemCache: CompositeEventCache
     let filtering: CalendarSettingsStore?
     let listManager: EventListSettingsManager
     var infoObject: MenuConfigurationInfo
@@ -67,17 +67,21 @@ final public class StatusItemContainer: @preconcurrency Identifiable, Observable
         self.filtering = filtering
         self.eventWindowManager = eventWindowManager
 
-        self.menuCache = CalendarEventCache(
+        let calCache = CalendarEventCache(
             calendarReader: source,
             calendarProvider: filtering,
             calendarContexts: [HLLStandardCalendarContexts.app.rawValue],
             hiddenEventManager: hiddenEventManager, id: "StatusItemContainer_MenuCache_\(info.identifier!)")
+        
+        self.menuCache = CompositeEventCache(calendarCache: calCache)
 
-        self.statusItemCache = CalendarEventCache(
+        let siCalCache = CalendarEventCache(
             calendarReader: source,
             calendarProvider: filtering,
             calendarContexts: [MacCalendarContexts.statusItem.rawValue, HLLStandardCalendarContexts.app.rawValue],
             hiddenEventManager: hiddenEventManager, id: "StatusItemContainer_StatusItemCache_\(info.identifier!)")
+        
+        self.statusItemCache = CompositeEventCache(calendarCache: siCalCache)
 
         self.pointStore = TimePointStore(eventCache: menuCache)
         self.statusItemPointStore = TimePointStore(eventCache: statusItemCache)

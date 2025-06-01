@@ -14,7 +14,7 @@ struct EventWindowSettingsView: View {
     @EnvironmentObject var eventWindow: EventWindow
 
     @State private var showEventPicker = false
-    @State private var events: [HLLCalendarEvent] = []
+    @State private var events: [HLLEvent] = []
 
     var body: some View {
         NavigationStack {

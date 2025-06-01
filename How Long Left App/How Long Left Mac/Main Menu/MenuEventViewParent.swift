@@ -14,11 +14,11 @@ struct MenuEventViewParent: View {
     @EnvironmentObject var calSource: CalendarSource
     @EnvironmentObject var windowManager: FMBEWindowProxy
 
-    var event: HLLCalendarEvent
+    var event: HLLEvent
 
     var statusItemPointStore: TimePointStore
 
-    init(event: HLLCalendarEvent, statusItemPointStore: TimePointStore) {
+    init(event: HLLEvent, statusItemPointStore: TimePointStore) {
         self.event = event
         self.statusItemPointStore = statusItemPointStore
     }

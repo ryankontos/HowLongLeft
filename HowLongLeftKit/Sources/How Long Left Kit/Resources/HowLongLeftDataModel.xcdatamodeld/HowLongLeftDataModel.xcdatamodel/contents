@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CalendarContext" representedClassName="CalendarContext" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <relationship name="calendar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CalendarInfo" inverseName="contexts" inverseEntity="CalendarInfo"/>
+    </entity>
+    <entity name="CalendarInfo" representedClassName="CalendarInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="contexts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CalendarContext" inverseName="calendar" inverseEntity="CalendarContext"/>
+        <relationship name="domain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CalendarStorageDomain" inverseName="calendarInfos" inverseEntity="CalendarStorageDomain"/>
+    </entity>
+    <entity name="CalendarStorageDomain" representedClassName="CalendarStorageDomain" syncable="YES" codeGenerationType="class">
+        <attribute name="domainID" optional="YES" attributeType="String"/>
+        <attribute name="showAllDayEvents" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="calendarInfos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CalendarInfo" inverseName="domain" inverseEntity="CalendarInfo"/>
+    </entity>
+    <entity name="EventStorageDomain" representedClassName="EventStorageDomain" syncable="YES" codeGenerationType="class">
+        <attribute name="domainID" optional="YES" attributeType="String"/>
+        <relationship name="eventInfos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StoredEventInfo" inverseName="domain" inverseEntity="StoredEventInfo"/>
+    </entity>
+    <entity name="StoredEventInfo" representedClassName="StoredEventInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="calendarID" optional="YES" attributeType="String"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="eventID" optional="YES" attributeType="String"/>
+        <attribute name="isAllDay" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="storedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="domain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventStorageDomain" inverseName="eventInfos" inverseEntity="EventStorageDomain"/>
+    </entity>
+    <entity name="UserEventModel" representedClassName="UserEventModel" syncable="YES" codeGenerationType="class">
+        <attribute name="colorCode" optional="YES" attributeType="String"/>
+        <attribute name="colorHex" optional="YES" attributeType="String"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+</model>

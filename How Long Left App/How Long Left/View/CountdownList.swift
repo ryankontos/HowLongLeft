@@ -70,7 +70,6 @@ struct CountdownList: View {
                             showCustomEventSheet.toggle()
                         }) {
                             Image(systemName: "plus")
-                                .font(.system(size: 20, weight: .bold))
                                 .foregroundStyle(.primary)
                         }
                     }

@@ -3,58 +3,32 @@
 //  How Long Left
 //
 //  Created by Ryan on 27/4/2025.
-//  Updated 30/4/2025 – optimised without colour banding.
+//  Simplified 11/6/2025 – minimal look with subtle border.
 //
 
 import SwiftUI
 
 private struct GlassCardModifier: ViewModifier {
-    @Environment(\.colorScheme) private var scheme
-    var cornerRadius: CGFloat = 22
+    var cornerRadius: CGFloat
+    var material: Material = .ultraThinMaterial
 
     func body(content: Content) -> some View {
-        let strokeGradient = LinearGradient(
-            gradient: Gradient(colors: [
-                (scheme == .dark ? Color.white : .black).opacity(0.15),
-                (scheme == .dark ? Color.white : .black).opacity(0.05)
-            ]),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-
-        let fillGradient = LinearGradient(
-            gradient: Gradient(colors: [
-                Color.white.opacity(scheme == .dark ? 0.10 : 0.20),
-                .clear
-            ]),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-
         content
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(.ultraThinMaterial)
+                    .fill(material)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(fillGradient)
+                    .strokeBorder(Color.primary.opacity(0.1), lineWidth: 1)
             )
-            .overlay(
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(strokeGradient, lineWidth: 1)
-            )
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius)) // clip once
-            .shadow(
-                color: .black.opacity(scheme == .dark ? 0.35 : 0.08),
-                radius: scheme == .dark ? 6 : 4,
-                x: 0, y: scheme == .dark ? 4 : 2
-            )
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
     }
 }
 
 extension View {
-    func glassCardBackground(cornerRadius: CGFloat = 22) -> some View {
-        modifier(GlassCardModifier(cornerRadius: cornerRadius))
+    /// Adds a minimal glass effect with corner radius and a subtle border.
+    func glassCardBackground(cornerRadius: CGFloat = 22, material: Material = .ultraThinMaterial) -> some View {
+        modifier(GlassCardModifier(cornerRadius: cornerRadius, material: material))
     }
 }

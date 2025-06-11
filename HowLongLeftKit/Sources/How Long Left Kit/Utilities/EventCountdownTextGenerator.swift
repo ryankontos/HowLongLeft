@@ -53,28 +53,41 @@ public class EventCountdownTextGenerator: EventInfoStringGenerator {
         let interval = Int(endDate.timeIntervalSince(startDate))
         let absInterval = abs(interval)
 
-        let hours = absInterval / 3600
-        let minutes = (absInterval % 3600) / 60
+        // Calculate days, hours, minutes, seconds
+        let days = absInterval / 86_400
+        let hours = (absInterval % 86_400) / 3_600
+        let minutes = (absInterval % 3_600) / 60
         let seconds = absInterval % 60
 
         if postional {
-            if hours > 0 {
-                return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-            } else if minutes > 0 {
-                return String(format: "%02d:%02d", minutes, seconds)
-            } else {
-                return String(format: "00:%02d", seconds)
+            // If interval is 24 hours or more, show days only
+            if days > 1 {
+                return "\(days)d"
             }
+            // If interval is 1 hour or more (but less than 24h), show hours and minutes only
+            if hours > 0 {
+                return "\(hours)h \(minutes)m"
+            }
+            // Under 1 hour: fall back to mm:ss
+            if minutes > 0 {
+                return String(format: "%02d:%02d", minutes, seconds)
+            }
+            // Under 1 minute: show just seconds (00:ss)
+            return String(format: "00:%02d", seconds)
         } else {
+            // Non-positional (“2h 5m 30s” style)
             var components: [String] = []
 
+            if days > 0 {
+                components.append("\(days)d")
+            }
             if hours > 0 {
                 components.append("\(hours)h")
             }
             if minutes > 0 || (hours > 0 && seconds > 0) {
                 components.append("\(minutes)m")
             }
-            if seconds > 0 && hours == 0 {
+            if seconds > 0 && hours == 0 && days == 0 {
                 components.append("\(seconds)s")
             }
 

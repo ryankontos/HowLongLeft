@@ -11,7 +11,7 @@ import Combine
 
 @MainActor
 public class CompositeEventCache: ObservableObject {
-    public let calendarCache: CalendarEventCache
+    public let calendarCache: CalendarEventCache?
     private let customSource: UserEventSource?
     @Published public private(set) var allEvents: [HLLEvent] = []
     private var cancellables: Set<AnyCancellable> = []
@@ -19,7 +19,7 @@ public class CompositeEventCache: ObservableObject {
    
     
     public var cacheSummaryHash: String {
-        let calHash = calendarCache.cacheSummaryHash
+        let calHash = calendarCache?.cacheSummaryHash
         let customHash = customSource?.eventSummaryHash ?? ""
         return "\(calHash ?? ""),\(customHash)".hashValue.description
         
@@ -42,7 +42,7 @@ public class CompositeEventCache: ObservableObject {
         
     }
     
-    public init(calendarCache: CalendarEventCache,
+    public init(calendarCache: CalendarEventCache? = nil,
                 customSource: UserEventSource? = nil,
                 includeCalendarEvents: Bool = true) {
         self.calendarCache = calendarCache
@@ -51,7 +51,7 @@ public class CompositeEventCache: ObservableObject {
 
         // subscribe to changes
         
-        if let customSource {
+        if let customSource, let calendarCache {
             
             
             calendarCache.objectWillChange
@@ -65,18 +65,22 @@ public class CompositeEventCache: ObservableObject {
     }
     
     var id: String {
-        return calendarCache.id
+        return calendarCache?.id ?? ""
     }
     
     func getEvents() async -> [HLLEvent] {
         return allEvents
     }
+    
+    public func isReady() -> Bool {
+        return calendarCache?.hasFetched ?? false
+    }
 
     private func rebuild() {
         Task {
-            let cal = showCalendarEvents ? await calendarCache.getEvents() : []
+            let cal = showCalendarEvents ? await calendarCache?.getEvents() : []
             let cust = showCustomEvents ? customSource?.customEvents : []
-            let unified: [HLLEvent] = (cal as [HLLEvent]) + ((cust ?? []) as [HLLEvent])
+            let unified: [HLLEvent] = ((cal ?? []) as [HLLEvent]) + ((cust ?? []) as [HLLEvent])
             self.allEvents = unified.sorted { $0.startDate < $1.startDate }
             self.objectWillChange.send()
         }

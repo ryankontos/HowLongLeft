@@ -16,6 +16,8 @@
 		BF0149E32CA2ECF20050B4EF /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF0149E22CA2ECF20050B4EF /* HowLongLeftKit */; };
 		BF0149E42CA2ECF20050B4EF /* HowLongLeftKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF0149E22CA2ECF20050B4EF /* HowLongLeftKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF0FCC642CA19A17003F92E9 /* WidgetUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */; };
+		BF10ADF72DF1D1CD00FE3D0C /* ProminentCountdownCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF10ADF62DF1D1CD00FE3D0C /* ProminentCountdownCard.swift */; };
+		BF10ADF92DF1D90D00FE3D0C /* BackgroundGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF10ADF82DF1D90D00FE3D0C /* BackgroundGradient.swift */; };
 		BF14879E2DBE010E001B8765 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF14879D2DBE010E001B8765 /* EventDetailView.swift */; };
 		BF1487A12DBE41F6001B8765 /* BezelKit in Frameworks */ = {isa = PBXBuildFile; productRef = BF1487A02DBE41F6001B8765 /* BezelKit */; };
 		BF1487A42DBE4C32001B8765 /* FluidGradient in Frameworks */ = {isa = PBXBuildFile; productRef = BF1487A32DBE4C32001B8765 /* FluidGradient */; };
@@ -44,6 +46,9 @@
 		BF4A0A602C1783E70094A170 /* MenuTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A0A5F2C1783E70094A170 /* MenuTimelineView.swift */; };
 		BF4A55C12D3662F400AD3EBB /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4A55C02D3662F400AD3EBB /* DefaultsKeys.swift */; };
 		BF4D145D2C2149A000ED054C /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4D145C2C2149A000ED054C /* ProgressRingView.swift */; };
+		BF5D02292DF9633B00B712F8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5D02282DF9633B00B712F8 /* MainView.swift */; };
+		BF5D022B2DF9634900B712F8 /* CurrentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5D022A2DF9634900B712F8 /* CurrentCard.swift */; };
+		BF5D022D2DF9749100B712F8 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5D022C2DF9749100B712F8 /* PageControl.swift */; };
 		BF61A9022CEC96C700FCAEF3 /* EmbededNSTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF61A9012CEC96C700FCAEF3 /* EmbededNSTableView.swift */; };
 		BF64830A2C27002F00C58A13 /* HiddenEventsPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6483092C27002F00C58A13 /* HiddenEventsPane.swift */; };
 		BF65BCDE2CE776D100C4BD92 /* Card_EventPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF65BCDD2CE776D100C4BD92 /* Card_EventPickerView.swift */; };
@@ -81,6 +86,9 @@
 		BF9D25F92C68DC510072329F /* StatusBarPaneContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9D25F82C68DC510072329F /* StatusBarPaneContent.swift */; };
 		BFA0B5E82C7C59F500FBFD8B /* HowLongLeftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFA0B5E72C7C59F500FBFD8B /* HowLongLeftKit */; };
 		BFA7E7492CF9C6400028FA56 /* ColorKit in Frameworks */ = {isa = PBXBuildFile; productRef = BFA7E7482CF9C6400028FA56 /* ColorKit */; };
+		BFA8F7712DF844E300C3A89D /* NoEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA8F7702DF844E300C3A89D /* NoEventsView.swift */; };
+		BFA8F7732DF8534000C3A89D /* no_events_en.json in Resources */ = {isa = PBXBuildFile; fileRef = BFA8F7722DF8534000C3A89D /* no_events_en.json */; };
+		BFA8F7742DF8534000C3A89D /* no_events_en.json in Resources */ = {isa = PBXBuildFile; fileRef = BFA8F7722DF8534000C3A89D /* no_events_en.json */; };
 		BFAC93E92C09FE0C00AB66BF /* PositionObservingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */; };
 		BFAC93EB2C09FE5B00AB66BF /* OffsetObservingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */; };
 		BFAC9BBC2CE33DF500422555 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFAC9BBB2CE33DF500422555 /* MainMenu.xib */; };
@@ -129,6 +137,7 @@
 		BFC6AD282C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC6AD272C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift */; };
 		BFCC9D772C036E57003475C8 /* MenuEventListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */; };
 		BFD31F6B2C6600D100792CD5 /* StatusTextGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD31F6A2C6600D100792CD5 /* StatusTextGenerator.swift */; };
+		BFDC49632DF942BE002A9A3A /* NoCalendarAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC49622DF942BE002A9A3A /* NoCalendarAccessView.swift */; };
 		BFDC7ACB2C2132C200EF8AF5 /* EventInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */; };
 		BFDDA3DB2C25B406001160A1 /* MenuNoCalendarAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */; };
 		BFDDA3DD2C25B77C001160A1 /* MenuNoEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */; };
@@ -343,6 +352,8 @@
 		BF0149CE2CA2EC140050B4EF /* WatchOS Widget ExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchOS Widget ExtensionExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF0149EF2CA2EEE10050B4EF /* WatchOS Widget ExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchOS Widget ExtensionExtension.entitlements"; sourceTree = "<group>"; };
 		BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUpdateManager.swift; sourceTree = "<group>"; };
+		BF10ADF62DF1D1CD00FE3D0C /* ProminentCountdownCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProminentCountdownCard.swift; sourceTree = "<group>"; };
+		BF10ADF82DF1D90D00FE3D0C /* BackgroundGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundGradient.swift; sourceTree = "<group>"; };
 		BF14879D2DBE010E001B8765 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		BF14D5572CE769FE00F211FE /* EventPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPickerView.swift; sourceTree = "<group>"; };
 		BF30A99F2BE3BA1F007850EE /* How-Long-LeftUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "How-Long-LeftUITests-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -364,6 +375,9 @@
 		BF4A0A5F2C1783E70094A170 /* MenuTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTimelineView.swift; sourceTree = "<group>"; };
 		BF4A55C02D3662F400AD3EBB /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		BF4D145C2C2149A000ED054C /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
+		BF5D02282DF9633B00B712F8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		BF5D022A2DF9634900B712F8 /* CurrentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentCard.swift; sourceTree = "<group>"; };
+		BF5D022C2DF9749100B712F8 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		BF61A9012CEC96C700FCAEF3 /* EmbededNSTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbededNSTableView.swift; sourceTree = "<group>"; };
 		BF6483092C27002F00C58A13 /* HiddenEventsPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenEventsPane.swift; sourceTree = "<group>"; };
 		BF65BCDD2CE776D100C4BD92 /* Card_EventPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card_EventPickerView.swift; sourceTree = "<group>"; };
@@ -393,6 +407,8 @@
 		BF9D25F42C6894900072329F /* CalendarsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarsListView.swift; sourceTree = "<group>"; };
 		BF9D25F62C68DBAC0072329F /* StatusBarPaneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPaneModel.swift; sourceTree = "<group>"; };
 		BF9D25F82C68DC510072329F /* StatusBarPaneContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarPaneContent.swift; sourceTree = "<group>"; };
+		BFA8F7702DF844E300C3A89D /* NoEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoEventsView.swift; sourceTree = "<group>"; };
+		BFA8F7722DF8534000C3A89D /* no_events_en.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = no_events_en.json; sourceTree = "<group>"; };
 		BFAC93E82C09FE0C00AB66BF /* PositionObservingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionObservingView.swift; sourceTree = "<group>"; };
 		BFAC93EA2C09FE5B00AB66BF /* OffsetObservingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetObservingScrollView.swift; sourceTree = "<group>"; };
 		BFAC9BBB2CE33DF500422555 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
@@ -426,6 +442,7 @@
 		BFC6AD272C295DBC00DEB881 /* CustomMenuCalendarPrefsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuCalendarPrefsContainerView.swift; sourceTree = "<group>"; };
 		BFCC9D762C036E57003475C8 /* MenuEventListSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuEventListSection.swift; sourceTree = "<group>"; };
 		BFD31F6A2C6600D100792CD5 /* StatusTextGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTextGenerator.swift; sourceTree = "<group>"; };
+		BFDC49622DF942BE002A9A3A /* NoCalendarAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCalendarAccessView.swift; sourceTree = "<group>"; };
 		BFDC7ACA2C2132C200EF8AF5 /* EventInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoItemView.swift; sourceTree = "<group>"; };
 		BFDDA3DA2C25B406001160A1 /* MenuNoCalendarAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNoCalendarAccessView.swift; sourceTree = "<group>"; };
 		BFDDA3DC2C25B77C001160A1 /* MenuNoEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNoEventsView.swift; sourceTree = "<group>"; };
@@ -670,12 +687,17 @@
 		BF3903622D2D05BF00567AF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BF5D02272DF9633300B712F8 /* UI2 */,
 				BF7944812DBDEBEC0036975F /* ContentView.swift */,
 				BF67B39F2DEA1B0C00F5F751 /* SettingsRowView.swift */,
 				BF67B39D2DEA18D100F5F751 /* CountdownListContainer.swift */,
 				BF42604A2DBDF2FF00E3E184 /* CountdownList.swift */,
+				BFA8F7702DF844E300C3A89D /* NoEventsView.swift */,
+				BFDC49622DF942BE002A9A3A /* NoCalendarAccessView.swift */,
 				BF66E3692DDDB76F005784FE /* CustomEventFormView.swift */,
 				BF7944852DBDEC390036975F /* CountdownCard.swift */,
+				BF10ADF62DF1D1CD00FE3D0C /* ProminentCountdownCard.swift */,
+				BF10ADF82DF1D90D00FE3D0C /* BackgroundGradient.swift */,
 				BF4260482DBDEF3C00E3E184 /* HLLEventViewModel.swift */,
 				BF7944832DBDEC250036975F /* GlassCardModifier.swift */,
 				BF67B39B2DEA17F800F5F751 /* SettingsView.swift */,
@@ -708,6 +730,16 @@
 				BF3CAF132BF4C3F0003035C7 /* CalendarSettingPickerView.swift */,
 			);
 			path = Calendars;
+			sourceTree = "<group>";
+		};
+		BF5D02272DF9633300B712F8 /* UI2 */ = {
+			isa = PBXGroup;
+			children = (
+				BF5D02282DF9633B00B712F8 /* MainView.swift */,
+				BF5D022C2DF9749100B712F8 /* PageControl.swift */,
+				BF5D022A2DF9634900B712F8 /* CurrentCard.swift */,
+			);
+			path = UI2;
 			sourceTree = "<group>";
 		};
 		BF65BCDC2CE776BB00C4BD92 /* Event Picker Vew */ = {
@@ -839,6 +871,7 @@
 				BF0FCC632CA19A17003F92E9 /* WidgetUpdateManager.swift */,
 				BF40D8B12BEC8AE200E26563 /* ToggleCalendarStateView.swift */,
 				BF67B3982DEA112D00F5F751 /* CountdownListDisplaySettings.swift */,
+				BFA8F7722DF8534000C3A89D /* no_events_en.json */,
 				BFE8F0CA2BE3602200083FD6 /* Assets.xcassets */,
 				BFE8F0CC2BE3602200083FD6 /* Preview Content */,
 			);
@@ -1321,6 +1354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA8F7732DF8534000C3A89D /* no_events_en.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1362,6 +1396,7 @@
 				BFBA7A0B2DD8E0C300F0D540 /* Manrope-VariableFont_wght.ttf in Resources */,
 				BFBA7A0C2DD8E0C300F0D540 /* Manrope-Bold.ttf in Resources */,
 				BFBA7A0D2DD8E0C300F0D540 /* Manrope-Medium.ttf in Resources */,
+				BFA8F7742DF8534000C3A89D /* no_events_en.json in Resources */,
 				BFBA7A0E2DD8E0C300F0D540 /* Manrope-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1488,10 +1523,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF10ADF72DF1D1CD00FE3D0C /* ProminentCountdownCard.swift in Sources */,
+				BF5D02292DF9633B00B712F8 /* MainView.swift in Sources */,
 				BF66E36A2DDDB76F005784FE /* CustomEventFormView.swift in Sources */,
 				BF4A55C12D3662F400AD3EBB /* DefaultsKeys.swift in Sources */,
+				BF10ADF92DF1D90D00FE3D0C /* BackgroundGradient.swift in Sources */,
 				BF7944822DBDEBEC0036975F /* ContentView.swift in Sources */,
 				BF67B39E2DEA18D100F5F751 /* CountdownListContainer.swift in Sources */,
+				BFDC49632DF942BE002A9A3A /* NoCalendarAccessView.swift in Sources */,
 				BF7944882DBDED950036975F /* CountdownRing.swift in Sources */,
 				BF009AE02D27B503004457C5 /* CalendarEventListProvider.swift in Sources */,
 				BF14879E2DBE010E001B8765 /* EventDetailView.swift in Sources */,
@@ -1502,9 +1541,12 @@
 				BF67B3992DEA112D00F5F751 /* CountdownListDisplaySettings.swift in Sources */,
 				BF0FCC642CA19A17003F92E9 /* WidgetUpdateManager.swift in Sources */,
 				BF40D8B22BEC8AE200E26563 /* ToggleCalendarStateView.swift in Sources */,
+				BFA8F7712DF844E300C3A89D /* NoEventsView.swift in Sources */,
+				BF5D022D2DF9749100B712F8 /* PageControl.swift in Sources */,
 				BF7E03A52BEC7F7800FD3B31 /* How_Long_LeftApp.swift in Sources */,
 				BF7944862DBDEC390036975F /* CountdownCard.swift in Sources */,
 				BF67B39C2DEA17F800F5F751 /* SettingsView.swift in Sources */,
+				BF5D022B2DF9634900B712F8 /* CurrentCard.swift in Sources */,
 				BF67B3A02DEA1B0C00F5F751 /* SettingsRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

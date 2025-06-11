@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 import WidgetKit
-
+/*
 @MainActor
 class WidgetUpdateManager {
     private var eventCacheSubscription: AnyCancellable?
@@ -67,3 +67,4 @@ class WidgetUpdateManager {
         }
     }
 }
+*/

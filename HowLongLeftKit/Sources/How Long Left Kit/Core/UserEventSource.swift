@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-import SwiftUICore
+import SwiftUI
 
 @MainActor
 public class UserEventSource: ObservableObject {

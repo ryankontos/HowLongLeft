@@ -33,6 +33,12 @@ public class CalendarEventCache: ObservableObject {
     
     private var updatesCache: Bool
     
+    // Indicates if the cache has been fetched at least once
+    public var hasFetched: Bool = false
+        
+    
+    private var lastFetchCalendars: [HLLCalendar]?
+    
     private weak var calendarReader: CalendarSource?
     public weak var calendarProvider: (any CalendarSettingsProvider)? {
         didSet { setupCalendarsSubscription() }
@@ -62,9 +68,7 @@ public class CalendarEventCache: ObservableObject {
         fetchDataKey = Defaults.Key<String?>("\(id)_LatestFetchData", suite: sharedDefaults, default: { nil })
         
         setupSubscriptions()
-        Task {
-            updateEvents()
-        }
+        
     }
     
     // MARK: - Setup Functions
@@ -123,12 +127,7 @@ public class CalendarEventCache: ObservableObject {
     }
     
     private func updateEvents() {
-        logger.debug("Updating events")
-
-        if !stale && eventCache != nil {
-            logger.debug("No changes detected, skipping update")
-            return
-        }
+     
 
         guard
             let calendarProvider,
@@ -138,11 +137,24 @@ public class CalendarEventCache: ObservableObject {
             logger.error("Missing required components for event update")
             return
         }
+        
+        let cals = calendarProvider.getAllowedCalendars(matchingContextIn: calendarContexts)
+        
+        
+        if !stale && eventCache != nil && lastFetchCalendars == cals {
+            logger.debug("No changes detected, skipping update")
+            return
+        }
 
+        logger.debug("Updating events")
+       
         // 1. Fetch all source events
         let fetchResult = calendarReader.getEvents(
-            from: calendarProvider.getAllowedCalendars(matchingContextIn: calendarContexts)
+            from: cals
         )
+        
+        self.lastFetchCalendars = cals
+        
         let allSourceEvents = fetchResult.events
             .filter { calendarProvider.getAllDayAllowed() || !$0.isAllDay }
 
@@ -206,6 +218,8 @@ public class CalendarEventCache: ObservableObject {
             eventCache = updatedCache
             cacheSummaryHash = String(fetchResult.getHash())
             stale = false
+            hasFetched = true
+            
             DispatchQueue.main.async {
                 self.objectWillChange.send()
             }

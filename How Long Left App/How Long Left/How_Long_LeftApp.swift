@@ -15,7 +15,7 @@ struct How_Long_LeftApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     let container = HLLCoreServicesContainer(id: "iOSApp")
-    let widgetUpdateManager: WidgetUpdateManager
+    var widgetUpdateManager: WidgetUpdateManager
 
     init() {
         widgetUpdateManager = WidgetUpdateManager(appEventCache: container.eventCache)
@@ -27,15 +27,19 @@ struct How_Long_LeftApp: App {
                 .environmentObject(container.calendarReader)
                 .environmentObject(container.calendarPrefsManager)
                 .environmentObject(container.eventCache)
-                .environmentObject(container.pointStore)
+                .environmentObject(TimePointProviderWrapper(provider: container.pointStore))
                 .environmentObject(container.userEventSource)
                 .onChange(of: scenePhase) { _, newPhase in
                     if newPhase == .active {
                         // //print("Active")
 
+                        
                         Task {
+                            
+                            
                             await widgetUpdateManager.checkIfWidgetNeedsReload()
                         }
+                        
                     } else if newPhase == .inactive {
                         // //print("Inactive")
                     } else if newPhase == .background {

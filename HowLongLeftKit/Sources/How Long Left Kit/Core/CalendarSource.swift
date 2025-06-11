@@ -22,6 +22,8 @@ public class CalendarSource: ObservableObject {
         eventChangedSubject.eraseToAnyPublisher()
     }
     
+    @Published public var calendarAccessDenied: Bool = false
+    
     public var authorization: EKAuthorizationStatus {
         return EKEventStore.authorizationStatus(for: .event)
     }
@@ -57,6 +59,33 @@ public class CalendarSource: ObservableObject {
         
         self.eventStore.reset()
         
+        
+        
+        
+        
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            self.calendarAccessDenied = false
+            
+        } else {
+            
+            switch EKEventStore.authorizationStatus(for: .event) {
+                
+            case .notDetermined:
+                self.calendarAccessDenied = false
+            case .restricted:
+                self.calendarAccessDenied = true
+            case .denied:
+                self.calendarAccessDenied = true
+            case .fullAccess:
+                self.calendarAccessDenied = false
+            case .writeOnly:
+                self.calendarAccessDenied = true
+            @unknown default:
+                self.calendarAccessDenied = true
+            }
+            
+        }
+    
         self.objectWillChange.send()
         self.eventChangedSubject.send()
         return result
@@ -117,6 +146,13 @@ public class CalendarSource: ObservableObject {
         print("Event store changed")
         eventChangedSubject.send()
     }
+    
+    public enum Authorization {
+        case notDetermined
+        case notAuthorized
+        case authorized
+    }
+    
 }
 
 @MainActor

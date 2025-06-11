@@ -13,22 +13,18 @@ struct CountdownCard: View {
     
     var body: some View {
         
-        let _ = Self._printChanges()
         
-            HStack {
+        
+        HStack(spacing: 12) {
+                
+                RoundedRectangle(cornerRadius: 10)
+                    .frame(width: 6)
+                    .foregroundStyle(event.color)
+                    
+                
                 VStack(alignment: .leading, spacing: 10) {
                    
-                    if let calendarEvent = event as? HLLCalendarEvent {
-                        
-                        Text(calendarEvent.calendar.title)
-                            .font(.system(size: 14.5).weight(.semibold))
-                            .padding(.vertical, 3)
-                            .padding(.horizontal, 9)
-                            .shadow(radius: 2)
-                            .background(Capsule().fill(event.color))
-                            .foregroundStyle(.white.opacity(0.9))
-                        
-                    }
+                    
                     
                     VStack(alignment: .leading, spacing: 7) {
                         title
@@ -57,19 +53,22 @@ struct CountdownCard: View {
                
                 .frame(width: 75, height: 75)
             }
-            .padding(20)
-            .onAppear() {
-                print("CountdownCard appeared for event: \(event.title)")
-            }
+            
+            .padding(.leading, 20)
+            .padding(.trailing, 20)
+            .padding(.vertical, 20)
+            .drawingGroup()
             .glassCardBackground()
+            
         
     }
    
     private var title: some View {
         Text(event.title)
-            .font(.system(size: 23, weight: .bold))
+            .font(.system(size: 19, weight: .bold))
             .foregroundStyle(.primary)
             .multilineTextAlignment(.leading)
+            .lineLimit(2)
     }
     private var timeLabel: some View {
         let df = DateFormatter()
@@ -90,7 +89,8 @@ struct CountdownCard: View {
 #Preview {
     CountdownCard(event: .init(title: "Anniversary Dinner",
                                startDate: Date().addingTimeInterval(-1000),
-                               endDate:  Date().addingTimeInterval(1000), isAllDay: false,
+                               endDate:  Date().addingTimeInterval(999909), isAllDay: false,
                               
                                color: .yellow))
+    .frame(width: 380, height: 120)
 }

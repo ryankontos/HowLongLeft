@@ -53,7 +53,7 @@ class CalendarEventListProvider: ObservableObject {
     }
     
     func getContainers() -> ([CalendarEventContainer], [CalendarEventContainer]) {
-        guard let calendars = pointStore.eventCache.calendarCache.getAllowedCalendars() else {
+        guard let calendars = pointStore.eventCache.calendarCache?.getAllowedCalendars() else {
             return ([], [])
         }
         

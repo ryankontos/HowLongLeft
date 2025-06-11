@@ -59,7 +59,7 @@ struct MainMenuContentView: View {
 
     @ViewBuilder
     private func noEventsView() -> some View {
-        if calendarSource.authorization == .denied {
+        if calendarSource.calendarAccessDenied {
             MenuNoCalendarAccessView()
         } else {
             MenuNoEventsView()
